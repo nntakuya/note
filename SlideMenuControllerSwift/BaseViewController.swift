@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {
+class BaseViewController: UIViewController,UITextViewDelegate{
 
     
     @IBOutlet weak var postView: UITextView!
@@ -26,7 +26,7 @@ class BaseViewController: UIViewController {
         //表示テキストのフォントサイズを変更
         postView.font = UIFont.systemFont(ofSize: 16)
 
-        // Do any additional setup after loading the view.
+        self.setInputAccessoryView()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
