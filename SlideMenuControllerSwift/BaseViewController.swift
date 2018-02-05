@@ -95,7 +95,7 @@ class BaseViewController: UIViewController {
 }
 
 
-
+//TODO:以下、サイドバーのジェスチャー機能だと思われるが、できない
 extension BaseViewController : SlideMenuControllerDelegate {
     
     func leftWillOpen() {

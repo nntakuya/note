@@ -8,9 +8,9 @@
 import UIKit
 
 enum LeftMenu: Int {
-    case main = 0
-    case swift
-    case java
+    case note = 0
+    case all
+    case todo
     case go
     case nonMenu
 }
@@ -22,7 +22,7 @@ protocol LeftMenuProtocol : class {
 class LeftViewController : UIViewController, LeftMenuProtocol {
     
     @IBOutlet weak var tableView: UITableView!
-    var menus = ["Main", "Swift", "Java", "Go", "NonMenu"]
+    var menus = ["Note", "All", "To Do", "Go", "NonMenu"]
     var mainViewController: UIViewController!
     var swiftViewController: UIViewController!
     var javaViewController: UIViewController!
@@ -71,11 +71,11 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
     
     func changeViewController(_ menu: LeftMenu) {
         switch menu {
-        case .main:
+        case .note:
             self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
-        case .swift:
+        case .all:
             self.slideMenuController()?.changeMainViewController(self.swiftViewController, close: true)
-        case .java:
+        case .todo:
             self.slideMenuController()?.changeMainViewController(self.javaViewController, close: true)
         case .go:
             self.slideMenuController()?.changeMainViewController(self.goViewController, close: true)
@@ -90,7 +90,7 @@ extension LeftViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let menu = LeftMenu(rawValue: indexPath.row) {
             switch menu {
-            case .main, .swift, .java, .go, .nonMenu:
+            case .note, .all, .todo, .go, .nonMenu:
                 return BaseTableViewCell.height()
             }
         }
@@ -123,7 +123,7 @@ extension LeftViewController : UITableViewDataSource {
         
         if let menu = LeftMenu(rawValue: indexPath.row) {
             switch menu {
-            case .main, .swift, .java, .go, .nonMenu:
+            case .note, .all, .todo, .go, .nonMenu:
                 let cell = BaseTableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: BaseTableViewCell.identifier)
                 cell.setData(menus[indexPath.row])
                 return cell
