@@ -14,6 +14,7 @@
 		B3A3DE0520287C2500D656A2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B3A3DE0320287C2500D656A2 /* Model.xcdatamodeld */; };
 		B3A3DE0820287CAD00D656A2 /* Article+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A3DE0620287CAD00D656A2 /* Article+CoreDataClass.swift */; };
 		B3A3DE0920287CAD00D656A2 /* Article+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A3DE0720287CAD00D656A2 /* Article+CoreDataProperties.swift */; };
+		B3A3DE0B2028AE3A00D656A2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A3DE0A2028AE3A00D656A2 /* DetailViewController.swift */; };
 		C539E6471A315E87003B7CC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C539E6461A315E87003B7CC7 /* AppDelegate.swift */; };
 		C539E64A1A315E87003B7CC7 /* SlideMenuControllerSwift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C539E6481A315E87003B7CC7 /* SlideMenuControllerSwift.xcdatamodeld */; };
 		C539E64C1A315E87003B7CC7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C539E64B1A315E87003B7CC7 /* MainViewController.swift */; };
@@ -64,6 +65,7 @@
 		B3A3DE0420287C2500D656A2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		B3A3DE0620287CAD00D656A2 /* Article+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Article+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B3A3DE0720287CAD00D656A2 /* Article+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Article+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B3A3DE0A2028AE3A00D656A2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C539E6411A315E87003B7CC7 /* SlideMenuControllerSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlideMenuControllerSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C539E6451A315E87003B7CC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C539E6461A315E87003B7CC7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				C5BF6A891BF3335D0064C18E /* SubContentsViewController.storyboard */,
 				C5BF6A8B1BF340020064C18E /* ExSlideMenuController.swift */,
 				B3A3DE0320287C2500D656A2 /* Model.xcdatamodeld */,
+				B3A3DE0A2028AE3A00D656A2 /* DetailViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -443,6 +446,7 @@
 				B3A3DE0520287C2500D656A2 /* Model.xcdatamodeld in Sources */,
 				C5F179D01BEB2CB500EEDD9A /* UIView.swift in Sources */,
 				C5BD39DA1A6CD12300D0AF95 /* SwiftViewController.swift in Sources */,
+				B3A3DE0B2028AE3A00D656A2 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -640,7 +644,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SlideMenuControllerSwift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "dekatotoro.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -654,7 +658,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SlideMenuControllerSwift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "dekatotoro.$(PRODUCT_NAME:rfc1034identifier)";

@@ -26,7 +26,7 @@
                                 <rect key="frame" x="16" y="20" width="343" height="639"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
-                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
@@ -53,7 +53,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-898.39999999999998" y="138.98050974512745"/>
+            <point key="canvasLocation" x="-908" y="1343"/>
         </scene>
         <!--Right View Controller-->
         <scene sceneID="bvR-W9-qnC">
@@ -204,6 +204,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="I9w-x4-mAi" id="aed-yU-jTI"/>
+                                    <outlet property="delegate" destination="I9w-x4-mAi" id="gh3-Ep-37c"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.89411764705882357" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -220,10 +224,55 @@
                     <navigationItem key="navigationItem" id="Wgh-E1-vlx"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
+                    <connections>
+                        <outlet property="myTableView" destination="daQ-9H-jzD" id="iUL-c7-alb"/>
+                        <segue destination="HBp-ZN-nn6" kind="show" identifier="Detail" id="eXp-XH-p8G"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0gN-ZX-EvU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="116.8" y="1436.5817091454273"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="Ucv-Yy-06f">
+            <objects>
+                <viewController storyboardIdentifier="Detail" id="HBp-ZN-nn6" customClass="DetailViewController" customModule="SlideMenuControllerSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YpV-2Y-7iT"/>
+                        <viewControllerLayoutGuide type="bottom" id="3hK-mQ-TMb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HGJ-P6-cau">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Vse-5j-5hL">
+                                <rect key="frame" x="16" y="20" width="343" height="627"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Fpa-q8-94Q" appends="YES" id="Mew-Wv-YhR"/>
+                                </connections>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Vse-5j-5hL" firstAttribute="trailing" secondItem="HGJ-P6-cau" secondAttribute="trailingMargin" id="7x9-M3-0Ri"/>
+                            <constraint firstItem="Vse-5j-5hL" firstAttribute="leading" secondItem="HGJ-P6-cau" secondAttribute="leadingMargin" id="Lvg-z8-XLe"/>
+                            <constraint firstAttribute="bottom" secondItem="Vse-5j-5hL" secondAttribute="bottom" constant="20" symbolic="YES" id="py9-Wh-SP7"/>
+                            <constraint firstItem="Vse-5j-5hL" firstAttribute="top" secondItem="YpV-2Y-7iT" secondAttribute="bottom" id="uG2-b9-feC"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="postView" destination="Vse-5j-5hL" id="CNG-nj-JIc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5lp-3x-Pd0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="down" id="Fpa-q8-94Q"/>
+            </objects>
+            <point key="canvasLocation" x="1250" y="1437"/>
         </scene>
         <!--Java View Controller-->
         <scene sceneID="4cK-mI-MCG">

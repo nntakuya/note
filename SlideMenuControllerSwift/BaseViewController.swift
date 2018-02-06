@@ -98,8 +98,7 @@ class BaseViewController: UIViewController,UITextViewDelegate{
         if #available(iOS 10.0, *) {
             let viewContext = appD.persistentContainer.viewContext
             
-            //Articleエンティティオブジェクトを作成
-//            let Article = NSEntityDescription.entity(forEntityName: "Article", in: viewContext)
+
             
             //どのエンティティを操作するためのオブジェクトを作成
             let query: NSFetchRequest<Article> = Article.fetchRequest()
