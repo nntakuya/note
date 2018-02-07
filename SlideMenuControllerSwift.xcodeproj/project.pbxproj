@@ -11,9 +11,12 @@
 		0E75C5A61BE3CAFE00844634 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E75C5A41BE3CAFE00844634 /* Info.plist */; };
 		0EB8EBFF1BE3CF3C00BC2A99 /* SlideMenuControllerSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E75C5A51BE3CAFE00844634 /* SlideMenuControllerSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B311643C2027006600F01ACB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B311643B2027006600F01ACB /* BaseViewController.swift */; };
+		B394FC5120294AC000D42467 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394FC5020294AC000D42467 /* Function.swift */; };
+		B394FC5A2029CACB00D42467 /* Article+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394FC562029CACB00D42467 /* Article+CoreDataClass.swift */; };
+		B394FC5B2029CACB00D42467 /* Article+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394FC572029CACB00D42467 /* Article+CoreDataProperties.swift */; };
+		B394FC60202A922F00D42467 /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394FC5E202A922F00D42467 /* Category+CoreDataClass.swift */; };
+		B394FC61202A922F00D42467 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394FC5F202A922F00D42467 /* Category+CoreDataProperties.swift */; };
 		B3A3DE0520287C2500D656A2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B3A3DE0320287C2500D656A2 /* Model.xcdatamodeld */; };
-		B3A3DE0820287CAD00D656A2 /* Article+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A3DE0620287CAD00D656A2 /* Article+CoreDataClass.swift */; };
-		B3A3DE0920287CAD00D656A2 /* Article+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A3DE0720287CAD00D656A2 /* Article+CoreDataProperties.swift */; };
 		B3A3DE0B2028AE3A00D656A2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A3DE0A2028AE3A00D656A2 /* DetailViewController.swift */; };
 		C539E6471A315E87003B7CC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C539E6461A315E87003B7CC7 /* AppDelegate.swift */; };
 		C539E64A1A315E87003B7CC7 /* SlideMenuControllerSwift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C539E6481A315E87003B7CC7 /* SlideMenuControllerSwift.xcdatamodeld */; };
@@ -62,9 +65,12 @@
 		0E75C5A41BE3CAFE00844634 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Source/Info.plist; sourceTree = "<group>"; };
 		0E75C5A51BE3CAFE00844634 /* SlideMenuControllerSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SlideMenuControllerSwift.h; path = Source/SlideMenuControllerSwift.h; sourceTree = "<group>"; };
 		B311643B2027006600F01ACB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		B394FC5020294AC000D42467 /* Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
+		B394FC562029CACB00D42467 /* Article+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Article+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B394FC572029CACB00D42467 /* Article+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Article+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B394FC5E202A922F00D42467 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B394FC5F202A922F00D42467 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B3A3DE0420287C2500D656A2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		B3A3DE0620287CAD00D656A2 /* Article+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Article+CoreDataClass.swift"; sourceTree = "<group>"; };
-		B3A3DE0720287CAD00D656A2 /* Article+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Article+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B3A3DE0A2028AE3A00D656A2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C539E6411A315E87003B7CC7 /* SlideMenuControllerSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlideMenuControllerSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C539E6451A315E87003B7CC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -138,8 +144,10 @@
 		C539E6381A315E87003B7CC7 = {
 			isa = PBXGroup;
 			children = (
-				B3A3DE0620287CAD00D656A2 /* Article+CoreDataClass.swift */,
-				B3A3DE0720287CAD00D656A2 /* Article+CoreDataProperties.swift */,
+				B394FC5E202A922F00D42467 /* Category+CoreDataClass.swift */,
+				B394FC5F202A922F00D42467 /* Category+CoreDataProperties.swift */,
+				B394FC562029CACB00D42467 /* Article+CoreDataClass.swift */,
+				B394FC572029CACB00D42467 /* Article+CoreDataProperties.swift */,
 				C5BA8AA41A43E24C00863FB9 /* Source */,
 				C539E6431A315E87003B7CC7 /* SlideMenuControllerSwift */,
 				C539E65C1A315E87003B7CC7 /* SlideMenuControllerSwiftTests */,
@@ -249,6 +257,7 @@
 				C5BF6A8B1BF340020064C18E /* ExSlideMenuController.swift */,
 				B3A3DE0320287C2500D656A2 /* Model.xcdatamodeld */,
 				B3A3DE0A2028AE3A00D656A2 /* DetailViewController.swift */,
+				B394FC5020294AC000D42467 /* Function.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -421,17 +430,19 @@
 			files = (
 				C5BF6A8E1BF34A8B0064C18E /* UIApplication.swift in Sources */,
 				C5BD39DE1A6CD17B00D0AF95 /* GoViewController.swift in Sources */,
-				B3A3DE0920287CAD00D656A2 /* Article+CoreDataProperties.swift in Sources */,
+				B394FC61202A922F00D42467 /* Category+CoreDataProperties.swift in Sources */,
+				B394FC5A2029CACB00D42467 /* Article+CoreDataClass.swift in Sources */,
 				C539E64C1A315E87003B7CC7 /* MainViewController.swift in Sources */,
 				C5BD39E01A6CDC8100D0AF95 /* UIViewController.swift in Sources */,
-				B3A3DE0820287CAD00D656A2 /* Article+CoreDataClass.swift in Sources */,
 				C5C1CE611A70F3B600B6E411 /* UITableViewExtension.swift in Sources */,
+				B394FC5B2029CACB00D42467 /* Article+CoreDataProperties.swift in Sources */,
 				B311643C2027006600F01ACB /* BaseViewController.swift in Sources */,
 				C539E64A1A315E87003B7CC7 /* SlideMenuControllerSwift.xcdatamodeld in Sources */,
 				C5BF6A8C1BF340020064C18E /* ExSlideMenuController.swift in Sources */,
 				C5C1CE5D1A70F27500B6E411 /* BaseTableViewCell.swift in Sources */,
 				C539E66C1A316C78003B7CC7 /* LeftViewController.swift in Sources */,
 				C5BF6A821BEEF1A70064C18E /* DataTableViewCell.swift in Sources */,
+				B394FC60202A922F00D42467 /* Category+CoreDataClass.swift in Sources */,
 				C539E6471A315E87003B7CC7 /* AppDelegate.swift in Sources */,
 				C5F179D21BEB2FAF00EEDD9A /* UIColor.swift in Sources */,
 				C5F179CE1BEB2A5900EEDD9A /* UIImage.swift in Sources */,
@@ -439,6 +450,7 @@
 				C5C1CE5B1A70DADF00B6E411 /* NonMenuController.swift in Sources */,
 				C5498C7E1BE897250076A7C5 /* ImageHeaderView.swift in Sources */,
 				C5BF6A861BEF4C080064C18E /* SubContentsViewController.swift in Sources */,
+				B394FC5120294AC000D42467 /* Function.swift in Sources */,
 				C5BD39DC1A6CD15700D0AF95 /* JavaViewController.swift in Sources */,
 				C5BA8AA61A43E2EF00863FB9 /* SlideMenuController.swift in Sources */,
 				C539E66E1A316F5F003B7CC7 /* RightViewController.swift in Sources */,

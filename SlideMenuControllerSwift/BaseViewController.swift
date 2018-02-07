@@ -6,6 +6,14 @@
 //  Copyright © 2018 Yuji Hato. All rights reserved.
 //
 
+
+//やるべきこと
+//1.CoreDataに保存されているデータを一度全部消す
+//2.CoreDataのエンティティにidカラム,saveDateを追加
+//2-1.配列の初期化をセット
+//2-2.Function "read""tapSave"にそれぞれ新しいカラムを追加
+//2-3.
+
 import UIKit
 import CoreData
 
@@ -13,6 +21,9 @@ class BaseViewController: UIViewController,UITextViewDelegate{
 
     
     @IBOutlet weak var postView: UITextView!
+    
+    //カテゴリーIDのデフォルト値（カテゴリー：All）を "0" とする
+    var categoryId = 0
     
     
     override func viewDidLoad() {
@@ -56,8 +67,6 @@ class BaseViewController: UIViewController,UITextViewDelegate{
     }
     
     
-    
-    
     //Doneボタンが押されたときに、データを保存
     //TODO:以下のバージョンの条件分岐について、えりこさんに確認
     func tapSave(){
@@ -65,67 +74,60 @@ class BaseViewController: UIViewController,UITextViewDelegate{
         
         //エンティティを操作するためのオブジェクトを作成
         //データベースと接続するために使用
-        if #available(iOS 10.0, *) {
-            let viewContext = appD.persistentContainer.viewContext
+        
+        let viewContext = appD.persistentContainer.viewContext
+        
+        //Articleエンティティオブジェクトを作成
+        let Article = NSEntityDescription.entity(forEntityName: "Article", in: viewContext)
+        
+        //Articleエンティティにレコード（行）を挿入するためのオブジェクトを作成
+        let newRecord = NSManagedObject (entity: Article!, insertInto: viewContext)
+        
+        //値のセット
+        newRecord.setValue(postView.text, forKey: "content")
+        newRecord.setValue(Date(), forKey: "saveDate")//Date()で現在日時が取得できる
+        newRecord.setValue(categoryId,forKey: "category_id")
+        
+        do{
+            //レコードの即時保存
+            //TODO:データ保存時のバリデーション確認
+            try viewContext.save()
             
-            //Articleエンティティオブジェクトを作成
-            let Article = NSEntityDescription.entity(forEntityName: "Article", in: viewContext)
-            
-            //Articleエンティティにレコード（行）を挿入するためのオブジェクトを作成
-            let newRecord = NSManagedObject (entity: Article!, insertInto: viewContext)
-            
-            //値のセット
-            newRecord.setValue(postView.text, forKey: "content")
-            
-            do{
-                //レコードの即時保存
-                //TODO:データ保存時のバリデーション確認
-                try viewContext.save()
-                
-            }catch{
-            }
-            
-        } else {
-            //ここはえりこさんに確認する
+        }catch{
         }
     }
+    
     
     //既に存在するデータの読込処理
     func read(){
         //AppDelegateを使う用意をする
         let appD: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         
-        if #available(iOS 10.0, *) {
-            let viewContext = appD.persistentContainer.viewContext
+        
+        let viewContext = appD.persistentContainer.viewContext
+    
+        //どのエンティティを操作するためのオブジェクトを作成
+        let query: NSFetchRequest<Article> = Article.fetchRequest()
+        
+        do{
+            //データを一括取得
+            let fetchResult = try viewContext.fetch(query)
             
-
-            
-            //どのエンティティを操作するためのオブジェクトを作成
-            let query: NSFetchRequest<Article> = Article.fetchRequest()
-            
-            do{
-                //データを一括取得
-                let fetchResult = try viewContext.fetch(query)
+            //データの取得
+            for result: AnyObject in fetchResult{
+                let content: String = result.value(forKey: "content") as! String
+                let saveDate :Date = result.value(forKey: "saveDate") as! Date
+//                let saveDate :Date = result.value(forKey: "saveDate") as! Date
+                let category: Int64 = (result.value(forKey: "category_id") as? Int64)!
                 
-                //データの取得
-                for result: AnyObject in fetchResult{
-                    let content: String? = result.value(forKey: "content") as? String
-                    
-                    print(content!)
-                }
-                
-            }catch{
-                
+                print(content)
+                print(saveDate)
+                print(category)
             }
             
-            
-        } else {
-            //ここはえりこさんに確認する
+        }catch{
         }
     }
-    
-    
-    
     
     //ToDo保留
     func setInputAccessoryView() {
@@ -157,11 +159,53 @@ class BaseViewController: UIViewController,UITextViewDelegate{
         self.resignFirstResponder()
         print("sampleだよ〜ん")
 //        tapSave()
-//        read()
+        read()//デバッグ用
+//        Delete()
+    }
+    
+    //削除機能
+    func Delete(){
+        //AppDelegateを使う用意をする
+        let appD: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let viewContext = appD.persistentContainer.viewContext
+        
+        //どのエンティティを操作するためのオブジェクトを作成
+        let query: NSFetchRequest<Article> = Article.fetchRequest()
+        
+        do{
+            //削除するデータを取得
+            let fetchResult = try viewContext.fetch(query)
+            for result: AnyObject in fetchResult {
+                let record = result as! NSManagedObject
+                //一行ずつ削除
+                viewContext.delete(record)
+            }
+            try viewContext.save()
+        } catch{
+        }
+        
+    }
+    
+    //データ保存時のidカラムのインクリ機能
+    func autoInc(){
+        //CoreDataから最新の
+        
         
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 //TODO:以下、サイドバーのジェスチャー機能だと思われるが、できない

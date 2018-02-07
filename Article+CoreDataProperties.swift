@@ -2,7 +2,7 @@
 //  Article+CoreDataProperties.swift
 //  SlideMenuControllerSwift
 //
-//  Created by 仲松拓哉 on 05/02/2018.
+//  Created by 仲松拓哉 on 06/02/2018.
 //  Copyright © 2018 Yuji Hato. All rights reserved.
 //
 //
@@ -18,5 +18,7 @@ extension Article {
     }
 
     @NSManaged public var content: String?
+    @NSManaged public var category_id: Int64
+    @NSManaged public var saveDate: NSDate?
 
 }
