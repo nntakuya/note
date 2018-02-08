@@ -1,10 +1,8 @@
-//
-//  DetailViewController.swift
-//  SlideMenuControllerSwift
-//
-//  Created by 仲松拓哉 on 05/02/2018.
-//  Copyright © 2018 Yuji Hato. All rights reserved.
-//
+
+//プログラミングの設計
+//目的：記事の詳細画面から、編集後のデータを保存する
+//viewDidDisappearのfunction内にCoreDataの保存内容を上書きする
+
 
 import UIKit
 import CoreData
@@ -58,7 +56,69 @@ class DetailViewController: UIViewController,UITextViewDelegate {
     
     
     
-    //ToDo保留
+    //ビューを閉じる際に、記事の内容のアップデートをする
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("viewDidAppear")
+        
+        //記事のアップデート関数
+        updateArticle()
+        
+    }
+    
+    
+    
+    //記事のアップデート関数
+    func updateArticle(){
+        //1.現在表示されているテキストの値を取得する
+//        print(artInfo)
+//        artInfo["content"] = postView.text
+//        print(artInfo)
+        
+        //2.現状表示されているデータのsaveDateを取得
+        //3.saveDataをキーに現在表示されているデータのオブジェクトを作成
+        
+        
+        //AppDelegateを使う用意をする
+        let appD: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let viewContext = appD.persistentContainer.viewContext
+        
+        //どのエンティティを操作するためのオブジェクトを作成
+        let query: NSFetchRequest<Article> = Article.fetchRequest()
+        
+        
+        //絞り込み検索
+        let namePredicte = NSPredicate(format: "saveDate = %@", saveDate as CVarArg)
+        query.predicate = namePredicte
+        
+        //4.更新データをセットし、保存
+        do{
+            //データを一括取得
+            let fetchResult = try viewContext.fetch(query)
+            
+            //データの取得
+            for result: AnyObject in fetchResult{
+                //更新する準備(NSManagedObjectにダウンキャスト型に変換)
+                let record = result as! NSManagedObject
+                
+                //更新したいデータのセット
+                record.setValue(postView.text, forKey: "content")
+                
+                //CoreDataにアップデートを反映
+                do{
+                    try viewContext.save()
+                }catch{
+                }
+            }
+        }catch{
+            print("エラーだよ")
+        }
+        
+    }
+    
+    
+    
     func setInputAccessoryView() {
         let kbToolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
         kbToolBar.barStyle = UIBarStyle.default  // スタイルを設定
@@ -86,13 +146,13 @@ class DetailViewController: UIViewController,UITextViewDelegate {
     // #selectorをつけるから、
     @objc func commitButtonTapped(sender: Any) {
         self.resignFirstResponder()
-        print("sampleだよ〜ん")
+//        print("sampleだよ〜ん")
         //        tapSave()
         //        read()
         
     }
     
-    //TODO:以下saveDataをkeyにCoreDataからデータを引っ張る
+    
 
     func read(){
         //AppDelegateを使う用意をする

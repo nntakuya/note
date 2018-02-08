@@ -69,7 +69,6 @@ class BaseViewController: UIViewController,UITextViewDelegate{
     
     
     //Doneボタンが押されたときに、データを保存
-    //TODO:以下のバージョンの条件分岐について、えりこさんに確認
     func tapSave(){
         let appD: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         

@@ -3,38 +3,6 @@ import UIKit
 import CoreData
 
 
-//【出来ていないこと】
-//・セル表示のコードの再読込をする　メモを追加後、データ一覧にすぐに反映されていない
-//　 └ おそらく、別threadで処理が並行されているので、上手く表示されていない可能性がある。
-// 　└ セルを再読込させるコードを追加
-//・削除したいセルと実際に削除されるデータに相違がある。
-//　 └
-
-
-//やるべきこと
-//1.CoreDataに保存されているデータを一度全部消す
-//2.CoreDataのエンティティにidカラム,saveDateを追加
-//2-1.配列の初期化をセット
-//2-2.Function "read""create"にそれぞれ新しいカラムを追加
-//2-3.
-
-// └ idにインクリ機能をつくる
-//  └ managedObjectのプロパティを保存して、更新
-//3.カテゴリー別のデータを取得（データの絞込）のコードを追加
-
-//3.サンプルデータを挿入
-//4.削除機能
-
-
-//デバッグメモ
-//【ファイルの読込順番】
-//・viewdidroad → table(row) →
-//【問題】
-//　サイドバーの1番最初の読み込み時は、viewdidroadやtableのメソッドを読み込む。
-//　2回目以降は、上記のfunctionが読み込まれない。
-//　└ viewWillAppearにセットする
-
-
 class SwiftViewController: UIViewController,UITableViewDelegate,UITableViewDataSource   {
     
     @IBOutlet weak var myTableView: UITableView!
@@ -156,12 +124,24 @@ class SwiftViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
+        
+        print("viewWillAppear")
         //配列を初期化
         artInfo = []
         read()//デバッグ用
         myTableView.reloadData()
     }
     
+//    override func viewDidAppear(_ animated: Bool) {
+////        super.viewWillAppear(animated)
+//        self.setNavigationBarItem()
+//
+//        print("viewDidAppear")
+//        //配列を初期化
+//        artInfo = []
+//        read()//デバッグ用
+//        myTableView.reloadData()
+//    }
     
     ///////////////////// CoreData操作 ////////////////////////////
     func read(){
@@ -198,6 +178,8 @@ class SwiftViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                 
                 print(artInfo)
             }
+            
+            
         }catch{
             print("エラーだよ")
         }
