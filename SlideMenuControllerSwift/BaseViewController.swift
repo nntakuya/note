@@ -29,10 +29,11 @@ class BaseViewController: UIViewController,UITextViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        read()//デバッグ用
+        
         //サンプルテキスト作成
         postView.text = "sample text"
         
-
         //行間指定
         let style = NSMutableParagraphStyle()
         style.lineSpacing = 2
@@ -74,7 +75,6 @@ class BaseViewController: UIViewController,UITextViewDelegate{
         
         //エンティティを操作するためのオブジェクトを作成
         //データベースと接続するために使用
-        
         let viewContext = appD.persistentContainer.viewContext
         
         //Articleエンティティオブジェクトを作成
@@ -103,7 +103,6 @@ class BaseViewController: UIViewController,UITextViewDelegate{
         //AppDelegateを使う用意をする
         let appD: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         
-        
         let viewContext = appD.persistentContainer.viewContext
     
         //どのエンティティを操作するためのオブジェクトを作成
@@ -117,7 +116,6 @@ class BaseViewController: UIViewController,UITextViewDelegate{
             for result: AnyObject in fetchResult{
                 let content: String = result.value(forKey: "content") as! String
                 let saveDate :Date = result.value(forKey: "saveDate") as! Date
-//                let saveDate :Date = result.value(forKey: "saveDate") as! Date
                 let category: Int64 = (result.value(forKey: "category_id") as? Int64)!
                 
                 print(content)
@@ -137,7 +135,7 @@ class BaseViewController: UIViewController,UITextViewDelegate{
         // スペーサー
         let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace,
                                      target: self, action: nil)
-        
+
         // 完了ボタン
         let commitButton = UIBarButtonItem(
             title: "Done",
@@ -157,8 +155,7 @@ class BaseViewController: UIViewController,UITextViewDelegate{
     // #selectorをつけるから、
     @objc func commitButtonTapped(sender: Any) {
         self.resignFirstResponder()
-        print("sampleだよ〜ん")
-//        tapSave()
+        tapSave()
         read()//デバッグ用
 //        Delete()
     }
@@ -187,13 +184,6 @@ class BaseViewController: UIViewController,UITextViewDelegate{
         
     }
     
-    //データ保存時のidカラムのインクリ機能
-    func autoInc(){
-        //CoreDataから最新の
-        
-        
-    }
-
 }
 
 

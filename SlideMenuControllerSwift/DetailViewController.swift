@@ -14,9 +14,15 @@ class DetailViewController: UIViewController,UITextViewDelegate {
     
     @IBOutlet weak var postView: UITextView!
     
-    //TODO:以下のartTitleの配列はグローバル変数として使用した方が良いのか
+    //セル一覧から選択されたセルのsaveDateを取得
+    var saveDate = Date()
+    
     //表示したいセルの配列を初期化
-    var artTitle:[String] = []
+    var artInfo:[String:Any] = [
+            "content":String(),
+            "saveDate":Date(),
+            "categoryId":Int()
+    ]
     
     //選択された行番号が受け渡されるプロパティ
     var passedIndex = -1 //渡されないことを判別するために-1を代入
@@ -28,8 +34,8 @@ class DetailViewController: UIViewController,UITextViewDelegate {
         read()
         
         //TODO:下記の書き方だと、おそらく想定の配列のデータの中身を取得出来ない可能性がある気がする
-        print(passedIndex)
-        postView.text = artTitle[passedIndex]
+        print(artInfo)
+        postView.text = artInfo["content"] as! String
         
         //TODO:下記にノートの初期設定を書く
         //行間指定
@@ -44,14 +50,10 @@ class DetailViewController: UIViewController,UITextViewDelegate {
         self.setInputAccessoryView()
         
     }
-    
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-        
-        
     }
     
     
@@ -89,16 +91,24 @@ class DetailViewController: UIViewController,UITextViewDelegate {
         //        read()
         
     }
+    
+    //TODO:以下saveDataをkeyにCoreDataからデータを引っ張る
 
     func read(){
         //AppDelegateを使う用意をする
         let appD: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         
-        
         let viewContext = appD.persistentContainer.viewContext
         
         //どのエンティティを操作するためのオブジェクトを作成
         let query: NSFetchRequest<Article> = Article.fetchRequest()
+        
+        
+        //絞り込み検索
+        //カテゴリーIDをキーにCoreDataを検索
+        let namePredicte = NSPredicate(format: "saveDate = %@", saveDate as CVarArg)
+        query.predicate = namePredicte
+        
         
         do{
             //データを一括取得
@@ -106,13 +116,14 @@ class DetailViewController: UIViewController,UITextViewDelegate {
             
             //データの取得
             for result: AnyObject in fetchResult{
-                let content: String? = result.value(forKey: "content") as? String
+                artInfo["content"] = result.value(forKey: "content") as? String
+                artInfo["saveDate"] =  result.value(forKey: "saveDate") as? Date
+                artInfo["categoryId"] = (result.value(forKey: "category_id") as? Int64)!
                 
-                artTitle.append(content!)
-                print(content!)
+                print(artInfo)
             }
-            
         }catch{
+            print("エラーだよ")
         }
     }
 }
