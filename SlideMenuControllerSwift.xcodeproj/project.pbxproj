@@ -18,6 +18,7 @@
 		B394FC61202A922F00D42467 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394FC5F202A922F00D42467 /* Category+CoreDataProperties.swift */; };
 		B3A3DE0520287C2500D656A2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B3A3DE0320287C2500D656A2 /* Model.xcdatamodeld */; };
 		B3A3DE0B2028AE3A00D656A2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A3DE0A2028AE3A00D656A2 /* DetailViewController.swift */; };
+		B3BA101F202C7AE700870E53 /* imageCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA101E202C7AE700870E53 /* imageCategory.swift */; };
 		C539E6471A315E87003B7CC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C539E6461A315E87003B7CC7 /* AppDelegate.swift */; };
 		C539E64A1A315E87003B7CC7 /* SlideMenuControllerSwift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C539E6481A315E87003B7CC7 /* SlideMenuControllerSwift.xcdatamodeld */; };
 		C539E64C1A315E87003B7CC7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C539E64B1A315E87003B7CC7 /* MainViewController.swift */; };
@@ -72,6 +73,7 @@
 		B394FC5F202A922F00D42467 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B3A3DE0420287C2500D656A2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		B3A3DE0A2028AE3A00D656A2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		B3BA101E202C7AE700870E53 /* imageCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageCategory.swift; sourceTree = "<group>"; };
 		C539E6411A315E87003B7CC7 /* SlideMenuControllerSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlideMenuControllerSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C539E6451A315E87003B7CC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C539E6461A315E87003B7CC7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 			children = (
 				C539E64B1A315E87003B7CC7 /* MainViewController.swift */,
 				B311643B2027006600F01ACB /* BaseViewController.swift */,
+				B3BA101E202C7AE700870E53 /* imageCategory.swift */,
 				C539E66B1A316C78003B7CC7 /* LeftViewController.swift */,
 				C539E66D1A316F5F003B7CC7 /* RightViewController.swift */,
 				C5BD39D91A6CD12300D0AF95 /* SwiftViewController.swift */,
@@ -443,6 +446,7 @@
 				C539E66C1A316C78003B7CC7 /* LeftViewController.swift in Sources */,
 				C5BF6A821BEEF1A70064C18E /* DataTableViewCell.swift in Sources */,
 				B394FC60202A922F00D42467 /* Category+CoreDataClass.swift in Sources */,
+				B3BA101F202C7AE700870E53 /* imageCategory.swift in Sources */,
 				C539E6471A315E87003B7CC7 /* AppDelegate.swift in Sources */,
 				C5F179D21BEB2FAF00EEDD9A /* UIColor.swift in Sources */,
 				C5F179CE1BEB2A5900EEDD9A /* UIImage.swift in Sources */,

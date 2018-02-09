@@ -8,13 +8,7 @@ class SwiftViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     @IBOutlet weak var myTableView: UITableView!
     
     //表示したいセルの配列を初期化
-    var artInfo:[[String:Any]] = [
-//        [
-//            "content":String(),
-//            "saveDate":Date(),
-//            "categoryId":Int()
-//        ]
-    ]
+    var artInfo:[[String:Any]] = []
     
     //何行目か保存されていないときを見分けるための-1を代入
     var selectedRowIndex = -1
@@ -125,23 +119,11 @@ class SwiftViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
         
-        print("viewWillAppear")
         //配列を初期化
         artInfo = []
         read()//デバッグ用
         myTableView.reloadData()
     }
-    
-//    override func viewDidAppear(_ animated: Bool) {
-////        super.viewWillAppear(animated)
-//        self.setNavigationBarItem()
-//
-//        print("viewDidAppear")
-//        //配列を初期化
-//        artInfo = []
-//        read()//デバッグ用
-//        myTableView.reloadData()
-//    }
     
     ///////////////////// CoreData操作 ////////////////////////////
     func read(){
@@ -198,9 +180,6 @@ class SwiftViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         
         //削除するセルのsaveDateをdelIdへ
         let delId = artInfo[selectedRowIndex]["saveDate"] as! Date
-        print("↓")
-        print(delId)
-        print("↑")
         
         //絞り込み検索
         //カテゴリーIDをキーにCoreDataを検索
