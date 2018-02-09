@@ -47,15 +47,6 @@ class SwiftViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
     /////////////////// スワイプ /////////////////////////////
     //セルのスワイプ表示（表示）
 //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

@@ -8,5 +8,7 @@
 
 import Foundation
 
-
+func sample() {
+    print("sample")
+}
 
