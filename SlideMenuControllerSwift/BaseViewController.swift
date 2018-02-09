@@ -240,17 +240,15 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         //5.スクロールオブジェクトに繰り返し文で、ボタンオブジェクトを追加していく
     
     //【課題】
-        //カテゴリー作成ボタン追加時に、コンテンツのwidth幅を広くする
-        //
+        //カテゴリーの数に応じたスクロールビュー内のコンテンツのwidthをとる
+        //上記に準じたカテゴリーオブジェクトの重複防止もコードも追加
     
     private func viewScroll()->UIScrollView{
         
 //        -----------テストデータ作成------------
-        
         //サンプルカテゴリー
-        var samCat:[String] = ["sam1","sam2","sam3","sam4","sam5","sam6","sam7","sam8","sam9"]
-        //2それぞれのCategoryデータをボタンオブジェクト化する//
-
+        let samCat:[String] = ["sam1","sam2","sam3","sam4","sam5","sam6","sam7","sam8","sam9"]
+        
 //        -------------------------------------
         
         
@@ -269,35 +267,37 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         
         // 中身の大きさを設定
-        scrollView.contentSize = CGSize(width: 1000, height: 50)
+        //TODO:ここのwidthを変える(test用)
+        var scWidth = 1000
+        
+        scrollView.contentSize = CGSize(width: scWidth, height: 50)
         
         //スクロールの跳ね返り
         scrollView.bounces = false
         
         //スクロールバーの見た目と余白
-        scrollView.indicatorStyle = .white
-        scrollView.scrollIndicatorInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+//        scrollView.indicatorStyle = .white
+        
+        //TODO:下記のスクロールバーを消す
+//        scrollView.scrollIndicatorInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         
         // Delegate を設定
         scrollView.delegate = self
         
-        // ScrollViewの中身を作る
-//        for i in 1 ..< 9 {
-//            let label = UILabel()
-//            label.text = "ラベル\(i)"
-//            label.sizeToFit()
-//            label.backgroundColor = UIColor.blue
-//            label.center = CGPoint(x: 100 * i, y:0)
-//            scrollView.addSubview(label)
-//        }
         
+        //TODO:以下の繰り返し文で全体のwidthも同時に取得すべき？
+        // ScrollViewの中身を作る
         var x = 0
+        scWidth = 0
         for value in samCat{
             var catBtn =  btnCategory(inputCategory: value)//返り値がボタンオブジェクト
-            
+            //オブジェクトの重複防止
             catBtn.frame.origin = CGPoint(x: 52 * x, y: 0)
+            //オブジェクトをスクロールバーへ追加
             scrollView.addSubview(catBtn)
-            print(catBtn)
+            
+            //オブジェクト全体のwidthを取得
+//            scWidth += catBtn.size^
             
             x += 1
         }
