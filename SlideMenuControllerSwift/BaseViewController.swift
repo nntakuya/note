@@ -60,7 +60,21 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         //テスト関数
 //        btnCategory()
+        
+        
+
+        
     }
+    
+    
+//    @IBAction func OpenButtonTouchUpInside(sender: UIButton) {
+//        atButton = sender
+//
+//        let modalViewController = ModalViewController()
+//        modalViewController.modalPresentationStyle = .Custom
+//        modalViewController.transitioningDelegate = self
+//        presentViewController(modalViewController, animated: true, completion: nil)
+//    }
     
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -142,7 +156,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         myButton.setTitleColor(UIColor.black, for: .highlighted)
         
         // ボタンにタグをつける.
-        myButton.tag = 1
+        myButton.tag = 0
         
         // イベントを追加する
         myButton.addTarget(self, action: #selector(self.onClickMyButton(sender:)), for: .touchUpInside)
@@ -158,6 +172,42 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     // └ tagで判断？
     @objc func onClickMyButton(sender: UIButton) {
         print("onClickMyButton")
+        
+        
+//        ------------モーダルウィンドウ テスト①-----------
+        
+//        let modalViewController = ModalViewController()
+        switch sender.tag {
+        case 0:
+            print("0")
+            
+            //テスト
+            // secondViewControllerのインスタンス生成.
+            let second = SecondViewController()
+            
+            // navigationControllerのrootViewControllerにsecondViewControllerをセット.
+            let nav = UINavigationController(rootViewController: second)
+            
+            // 画面遷移.
+            self.present(nav, animated: true, completion: nil)
+            
+            
+//        ------------モーダルウィンドウ テスト②-----------
+            
+            
+            //        modalViewController.modalPresentationStyle = .custom
+            //        modalViewController.transitioningDelegate = self
+            //        present(modalViewController, animated: true, completion: nil)
+            
+            
+            
+        case 1:
+            print("1")
+        default:
+            print("default")
+        }
+        
+        
     }
     
 //    ==================================
@@ -247,11 +297,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
 //        -----------テストデータ作成------------
         //サンプルカテゴリー
-        let samCat:[String] = ["sam1","sam2","sam3","sam4","sam5","sam6","sam7","sam8","sam9"]
-        
+        let samCat:[String] = ["sam1sam1sam1","sam2","sam3","sam4","sam5","sam6sam6sam6sam6","sam7","sam8","sam9","sam10"]
 //        -------------------------------------
-        
-        
         let scrollView = UIScrollView()
         scrollView.backgroundColor = UIColor.gray
         
@@ -265,18 +312,14 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         scrollView.frame = CGRect(x: sPosX, y: sPosY, width: sWidth, height: sHeight)
         
-        
         // 中身の大きさを設定
         //TODO:ここのwidthを変える(test用)
         var scWidth = 1000
         
-        scrollView.contentSize = CGSize(width: scWidth, height: 50)
+//        scrollView.contentSize = CGSize(width: scWidth, height: 50)
         
         //スクロールの跳ね返り
         scrollView.bounces = false
-        
-        //スクロールバーの見た目と余白
-//        scrollView.indicatorStyle = .white
         
         //TODO:下記のスクロールバーを消す
 //        scrollView.scrollIndicatorInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
@@ -284,23 +327,26 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         // Delegate を設定
         scrollView.delegate = self
         
-        
         //TODO:以下の繰り返し文で全体のwidthも同時に取得すべき？
         // ScrollViewの中身を作る
         var x = 0
         scWidth = 0
-        for value in samCat{
-            var catBtn =  btnCategory(inputCategory: value)//返り値がボタンオブジェクト
+        for btnName in samCat{
+            let catBtn =  btnCategory(inputCategory: btnName)//返り値がボタンオブジェクト
+            
             //オブジェクトの重複防止
-            catBtn.frame.origin = CGPoint(x: 52 * x, y: 0)
+            //TODO:以下のX座標を可変にする
+            //52の部分を、前のオブジェクトを取得し、+4した数値にセットする
+            catBtn.frame.origin = CGPoint(x: scWidth, y: 0)
             //オブジェクトをスクロールバーへ追加
             scrollView.addSubview(catBtn)
-            
             //オブジェクト全体のwidthを取得
-//            scWidth += catBtn.size^
+            scWidth += Int(catBtn.layer.bounds.width) + 5
             
             x += 1
         }
+        
+        scrollView.contentSize = CGSize(width: scWidth, height: 50)
 
         return scrollView
     }
@@ -352,8 +398,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         }catch{
         }
     }
-    
-    
     
 //    ==================================
 //　　　　    CoreData操作
@@ -445,6 +489,17 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
     }
     
+}
+
+
+//    ==================================
+//　　　　    モーダルウィンドウ Extension
+//    ==================================
+
+extension BaseViewController: UIViewControllerTransitioningDelegate {
+    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
+        return CustomPresentationController(presentedViewController: presented, presenting: presenting)
+    }
 }
 
 

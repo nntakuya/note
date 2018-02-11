@@ -31,7 +31,7 @@ class NonMenuController: UIViewController {
             }
             if vc.isKind(of: NonMenuController.self)  {
                 self.slideMenuController()?.removeLeftGestures()
-                self.slideMenuController()?.removeRightGestures()
+//                self.slideMenuController()?.removeRightGestures()
             }
         })
     }
