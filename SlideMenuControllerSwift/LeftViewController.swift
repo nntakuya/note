@@ -10,9 +10,7 @@ import UIKit
 enum LeftMenu: Int {
     case note = 0
     case all
-    case todo
-    case go
-    case nonMenu
+    case others
 }
 
 protocol LeftMenuProtocol : class {
@@ -22,12 +20,13 @@ protocol LeftMenuProtocol : class {
 class LeftViewController : UIViewController, LeftMenuProtocol {
     
     @IBOutlet weak var tableView: UITableView!
-    var menus = ["Note", "All", "To Do", "Go", "NonMenu"]
+    
+    //TODO:配列を"Note"と"All"以外、CoreDataに保存されているカテゴリー名から追加する処理にする
+    var menus = ["Note", "All", "To Do"]
+    //TODO:カテゴリー名に応じた名前のviewControllerを生成する
     var mainViewController: UIViewController!
     var swiftViewController: UIViewController!
-    var javaViewController: UIViewController!
-    var goViewController: UIViewController!
-    var nonMenuViewController: UIViewController!
+    var OthersViewController: UIViewController!
     var imageHeaderView: ImageHeaderView!
     
     required init?(coder aDecoder: NSCoder) {
@@ -43,15 +42,8 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
         let swiftViewController = storyboard.instantiateViewController(withIdentifier: "SwiftViewController") as! SwiftViewController
         self.swiftViewController = UINavigationController(rootViewController: swiftViewController)
         
-        let javaViewController = storyboard.instantiateViewController(withIdentifier: "JavaViewController") as! JavaViewController
-        self.javaViewController = UINavigationController(rootViewController: javaViewController)
-        
-        let goViewController = storyboard.instantiateViewController(withIdentifier: "GoViewController") as! GoViewController
-        self.goViewController = UINavigationController(rootViewController: goViewController)
-        
-        let nonMenuController = storyboard.instantiateViewController(withIdentifier: "NonMenuController") as! NonMenuController
-        nonMenuController.delegate = self
-        self.nonMenuViewController = UINavigationController(rootViewController: nonMenuController)
+        let OthersViewController = storyboard.instantiateViewController(withIdentifier: "OthersViewController") as! OthersViewController
+        self.OthersViewController = UINavigationController(rootViewController: OthersViewController)
         
         self.tableView.registerCellClass(BaseTableViewCell.self)
         
@@ -76,12 +68,8 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
         case .all:
             self.slideMenuController()?.changeMainViewController(self.swiftViewController, close: true)
         //TODO:(カテゴリー作成後反映)ここ以下のviewファイルをコードで全部作成
-        case .todo:
-            self.slideMenuController()?.changeMainViewController(self.javaViewController, close: true)
-        case .go:
-            self.slideMenuController()?.changeMainViewController(self.goViewController, close: true)
-        case .nonMenu:
-            self.slideMenuController()?.changeMainViewController(self.nonMenuViewController, close: true)
+        case .others:
+            self.slideMenuController()?.changeMainViewController(self.OthersViewController, close: true)
         }
     }
 }
@@ -94,7 +82,7 @@ extension LeftViewController : UITableViewDelegate {
             print("遷移先テスト")
             print(menu)
             switch menu {
-            case .note, .all, .todo, .go, .nonMenu:
+            case .note, .all, .others:
                 return BaseTableViewCell.height()
             }
         }
@@ -123,11 +111,12 @@ extension LeftViewController : UITableViewDataSource {
         return menus.count
     }
 
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let menu = LeftMenu(rawValue: indexPath.row) {
             switch menu {
-            case .note, .all, .todo, .go, .nonMenu:
+            case .note, .all, .others:
                 let cell = BaseTableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: BaseTableViewCell.identifier)
                 print(cell)
                 cell.setData(menus[indexPath.row])
@@ -136,6 +125,5 @@ extension LeftViewController : UITableViewDataSource {
         }
         return UITableViewCell()
     }
-    
     
 }

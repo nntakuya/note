@@ -17,6 +17,7 @@
 		B331936920303B34008477C9 /* ingCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331936820303B34008477C9 /* ingCoreData.swift */; };
 		B331936C20303D04008477C9 /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331936A20303D04008477C9 /* Category+CoreDataClass.swift */; };
 		B331936D20303D04008477C9 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331936B20303D04008477C9 /* Category+CoreDataProperties.swift */; };
+		B331936F20309401008477C9 /* OthersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331936E20309401008477C9 /* OthersViewController.swift */; };
 		B394FC5120294AC000D42467 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394FC5020294AC000D42467 /* Function.swift */; };
 		B394FC5A2029CACB00D42467 /* Article+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394FC562029CACB00D42467 /* Article+CoreDataClass.swift */; };
 		B394FC5B2029CACB00D42467 /* Article+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394FC572029CACB00D42467 /* Article+CoreDataProperties.swift */; };
@@ -76,6 +77,7 @@
 		B331936820303B34008477C9 /* ingCoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ingCoreData.swift; sourceTree = "<group>"; };
 		B331936A20303D04008477C9 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B331936B20303D04008477C9 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B331936E20309401008477C9 /* OthersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersViewController.swift; sourceTree = "<group>"; };
 		B394FC5020294AC000D42467 /* Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
 		B394FC562029CACB00D42467 /* Article+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Article+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B394FC572029CACB00D42467 /* Article+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Article+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				C5BD39D91A6CD12300D0AF95 /* SwiftViewController.swift */,
 				C5BD39DB1A6CD15700D0AF95 /* JavaViewController.swift */,
 				C5BD39DD1A6CD17B00D0AF95 /* GoViewController.swift */,
+				B331936E20309401008477C9 /* OthersViewController.swift */,
 				C5C1CE5A1A70DADF00B6E411 /* NonMenuController.swift */,
 				C539E64D1A315E87003B7CC7 /* Main.storyboard */,
 				C5BF6A851BEF4C080064C18E /* SubContentsViewController.swift */,
@@ -461,6 +464,7 @@
 				B3BA101F202C7AE700870E53 /* imageCategory.swift in Sources */,
 				C539E6471A315E87003B7CC7 /* AppDelegate.swift in Sources */,
 				B331936720300317008477C9 /* SecondViewController.swift in Sources */,
+				B331936F20309401008477C9 /* OthersViewController.swift in Sources */,
 				C5F179D21BEB2FAF00EEDD9A /* UIColor.swift in Sources */,
 				B331936D20303D04008477C9 /* Category+CoreDataProperties.swift in Sources */,
 				C5F179CE1BEB2A5900EEDD9A /* UIImage.swift in Sources */,
