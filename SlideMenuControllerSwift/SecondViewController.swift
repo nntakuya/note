@@ -3,12 +3,12 @@
 //  SlideMenuControllerSwift
 //
 //  Created by 仲松拓哉 on 11/02/2018.
-//
+
+
 
 import UIKit
 
 class SecondViewController: UIViewController {
-    
     
     //UITextViewのインスタンスを生成
     let textView: UITextView = UITextView()
@@ -93,6 +93,13 @@ class SecondViewController: UIViewController {
         self.textView.resignFirstResponder()
         //モーダルウィンドウ閉じる
         self.navigationController?.dismiss(animated: true, completion: nil)
+        let coreData = ingCoreData()
+        
+        //カテゴリーをCoreDataへインサート
+        coreData.insertCategory(name: textView.text)
+        //CoreDataのデータチェック
+        coreData.readCategoryAll()
+        
     }
     
     

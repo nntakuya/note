@@ -180,7 +180,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         switch sender.tag {
         case 0:
             print("0")
-            
             //テスト
             // secondViewControllerのインスタンス生成.
             let second = SecondViewController()
@@ -190,16 +189,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
             
             // 画面遷移.
             self.present(nav, animated: true, completion: nil)
-            
-            
-//        ------------モーダルウィンドウ テスト②-----------
-            
-            
-            //        modalViewController.modalPresentationStyle = .custom
-            //        modalViewController.transitioningDelegate = self
-            //        present(modalViewController, animated: true, completion: nil)
-            
-            
             
         case 1:
             print("1")
@@ -289,10 +278,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         //4.スクロールのコンテンツ内のwidth値に、上記の"3"で取得したwidth値をセット
         //5.スクロールオブジェクトに繰り返し文で、ボタンオブジェクトを追加していく
     
-    //【課題】
-        //カテゴリーの数に応じたスクロールビュー内のコンテンツのwidthをとる
-        //上記に準じたカテゴリーオブジェクトの重複防止もコードも追加
-    
     private func viewScroll()->UIScrollView{
         
 //        -----------テストデータ作成------------
@@ -335,8 +320,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
             let catBtn =  btnCategory(inputCategory: btnName)//返り値がボタンオブジェクト
             
             //オブジェクトの重複防止
-            //TODO:以下のX座標を可変にする
-            //52の部分を、前のオブジェクトを取得し、+4した数値にセットする
             catBtn.frame.origin = CGPoint(x: scWidth, y: 0)
             //オブジェクトをスクロールバーへ追加
             scrollView.addSubview(catBtn)
@@ -345,7 +328,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
             
             x += 1
         }
-        
         scrollView.contentSize = CGSize(width: scWidth, height: 50)
 
         return scrollView
@@ -496,11 +478,11 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //　　　　    モーダルウィンドウ Extension
 //    ==================================
 
-extension BaseViewController: UIViewControllerTransitioningDelegate {
-    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
-        return CustomPresentationController(presentedViewController: presented, presenting: presenting)
-    }
-}
+//extension BaseViewController: UIViewControllerTransitioningDelegate {
+//    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
+//        return CustomPresentationController(presentedViewController: presented, presenting: presenting)
+//    }
+//}
 
 
 
