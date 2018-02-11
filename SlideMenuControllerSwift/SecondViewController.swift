@@ -4,8 +4,6 @@
 //
 //  Created by 仲松拓哉 on 11/02/2018.
 
-
-
 import UIKit
 
 class SecondViewController: UIViewController {
@@ -25,7 +23,6 @@ class SecondViewController: UIViewController {
 //        backBtn()
         
     }
-    
     
 
 //    ==================================
@@ -99,7 +96,6 @@ class SecondViewController: UIViewController {
         coreData.insertCategory(name: textView.text)
         //CoreDataのデータチェック
         coreData.readCategoryAll()
-        
     }
     
     

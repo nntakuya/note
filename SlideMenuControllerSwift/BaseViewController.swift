@@ -19,7 +19,10 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
     //カテゴリーIDのデフォルト値（カテゴリー：All）を "0" とする
     var categoryId = 0
-    
+//    ==================================
+//　　　　   カテゴリーオブジェクト作成
+//    ==================================
+    var categoryDatas = ingCoreData()
 //    ==================================
 //　　　　   画像オブジェクト作成
 //    ==================================
@@ -56,25 +59,12 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         self.setInputAccessoryView()
         
         //ボタンオブジェクトセット
-        createTabBar()
+//        createTabBar()
         
         //テスト関数
 //        btnCategory()
-        
-        
-
-        
     }
     
-    
-//    @IBAction func OpenButtonTouchUpInside(sender: UIButton) {
-//        atButton = sender
-//
-//        let modalViewController = ModalViewController()
-//        modalViewController.modalPresentationStyle = .Custom
-//        modalViewController.transitioningDelegate = self
-//        presentViewController(modalViewController, animated: true, completion: nil)
-//    }
     
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -90,6 +80,9 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
+        
+        //アンダーバーの再読込
+        createTabBar()
     }
     
     
@@ -119,7 +112,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    ==================================
 //　　　　 ボタン(カテゴリー追加【+】)作成
 //    ==================================
-    
     
     private func createBtn() -> UIButton{
         
@@ -173,10 +165,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     @objc func onClickMyButton(sender: UIButton) {
         print("onClickMyButton")
         
-        
-//        ------------モーダルウィンドウ テスト①-----------
-        
-//        let modalViewController = ModalViewController()
+//      ------------モーダルウィンドウ-----------
         switch sender.tag {
         case 0:
             print("0")
@@ -195,8 +184,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         default:
             print("default")
         }
-        
-        
     }
     
 //    ==================================
@@ -206,7 +193,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         //1.testviewオブジェクト（テキストオブジェクトの横幅計るため）の作成
         //2.作成されたカテゴリー名に応じたwidthの幅を取得
         //3.textviewの横幅の値を取得
-        //4.
     //【課題】
         //それぞれのカテゴリーにtag的な機能を追加する必要がある
     
@@ -282,8 +268,10 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
 //        -----------テストデータ作成------------
         //サンプルカテゴリー
-        let samCat:[String] = ["sam1sam1sam1","sam2","sam3","sam4","sam5","sam6sam6sam6sam6","sam7","sam8","sam9","sam10"]
+//        let samCat:[String] = ["sam1sam1sam1","sam2","sam3","sam4","sam5","sam6sam6sam6sam6","sam7","sam8","sam9","sam10"]
 //        -------------------------------------
+        
+//        -------------スクロールビュー作成------------------------
         let scrollView = UIScrollView()
         scrollView.backgroundColor = UIColor.gray
         
@@ -312,11 +300,17 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         // Delegate を設定
         scrollView.delegate = self
         
-        //TODO:以下の繰り返し文で全体のwidthも同時に取得すべき？
+        
+//     -----------カテゴリーボタン生成-------------------------------
+        
+        //CoreDataからカテゴリーデータを全件取得
+        let inputCategories = categoryDatas.readCategoryAll()
         // ScrollViewの中身を作る
         var x = 0
         scWidth = 0
-        for btnName in samCat{
+        for inputCategory in inputCategories{
+            //カテゴリーオブジェクトからカテゴリー名だけ取得
+            let btnName = inputCategory["name"] as! String
             let catBtn =  btnCategory(inputCategory: btnName)//返り値がボタンオブジェクト
             
             //オブジェクトの重複防止
@@ -472,19 +466,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     }
     
 }
-
-
-//    ==================================
-//　　　　    モーダルウィンドウ Extension
-//    ==================================
-
-//extension BaseViewController: UIViewControllerTransitioningDelegate {
-//    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
-//        return CustomPresentationController(presentedViewController: presented, presenting: presenting)
-//    }
-//}
-
-
 
 //    ==================================
 //　　　　    サイドバーアクション

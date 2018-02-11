@@ -1,5 +1,11 @@
 
+//サイドバー
 import UIKit
+
+//実現したいこと
+//1.サイドバーのセルにカテゴリー一覧を反映させたい
+//2. "1"を追加するにあたって、"All"は残し、その次の項目から追加していく
+
 
 enum LeftMenu: Int {
     case note = 0
@@ -69,6 +75,7 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
             self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
         case .all:
             self.slideMenuController()?.changeMainViewController(self.swiftViewController, close: true)
+        //TODO:(カテゴリー作成後反映)ここ以下のviewファイルをコードで全部作成
         case .todo:
             self.slideMenuController()?.changeMainViewController(self.javaViewController, close: true)
         case .go:
@@ -80,9 +87,12 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
 }
 
 //以下で遷移先を指定している
+//TODO:"todo,go,nonMenu"の部分をothersに変更し、共通の処理を統一する？
 extension LeftViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let menu = LeftMenu(rawValue: indexPath.row) {
+            print("遷移先テスト")
+            print(menu)
             switch menu {
             case .note, .all, .todo, .go, .nonMenu:
                 return BaseTableViewCell.height()
@@ -119,6 +129,7 @@ extension LeftViewController : UITableViewDataSource {
             switch menu {
             case .note, .all, .todo, .go, .nonMenu:
                 let cell = BaseTableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: BaseTableViewCell.identifier)
+                print(cell)
                 cell.setData(menus[indexPath.row])
                 return cell
             }
