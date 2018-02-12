@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let BaseViewController = storyboard.instantiateViewController(withIdentifier: "BaseViewController") as! BaseViewController
 
         let leftViewController = storyboard.instantiateViewController(withIdentifier: "LeftViewController") as! LeftViewController
-        let rightViewController = storyboard.instantiateViewController(withIdentifier: "RightViewController") as! RightViewController
+//        let rightViewController = storyboard.instantiateViewController(withIdentifier: "RightViewController") as! RightViewController
         
         //アプリ立ち上げ時に最初に表示したいページを指定している
         let nvc: UINavigationController = UINavigationController(rootViewController: BaseViewController)
@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //おそらく下記のコードは挙動確認のため
         //指定のviewControllerが引数に取られた場合に、trueがくる
-        let slideMenuController = SlideMenuController(mainViewController:nvc, leftMenuViewController: leftViewController, rightMenuViewController: rightViewController)
+        let slideMenuController = SlideMenuController(mainViewController:nvc, leftMenuViewController: leftViewController)
         
         slideMenuController.automaticallyAdjustsScrollViewInsets = true
 //        slideMenuController.delegate = BaseViewController

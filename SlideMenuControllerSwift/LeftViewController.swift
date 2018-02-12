@@ -22,7 +22,7 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     //TODO:配列を"Note"と"All"以外、CoreDataに保存されているカテゴリー名から追加する処理にする
-    var menus = ["Note", "All", "To Do"]
+    var menus = ["Note", "All", "Others"]
     //TODO:カテゴリー名に応じた名前のviewControllerを生成する
     var mainViewController: UIViewController!
     var swiftViewController: UIViewController!
@@ -35,7 +35,6 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -73,6 +72,7 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
         }
     }
 }
+
 
 //以下で遷移先を指定している
 //TODO:"todo,go,nonMenu"の部分をothersに変更し、共通の処理を統一する？

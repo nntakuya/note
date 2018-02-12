@@ -310,10 +310,10 @@
             </objects>
             <point key="canvasLocation" x="130" y="789"/>
         </scene>
-        <!--View Controller-->
+        <!--Others View Controller-->
         <scene sceneID="NcR-1W-I67">
             <objects>
-                <viewController id="9pR-3M-7B7" sceneMemberID="viewController">
+                <viewController restorationIdentifier="OthersViewController" storyboardIdentifier="OthersViewController" id="9pR-3M-7B7" customClass="OthersViewController" customModule="SlideMenuControllerSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yNF-WD-HFQ"/>
                         <viewControllerLayoutGuide type="bottom" id="4mQ-F5-32P"/>
@@ -322,23 +322,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w3F-DD-UWG">
-                                <rect key="frame" x="0.0" y="95" width="375" height="572"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.86730893782383423" green="0.86730893782383423" blue="0.86730893782383423" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EWm-3a-x3g">
-                                <rect key="frame" x="0.0" y="44" width="181" height="53"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="0.076232020998347694" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6b3-MO-Kqf">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="M2R-ng-PbR">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M2R-ng-PbR" id="OcK-vU-6iM">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6b3-MO-Kqf" firstAttribute="bottom" secondItem="4mQ-F5-32P" secondAttribute="top" id="B9n-po-qKw"/>
+                            <constraint firstAttribute="trailing" secondItem="6b3-MO-Kqf" secondAttribute="trailing" id="VhH-FW-oiC"/>
+                            <constraint firstItem="6b3-MO-Kqf" firstAttribute="top" secondItem="Q6b-Ge-Ffs" secondAttribute="top" id="btR-3w-Qe1"/>
+                            <constraint firstItem="6b3-MO-Kqf" firstAttribute="leading" secondItem="Q6b-Ge-Ffs" secondAttribute="leading" id="l0P-YI-m5f"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="faq-yo-puq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1306.4000000000001" y="2369.8650674662672"/>
+            <point key="canvasLocation" x="-927.20000000000005" y="2218.7406296851577"/>
         </scene>
         <!--Go View Controller-->
         <scene sceneID="adq-KJ-u5Z">

@@ -30,7 +30,7 @@ class SwiftViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
         //表示したい文字の設定
-        cell.textLabel?.text = artInfo[indexPath.row]["content"] as! String
+        cell.textLabel?.text = artInfo[indexPath.row]["content"] as? String
         
         //文字設定したセルを返す
         return cell
@@ -75,13 +75,6 @@ class SwiftViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     }
     
     
-    
-    
-    
-    
-    
-    
-    
     ///////////////////// 画面遷移 ////////////////////////////
     
     
@@ -89,7 +82,7 @@ class SwiftViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     //上のtableView関数で定義されているperformSegue関数を使用することで使用が可能になる。
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        var dvc:DetailViewController = segue.destination as! DetailViewController
+        let dvc:DetailViewController = segue.destination as! DetailViewController
         
         //移動先の画面のプロパティに、選択された行番号を代入
         dvc.passedIndex = selectedRowIndex
@@ -145,7 +138,7 @@ class SwiftViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                 let category: Int64 = (result.value(forKey: "category_id") as? Int64)!
                 
                 
-                var dic = ["content":content!,"saveDate":saveDate!,"categoryId":category] as [String : Any]
+                let dic = ["content":content!,"saveDate":saveDate!,"categoryId":category] as [String : Any]
                 
                 artInfo.append(dic)
                 

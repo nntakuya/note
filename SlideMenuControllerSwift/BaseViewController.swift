@@ -1,7 +1,6 @@
-//
 //  BaseViewController.swift
 //  SlideMenuControllerSwift
-//
+
 //  Created by 仲松拓哉 on 04/02/2018.
 //
 
@@ -20,17 +19,38 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     //カテゴリーIDのデフォルト値（カテゴリー：All）を "0" とする
     var categoryId = 0
 //    ==================================
-//　　　　   カテゴリーオブジェクト作成
+//　　　　   カテゴリーオブジェクト
 //    ==================================
     var categoryDatas = ingCoreData()
+    
 //    ==================================
-//　　　　   画像オブジェクト作成
+//　　　　    画像オブジェクト
 //    ==================================
     var tabBarWidth: CGFloat!
     var tabBarHeight: CGFloat!
     var screenWidth:CGFloat!
     var screenHeight:CGFloat!
-    var scrollView:UIScrollView!
+    
+//    ==================================
+//　　　　 アンダーバーオブジェクト
+//    ==================================
+    var TestView = UIView()
+
+//    ==================================
+//　　　　 スクロールバーオブジェクト
+//    ==================================
+    var scrollView:UIScrollView = UIScrollView()
+    // スクロールバーのサイズ
+    let sWidth: CGFloat = 0.0
+    let sHeight: CGFloat = 0.0
+    // ボタンのX,Y座標
+    let sPosX: CGFloat = 0.0
+    let sPosY: CGFloat = 0.0
+    
+    
+    
+    
+    
     
     
     override func viewDidLoad() {
@@ -58,13 +78,12 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         //keyboard上の"Done"ボタンセット
         self.setInputAccessoryView()
         
-        //ボタンオブジェクトセット
-//        createTabBar()
+        //アンダーバー作成
+        createTabBar()
         
         //テスト関数
 //        btnCategory()
     }
-    
     
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -82,8 +101,30 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         self.setNavigationBarItem()
         
         //アンダーバーの再読込
-        createTabBar()
+//        createTabBar()
+        
+        //スクロールバーにカテゴリーボタンを作成
+        //ここにviewScrollのオブジェクトが入っている場合に、全部抜き取るイメージ？
+        
+        addBtnCategory()
+//        TestView.addSubview(viewScroll())//スクロール
+//        self.view.addSubview(TestView)
     }
+    
+    //1回で済む処理と更新すべき処理が混ざっている
+    //（解決法1）ラベルをつけるやり方
+    //
+    
+    //【1回で済む処理】
+    //・アンダーバー作成
+    //・+ボタン作成
+    
+    
+    //・スクロールバー作成
+    
+    //【更新すべき処理】
+    //・カテゴリーボタン
+    
     
     
 //    ==================================
@@ -91,7 +132,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    ==================================
     
     private func createTabBar(){
-        
         // ボタンのサイズ.
         let bWidth: CGFloat = self.view.frame.width //iphoneの横いっぱいの長さを取得
         let bHeight: CGFloat = 50 //ノリ
@@ -100,14 +140,18 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         let posX: CGFloat = 0
         let posY: CGFloat = self.view.bounds.height - bHeight
         
-        let TestView = UIView.init(frame: CGRect(x: posX, y: posY, width: bWidth, height: bHeight))
+        //TODO:TestVeiwのメンバー変数
+        TestView = UIView.init(frame: CGRect(x: posX, y: posY, width: bWidth, height: bHeight))
+        
         //色指定
         TestView.backgroundColor = UIColor.red
         
-        TestView.addSubview(createBtn())
-        TestView.addSubview(viewScroll())
+        TestView.addSubview(createBtn())//+ボタン
+//        TestView.addSubview(viewScroll())//スクロール
         self.view.addSubview(TestView)
     }
+    
+    
     
 //    ==================================
 //　　　　 ボタン(カテゴリー追加【+】)作成
@@ -156,6 +200,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     }
     
     
+    
     /*
      ボタンのイベント.
      */
@@ -186,16 +231,10 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         }
     }
     
-//    ==================================
-//　　　　   ボタン(カテゴリー選択)作成
-//    ==================================
-    //【プログラミングの設計】
-        //1.testviewオブジェクト（テキストオブジェクトの横幅計るため）の作成
-        //2.作成されたカテゴリー名に応じたwidthの幅を取得
-        //3.textviewの横幅の値を取得
-    //【課題】
-        //それぞれのカテゴリーにtag的な機能を追加する必要がある
     
+//    ============================================
+//　　　　   MARK:ボタン(カテゴリー選択)作成
+//    ============================================
     private func btnCategory(inputCategory :String)->UIButton{
         
         //=============実験===================
@@ -257,39 +296,10 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    ==================================
 //　　　　  スクロールオブジェクト作成
 //    ==================================
-    //【プログラミングの設計】
-        //1.データベースからCategoryデータを全件取得
-        //2それぞれのCategoryデータをボタンオブジェクト化する
-        //3.それぞれのボタンオブジェクトのwidthの合計とその隙間のwidth値の合計値を取得
-        //4.スクロールのコンテンツ内のwidth値に、上記の"3"で取得したwidth値をセット
-        //5.スクロールオブジェクトに繰り返し文で、ボタンオブジェクトを追加していく
     
     private func viewScroll()->UIScrollView{
-        
-//        -----------テストデータ作成------------
-        //サンプルカテゴリー
-//        let samCat:[String] = ["sam1sam1sam1","sam2","sam3","sam4","sam5","sam6sam6sam6sam6","sam7","sam8","sam9","sam10"]
-//        -------------------------------------
-        
-//        -------------スクロールビュー作成------------------------
-        let scrollView = UIScrollView()
         scrollView.backgroundColor = UIColor.gray
-        
-        // スクロールバーのサイズ
-        let sWidth: CGFloat = self.view.frame.width - 60 //50はボタンのwidthサイズ
-        let sHeight: CGFloat = 50
-        
-        // ボタンのX,Y座標
-        let sPosX: CGFloat = self.view.frame.width / 90 + 60 //ボタン横の幅 + 50はボタンのwidthサイズ
-        let sPosY: CGFloat = 0
-        
         scrollView.frame = CGRect(x: sPosX, y: sPosY, width: sWidth, height: sHeight)
-        
-        // 中身の大きさを設定
-        //TODO:ここのwidthを変える(test用)
-        var scWidth = 1000
-        
-//        scrollView.contentSize = CGSize(width: scWidth, height: 50)
         
         //スクロールの跳ね返り
         scrollView.bounces = false
@@ -300,14 +310,22 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         // Delegate を設定
         scrollView.delegate = self
         
-        
-//     -----------カテゴリーボタン生成-------------------------------
+        return scrollView
+    }
+    
+    
+//    ==========================================
+//　　　　  スクロールへカテゴリーボタン追加機能
+//    ==========================================
+    
+    //スクロールバーオブジェクトにカテゴリーボタンを追加
+    func addBtnCategory()->UIScrollView{
+        var scWidth = 0//コンテンツの中身のwidth
         
         //CoreDataからカテゴリーデータを全件取得
         let inputCategories = categoryDatas.readCategoryAll()
-        // ScrollViewの中身を作る
-        var x = 0
-        scWidth = 0
+        
+        var x = 0// カテゴリーボタンオブジェクトのカウント変数
         for inputCategory in inputCategories{
             //カテゴリーオブジェクトからカテゴリー名だけ取得
             let btnName = inputCategory["name"] as! String
@@ -323,9 +341,13 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
             x += 1
         }
         scrollView.contentSize = CGSize(width: scWidth, height: 50)
-
+        
         return scrollView
     }
+    
+    
+    
+    
     
     /* 以下は UITextFieldDelegate のメソッド */
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -338,6 +360,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         print("beginDragging")
     }
 
+    
     
 //    ==================================
 //　　　　    ジェスチャーイベント
