@@ -21,8 +21,8 @@ class SecondViewController: UIViewController {
         
         //(テスト用)戻るButtonを生成.
 //        backBtn()
-        
     }
+    
     
 
 //    ==================================
@@ -132,11 +132,7 @@ class SecondViewController: UIViewController {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
-    
-    
     //TODO:カテゴリー追加後に、既存のカテゴリーを削除
-    
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

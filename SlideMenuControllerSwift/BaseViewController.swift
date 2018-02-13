@@ -21,7 +21,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    ==================================
 //　　　　   カテゴリーオブジェクト
 //    ==================================
-    var categoryDatas = ingCoreData()
+//    var categoryDatas = ingCoreData()
     
 //    ==================================
 //　　　　    画像オブジェクト
@@ -192,6 +192,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     @objc func onClickMyButton(sender: UIButton) {
         print("onClickMyButton")
 //      ------------モーダルウィンドウ-----------
+        print(sender)
         switch sender.tag {
         case 0:
             print("0")
@@ -311,6 +312,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     //スクロールバーオブジェクトにカテゴリーボタンを追加
     func addBtnCategory(){
         var scWidth = 0//コンテンツの中身のwidth
+        let categoryDatas = ingCoreData()
+        
         
         //CoreDataからカテゴリーデータを全件取得
         let inputCategories = categoryDatas.readCategoryAll()
