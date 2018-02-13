@@ -200,6 +200,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
             // secondViewControllerのインスタンス生成.
             let second = SecondViewController()
             
+            
             // navigationControllerのrootViewControllerにsecondViewControllerをセット.
             let nav = UINavigationController(rootViewController: second)
             
@@ -357,11 +358,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     func DeleteScrollView(scv:UIScrollView) {
         //        btnCategory = UIButton()
         scv.removeFromSuperview()
-//
-//        let subviews = scrollView.subviews
-//        for subview in subviews {
-//            subview.removeFromSuperview()
-//        }
+
     }
 
 //    =======================================

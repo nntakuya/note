@@ -12,15 +12,25 @@ class SecondViewController: UIViewController {
     let textView: UITextView = UITextView()
 
     override func viewDidLoad() {
+        //(test)全体のビュー画面の体裁調整
+        styleChg()
+        
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.white
         
         //テキストビューを追加
         createText()
+    }
+    
+    
+//    ==================================
+//　　　　  (テスト)View体裁
+//    ==================================
+    func styleChg(){
+        self.textView.frame = CGRect(x: 0, y: 100, width: self.view.bounds.width, height: self.view.bounds.height)
         
-        //(テスト用)戻るButtonを生成.
-//        backBtn()
+        
     }
     
     
@@ -30,9 +40,11 @@ class SecondViewController: UIViewController {
 //    ==================================
     
     func createText(){
-        
         //textViewのイチとサイズを設定
         textView.frame = CGRect(x: 0, y:0, width: self.view.frame.width, height: self.view.frame.height)
+        
+        //textViewにジェスチャーイベントを追加
+        downSwipe()
         
         //テキストを設定
         textView.text = "入力してください"
@@ -54,6 +66,31 @@ class SecondViewController: UIViewController {
         //ビューへ反映
         self.view.addSubview(textView)
         
+    }
+    
+    
+    
+    
+    
+    
+//    ==================================
+//　　　　    スワイプアクション
+//    ==================================
+    func downSwipe(){
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(SecondViewController.leftSwipeView(sender:)))  //Swift3
+        // スワイプの方向を指定
+        downSwipe.direction = .down
+        // viewにジェスチャーを登録
+        self.view.addGestureRecognizer(downSwipe)
+        
+    }
+    //スワイプ発動時、実行
+    @objc func leftSwipeView(sender: UISwipeGestureRecognizer) {
+        print("Down Swipe")
+        //キーボード閉じる
+        self.textView.resignFirstResponder()
+        //モーダルウィンドウ閉じる
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
     
@@ -96,41 +133,9 @@ class SecondViewController: UIViewController {
         coreData.insertCategory(name: textView.text)
         //CoreDataのデータチェック
         coreData.readCategoryAll()
-        
-        //カテゴリーボタンの追加
-        let sample = BaseViewController()
-//        sample.DeleteCategoryBtn()
-//        sample.addBtnCategory()
     }
     
     
-    
-//    ==========================================
-//      （テスト用）モーダルウィンドウ閉じるボタン
-//    ==========================================
-    func backBtn(){
-        let myButton = UIButton()
-        myButton.frame = CGRect(x: 0, y: 0, width: 200, height: 40)
-        myButton.backgroundColor = UIColor.red
-        myButton.layer.masksToBounds = true
-        myButton.setTitle("もどる", for: UIControlState.normal)
-        myButton.setTitleColor(UIColor.white, for: UIControlState.normal)
-        myButton.setTitleColor(UIColor.black, for: UIControlState.highlighted)
-        myButton.layer.cornerRadius = 20.0
-        myButton.layer.position = CGPoint(x: self.view.frame.width/2, y:200)
-        myButton.tag = 1
-        myButton.addTarget(self, action: #selector(SecondViewController.onClickMyButton(sender:)), for: .touchUpInside)
-        
-        // viewにButtonを追加.
-        self.view.addSubview(myButton)
-    }
-//    ==========================================
-//      （テスト用）上記付属ファンクション
-//    ==========================================
-    @objc func onClickMyButton(sender : UIButton){
-        // viewを閉じる.
-        self.navigationController?.dismiss(animated: true, completion: nil)
-    }
     
     //TODO:カテゴリー追加後に、既存のカテゴリーを削除
     override func didReceiveMemoryWarning() {
