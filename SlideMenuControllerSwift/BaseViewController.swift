@@ -48,9 +48,10 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     let sPosY: CGFloat = 0.0
     
     
-    
-    
-    
+//    ==================================
+//　　　　 カテゴリーボタンオブジェクト
+//    ==================================
+    var btnCategory: UIButton!
     
     
     override func viewDidLoad() {
@@ -80,9 +81,12 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         //アンダーバー作成
         createTabBar()
+        //カテゴリーボタンの追加
+//        addBtnCategory()
         
-        //テスト関数
-//        btnCategory()
+//        //カテゴリーボタン削除
+//        DeleteScrollView(scv: scrollView)
+        
     }
     
     
@@ -100,37 +104,20 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
         
-        //アンダーバーの再読込
-//        createTabBar()
-        
-        //スクロールバーにカテゴリーボタンを作成
-        //ここにviewScrollのオブジェクトが入っている場合に、全部抜き取るイメージ？
-        
+        //カテゴリーボタン削除
+        DeleteScrollView(scv: scrollView)
+        scrollView = UIScrollView()
+        viewScroll()
+//        //カテゴリーボタンの追加
         addBtnCategory()
-//        TestView.addSubview(viewScroll())//スクロール
-//        self.view.addSubview(TestView)
+        
     }
-    
-    //1回で済む処理と更新すべき処理が混ざっている
-    //（解決法1）ラベルをつけるやり方
-    //
-    
-    //【1回で済む処理】
-    //・アンダーバー作成
-    //・+ボタン作成
-    
-    
-    //・スクロールバー作成
-    
-    //【更新すべき処理】
-    //・カテゴリーボタン
-    
+  
     
     
 //    ==================================
 //　　　　 アンダーバーオブジェクト作成
 //    ==================================
-    
     private func createTabBar(){
         // ボタンのサイズ.
         let bWidth: CGFloat = self.view.frame.width //iphoneの横いっぱいの長さを取得
@@ -147,16 +134,14 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         TestView.backgroundColor = UIColor.red
         
         TestView.addSubview(createBtn())//+ボタン
-//        TestView.addSubview(viewScroll())//スクロール
+        TestView.addSubview(viewScroll())//スクロール
         self.view.addSubview(TestView)
     }
-    
     
     
 //    ==================================
 //　　　　 ボタン(カテゴリー追加【+】)作成
 //    ==================================
-    
     private func createBtn() -> UIButton{
         
         var myButton: UIButton!
@@ -201,15 +186,11 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
     
     
-    /*
-     ボタンのイベント.
-     */
-    //TODO:以下にカテゴリー追加機能を追加
-    //TODO:（確認）選択されたボタン毎に条件分岐文で処理を切り替えるイメージなのか？
-    // └ tagで判断？
+//    ============================================
+//　　　　   ボタン【+】プッシュ後のアクション
+//    ============================================
     @objc func onClickMyButton(sender: UIButton) {
         print("onClickMyButton")
-        
 //      ------------モーダルウィンドウ-----------
         switch sender.tag {
         case 0:
@@ -223,7 +204,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
             
             // 画面遷移.
             self.present(nav, animated: true, completion: nil)
-            
         case 1:
             print("1")
         default:
@@ -233,7 +213,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
     
 //    ============================================
-//　　　　   MARK:ボタン(カテゴリー選択)作成
+//　　　　   ボタン(カテゴリー選択)作成
 //    ============================================
     private func btnCategory(inputCategory :String)->UIButton{
         
@@ -250,7 +230,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         print(width.width)
         //================================
         
-        var btnCategory: UIButton!
+        
         // Buttonを生成する.
         btnCategory = UIButton()
         
@@ -296,9 +276,17 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    ==================================
 //　　　　  スクロールオブジェクト作成
 //    ==================================
-    
     private func viewScroll()->UIScrollView{
         scrollView.backgroundColor = UIColor.gray
+        
+        let sWidth: CGFloat = self.view.frame.width - 60 //50はボタンのwidthサイズ
+        let sHeight: CGFloat = 50
+        
+        // ボタンのX,Y座標
+        let sPosX: CGFloat = self.view.frame.width / 90 + 60 //ボタン横の幅 + 50はボタンのwidthサイズ
+        let sPosY: CGFloat = 0
+        
+        
         scrollView.frame = CGRect(x: sPosX, y: sPosY, width: sWidth, height: sHeight)
         
         //スクロールの跳ね返り
@@ -310,16 +298,18 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         // Delegate を設定
         scrollView.delegate = self
         
+        TestView.addSubview(scrollView)
+//        self.view.addSubview(TestView)
+        
         return scrollView
     }
     
     
-//    ==========================================
-//　　　　  スクロールへカテゴリーボタン追加機能
-//    ==========================================
-    
+//    ========================================================
+//　　　　  スクロールオブジェクトへカテゴリーボタン追加機能
+//    ========================================================
     //スクロールバーオブジェクトにカテゴリーボタンを追加
-    func addBtnCategory()->UIScrollView{
+    func addBtnCategory(){
         var scWidth = 0//コンテンツの中身のwidth
         
         //CoreDataからカテゴリーデータを全件取得
@@ -337,18 +327,40 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
             scrollView.addSubview(catBtn)
             //オブジェクト全体のwidthを取得
             scWidth += Int(catBtn.layer.bounds.width) + 5
-            
             x += 1
         }
         scrollView.contentSize = CGSize(width: scWidth, height: 50)
-        
-        return scrollView
+
     }
     
+//    =====================================================
+//　　　　   　スクロールオブジェクト内 カテゴリーボタン削除
+//    =====================================================
+    func DeleteCategoryBtn() {
+//        btnCategory = UIButton()
+        
+        let subviews = btnCategory.subviews
+        for subview in subviews {
+            subview.removeFromSuperview()
+        }
+    }
     
-    
-    
-    
+//    =====================================================
+//　　　　   　スクロールオブジェクト内 スクロールビュー削除
+//    =====================================================
+    func DeleteScrollView(scv:UIScrollView) {
+        //        btnCategory = UIButton()
+        scv.removeFromSuperview()
+//
+//        let subviews = scrollView.subviews
+//        for subview in subviews {
+//            subview.removeFromSuperview()
+//        }
+    }
+
+//    =======================================
+//　　　　    スクロールイベント（未定義）
+//    =======================================
     /* 以下は UITextFieldDelegate のメソッド */
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // スクロール中の処理
@@ -359,18 +371,19 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         // ドラッグ開始時の処理
         print("beginDragging")
     }
-
     
     
-//    ==================================
-//　　　　    ジェスチャーイベント
-//    ==================================
+//    =======================================
+//　　　　    ジェスチャーイベント(下スワイプ)
+//    =======================================
     @IBAction func keyClose(_ sender: UISwipeGestureRecognizer) {
         postView.resignFirstResponder()
     }
     
     
-    //Doneボタンが押されたときに、データを保存
+//    ==================================
+//　　　　    CoreData操作(Insert処理)
+//    ==================================
     func tapSave(){
         let appD: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         
@@ -393,13 +406,12 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
             //レコードの即時保存
             //TODO:データ保存時のバリデーション確認
             try viewContext.save()
-            
         }catch{
         }
     }
     
 //    ==================================
-//　　　　    CoreData操作
+//　　　　    CoreData操作(Read処理)
 //    ==================================
     //既に存在するデータの読込処理
     func read(){
@@ -425,12 +437,14 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
                 print(saveDate)
                 print(category)
             }
-            
         }catch{
         }
     }
     
-    //ToDo保留
+
+//    ==================================
+//　　　　    キーボードのDoneボタン追加
+//    ==================================
     func setInputAccessoryView() {
         let kbToolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
         kbToolBar.barStyle = UIBarStyle.default  // スタイルを設定
@@ -452,10 +466,9 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         postView.inputAccessoryView = kbToolBar
     }
     
-    
-    //おそらく以下はボタンを押した後のアクション定義する場所
-    //@objcはググる
-    // #selectorをつけるから、
+//    ==================================
+//　　　　 Doneボタンの実行処理
+//    ==================================
     @objc func commitButtonTapped(sender: Any) {
         self.resignFirstResponder()
         tapSave()
@@ -464,7 +477,10 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         postView.resignFirstResponder()
     }
     
-    //削除機能
+    
+//    ==================================
+//　　　　  CoreData操作(Delete処理)
+//    ==================================
     func Delete(){
         //AppDelegateを使う用意をする
         let appD: AppDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -485,10 +501,10 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
             try viewContext.save()
         } catch{
         }
-        
     }
-    
 }
+
+
 
 //    ==================================
 //　　　　    サイドバーアクション

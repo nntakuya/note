@@ -96,6 +96,11 @@ class SecondViewController: UIViewController {
         coreData.insertCategory(name: textView.text)
         //CoreDataのデータチェック
         coreData.readCategoryAll()
+        
+        //カテゴリーボタンの追加
+        let sample = BaseViewController()
+//        sample.DeleteCategoryBtn()
+//        sample.addBtnCategory()
     }
     
     
@@ -127,6 +132,9 @@ class SecondViewController: UIViewController {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
+    
+    
+    //TODO:カテゴリー追加後に、既存のカテゴリーを削除
     
 
     override func didReceiveMemoryWarning() {
