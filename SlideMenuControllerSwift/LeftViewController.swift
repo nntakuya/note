@@ -1,40 +1,12 @@
 //サイドバー
 import UIKit
 
-//実現したいこと
-//1.サイドバーのセルにカテゴリー一覧を反映させたい
-//2. "1"を追加するにあたって、"All"は残し、その次の項目から追加していく
-
-//【メモ】
-//CoreDataからカテゴリー名を全件取得
-//menus配列にappendしていく
-//menus配列にあるデータをサイドバーのセルに表示していく
-//遷移先をOthersViewControllerにする
-
-//TODO:列挙体を使わない方向で考えるべき
-//└ 列挙体がどういう場面で使用されているのか確認
-//└ changeViewController, tableView, extension LeftViewController
-//└
-
-enum LeftMenu: Int {
-    case note = 0
-    case all
-    case others
-    case others1
-    case others2
-    case others3
-}
-
-protocol LeftMenuProtocol : class {
-    func changeViewController(_ menu: LeftMenu)
-}
-
-
-class LeftViewController : UIViewController, LeftMenuProtocol {
+class LeftViewController : UIViewController{
     
     @IBOutlet weak var tableView: UITableView!
     
     //TODO:配列を"Note"と"All"以外、CoreDataに保存されているカテゴリー名から追加する処理にする(ファンクション作成済)
+    //固定項目:"Note","All"
     var menus = ["Note", "All"]
     
     //TODO:カテゴリー名に応じた名前のviewControllerを生成する
@@ -51,7 +23,6 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         //menusの配列にCoreDataのカテゴリー名を追加する
-        addListCategory()
         
         self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         
@@ -69,6 +40,12 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addListCategory()
+//        tableView.reloadData()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
@@ -80,14 +57,12 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
     }
     
     //目的:サイドバーのカテゴリー項目から詳細画面へ遷移
-    func changeViewController(_ menu: LeftMenu) {
-        switch menu {
-        case .note:
+    func changeViewController(num: Int) {
+        if menus[num] == "Note"{
             self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
-        case .all:
+        }else if(menus[num] == "All"){
             self.slideMenuController()?.changeMainViewController(self.swiftViewController, close: true)
-        //TODO:(カテゴリー作成後反映)ここ以下のviewファイルをコードで全部作成
-        default:
+        }else{
             self.slideMenuController()?.changeMainViewController(self.OthersViewController, close: true)
         }
     }
@@ -99,36 +74,39 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
         let categoryDatas = ingCoreData()
         //CoreDataからカテゴリーデータを全件取得
         let inputCategories = categoryDatas.readCategoryAll()
+        //menus配列をイニシャライズ
+        menus = ["Note", "All"]
         
+        //CoreDataにあるカテゴリー名を全件取得
         for inputCategory in inputCategories{
-            //カテゴリーオブジェクトからカテゴリー名だけ取得
             let addCategory = inputCategory["name"] as! String
             menus.append(addCategory)
         }
+        //テーブルの再描画
+        tableView.reloadData()
     }
 }
 
 
+//TODO:なぜextensionが上手くいってないのか
+// └ 上記でセットしているfunctionがなぜか反応しない
 //遷移先を指定している
 extension LeftViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if let menu = LeftMenu(rawValue: indexPath.row) {
-            print("遷移先テスト")
-            print(menu)
-            switch menu {
-            case .note, .all:
+        for list in menus{
+            print(list)
+            if (list == "Note" || list == "All"){
                 return BaseTableViewCell.height()
-            default:
+            }else{
                 return 60
             }
         }
-        return 0
+        
+        return CGFloat()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let menu = LeftMenu(rawValue: indexPath.row) {
-            self.changeViewController(menu)
-        }
+        self.changeViewController(num: indexPath.row)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -146,14 +124,13 @@ extension LeftViewController : UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let menu = LeftMenu(rawValue: indexPath.row) {
-            switch menu {
-            case .note, .all:
+        for list in menus{
+            if (list == "Note" || list == "All"){
                 let cell = BaseTableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: BaseTableViewCell.identifier)
                 print(cell)
                 cell.setData(menus[indexPath.row])
                 return cell
-            default:
+            }else{
                 let cell = BaseTableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: BaseTableViewCell.identifier)
                 print(cell)
                 cell.setData(menus[indexPath.row])

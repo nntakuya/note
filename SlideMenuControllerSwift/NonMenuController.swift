@@ -12,7 +12,7 @@ import UIKit
 
 class NonMenuController: UIViewController {
     
-    weak var delegate: LeftMenuProtocol?
+//    weak var delegate: LeftMenuProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +36,7 @@ class NonMenuController: UIViewController {
         })
     }
   
-    @IBAction func didTouchToMain(_ sender: UIButton) {
-        delegate?.changeViewController(LeftMenu.note)
-    }
+//    @IBAction func didTouchToMain(_ sender: UIButton) {
+//        delegate?.changeViewController(LeftMenu.note)
+//    }
 }

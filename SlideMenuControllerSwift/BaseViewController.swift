@@ -82,7 +82,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         //アンダーバー作成
         createTabBar()
         //カテゴリーボタンの追加
-//        addBtnCategory()
+        addBtnCategory()
         
 //        //カテゴリーボタン削除
 //        DeleteScrollView(scv: scrollView)
@@ -312,6 +312,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     //スクロールバーオブジェクトにカテゴリーボタンを追加
     func addBtnCategory(){
         var scWidth = 0//コンテンツの中身のwidth
+        //カテゴリーボタンの初期化
         let categoryDatas = ingCoreData()
         
         
@@ -322,6 +323,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         for inputCategory in inputCategories{
             //カテゴリーオブジェクトからカテゴリー名だけ取得
             let btnName = inputCategory["name"] as! String
+            print(btnName)
+            print("test")
             let catBtn =  btnCategory(inputCategory: btnName)//返り値がボタンオブジェクト
             
             //オブジェクトの重複防止
