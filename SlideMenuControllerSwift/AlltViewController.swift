@@ -3,7 +3,7 @@ import UIKit
 import CoreData
 
 
-class SwiftViewController: UIViewController,UITableViewDelegate,UITableViewDataSource   {
+class AllViewController: UIViewController,UITableViewDelegate,UITableViewDataSource   {
     
     @IBOutlet weak var myTableView: UITableView!
     

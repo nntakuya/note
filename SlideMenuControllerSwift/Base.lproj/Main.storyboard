@@ -169,10 +169,10 @@
             </objects>
             <point key="canvasLocation" x="117" y="139"/>
         </scene>
-        <!--Swift View Controller-->
+        <!--All View Controller-->
         <scene sceneID="qDe-KX-ho1">
             <objects>
-                <viewController storyboardIdentifier="SwiftViewController" id="I9w-x4-mAi" customClass="SwiftViewController" customModule="SlideMenuControllerSwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="AllViewController" storyboardIdentifier="AllViewController" id="I9w-x4-mAi" customClass="AllViewController" customModule="SlideMenuControllerSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jtW-TN-dF4"/>
                         <viewControllerLayoutGuide type="bottom" id="2n0-fL-47k"/>

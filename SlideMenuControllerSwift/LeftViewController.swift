@@ -11,7 +11,7 @@ class LeftViewController : UIViewController{
     
     //TODO:カテゴリー名に応じた名前のviewControllerを生成する
     var mainViewController: UIViewController!
-    var swiftViewController: UIViewController!
+    var AllViewController: UIViewController!
     var OthersViewController: UIViewController!
     var imageHeaderView: ImageHeaderView!
     
@@ -27,8 +27,8 @@ class LeftViewController : UIViewController{
         self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let swiftViewController = storyboard.instantiateViewController(withIdentifier: "SwiftViewController") as! SwiftViewController
-        self.swiftViewController = UINavigationController(rootViewController: swiftViewController)
+        let AllViewController = storyboard.instantiateViewController(withIdentifier: "AllViewController") as! AllViewController
+        self.AllViewController = UINavigationController(rootViewController: AllViewController)
         
         let OthersViewController = storyboard.instantiateViewController(withIdentifier: "OthersViewController") as! OthersViewController
         self.OthersViewController = UINavigationController(rootViewController: OthersViewController)
@@ -61,7 +61,7 @@ class LeftViewController : UIViewController{
         if menus[num] == "Note"{
             self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
         }else if(menus[num] == "All"){
-            self.slideMenuController()?.changeMainViewController(self.swiftViewController, close: true)
+            self.slideMenuController()?.changeMainViewController(self.AllViewController, close: true)
         }else{
             self.slideMenuController()?.changeMainViewController(self.OthersViewController, close: true)
         }
