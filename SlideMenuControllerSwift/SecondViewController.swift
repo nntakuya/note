@@ -21,8 +21,6 @@ class SecondViewController: UIViewController {
         createText()
     }
     
-    
-
 //    ==================================
 //　　　　  UITextViewの設定
 //    ==================================
@@ -55,8 +53,6 @@ class SecondViewController: UIViewController {
         self.view.addSubview(textView)
         
     }
-    
-    
     
     
     

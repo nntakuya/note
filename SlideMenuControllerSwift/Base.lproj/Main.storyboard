@@ -74,12 +74,18 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.9206724167" green="0.99694758650000004" blue="0.96233230830000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Create Category"/>
+                                        <connections>
+                                            <action selector="BtnCreaateCategory:" destination="hwP-Ck-hW7" eventType="touchUpInside" id="Ha1-uG-szj"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FwN-GG-R3s">
                                         <rect key="frame" x="191" y="34" width="184" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.97811824079999998" green="0.88229888680000002" blue="0.76403063540000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Custom Category"/>
+                                        <connections>
+                                            <action selector="BtnCustomCategory:" destination="hwP-Ck-hW7" eventType="touchUpInside" id="xUG-Oo-Bv1"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.88617227979274615" green="0.88617227979274615" blue="0.88617227979274615" alpha="0.2107999559859155" colorSpace="custom" customColorSpace="displayP3"/>

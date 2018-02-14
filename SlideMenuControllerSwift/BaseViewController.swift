@@ -29,9 +29,9 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     @IBOutlet weak var CreateCategoryView: UIView!
     @IBOutlet weak var CustomCategoryView: UIView!
     
-    //    =========================================
-    //　　　　   CustomCategoryテーブル初期値セット
-    //    =========================================
+//    =========================================
+//　　　　   CustomCategoryテーブル初期値セット
+//    =========================================
     //【テーブル】CustomCategoryViewのテーブルを作成
     @IBOutlet weak var CusCategoryTable: UITableView!
     //カテゴリー一覧変数(CustomCategoryTable)
@@ -40,17 +40,30 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     //何行目か保存されていないときを見分けるための-1を代入
     var selectedRowIndex = -1
     
-    
-    
-    
-    
-    
-    
-    
     //カテゴリーIDのデフォルト値（カテゴリー：All）を "0" とする
     var categoryId = 0
     
     
+    
+//    =========================================
+//　　　　   モーダルウィンドウボタン
+//    =========================================
+    //(Btn)CreateCategoryアクション
+    
+    @IBAction func BtnCreaateCategory(_ sender: UIButton) {
+        
+        
+        
+        
+        
+    }
+    //(Btn)CustomCategoryアクション
+    @IBAction func BtnCustomCategory(_ sender: UIButton) {
+        
+        
+        
+        
+    }
     
     
 //    ==================================

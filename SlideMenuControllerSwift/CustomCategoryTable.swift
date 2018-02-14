@@ -3,7 +3,6 @@
 //  SlideMenuControllerSwift
 //
 //  Created by 仲松拓哉 on 14/02/2018.
-//  Copyright © 2018 Yuji Hato. All rights reserved.
 //
 
 import Foundation
@@ -34,25 +33,22 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
         //CoreDataオブジェクト作成
         let categoryDatas = ingCoreData()
         //CoreDataからカテゴリーデータを全件取得
-        let categoryInfo = categoryDatas.readCategoryAll()
-        
+        categoryInfo = categoryDatas.readCategoryAll() as! [[String : Any]]
         
         //テーブルの再描画
-//        tableView.reloadData()
+        //        tableView.reloadData()
     }
     
     //セルのスワイプ表示（デザイン）
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
         let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (action, index) -> Void in
             
             //指定されたIDのメモデータをCoreDataから削除
             self.selectedRowIndex = indexPath.row
             self.Delete()
-            
             //ビューから指定されたセルを削除
-//            self.artInfo.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
+            //            self.artInfo.remove(at: indexPath.row)
+            //            tableView.deleteRows(at: [indexPath], with: .fade)
         }
         deleteButton.backgroundColor = UIColor.red
         
@@ -60,7 +56,5 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     
-    
-    
-    
 }
+

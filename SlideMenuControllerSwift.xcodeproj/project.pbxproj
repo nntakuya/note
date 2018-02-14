@@ -158,7 +158,6 @@
 		C539E6381A315E87003B7CC7 = {
 			isa = PBXGroup;
 			children = (
-				B311B5762033E16600CA0604 /* CustomCategoryTable.swift */,
 				B331936A20303D04008477C9 /* Category+CoreDataClass.swift */,
 				B331936B20303D04008477C9 /* Category+CoreDataProperties.swift */,
 				B394FC562029CACB00D42467 /* Article+CoreDataClass.swift */,
@@ -258,6 +257,7 @@
 		C5C1CE631A70F7C400B6E411 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				B311B5762033E16600CA0604 /* CustomCategoryTable.swift */,
 				C539E64B1A315E87003B7CC7 /* MainViewController.swift */,
 				B331936620300317008477C9 /* SecondViewController.swift */,
 				B311643B2027006600F01ACB /* BaseViewController.swift */,
