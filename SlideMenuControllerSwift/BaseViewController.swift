@@ -12,12 +12,47 @@
 import UIKit
 import CoreData
 
-class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelegate {
-
+class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelegate{
+    
+    
+    
+    //デフォルトのメモのTextView
     @IBOutlet weak var postView: UITextView!
+    //(ModalView)UITextViewのインスタンスを生成
+    let textView: UITextView = UITextView()
+    
+    
+    //【モーダルウィンドウ】パーツ
+    @IBOutlet weak var ModalView: UIView!
+    @IBOutlet weak var CreateCategoryBtn: UIButton!
+    @IBOutlet weak var CustomCategoryBtn: UIButton!
+    @IBOutlet weak var CreateCategoryView: UIView!
+    @IBOutlet weak var CustomCategoryView: UIView!
+    
+    //    =========================================
+    //　　　　   CustomCategoryテーブル初期値セット
+    //    =========================================
+    //【テーブル】CustomCategoryViewのテーブルを作成
+    @IBOutlet weak var CusCategoryTable: UITableView!
+    //カテゴリー一覧変数(CustomCategoryTable)
+    //表示したいセルの配列を初期化
+    var categoryInfo:[[String:Any]] = []
+    //何行目か保存されていないときを見分けるための-1を代入
+    var selectedRowIndex = -1
+    
+    
+    
+    
+    
+    
+    
     
     //カテゴリーIDのデフォルト値（カテゴリー：All）を "0" とする
     var categoryId = 0
+    
+    
+    
+    
 //    ==================================
 //　　　　   カテゴリーオブジェクト
 //    ==================================
@@ -48,6 +83,10 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     let sPosY: CGFloat = 0.0
     
     
+    
+    
+    
+    
 //    ==================================
 //　　　　 カテゴリーボタンオブジェクト
 //    ==================================
@@ -56,6 +95,14 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //ModalViewを見えない場所にセットする
+        cretaModalWindow()
+        
+        //(test)ModalView【custom】
+        customModalWindow()
+        addListCategory()
+        
         
         //タブバーの幅取得
         tabBarWidth = self.view.bounds.width
@@ -77,7 +124,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         postView.font = UIFont.systemFont(ofSize: 16)
 
         //keyboard上の"Done"ボタンセット
-        self.setInputAccessoryView()
+        //"Main"はデフォルト画面のtextview画面
+        setInputAccessoryView(viewName: "Main")
         
         //アンダーバー作成
         createTabBar()
@@ -86,9 +134,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
 //        //カテゴリーボタン削除
 //        DeleteScrollView(scv: scrollView)
-        
     }
-    
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
@@ -108,11 +154,113 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         DeleteScrollView(scv: scrollView)
         scrollView = UIScrollView()
         viewScroll()
-//        //カテゴリーボタンの追加
+//      カテゴリーボタンの追加
         addBtnCategory()
-        
     }
   
+//    ==================================
+//　　　　 モーダルウィンドウ作成(create)
+//    ==================================
+    func cretaModalWindow(){
+        
+        ModalView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipeView(sender:)))  //Swift3
+        // スワイプの方向を指定
+        downSwipe.direction = .down
+        // viewにジェスチャーを登録
+        self.view.addGestureRecognizer(downSwipe)
+
+        
+        CreateCategoryView.frame = CGRect(x: 0, y: 150, width: ModalView.bounds.width, height: ModalView.bounds.height - 150)
+        CreateCategoryBtn.frame = CGRect(x:0,y:100,width:ModalView.bounds.width / 2, height: 50)
+        CustomCategoryBtn.frame = CGRect(x:ModalView.bounds.width / 2 , y:100, width:ModalView.bounds.width / 2, height: 50)
+        ModalView.addSubview(CreateCategoryBtn)
+        ModalView.addSubview(CustomCategoryBtn)
+        CreateCategoryView.addSubview(createText())
+        ModalView.addSubview(CreateCategoryView)
+        
+//        ModalView.addSubview(createText())
+//        createText()
+        
+        
+        //下記が理想の位置
+//        ModalView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+//        CreateCategoryView.frame = CGRect(x: 0, y: 150, width: ModalView.bounds.width, height: ModalView.bounds.height - 150)
+//        CreateCategoryBtn.frame = CGRect(x:0,y:100,width:ModalView.bounds.width / 2, height: 50)
+//        CustomCategoryBtn.frame = CGRect(x:ModalView.bounds.width / 2 , y:100,width:ModalView.bounds.width / 2, height: 50)
+//        ModalView.addSubview(CreateCategoryBtn)
+//        ModalView.addSubview(CustomCategoryBtn)
+//        ModalView.addSubview(CreateCategoryView)
+    }
+    
+    @objc func DownSwipeView(sender: UISwipeGestureRecognizer) {
+        print("Down Swipe")
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {
+            self.ModalView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.ModalView.bounds.width, height: self.ModalView.bounds.height - 150)
+        }, completion: nil)
+        
+        
+        //キーボード閉じる
+        textView.resignFirstResponder()
+    }
+    
+    //TODO:作成中
+//    ==================================
+//　　　　 モーダルウィンドウ作成(custom)
+//    ==================================
+    func customModalWindow(){
+        
+        //表示状態
+        CustomCategoryView.frame = CGRect(x: 0, y: 150, width: self.view.bounds.width, height: self.view.bounds.height)
+        //隠れた状態
+//        CustomCategoryView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
+        
+        
+        //スワイプジェスチャー
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipeView(sender:)))  //Swift3
+        // スワイプの方向を指定
+        downSwipe.direction = .down
+        // viewにジェスチャーを登録
+        self.view.addGestureRecognizer(downSwipe)
+        
+        self.view.addSubview(CustomCategoryView)
+    }
+    
+    
+//    =========================================
+//　　　　  (モーダルウィンドウ)UITextViewの設定
+//    =========================================
+    func createText()->UITextView{
+        //textViewのイチとサイズを設定
+        textView.frame = CGRect(x: 0, y:0, width: self.view.frame.width, height: self.view.frame.height)
+        
+        //textViewにジェスチャーイベントを追加
+//        downSwipe()
+        
+        //テキストを設定
+        textView.text = "入力してください"
+        
+        //フォントの大きさを設定
+        textView.font = UIFont.systemFont(ofSize:20.0)
+        
+        //textViewの枠線の太さを設定
+        textView.layer.borderWidth = 1
+        
+        //枠線の色をグレーに設定
+        textView.layer.borderColor = UIColor.lightGray.cgColor
+        
+        //テキストを編集できるように設定
+        textView.isEditable = true
+        
+        //TODO:未定義事項
+        //1.DONEボタンのセット 2.カテゴリーの保存処理
+        //キーボードに完了ボタンを追加
+        setInputAccessoryView(viewName: "Modal")
+        
+        return textView
+    }
+    
     
     
 //    ==================================
@@ -196,16 +344,17 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         switch sender.tag {
         case 0:
             print("0")
-            //テスト
-            // secondViewControllerのインスタンス生成.
-            let second = SecondViewController()
+            
+//            self.blueView.center = self.view.center
+            UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {
+                self.ModalView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+            }, completion: nil)
             
             
-            // navigationControllerのrootViewControllerにsecondViewControllerをセット.
-            let nav = UINavigationController(rootViewController: second)
-            
-            // 画面遷移.
-            self.present(nav, animated: true, completion: nil)
+            //モーダルウィンドウの出し方2
+//            let second = SecondViewController()
+//            let nav = UINavigationController(rootViewController: second)
+//            self.present(nav, animated: true, completion: nil)
         case 1:
             print("1")
         default:
@@ -231,7 +380,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         print("テスト")
         print(width.width)
         //================================
-        
         
         // Buttonを生成する.
         btnCategory = UIButton()
@@ -301,7 +449,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         scrollView.delegate = self
         
         TestView.addSubview(scrollView)
-//        self.view.addSubview(TestView)
         
         return scrollView
     }
@@ -315,7 +462,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         var scWidth = 0//コンテンツの中身のwidth
         //カテゴリーボタンの初期化
         let categoryDatas = ingCoreData()
-        
         
         //CoreDataからカテゴリーデータを全件取得
         let inputCategories = categoryDatas.readCategoryAll()
@@ -352,13 +498,13 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         }
     }
     
+    
 //    =====================================================
 //　　　　   　スクロールオブジェクト内 スクロールビュー削除
 //    =====================================================
     func DeleteScrollView(scv:UIScrollView) {
         //        btnCategory = UIButton()
         scv.removeFromSuperview()
-
     }
 
 //    =======================================
@@ -448,36 +594,79 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    ==================================
 //　　　　    キーボードのDoneボタン追加
 //    ==================================
-    func setInputAccessoryView() {
+    func setInputAccessoryView(viewName: String) {
+//        --------ボタンオブジェクト作成-----------------------------
         let kbToolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
         kbToolBar.barStyle = UIBarStyle.default  // スタイルを設定
         kbToolBar.sizeToFit()  // 画面幅に合わせてサイズを変更
         // スペーサー
         let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace,
                                      target: self, action: nil)
-
-        // 完了ボタン
-        let commitButton = UIBarButtonItem(
-            title: "Done",
-            style: .done,
-            target: self,
-            action: #selector(self.commitButtonTapped(sender:))
-        )
+//        ------------------------------------------------------
         
-        kbToolBar.items = [spacer, commitButton]
-        
-        postView.inputAccessoryView = kbToolBar
+        //Main:デフォルトのメモ画面のtextview
+        //Modal:モーダルウィンドウのtextview
+        //TODO:以下の"action: #selector(self.MaincommitButtonTapped(sender:)"のコードを
+        //     この引数senderに引数を入れるとエラーがでる。
+        if viewName == "Main" {
+            // 完了ボタン
+            let commitButton = UIBarButtonItem(
+                title: "Done",
+                style: .done,
+                target: self,
+                action: #selector(self.MaincommitButtonTapped(sender:))
+            )
+            kbToolBar.items = [spacer, commitButton]
+            postView.inputAccessoryView = kbToolBar
+            
+        }else if viewName == "Modal"{
+            let commitButton = UIBarButtonItem(
+                title: "Done",
+                style: .done,
+                target: self,
+                action: #selector(self.ModalcommitButtonTapped(sender:))
+            )
+            kbToolBar.items = [spacer, commitButton]
+            textView.inputAccessoryView = kbToolBar
+            
+        }
     }
     
 //    ==================================
-//　　　　 Doneボタンの実行処理
+//　　　　 Doneボタンの実行処理(Main,Modal)
 //    ==================================
-    @objc func commitButtonTapped(sender: Any) {
+    //TODO:以下の処理が微妙
+    //Main
+    @objc func MaincommitButtonTapped(sender: Any) {
         self.resignFirstResponder()
-        tapSave()
+
+        tapSave()//インサート
         read()//デバッグ用
-//        Delete()
-        postView.resignFirstResponder()
+        postView.resignFirstResponder()//キーボードを閉じる
+    }
+    
+    @objc func ModalcommitButtonTapped(sender: Any) {
+        self.resignFirstResponder()
+        
+        //CoreData処理
+        let coreData = ingCoreData()
+        coreData.insertCategory(name: textView.text)//インサート
+        coreData.readCategoryAll()//データチェック
+        
+        //カテゴリーボタン削除
+        DeleteScrollView(scv: scrollView)
+        scrollView = UIScrollView()
+        viewScroll()
+        //        //カテゴリーボタンの追加
+        addBtnCategory()
+        
+        textView.resignFirstResponder()//キーボードを閉じる
+        
+        //モーダルウィンドウ閉じる
+        UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {
+            self.ModalView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.ModalView.bounds.width, height: self.ModalView.bounds.height - 150)
+        }, completion: nil)
+        
     }
     
     

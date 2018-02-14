@@ -11,6 +11,7 @@
 		0E75C5A61BE3CAFE00844634 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E75C5A41BE3CAFE00844634 /* Info.plist */; };
 		0EB8EBFF1BE3CF3C00BC2A99 /* SlideMenuControllerSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E75C5A51BE3CAFE00844634 /* SlideMenuControllerSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B311643C2027006600F01ACB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B311643B2027006600F01ACB /* BaseViewController.swift */; };
+		B311B5772033E16600CA0604 /* CustomCategoryTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B311B5762033E16600CA0604 /* CustomCategoryTable.swift */; };
 		B3319363202E8483008477C9 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3319362202E8483008477C9 /* ModalViewController.swift */; };
 		B3319365202E8543008477C9 /* CustomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3319364202E8543008477C9 /* CustomPresentationController.swift */; };
 		B331936720300317008477C9 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331936620300317008477C9 /* SecondViewController.swift */; };
@@ -71,6 +72,7 @@
 		0E75C5A41BE3CAFE00844634 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Source/Info.plist; sourceTree = "<group>"; };
 		0E75C5A51BE3CAFE00844634 /* SlideMenuControllerSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SlideMenuControllerSwift.h; path = Source/SlideMenuControllerSwift.h; sourceTree = "<group>"; };
 		B311643B2027006600F01ACB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		B311B5762033E16600CA0604 /* CustomCategoryTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryTable.swift; sourceTree = "<group>"; };
 		B3319362202E8483008477C9 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
 		B3319364202E8543008477C9 /* CustomPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPresentationController.swift; sourceTree = "<group>"; };
 		B331936620300317008477C9 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 		C539E6381A315E87003B7CC7 = {
 			isa = PBXGroup;
 			children = (
+				B311B5762033E16600CA0604 /* CustomCategoryTable.swift */,
 				B331936A20303D04008477C9 /* Category+CoreDataClass.swift */,
 				B331936B20303D04008477C9 /* Category+CoreDataProperties.swift */,
 				B394FC562029CACB00D42467 /* Article+CoreDataClass.swift */,
@@ -477,6 +480,7 @@
 				C5BD39DC1A6CD15700D0AF95 /* JavaViewController.swift in Sources */,
 				B3319363202E8483008477C9 /* ModalViewController.swift in Sources */,
 				C5BA8AA61A43E2EF00863FB9 /* SlideMenuController.swift in Sources */,
+				B311B5772033E16600CA0604 /* CustomCategoryTable.swift in Sources */,
 				C539E66E1A316F5F003B7CC7 /* RightViewController.swift in Sources */,
 				C5C1CE5F1A70F2FD00B6E411 /* String.swift in Sources */,
 				B3A3DE0520287C2500D656A2 /* Model.xcdatamodeld in Sources */,

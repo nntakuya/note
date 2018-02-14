@@ -8,12 +8,10 @@ import UIKit
 
 class SecondViewController: UIViewController {
     
-    //UITextViewのインスタンスを生成
+    //(ModalView)UITextViewのインスタンスを生成
     let textView: UITextView = UITextView()
 
     override func viewDidLoad() {
-        //(test)全体のビュー画面の体裁調整
-        styleChg()
         
         super.viewDidLoad()
 
@@ -21,16 +19,6 @@ class SecondViewController: UIViewController {
         
         //テキストビューを追加
         createText()
-    }
-    
-    
-//    ==================================
-//　　　　  (テスト)View体裁
-//    ==================================
-    func styleChg(){
-        self.textView.frame = CGRect(x: 0, y: 100, width: self.view.bounds.width, height: self.view.bounds.height)
-        
-        
     }
     
     
@@ -127,8 +115,8 @@ class SecondViewController: UIViewController {
         self.textView.resignFirstResponder()
         //モーダルウィンドウ閉じる
         self.navigationController?.dismiss(animated: true, completion: nil)
-        let coreData = ingCoreData()
         
+        let coreData = ingCoreData()
         //カテゴリーをCoreDataへインサート
         coreData.insertCategory(name: textView.text)
         //CoreDataのデータチェック

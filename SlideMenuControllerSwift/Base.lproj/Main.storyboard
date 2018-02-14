@@ -32,6 +32,58 @@
                                     <outletCollection property="gestureRecognizers" destination="6oI-JU-Xm9" appends="YES" id="MeO-JZ-7hG"/>
                                 </connections>
                             </textView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PGB-4v-vDp">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xxv-em-rjw">
+                                        <rect key="frame" x="0.0" y="74" width="375" height="593"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sF4-Xk-3UW">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="593"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WVQ-sy-CpR">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="593"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <prototypes>
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Cell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Yw4-ra-MR1">
+                                                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Yw4-ra-MR1" id="sOm-Zm-Qor">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                </tableViewCellContentView>
+                                                            </tableViewCell>
+                                                        </prototypes>
+                                                        <connections>
+                                                            <outlet property="dataSource" destination="hwP-Ck-hW7" id="jMp-Re-39I"/>
+                                                            <outlet property="delegate" destination="hwP-Ck-hW7" id="Q3F-ue-4jw"/>
+                                                        </connections>
+                                                    </tableView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.97811824079999998" green="0.88229888680000002" blue="0.76403063540000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.92041097350000001" green="1" blue="0.96254287810000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GyV-I1-IGq">
+                                        <rect key="frame" x="0.0" y="34" width="193" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.9206724167" green="0.99694758650000004" blue="0.96233230830000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Create Category"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FwN-GG-R3s">
+                                        <rect key="frame" x="191" y="34" width="184" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.97811824079999998" green="0.88229888680000002" blue="0.76403063540000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Custom Category"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.88617227979274615" green="0.88617227979274615" blue="0.88617227979274615" alpha="0.2107999559859155" colorSpace="custom" customColorSpace="displayP3"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.98102861642837524" green="0.98101013898849487" blue="0.97380751371383667" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -42,6 +94,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="CreateCategoryBtn" destination="GyV-I1-IGq" id="mqM-80-Qci"/>
+                        <outlet property="CreateCategoryView" destination="Xxv-em-rjw" id="jt1-nb-WGh"/>
+                        <outlet property="CusCategoryTable" destination="WVQ-sy-CpR" id="3mA-1o-9HH"/>
+                        <outlet property="CustomCategoryBtn" destination="FwN-GG-R3s" id="Ng6-VU-Bbj"/>
+                        <outlet property="CustomCategoryView" destination="sF4-Xk-3UW" id="3fT-Um-uca"/>
+                        <outlet property="ModalView" destination="PGB-4v-vDp" id="9wC-aJ-r9G"/>
                         <outlet property="postView" destination="pAv-Nx-ghn" id="BSh-tu-Xdf"/>
                     </connections>
                 </viewController>
@@ -53,6 +111,24 @@
                 </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-908" y="1342.5787106446778"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="qbH-ao-yoE">
+            <objects>
+                <viewController id="J0B-4h-Jqy" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="moL-cv-uhi"/>
+                        <viewControllerLayoutGuide type="bottom" id="PFJ-D9-zB0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="m8f-Jm-2xy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JCa-gY-Iou" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2480.8000000000002" y="2205.2473763118442"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="mey-9X-GmW">
@@ -72,10 +148,16 @@
                                 <color key="backgroundColor" red="0.92041097345128131" green="1" blue="0.96254287805285499" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8xC-Wo-nZW">
-                                <rect key="frame" x="0.0" y="34" width="184" height="40"/>
+                                <rect key="frame" x="0.0" y="34" width="193" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.92067241668701172" green="0.99694758653640747" blue="0.96233230829238892" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Create Category"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="971-7C-WGX">
+                                <rect key="frame" x="191" y="34" width="184" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.97811824083328247" green="0.88229888677597046" blue="0.76403063535690308" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Custom Category"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -102,12 +184,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.97811824083328247" green="0.88229888677597046" blue="0.76403063535690308" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="971-7C-WGX">
-                                <rect key="frame" x="191" y="35" width="184" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.97811824083328247" green="0.88229888677597046" blue="0.76403063535690308" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Button"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
