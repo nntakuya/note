@@ -102,19 +102,30 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //カテゴリーデータ全件削除
+//        let daldata = ingCoreData()
+//        daldata.deleteCategoryAll()
+        
+        
+        //viewTable カテゴリー一覧の並び替え
+        CusCategoryTable.reorder.delegate = self as? TableViewReorderDelegate
         //ModalViewを見えない場所にセットする
         cretaModalWindow()
         
+        
+        
         //(test)ModalView【custom】
         customModalWindow()
-        addListCategory()
-        //TODO:上手くいかない
+        addListCategory()//CoreDataからテーブルデータを取得
+        
         //以下ジェスチャーでWindow閉じるイベント
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipeView(sender:)))  //Swift3
         // スワイプの方向を指定
         downSwipe.direction = .down
         // viewにジェスチャーを登録
         CustomCategoryView.addGestureRecognizer(downSwipe)
+        
+        
         
         
         //タブバーの幅取得
@@ -221,7 +232,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //　　　　 モーダルウィンドウ ジェスチャーイベント
 //    ============================================
     @objc func DownSwipeView(sender: UISwipeGestureRecognizer) {
-        print("Down Swipe")
         
         UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {
             self.ModalView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.ModalView.bounds.width, height: self.ModalView.bounds.height - 150)
@@ -340,12 +350,10 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //　　　　   ボタン【+】プッシュ後のアクション
 //    ============================================
     @objc func onClickMyButton(sender: UIButton) {
-        print("onClickMyButton")
 //      ------------モーダルウィンドウ-----------
-        print(sender)
+        
         switch sender.tag {
         case 0:
-            print("0")
             
 //            self.blueView.center = self.view.center
             UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {
@@ -360,7 +368,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         case 1:
             print("1")
         default:
-            print("default")
+            print("デフォルト")
         }
     }
     
@@ -370,8 +378,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    ============================================
     private func btnCategory(inputCategory :String)->UIButton{
         
-        //=============実験===================
-        print(inputCategory)
         var text = "サンプル"
         //関数にデータが入った場合にのみ、そのデータを変数へ
         text = inputCategory
@@ -379,9 +385,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         //以下のコマンドで文字列の横幅を取得
         // width.widthでInt型でデータを取得出来る
         let width = text.size(withAttributes: [NSAttributedStringKey.font : font])
-        print("テスト")
-        print(width.width)
-        //================================
+        
         
         // Buttonを生成する.
         btnCategory = UIButton()
@@ -472,8 +476,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         for inputCategory in inputCategories{
             //カテゴリーオブジェクトからカテゴリー名だけ取得
             let btnName = inputCategory["name"] as! String
-            print(btnName)
-            print("test")
             let catBtn =  btnCategory(inputCategory: btnName)//返り値がボタンオブジェクト
             
             //オブジェクトの重複防止
@@ -515,12 +517,10 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     /* 以下は UITextFieldDelegate のメソッド */
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // スクロール中の処理
-        print("didScroll")
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         // ドラッグ開始時の処理
-        print("beginDragging")
     }
     
     
@@ -583,10 +583,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
                 let content: String = result.value(forKey: "content") as! String
                 let saveDate :Date = result.value(forKey: "saveDate") as! Date
                 let category: Int64 = (result.value(forKey: "category_id") as? Int64)!
-                
-                print(content)
-                print(saveDate)
-                print(category)
             }
         }catch{
         }
@@ -668,9 +664,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {
             self.ModalView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.ModalView.bounds.width, height: self.ModalView.bounds.height - 150)
         }, completion: nil)
-        
-        
-        
     }
     
     

@@ -18,7 +18,6 @@ class AllViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     /////////////////// テーブルについて /////////////////////////////
     //（疑問）直下のtableviewはなぜ4回繰り返されるのか
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(artInfo.count)
         return artInfo.count
     }
     
@@ -141,11 +140,7 @@ class AllViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 let dic = ["content":content!,"saveDate":saveDate!,"categoryId":category] as [String : Any]
                 
                 artInfo.append(dic)
-                
-                print(artInfo)
             }
-            
-            
         }catch{
             print("エラーだよ")
         }

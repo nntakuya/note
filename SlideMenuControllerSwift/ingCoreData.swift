@@ -329,12 +329,52 @@ class ingCoreData {
 //        }
 //    }
     
-    //==============================================
-    //　カテゴリーの並び替えが行われた際に、
-    //sort_idを全件取得し、昇順にidの再割当てする処理
-    //==============================================
-    func sortChange(){
+    
+    
+//==============================================
+//　カテゴリーの並び替えが行われた際に、
+//sort_idを全件取得し、昇順にidの再割当てする処理
+//==============================================
+    func sortChange(categoryArray:[[String:Any]]){
+        //エンティティを操作するためのオブジェクトを作成する
+        let viewContext = appDalegate.persistentContainer.viewContext
         
+        //エンティティオブジェクトを作成する
+        let myEntity = NSEntityDescription.entity(forEntityName: "Category", in: viewContext)
+        
+        //どのエンティティからデータを取得してくるか設定（ToDoエンティティ）
+        let query:NSFetchRequest<Category> =  Category.fetchRequest()
+        query.entity = myEntity
+        
+        //取り出しの順番
+        //ascendind:true 昇順 古い順、false 降順　新しい順
+        let sortDescripter = NSSortDescriptor(key: "sort_id", ascending: true)
+        query.sortDescriptors = [sortDescripter]
+        
+        
+        do {
+            let fetchResults = try viewContext.fetch(query)
+            
+            var i = 0
+            for fetch:AnyObject in fetchResults {
+                //更新する対象のデータをNSManagedObjectにダウンキャスト
+                let record = fetch as! NSManagedObject
+                //値のセット
+                record.setValue(categoryArray[i]["sort_id"], forKey: "sort_id")
+                i += 1
+                print(record)
+                print(categoryArray)
+                //レコードの即時保存
+                do {
+                    try viewContext.save()
+                } catch {
+                    //エラーが発生した時に行う例外処理を書いておく
+                    print(#function)
+                    print("保存できなかった")
+                }
+            }
+        } catch  {
+        }
     }
     
     

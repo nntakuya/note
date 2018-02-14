@@ -19,6 +19,12 @@
 		B331936C20303D04008477C9 /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331936A20303D04008477C9 /* Category+CoreDataClass.swift */; };
 		B331936D20303D04008477C9 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331936B20303D04008477C9 /* Category+CoreDataProperties.swift */; };
 		B331936F20309401008477C9 /* OthersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331936E20309401008477C9 /* OthersViewController.swift */; };
+		B36EF0DB20347ABE0038E2D5 /* UITableView+Reorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36EF0D520347ABD0038E2D5 /* UITableView+Reorder.swift */; };
+		B36EF0DC20347ABE0038E2D5 /* ReorderController+SnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36EF0D620347ABD0038E2D5 /* ReorderController+SnapshotView.swift */; };
+		B36EF0DD20347ABE0038E2D5 /* ReorderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36EF0D720347ABD0038E2D5 /* ReorderController.swift */; };
+		B36EF0DE20347ABE0038E2D5 /* ReorderController+GestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36EF0D820347ABD0038E2D5 /* ReorderController+GestureRecognizer.swift */; };
+		B36EF0DF20347ABE0038E2D5 /* ReorderController+DestinationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36EF0D920347ABD0038E2D5 /* ReorderController+DestinationRow.swift */; };
+		B36EF0E020347ABE0038E2D5 /* ReorderController+AutoScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36EF0DA20347ABD0038E2D5 /* ReorderController+AutoScroll.swift */; };
 		B394FC5120294AC000D42467 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394FC5020294AC000D42467 /* Function.swift */; };
 		B394FC5A2029CACB00D42467 /* Article+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394FC562029CACB00D42467 /* Article+CoreDataClass.swift */; };
 		B394FC5B2029CACB00D42467 /* Article+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394FC572029CACB00D42467 /* Article+CoreDataProperties.swift */; };
@@ -80,6 +86,12 @@
 		B331936A20303D04008477C9 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B331936B20303D04008477C9 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B331936E20309401008477C9 /* OthersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersViewController.swift; sourceTree = "<group>"; };
+		B36EF0D520347ABD0038E2D5 /* UITableView+Reorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Reorder.swift"; sourceTree = "<group>"; };
+		B36EF0D620347ABD0038E2D5 /* ReorderController+SnapshotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ReorderController+SnapshotView.swift"; sourceTree = "<group>"; };
+		B36EF0D720347ABD0038E2D5 /* ReorderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReorderController.swift; sourceTree = "<group>"; };
+		B36EF0D820347ABD0038E2D5 /* ReorderController+GestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ReorderController+GestureRecognizer.swift"; sourceTree = "<group>"; };
+		B36EF0D920347ABD0038E2D5 /* ReorderController+DestinationRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ReorderController+DestinationRow.swift"; sourceTree = "<group>"; };
+		B36EF0DA20347ABD0038E2D5 /* ReorderController+AutoScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ReorderController+AutoScroll.swift"; sourceTree = "<group>"; };
 		B394FC5020294AC000D42467 /* Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
 		B394FC562029CACB00D42467 /* Article+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Article+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B394FC572029CACB00D42467 /* Article+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Article+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -155,6 +167,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		B36EF0D420347ABD0038E2D5 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				B36EF0D520347ABD0038E2D5 /* UITableView+Reorder.swift */,
+				B36EF0D620347ABD0038E2D5 /* ReorderController+SnapshotView.swift */,
+				B36EF0D720347ABD0038E2D5 /* ReorderController.swift */,
+				B36EF0D820347ABD0038E2D5 /* ReorderController+GestureRecognizer.swift */,
+				B36EF0D920347ABD0038E2D5 /* ReorderController+DestinationRow.swift */,
+				B36EF0DA20347ABD0038E2D5 /* ReorderController+AutoScroll.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
 		C539E6381A315E87003B7CC7 = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +207,7 @@
 		C539E6431A315E87003B7CC7 /* SlideMenuControllerSwift */ = {
 			isa = PBXGroup;
 			children = (
+				B36EF0D420347ABD0038E2D5 /* Source */,
 				C539E6461A315E87003B7CC7 /* AppDelegate.swift */,
 				C5C1CE631A70F7C400B6E411 /* ViewController */,
 				C5C1CE641A70F7EC00B6E411 /* View */,
@@ -450,7 +476,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5BF6A8E1BF34A8B0064C18E /* UIApplication.swift in Sources */,
+				B36EF0DE20347ABE0038E2D5 /* ReorderController+GestureRecognizer.swift in Sources */,
 				B331936920303B34008477C9 /* ingCoreData.swift in Sources */,
+				B36EF0E020347ABE0038E2D5 /* ReorderController+AutoScroll.swift in Sources */,
 				C5BD39DE1A6CD17B00D0AF95 /* GoViewController.swift in Sources */,
 				B394FC5A2029CACB00D42467 /* Article+CoreDataClass.swift in Sources */,
 				B3319365202E8543008477C9 /* CustomPresentationController.swift in Sources */,
@@ -469,6 +497,7 @@
 				B331936720300317008477C9 /* SecondViewController.swift in Sources */,
 				B331936F20309401008477C9 /* OthersViewController.swift in Sources */,
 				C5F179D21BEB2FAF00EEDD9A /* UIColor.swift in Sources */,
+				B36EF0DC20347ABE0038E2D5 /* ReorderController+SnapshotView.swift in Sources */,
 				B331936D20303D04008477C9 /* Category+CoreDataProperties.swift in Sources */,
 				C5F179CE1BEB2A5900EEDD9A /* UIImage.swift in Sources */,
 				C5498C821BE8994F0076A7C5 /* UIImageView.swift in Sources */,
@@ -479,11 +508,14 @@
 				B394FC5120294AC000D42467 /* Function.swift in Sources */,
 				C5BD39DC1A6CD15700D0AF95 /* JavaViewController.swift in Sources */,
 				B3319363202E8483008477C9 /* ModalViewController.swift in Sources */,
+				B36EF0DB20347ABE0038E2D5 /* UITableView+Reorder.swift in Sources */,
 				C5BA8AA61A43E2EF00863FB9 /* SlideMenuController.swift in Sources */,
+				B36EF0DD20347ABE0038E2D5 /* ReorderController.swift in Sources */,
 				B311B5772033E16600CA0604 /* CustomCategoryTable.swift in Sources */,
 				C539E66E1A316F5F003B7CC7 /* RightViewController.swift in Sources */,
 				C5C1CE5F1A70F2FD00B6E411 /* String.swift in Sources */,
 				B3A3DE0520287C2500D656A2 /* Model.xcdatamodeld in Sources */,
+				B36EF0DF20347ABE0038E2D5 /* ReorderController+DestinationRow.swift in Sources */,
 				C5F179D01BEB2CB500EEDD9A /* UIView.swift in Sources */,
 				C5BD39DA1A6CD12300D0AF95 /* AlltViewController.swift in Sources */,
 				B3A3DE0B2028AE3A00D656A2 /* DetailViewController.swift in Sources */,

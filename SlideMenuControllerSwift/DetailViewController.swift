@@ -32,7 +32,6 @@ class DetailViewController: UIViewController,UITextViewDelegate {
         read()
         
         //TODO:下記の書き方だと、おそらく想定の配列のデータの中身を取得出来ない可能性がある気がする
-        print(artInfo)
         postView.text = artInfo["content"] as! String
         
         //TODO:下記にノートの初期設定を書く
@@ -70,15 +69,6 @@ class DetailViewController: UIViewController,UITextViewDelegate {
     
     //記事のアップデート関数
     func updateArticle(){
-        //1.現在表示されているテキストの値を取得する
-//        print(artInfo)
-//        artInfo["content"] = postView.text
-//        print(artInfo)
-        
-        //2.現状表示されているデータのsaveDateを取得
-        //3.saveDataをキーに現在表示されているデータのオブジェクトを作成
-        
-        
         //AppDelegateを使う用意をする
         let appD: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         
@@ -141,19 +131,10 @@ class DetailViewController: UIViewController,UITextViewDelegate {
     }
     
     
-    //おそらく以下はボタンを押した後のアクション定義する場所
-    //@objcはググる
-    // #selectorをつけるから、
     @objc func commitButtonTapped(sender: Any) {
         self.resignFirstResponder()
-//        print("sampleだよ〜ん")
-        //        tapSave()
-        //        read()
-        
     }
     
-    
-
     func read(){
         //AppDelegateを使う用意をする
         let appD: AppDelegate = UIApplication.shared.delegate as! AppDelegate
