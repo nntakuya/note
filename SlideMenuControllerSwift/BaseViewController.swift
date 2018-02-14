@@ -14,8 +14,6 @@ import CoreData
 
 class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelegate{
     
-    
-    
     //デフォルトのメモのTextView
     @IBOutlet weak var postView: UITextView!
     //(ModalView)UITextViewのインスタンスを生成
@@ -110,6 +108,13 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         //(test)ModalView【custom】
         customModalWindow()
         addListCategory()
+        //TODO:上手くいかない
+        //以下ジェスチャーでWindow閉じるイベント
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipeView(sender:)))  //Swift3
+        // スワイプの方向を指定
+        downSwipe.direction = .down
+        // viewにジェスチャーを登録
+        CustomCategoryView.addGestureRecognizer(downSwipe)
         
         
         //タブバーの幅取得
@@ -165,6 +170,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //      カテゴリーボタンの追加
         addBtnCategory()
     }
+    
+    
   
 //    ==================================
 //　　　　 モーダルウィンドウ作成(create)
@@ -187,40 +194,15 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         CreateCategoryView.addSubview(createText())
         ModalView.addSubview(CreateCategoryView)
         
-//        ModalView.addSubview(createText())
-//        createText()
-        
-        
-        //下記が理想の位置
-//        ModalView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
-//        CreateCategoryView.frame = CGRect(x: 0, y: 150, width: ModalView.bounds.width, height: ModalView.bounds.height - 150)
-//        CreateCategoryBtn.frame = CGRect(x:0,y:100,width:ModalView.bounds.width / 2, height: 50)
-//        CustomCategoryBtn.frame = CGRect(x:ModalView.bounds.width / 2 , y:100,width:ModalView.bounds.width / 2, height: 50)
-//        ModalView.addSubview(CreateCategoryBtn)
-//        ModalView.addSubview(CustomCategoryBtn)
-//        ModalView.addSubview(CreateCategoryView)
     }
     
-    @objc func DownSwipeView(sender: UISwipeGestureRecognizer) {
-        print("Down Swipe")
-        
-        UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {
-            self.ModalView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.ModalView.bounds.width, height: self.ModalView.bounds.height - 150)
-        }, completion: nil)
-        
-        
-        //キーボード閉じる
-        textView.resignFirstResponder()
-    }
-    
-    //TODO:作成中
 //    ==================================
 //　　　　 モーダルウィンドウ作成(custom)
 //    ==================================
     func customModalWindow(){
         
         //表示状態
-//        CustomCategoryView.frame = CGRect(x: 0, y: 150, width: self.view.bounds.width, height: self.view.bounds.height)
+        //        CustomCategoryView.frame = CGRect(x: 0, y: 150, width: self.view.bounds.width, height: self.view.bounds.height)
         //隠れた状態
         CustomCategoryView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
         
@@ -235,6 +217,22 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         self.view.addSubview(CustomCategoryView)
     }
     
+//    ============================================
+//　　　　 モーダルウィンドウ ジェスチャーイベント
+//    ============================================
+    @objc func DownSwipeView(sender: UISwipeGestureRecognizer) {
+        print("Down Swipe")
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {
+            self.ModalView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.ModalView.bounds.width, height: self.ModalView.bounds.height - 150)
+        }, completion: nil)
+        
+        UIView.animate(withDuration: 0.5, delay: 0,  animations: {
+            self.CustomCategoryView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
+        }, completion: nil)
+        //キーボード閉じる
+        textView.resignFirstResponder()
+    }
     
 //    =========================================
 //　　　　  (モーダルウィンドウ)UITextViewの設定
@@ -242,9 +240,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     func createText()->UITextView{
         //textViewのイチとサイズを設定
         textView.frame = CGRect(x: 0, y:0, width: self.view.frame.width, height: self.view.frame.height)
-        
-        //textViewにジェスチャーイベントを追加
-//        downSwipe()
         
         //テキストを設定
         textView.text = "入力してください"
@@ -268,7 +263,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         return textView
     }
-    
     
     
 //    ==================================
@@ -674,6 +668,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {
             self.ModalView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.ModalView.bounds.width, height: self.ModalView.bounds.height - 150)
         }, completion: nil)
+        
+        
         
     }
     
