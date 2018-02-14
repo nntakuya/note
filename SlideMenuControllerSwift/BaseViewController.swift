@@ -51,17 +51,16 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     //(Btn)CreateCategoryアクション
     
     @IBAction func BtnCreaateCategory(_ sender: UIButton) {
-        
-        
-        
-        
+        UIView.animate(withDuration: 0, delay: 0,  animations: {
+            self.CustomCategoryView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
+        }, completion: nil)
         
     }
     //(Btn)CustomCategoryアクション
     @IBAction func BtnCustomCategory(_ sender: UIButton) {
-        
-        
-        
+        UIView.animate(withDuration: 0.0, delay: 0.0,  animations: {
+            self.CustomCategoryView.frame = CGRect(x: 0, y: 150, width: self.view.bounds.width, height: self.view.bounds.height)
+        }, completion: nil)
         
     }
     
@@ -94,10 +93,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     // ボタンのX,Y座標
     let sPosX: CGFloat = 0.0
     let sPosY: CGFloat = 0.0
-    
-    
-    
-    
     
     
 //    ==================================
@@ -225,9 +220,9 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     func customModalWindow(){
         
         //表示状態
-        CustomCategoryView.frame = CGRect(x: 0, y: 150, width: self.view.bounds.width, height: self.view.bounds.height)
+//        CustomCategoryView.frame = CGRect(x: 0, y: 150, width: self.view.bounds.width, height: self.view.bounds.height)
         //隠れた状態
-//        CustomCategoryView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
+        CustomCategoryView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
         
         
         //スワイプジェスチャー
