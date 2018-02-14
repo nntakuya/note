@@ -49,10 +49,15 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
             
             //指定されたIDのメモデータをCoreDataから削除
             self.selectedRowIndex = indexPath.row
-            self.Delete()
+//            self.Delete()
+            //TODO:確認事項　下記コードはindexPath.rowで要素を指定した方が良いのか？
+            let id = self.categoryInfo[self.selectedRowIndex]["id"] as! Int
+            let CoreData = ingCoreData()
+            CoreData.deleteCategory(id: id)
+            
             //ビューから指定されたセルを削除
-            //            self.artInfo.remove(at: indexPath.row)
-            //            tableView.deleteRows(at: [indexPath], with: .fade)
+            self.categoryInfo.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
         deleteButton.backgroundColor = UIColor.red
         
