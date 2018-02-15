@@ -277,65 +277,9 @@ class ingCoreData {
     }
     
     //==============================
-    // Edit　今回は使わないけど記述残しとく
+    // sort_idアップデートメッソド
     //==============================
-    
-//    func editRireki(id:Int, result:String, resultText:String) {
-//        print(#function)
-//        //エンティティを操作するためのオブジェクトを作成する
-//        let viewContext = appDalegate.persistentContainer.viewContext
-//
-//        //どのエンティティからデータを取得してくるか設定（ToDoエンティティ）
-//        let query:NSFetchRequest<Rireki> =  Rireki.fetchRequest()
-//
-//
-//        //===== 絞り込み =====
-//        let idPredicate = NSPredicate(format: "id = %d", id)
-//        query.predicate = idPredicate
-//
-//        do {
-//
-//            let fetchResults = try viewContext.fetch(query)
-//
-//            if (fetchResults.count == 0) {
-//                //なければ新規で作る
-//                print(#function)
-//                print("ないので作ります。")
-//                createRecord(id: id, result: result, resultText: resultText)
-//                return  // 作って終了する
-//            }
-//
-//            for fetch:AnyObject in fetchResults {
-//
-//                //更新する対象のデータをNSManagedObjectにダウンキャスト
-//                let record = fetch as! NSManagedObject
-//                //値のセット
-//                record.setValue(id, forKey: "id")
-//                record.setValue(result, forKey: "result")
-//                record.setValue(resultText, forKey: "resultText")
-//
-//                //レコードの即時保存
-//                do {
-//                    try viewContext.save()
-//                } catch {
-//                    //エラーが発生した時に行う例外処理を書いておく
-//                    print(#function)
-//                    print("保存できなかった")
-//                }
-//
-//
-//            }
-//        } catch  {
-//        }
-//    }
-    
-    
-    
-//==============================================
-//　カテゴリーの並び替えが行われた際に、
-//sort_idを全件取得し、昇順にidの再割当てする処理
-//==============================================
-    func sortChange(categoryArray:[[String:Any]]){
+    func sortChange(id:Int, sort_id: Int) {
         //エンティティを操作するためのオブジェクトを作成する
         let viewContext = appDalegate.persistentContainer.viewContext
         
@@ -345,25 +289,20 @@ class ingCoreData {
         //どのエンティティからデータを取得してくるか設定（ToDoエンティティ）
         let query:NSFetchRequest<Category> =  Category.fetchRequest()
         query.entity = myEntity
-        
-        //取り出しの順番
-        //ascendind:true 昇順 古い順、false 降順　新しい順
-        let sortDescripter = NSSortDescriptor(key: "sort_id", ascending: true)
-        query.sortDescriptors = [sortDescripter]
-        
-        
+
+        //===== 絞り込み =====
+        let idPredicate = NSPredicate(format: "id = %d", id)
+        query.predicate = idPredicate
+
         do {
             let fetchResults = try viewContext.fetch(query)
-            
-            var i = 0
+
             for fetch:AnyObject in fetchResults {
                 //更新する対象のデータをNSManagedObjectにダウンキャスト
                 let record = fetch as! NSManagedObject
                 //値のセット
-                record.setValue(categoryArray[i]["sort_id"], forKey: "sort_id")
-                i += 1
-                print(record)
-                print(categoryArray)
+                record.setValue(sort_id, forKey: "sort_id")
+
                 //レコードの即時保存
                 do {
                     try viewContext.save()
@@ -376,6 +315,59 @@ class ingCoreData {
         } catch  {
         }
     }
+    
+    
+    
+//==============================================
+//　カテゴリーの並び替えが行われた際に、
+//sort_idを全件取得し、昇順にidの再割当てする処理
+//==============================================
+//    func sortChangeAll(categoryArray:[[String:Any]]){
+//        //エンティティを操作するためのオブジェクトを作成する
+//        let viewContext = appDalegate.persistentContainer.viewContext
+//
+//        //エンティティオブジェクトを作成する
+//        let myEntity = NSEntityDescription.entity(forEntityName: "Category", in: viewContext)
+//
+//        //どのエンティティからデータを取得してくるか設定（ToDoエンティティ）
+//        let query:NSFetchRequest<Category> =  Category.fetchRequest()
+//        query.entity = myEntity
+//
+//
+//        //取り出しの順番をsort_id変更後の状態で取得したい
+//
+//
+//        //取り出しの順番
+//        //ascendind:true 昇順 古い順、false 降順　新しい順
+//        let sortDescripter = NSSortDescriptor(key: "sort_id", ascending: true)
+//        query.sortDescriptors = [sortDescripter]
+//
+//        do {
+//            let fetchResults = try viewContext.fetch(query)
+//
+//            var i = 0
+//            for fetch:AnyObject in fetchResults {
+//                //更新する対象のデータをNSManagedObjectにダウンキャスト
+//                let record = fetch as! NSManagedObject
+//
+//
+//                //値のセット
+//                record.setValue(categoryArray[i]["sort_id"], forKey: "sort_id")
+//                i += 1
+//                print(record)
+//                print(categoryArray)
+//                //レコードの即時保存
+//                do {
+//                    try viewContext.save()
+//                } catch {
+//                    //エラーが発生した時に行う例外処理を書いておく
+//                    print(#function)
+//                    print("保存できなかった")
+//                }
+//            }
+//        } catch  {
+//        }
+//    }
     
     
     //==============================

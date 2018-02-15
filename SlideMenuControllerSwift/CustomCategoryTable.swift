@@ -68,6 +68,7 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
 }
 
 //セルの並び替え処理
+//方針: 配列の要素のデータを個別にアップデートする設計にする
 extension BaseViewController: TableViewReorderDelegate {
     func tableView(_ tableView: UITableView, reorderRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         // Update data model
@@ -84,15 +85,22 @@ extension BaseViewController: TableViewReorderDelegate {
         //3.削除したカテゴリーオブジェクトを最終移動セルの場所に追加。
         categoryInfo.insert(category, at: destinationIndexPath.row)
         
-        print(categoryInfo)
-        
-        //4.CoreDataのsort_idをアップデート
-        let coreDataUpdate = ingCoreData()
-        coreDataUpdate.sortChange(categoryArray: categoryInfo)
-        
+        //カテゴリーの配列を個別でアップデート処理
+        var i = 0
+         for category in categoryInfo{
+            let id =  category["id"]
+            var sort_id = category["sort_id"]
+            
+            //sort_idを更新
+            sort_id = i
+            
+            //CoreDataのカテゴリー個別アップデートを行う
+            let coreDataUpdate = ingCoreData()
+            coreDataUpdate.sortChange(id: id as! Int, sort_id: sort_id as! Int)
+            
+            i += 1
+        }
         //5.テーブルの再読込
         CusCategoryTable.reloadData()
-        
-        
     }
 }
