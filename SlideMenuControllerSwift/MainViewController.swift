@@ -55,31 +55,31 @@ extension MainViewController : UITableViewDataSource {
 extension MainViewController : SlideMenuControllerDelegate {
     
     func leftWillOpen() {
-        print("SlideMenuControllerDelegate: leftWillOpen")
+//        print("SlideMenuControllerDelegate: leftWillOpen")
     }
     
     func leftDidOpen() {
-        print("SlideMenuControllerDelegate: leftDidOpen")
+//        print("SlideMenuControllerDelegate: leftDidOpen")
     }
     
     func leftWillClose() {
-        print("SlideMenuControllerDelegate: leftWillClose")
+//        print("SlideMenuControllerDelegate: leftWillClose")
     }
     
     func leftDidClose() {
-        print("SlideMenuControllerDelegate: leftDidClose")
+//        print("SlideMenuControllerDelegate: leftDidClose")
     }
     
     func rightWillOpen() {
-        print("SlideMenuControllerDelegate: rightWillOpen")
+//        print("SlideMenuControllerDelegate: rightWillOpen")
     }
     
     func rightDidOpen() {
-        print("SlideMenuControllerDelegate: rightDidOpen")
+//        print("SlideMenuControllerDelegate: rightDidOpen")
     }
     
     func rightWillClose() {
-        print("SlideMenuControllerDelegate: rightWillClose")
+//        print("SlideMenuControllerDelegate: rightWillClose")
     }
     
     func rightDidClose() {

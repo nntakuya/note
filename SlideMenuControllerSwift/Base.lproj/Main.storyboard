@@ -401,8 +401,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Vse-5j-5hL">
-                                <rect key="frame" x="16" y="20" width="343" height="627"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Vse-5j-5hL">
+                                <rect key="frame" x="16" y="29" width="343" height="627"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -492,6 +492,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="9pR-3M-7B7" id="ebh-8q-Uei"/>
+                                    <outlet property="delegate" destination="9pR-3M-7B7" id="6DN-TE-QZm"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -502,6 +506,9 @@
                             <constraint firstItem="6b3-MO-Kqf" firstAttribute="leading" secondItem="Q6b-Ge-Ffs" secondAttribute="leading" id="l0P-YI-m5f"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="myTableView" destination="6b3-MO-Kqf" id="gYz-MF-gDi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="faq-yo-puq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -543,6 +550,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R0Q-i3-kfU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="14" y="3436"/>
+        </scene>
+        <!--Category Detail Article View Controller-->
+        <scene sceneID="4c6-JU-gfu">
+            <objects>
+                <viewController id="wfr-pz-swj" customClass="CategoryDetailArticleViewController" customModule="SlideMenuControllerSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aRM-cZ-00c"/>
+                        <viewControllerLayoutGuide type="bottom" id="nkD-z1-In1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gCk-pK-Vjm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GvB-n7-P7B">
+                                <rect key="frame" x="16" y="20" width="343" height="619"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="0Vv-sP-w5T" appends="YES" id="izD-Ds-dMz"/>
+                                </connections>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="GvB-n7-P7B" firstAttribute="trailing" secondItem="gCk-pK-Vjm" secondAttribute="trailingMargin" id="14K-vC-HIm"/>
+                            <constraint firstItem="nkD-z1-In1" firstAttribute="top" secondItem="GvB-n7-P7B" secondAttribute="bottom" constant="28" id="Fw4-rZ-Pee"/>
+                            <constraint firstItem="GvB-n7-P7B" firstAttribute="leading" secondItem="gCk-pK-Vjm" secondAttribute="leadingMargin" id="XYc-KI-v5s"/>
+                            <constraint firstItem="GvB-n7-P7B" firstAttribute="top" secondItem="aRM-cZ-00c" secondAttribute="bottom" id="iJ3-hv-9eY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="postView" destination="GvB-n7-P7B" id="I09-uD-Fh2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jcg-mn-eB8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="down" id="0Vv-sP-w5T"/>
+            </objects>
+            <point key="canvasLocation" x="1249" y="2239"/>
         </scene>
         <!--Non Menu Controller-->
         <scene sceneID="d7w-0k-xlq">

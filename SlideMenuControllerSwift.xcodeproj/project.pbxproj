@@ -19,13 +19,14 @@
 		B331936C20303D04008477C9 /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331936A20303D04008477C9 /* Category+CoreDataClass.swift */; };
 		B331936D20303D04008477C9 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331936B20303D04008477C9 /* Category+CoreDataProperties.swift */; };
 		B331936F20309401008477C9 /* OthersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331936E20309401008477C9 /* OthersViewController.swift */; };
+		B3430BBF2039979C00D42114 /* CategoryDetailArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3430BBE2039979C00D42114 /* CategoryDetailArticleViewController.swift */; };
+		B3430BC32039987300D42114 /* ArticleCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3430BC22039987300D42114 /* ArticleCoreData.swift */; };
 		B36EF0DB20347ABE0038E2D5 /* UITableView+Reorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36EF0D520347ABD0038E2D5 /* UITableView+Reorder.swift */; };
 		B36EF0DC20347ABE0038E2D5 /* ReorderController+SnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36EF0D620347ABD0038E2D5 /* ReorderController+SnapshotView.swift */; };
 		B36EF0DD20347ABE0038E2D5 /* ReorderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36EF0D720347ABD0038E2D5 /* ReorderController.swift */; };
 		B36EF0DE20347ABE0038E2D5 /* ReorderController+GestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36EF0D820347ABD0038E2D5 /* ReorderController+GestureRecognizer.swift */; };
 		B36EF0DF20347ABE0038E2D5 /* ReorderController+DestinationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36EF0D920347ABD0038E2D5 /* ReorderController+DestinationRow.swift */; };
 		B36EF0E020347ABE0038E2D5 /* ReorderController+AutoScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36EF0DA20347ABD0038E2D5 /* ReorderController+AutoScroll.swift */; };
-		B394FC5120294AC000D42467 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394FC5020294AC000D42467 /* Function.swift */; };
 		B394FC5A2029CACB00D42467 /* Article+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394FC562029CACB00D42467 /* Article+CoreDataClass.swift */; };
 		B394FC5B2029CACB00D42467 /* Article+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394FC572029CACB00D42467 /* Article+CoreDataProperties.swift */; };
 		B39D058520349E6900975F16 /* InputTextTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D058420349E6900975F16 /* InputTextTableCell.swift */; };
@@ -52,7 +53,6 @@
 		C5BF6A821BEEF1A70064C18E /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF6A811BEEF1A70064C18E /* DataTableViewCell.swift */; };
 		C5BF6A841BEEF1E70064C18E /* DataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5BF6A831BEEF1E70064C18E /* DataTableViewCell.xib */; };
 		C5BF6A861BEF4C080064C18E /* SubContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF6A851BEF4C080064C18E /* SubContentsViewController.swift */; };
-		C5BF6A8A1BF3335D0064C18E /* SubContentsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5BF6A891BF3335D0064C18E /* SubContentsViewController.storyboard */; };
 		C5BF6A8C1BF340020064C18E /* ExSlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF6A8B1BF340020064C18E /* ExSlideMenuController.swift */; };
 		C5BF6A8E1BF34A8B0064C18E /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF6A8D1BF34A8B0064C18E /* UIApplication.swift */; };
 		C5C1CE5B1A70DADF00B6E411 /* NonMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C1CE5A1A70DADF00B6E411 /* NonMenuController.swift */; };
@@ -87,13 +87,14 @@
 		B331936A20303D04008477C9 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B331936B20303D04008477C9 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B331936E20309401008477C9 /* OthersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersViewController.swift; sourceTree = "<group>"; };
+		B3430BBE2039979C00D42114 /* CategoryDetailArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailArticleViewController.swift; sourceTree = "<group>"; };
+		B3430BC22039987300D42114 /* ArticleCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCoreData.swift; sourceTree = "<group>"; };
 		B36EF0D520347ABD0038E2D5 /* UITableView+Reorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Reorder.swift"; sourceTree = "<group>"; };
 		B36EF0D620347ABD0038E2D5 /* ReorderController+SnapshotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ReorderController+SnapshotView.swift"; sourceTree = "<group>"; };
 		B36EF0D720347ABD0038E2D5 /* ReorderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReorderController.swift; sourceTree = "<group>"; };
 		B36EF0D820347ABD0038E2D5 /* ReorderController+GestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ReorderController+GestureRecognizer.swift"; sourceTree = "<group>"; };
 		B36EF0D920347ABD0038E2D5 /* ReorderController+DestinationRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ReorderController+DestinationRow.swift"; sourceTree = "<group>"; };
 		B36EF0DA20347ABD0038E2D5 /* ReorderController+AutoScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ReorderController+AutoScroll.swift"; sourceTree = "<group>"; };
-		B394FC5020294AC000D42467 /* Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
 		B394FC562029CACB00D42467 /* Article+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Article+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B394FC572029CACB00D42467 /* Article+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Article+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B39D058420349E6900975F16 /* InputTextTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextTableCell.swift; sourceTree = "<group>"; };
@@ -124,7 +125,6 @@
 		C5BF6A811BEEF1A70064C18E /* DataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewCell.swift; sourceTree = "<group>"; };
 		C5BF6A831BEEF1E70064C18E /* DataTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataTableViewCell.xib; sourceTree = "<group>"; };
 		C5BF6A851BEF4C080064C18E /* SubContentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubContentsViewController.swift; sourceTree = "<group>"; };
-		C5BF6A891BF3335D0064C18E /* SubContentsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SubContentsViewController.storyboard; sourceTree = "<group>"; };
 		C5BF6A8B1BF340020064C18E /* ExSlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExSlideMenuController.swift; sourceTree = "<group>"; };
 		C5BF6A8D1BF34A8B0064C18E /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		C5C1CE5A1A70DADF00B6E411 /* NonMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonMenuController.swift; sourceTree = "<group>"; };
@@ -167,6 +167,15 @@
 				0E75C5A41BE3CAFE00844634 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B3430BC42039999200D42114 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				B3430BC22039987300D42114 /* ArticleCoreData.swift */,
+				B331936820303B34008477C9 /* ingCoreData.swift */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 		B36EF0D420347ABD0038E2D5 /* Source */ = {
@@ -302,12 +311,11 @@
 				C5C1CE5A1A70DADF00B6E411 /* NonMenuController.swift */,
 				C539E64D1A315E87003B7CC7 /* Main.storyboard */,
 				C5BF6A851BEF4C080064C18E /* SubContentsViewController.swift */,
-				C5BF6A891BF3335D0064C18E /* SubContentsViewController.storyboard */,
 				C5BF6A8B1BF340020064C18E /* ExSlideMenuController.swift */,
 				B3A3DE0320287C2500D656A2 /* Model.xcdatamodeld */,
 				B3A3DE0A2028AE3A00D656A2 /* DetailViewController.swift */,
-				B394FC5020294AC000D42467 /* Function.swift */,
-				B331936820303B34008477C9 /* ingCoreData.swift */,
+				B3430BBE2039979C00D42114 /* CategoryDetailArticleViewController.swift */,
+				B3430BC42039999200D42114 /* CoreData */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -447,7 +455,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5498C801BE897660076A7C5 /* ImageHeaderView.xib in Resources */,
-				C5BF6A8A1BF3335D0064C18E /* SubContentsViewController.storyboard in Resources */,
 				C5BF6A841BEEF1E70064C18E /* DataTableViewCell.xib in Resources */,
 				0E75C5A61BE3CAFE00844634 /* Info.plist in Resources */,
 				C539E64F1A315E87003B7CC7 /* Main.storyboard in Resources */,
@@ -498,6 +505,7 @@
 				B3BA101F202C7AE700870E53 /* imageCategory.swift in Sources */,
 				C539E6471A315E87003B7CC7 /* AppDelegate.swift in Sources */,
 				B331936720300317008477C9 /* SecondViewController.swift in Sources */,
+				B3430BBF2039979C00D42114 /* CategoryDetailArticleViewController.swift in Sources */,
 				B331936F20309401008477C9 /* OthersViewController.swift in Sources */,
 				C5F179D21BEB2FAF00EEDD9A /* UIColor.swift in Sources */,
 				B36EF0DC20347ABE0038E2D5 /* ReorderController+SnapshotView.swift in Sources */,
@@ -505,10 +513,10 @@
 				C5F179CE1BEB2A5900EEDD9A /* UIImage.swift in Sources */,
 				C5498C821BE8994F0076A7C5 /* UIImageView.swift in Sources */,
 				C5C1CE5B1A70DADF00B6E411 /* NonMenuController.swift in Sources */,
+				B3430BC32039987300D42114 /* ArticleCoreData.swift in Sources */,
 				C5498C7E1BE897250076A7C5 /* ImageHeaderView.swift in Sources */,
 				B331936C20303D04008477C9 /* Category+CoreDataClass.swift in Sources */,
 				C5BF6A861BEF4C080064C18E /* SubContentsViewController.swift in Sources */,
-				B394FC5120294AC000D42467 /* Function.swift in Sources */,
 				C5BD39DC1A6CD15700D0AF95 /* JavaViewController.swift in Sources */,
 				B3319363202E8483008477C9 /* ModalViewController.swift in Sources */,
 				B36EF0DB20347ABE0038E2D5 /* UITableView+Reorder.swift in Sources */,
