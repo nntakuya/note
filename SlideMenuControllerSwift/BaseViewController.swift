@@ -32,14 +32,10 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    =========================================
     //【テーブル】CustomCategoryViewのテーブルを作成
     @IBOutlet weak var CusCategoryTable: UITableView!
-    //カテゴリー一覧変数(CustomCategoryTable)
-    //表示したいセルの配列を初期化
-    var categoryInfo:[[String:Any]] = []
-    //何行目か保存されていないときを見分けるための-1を代入
-    var selectedRowIndex = -1
     
-    //カテゴリーIDのデフォルト値（カテゴリー：All）を "0" とする
-    var categoryId = 0
+    var categoryInfo:[[String:Any]] = []//表示したいセルの配列を初期化
+    var selectedRowIndex = -1//何行目か保存されていないときを見分けるための-1を代入
+    var categoryId = 0//カテゴリーIDのデフォルト値（カテゴリー：All）を "0" とする
     
     
     
@@ -102,17 +98,10 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //カテゴリーデータ全件削除
-//        let daldata = ingCoreData()
-//        daldata.deleteCategoryAll()
-        
-        
         //viewTable カテゴリー一覧の並び替え
         CusCategoryTable.reorder.delegate = self as? TableViewReorderDelegate
         //ModalViewを見えない場所にセットする
         cretaModalWindow()
-        
-        
         
         //(test)ModalView【custom】
         customModalWindow()

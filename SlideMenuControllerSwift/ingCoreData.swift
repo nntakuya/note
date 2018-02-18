@@ -9,17 +9,6 @@ import UIKit
 //max_rid     : 現在の最大の idの位置
 //maxNum      : 最大の値
 
-//【タスク】
-//・sort_id作成するfunction
-
-//~sort_id~
-//(やりたいこと)
-//データが並び替えられた際、データが並び替えられた順にsort_idを並び替えたい
-//上記のことが必要な場合は、データが並び替えられた時のみ
-//それ以外の場合では、idと同じ処理(カテゴリーが増える度に、CoreDataから最新のsort_idを取得し、+1でsort_idを更新
-//（必要なこと）
-//
-
 
 class ingCoreData {
     //AppDelegateを使う用意をしておく（インスタンス化）
@@ -155,7 +144,7 @@ class ingCoreData {
                     dics.append(dic as NSDictionary)
                 }
             }
-            print(dics)
+//            print(dics)
             
         } catch  {
             print(error)
@@ -195,8 +184,7 @@ class ingCoreData {
 
                 dic =  ["id":id,"name":name,"sort_id":sort_id,"saveData":saveData]
                 
-                print(dic)
-                
+//                print(dic)
             }
             
         } catch  {
@@ -266,18 +254,55 @@ class ingCoreData {
 
             
         } catch  {
-            
-//            if Constants.DEBUG == true {
-//                print(#function)
                 print("削除するレコードなかったよ")
-//            }
             
         }
-        
     }
     
     //==============================
-    // sort_idアップデートメッソド
+    // 　　　Category名更新メソッド
+    //==============================
+    func UpdateCategoryName(id:Int, name:String) {
+        //エンティティを操作するためのオブジェクトを作成する
+        let viewContext = appDalegate.persistentContainer.viewContext
+        
+        //エンティティオブジェクトを作成する
+        let myEntity = NSEntityDescription.entity(forEntityName: "Category", in: viewContext)
+        
+        //どのエンティティからデータを取得してくるか設定（ToDoエンティティ）
+        let query:NSFetchRequest<Category> =  Category.fetchRequest()
+        query.entity = myEntity
+        
+        //===== 絞り込み =====
+        let idPredicate = NSPredicate(format: "id = %d", id)
+        query.predicate = idPredicate
+        
+        do {
+            let fetchResults = try viewContext.fetch(query)
+            
+            for fetch:AnyObject in fetchResults {
+                //更新する対象のデータをNSManagedObjectにダウンキャスト
+                let record = fetch as! NSManagedObject
+                //値のセット
+                record.setValue(name, forKey: "name")
+                
+                //レコードの即時保存
+                do {
+                    try viewContext.save()
+                } catch {
+                    //エラーが発生した時に行う例外処理を書いておく
+                    print(#function)
+                    print("保存できなかった")
+                }
+            }
+        } catch  {
+        }
+    }
+    
+    
+    
+    //==============================
+    // sort_idアップデートメソッド
     //==============================
     func sortChange(id:Int, sort_id: Int) {
         //エンティティを操作するためのオブジェクトを作成する
@@ -315,59 +340,6 @@ class ingCoreData {
         } catch  {
         }
     }
-    
-    
-    
-//==============================================
-//　カテゴリーの並び替えが行われた際に、
-//sort_idを全件取得し、昇順にidの再割当てする処理
-//==============================================
-//    func sortChangeAll(categoryArray:[[String:Any]]){
-//        //エンティティを操作するためのオブジェクトを作成する
-//        let viewContext = appDalegate.persistentContainer.viewContext
-//
-//        //エンティティオブジェクトを作成する
-//        let myEntity = NSEntityDescription.entity(forEntityName: "Category", in: viewContext)
-//
-//        //どのエンティティからデータを取得してくるか設定（ToDoエンティティ）
-//        let query:NSFetchRequest<Category> =  Category.fetchRequest()
-//        query.entity = myEntity
-//
-//
-//        //取り出しの順番をsort_id変更後の状態で取得したい
-//
-//
-//        //取り出しの順番
-//        //ascendind:true 昇順 古い順、false 降順　新しい順
-//        let sortDescripter = NSSortDescriptor(key: "sort_id", ascending: true)
-//        query.sortDescriptors = [sortDescripter]
-//
-//        do {
-//            let fetchResults = try viewContext.fetch(query)
-//
-//            var i = 0
-//            for fetch:AnyObject in fetchResults {
-//                //更新する対象のデータをNSManagedObjectにダウンキャスト
-//                let record = fetch as! NSManagedObject
-//
-//
-//                //値のセット
-//                record.setValue(categoryArray[i]["sort_id"], forKey: "sort_id")
-//                i += 1
-//                print(record)
-//                print(categoryArray)
-//                //レコードの即時保存
-//                do {
-//                    try viewContext.save()
-//                } catch {
-//                    //エラーが発生した時に行う例外処理を書いておく
-//                    print(#function)
-//                    print("保存できなかった")
-//                }
-//            }
-//        } catch  {
-//        }
-//    }
     
     
     //==============================

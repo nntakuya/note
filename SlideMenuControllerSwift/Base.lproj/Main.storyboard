@@ -49,13 +49,26 @@
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <prototypes>
-                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Cell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Yw4-ra-MR1">
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Cell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Yw4-ra-MR1" customClass="CustomTableViewCell" customModule="SlideMenuControllerSwift" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Yw4-ra-MR1" id="sOm-Zm-Qor">
                                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
+                                                                    <subviews>
+                                                                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7jb-uk-3K6">
+                                                                            <rect key="frame" x="15" y="6" width="297" height="30"/>
+                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                            <nil key="textColor"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                            <textInputTraits key="textInputTraits"/>
+                                                                        </textField>
+                                                                    </subviews>
                                                                 </tableViewCellContentView>
+                                                                <connections>
+                                                                    <outlet property="CategoryCell" destination="sOm-Zm-Qor" id="vOk-Em-ouh"/>
+                                                                    <outlet property="CategoryTextField" destination="7jb-uk-3K6" id="E1E-5q-OiN"/>
+                                                                </connections>
                                                             </tableViewCell>
                                                         </prototypes>
                                                         <connections>

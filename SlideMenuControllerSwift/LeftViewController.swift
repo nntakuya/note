@@ -94,7 +94,7 @@ class LeftViewController : UIViewController{
 extension LeftViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         for list in menus{
-            print(list)
+//            print(list)
             if (list == "Note" || list == "All"){
                 return BaseTableViewCell.height()
             }else{
@@ -127,12 +127,10 @@ extension LeftViewController : UITableViewDataSource {
         for list in menus{
             if (list == "Note" || list == "All"){
                 let cell = BaseTableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: BaseTableViewCell.identifier)
-                print(cell)
                 cell.setData(menus[indexPath.row])
                 return cell
             }else{
                 let cell = BaseTableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: BaseTableViewCell.identifier)
-                print(cell)
                 cell.setData(menus[indexPath.row])
                 return cell
             }
