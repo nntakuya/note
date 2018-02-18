@@ -3,26 +3,6 @@
 //  SlideMenuControllerSwift
 //
 //  Created by 仲松拓哉 on 14/02/2018.
-//
-//
-
-
-//目的：カテゴリー内容の編集
-//【出来てること】
-//1.テーブルのセルの上に、textFieldをセット
-//2.そのtextFieldに、データを反映
-
-//【出来ていないこと】
-//1.レイアウトが一気に崩れた
-//2.指定したセルの特定方法が不明
-
-//【プログラムの設計】
-//1.選択されたセルを特定する必要がある
-// └ textFieldからデータを取得する方法
-// └ セルからデータを取得する
-//2.特定したセルをキーに選択されたカテゴリーを特定(categoryInfo配列を使用予定)
-//3.categoryInfoの情報を上書き
-//4.CoreDataに情報を反映
 
 
 import Foundation
@@ -30,7 +10,6 @@ import UIKit
 
 
 class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
-
     //上記のプロトコル(UITableViewCell)でCellのデリゲートをしているので、
     //Cellのプロパティでidが使用できる
     @IBOutlet weak var CategoryCell: UIView!
@@ -55,19 +34,14 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
         
         return true
     }
-    
-    
-//    //入力開始前に呼び出し
-//    func textFieldShouldBeginEditing(_ textField:UITextField) -> Bool {
-//        print("入力開始前に呼び出し")
-//        return true
-//    }
+
     //入力完了後に呼び出し
     func textFieldDidEndEditing(_ textField:UITextField){
         print("入力完了後に呼び出し")
         updateCategoryName()//カテゴリー名更新
     }
     
+    //カテゴリー名更新
     func updateCategoryName(){
         let categoryCore = ingCoreData()
         let inputText = CategoryTextField.text as! String
@@ -75,8 +49,9 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
     }
 }
 
-extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
 
+
+extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
 //    ==========================
 //　　　　  　テーブル作成
 //    ==========================
@@ -96,12 +71,6 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
         //以下 "CustomTableViewCell" はテスト用にセット
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
 
-        //TODO:以下のコードの内容を確認する
-        //問題：セル内のtextFieldが選択された状態で、セルが選択されたと認識されないこと
-//        cell.CategoryTextField.delegate = self as? UITextFieldDelegate
-//        cell.CategoryTextField.tag = indexPath.row
-        
-
         //category内容編集するためにidプロパティを更新
         cell.id = categoryInfo[indexPath.row]["id"] as? Int
         
@@ -110,20 +79,6 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
         
         return cell
     }
-    
-    
-    //行を編集するための関数（メモがからの時は削除ボタンを出なくする）
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        
-        print(indexPath.row)
-        return false
-    }
-    
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
-    }
-
     
     //カテゴリー一覧呼び込み関数
     func addListCategory(){
@@ -143,7 +98,6 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
             
             //指定されたIDのメモデータをCoreDataから削除
             self.selectedRowIndex = indexPath.row
-//            self.Delete()
             //TODO:確認事項　下記コードはindexPath.rowで要素を指定した方が良いのか？
             let id = self.categoryInfo[self.selectedRowIndex]["id"] as! Int
             let CoreData = ingCoreData()
@@ -189,7 +143,6 @@ extension BaseViewController: TableViewReorderDelegate {
             //CoreDataのカテゴリー個別アップデートを行う
             let coreDataUpdate = ingCoreData()
             coreDataUpdate.sortChange(id: id as! Int, sort_id: sort_id as! Int)
-            
             i += 1
         }
         //5.テーブルの再読込
