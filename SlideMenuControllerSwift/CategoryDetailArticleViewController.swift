@@ -1,8 +1,4 @@
-
-//プログラミングの設計
-//目的：記事の詳細画面から、編集後のデータを保存する
-//viewDidDisappearのfunction内にCoreDataの保存内容を上書きする
-
+//指定されたカテゴリーの記事一覧の詳細
 
 import UIKit
 import CoreData

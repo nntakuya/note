@@ -9,6 +9,8 @@ import UIKit
 
 open class BaseTableViewCell : UITableViewCell {
     class var identifier: String { return String.className(self) }
+    //カテゴリーIDを作成
+    var category_id:Int = -1
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

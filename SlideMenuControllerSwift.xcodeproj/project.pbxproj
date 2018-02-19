@@ -29,7 +29,7 @@
 		B36EF0E020347ABE0038E2D5 /* ReorderController+AutoScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36EF0DA20347ABD0038E2D5 /* ReorderController+AutoScroll.swift */; };
 		B394FC5A2029CACB00D42467 /* Article+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394FC562029CACB00D42467 /* Article+CoreDataClass.swift */; };
 		B394FC5B2029CACB00D42467 /* Article+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394FC572029CACB00D42467 /* Article+CoreDataProperties.swift */; };
-		B39D058520349E6900975F16 /* InputTextTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D058420349E6900975F16 /* InputTextTableCell.swift */; };
+		B396958B203A6925008CEB96 /* OtherCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B396958A203A6925008CEB96 /* OtherCustomCell.swift */; };
 		B3A3DE0520287C2500D656A2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B3A3DE0320287C2500D656A2 /* Model.xcdatamodeld */; };
 		B3A3DE0B2028AE3A00D656A2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A3DE0A2028AE3A00D656A2 /* DetailViewController.swift */; };
 		B3BA101F202C7AE700870E53 /* imageCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA101E202C7AE700870E53 /* imageCategory.swift */; };
@@ -52,7 +52,6 @@
 		C5BD39E01A6CDC8100D0AF95 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BD39DF1A6CDC8100D0AF95 /* UIViewController.swift */; };
 		C5BF6A821BEEF1A70064C18E /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF6A811BEEF1A70064C18E /* DataTableViewCell.swift */; };
 		C5BF6A841BEEF1E70064C18E /* DataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5BF6A831BEEF1E70064C18E /* DataTableViewCell.xib */; };
-		C5BF6A861BEF4C080064C18E /* SubContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF6A851BEF4C080064C18E /* SubContentsViewController.swift */; };
 		C5BF6A8C1BF340020064C18E /* ExSlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF6A8B1BF340020064C18E /* ExSlideMenuController.swift */; };
 		C5BF6A8E1BF34A8B0064C18E /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF6A8D1BF34A8B0064C18E /* UIApplication.swift */; };
 		C5C1CE5B1A70DADF00B6E411 /* NonMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C1CE5A1A70DADF00B6E411 /* NonMenuController.swift */; };
@@ -97,7 +96,7 @@
 		B36EF0DA20347ABD0038E2D5 /* ReorderController+AutoScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ReorderController+AutoScroll.swift"; sourceTree = "<group>"; };
 		B394FC562029CACB00D42467 /* Article+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Article+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B394FC572029CACB00D42467 /* Article+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Article+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		B39D058420349E6900975F16 /* InputTextTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextTableCell.swift; sourceTree = "<group>"; };
+		B396958A203A6925008CEB96 /* OtherCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherCustomCell.swift; sourceTree = "<group>"; };
 		B3A3DE0420287C2500D656A2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		B3A3DE0A2028AE3A00D656A2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		B3BA101E202C7AE700870E53 /* imageCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageCategory.swift; sourceTree = "<group>"; };
@@ -124,7 +123,6 @@
 		C5BD39DF1A6CDC8100D0AF95 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		C5BF6A811BEEF1A70064C18E /* DataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewCell.swift; sourceTree = "<group>"; };
 		C5BF6A831BEEF1E70064C18E /* DataTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataTableViewCell.xib; sourceTree = "<group>"; };
-		C5BF6A851BEF4C080064C18E /* SubContentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubContentsViewController.swift; sourceTree = "<group>"; };
 		C5BF6A8B1BF340020064C18E /* ExSlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExSlideMenuController.swift; sourceTree = "<group>"; };
 		C5BF6A8D1BF34A8B0064C18E /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		C5C1CE5A1A70DADF00B6E411 /* NonMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonMenuController.swift; sourceTree = "<group>"; };
@@ -189,6 +187,40 @@
 				B36EF0DA20347ABD0038E2D5 /* ReorderController+AutoScroll.swift */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		B396958D203A6992008CEB96 /* SideBar */ = {
+			isa = PBXGroup;
+			children = (
+				C5BD39D91A6CD12300D0AF95 /* AlltViewController.swift */,
+				C539E66B1A316C78003B7CC7 /* LeftViewController.swift */,
+				B331936E20309401008477C9 /* OthersViewController.swift */,
+				B396958A203A6925008CEB96 /* OtherCustomCell.swift */,
+				B3430BBE2039979C00D42114 /* CategoryDetailArticleViewController.swift */,
+				B3A3DE0A2028AE3A00D656A2 /* DetailViewController.swift */,
+			);
+			name = SideBar;
+			sourceTree = "<group>";
+		};
+		B396958E203A6A34008CEB96 /* other */ = {
+			isa = PBXGroup;
+			children = (
+				C5BD39DD1A6CD17B00D0AF95 /* GoViewController.swift */,
+				C5BD39DB1A6CD15700D0AF95 /* JavaViewController.swift */,
+				C5C1CE5A1A70DADF00B6E411 /* NonMenuController.swift */,
+				C539E66D1A316F5F003B7CC7 /* RightViewController.swift */,
+			);
+			name = other;
+			sourceTree = "<group>";
+		};
+		B396958F203A6AAB008CEB96 /* ModalView */ = {
+			isa = PBXGroup;
+			children = (
+				B331936620300317008477C9 /* SecondViewController.swift */,
+				B311B5762033E16600CA0604 /* CustomCategoryTable.swift */,
+				B3319362202E8483008477C9 /* ModalViewController.swift */,
+			);
+			name = ModalView;
 			sourceTree = "<group>";
 		};
 		C539E6381A315E87003B7CC7 = {
@@ -294,28 +326,17 @@
 		C5C1CE631A70F7C400B6E411 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				B311B5762033E16600CA0604 /* CustomCategoryTable.swift */,
-				B39D058420349E6900975F16 /* InputTextTableCell.swift */,
 				C539E64B1A315E87003B7CC7 /* MainViewController.swift */,
-				B331936620300317008477C9 /* SecondViewController.swift */,
 				B311643B2027006600F01ACB /* BaseViewController.swift */,
-				B3319362202E8483008477C9 /* ModalViewController.swift */,
 				B3319364202E8543008477C9 /* CustomPresentationController.swift */,
 				B3BA101E202C7AE700870E53 /* imageCategory.swift */,
-				C539E66B1A316C78003B7CC7 /* LeftViewController.swift */,
-				C539E66D1A316F5F003B7CC7 /* RightViewController.swift */,
-				C5BD39D91A6CD12300D0AF95 /* AlltViewController.swift */,
-				C5BD39DB1A6CD15700D0AF95 /* JavaViewController.swift */,
-				C5BD39DD1A6CD17B00D0AF95 /* GoViewController.swift */,
-				B331936E20309401008477C9 /* OthersViewController.swift */,
-				C5C1CE5A1A70DADF00B6E411 /* NonMenuController.swift */,
 				C539E64D1A315E87003B7CC7 /* Main.storyboard */,
-				C5BF6A851BEF4C080064C18E /* SubContentsViewController.swift */,
 				C5BF6A8B1BF340020064C18E /* ExSlideMenuController.swift */,
+				B396958F203A6AAB008CEB96 /* ModalView */,
+				B396958D203A6992008CEB96 /* SideBar */,
 				B3A3DE0320287C2500D656A2 /* Model.xcdatamodeld */,
-				B3A3DE0A2028AE3A00D656A2 /* DetailViewController.swift */,
-				B3430BBE2039979C00D42114 /* CategoryDetailArticleViewController.swift */,
 				B3430BC42039999200D42114 /* CoreData */,
+				B396958E203A6A34008CEB96 /* other */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -505,6 +526,7 @@
 				B3BA101F202C7AE700870E53 /* imageCategory.swift in Sources */,
 				C539E6471A315E87003B7CC7 /* AppDelegate.swift in Sources */,
 				B331936720300317008477C9 /* SecondViewController.swift in Sources */,
+				B396958B203A6925008CEB96 /* OtherCustomCell.swift in Sources */,
 				B3430BBF2039979C00D42114 /* CategoryDetailArticleViewController.swift in Sources */,
 				B331936F20309401008477C9 /* OthersViewController.swift in Sources */,
 				C5F179D21BEB2FAF00EEDD9A /* UIColor.swift in Sources */,
@@ -516,7 +538,6 @@
 				B3430BC32039987300D42114 /* ArticleCoreData.swift in Sources */,
 				C5498C7E1BE897250076A7C5 /* ImageHeaderView.swift in Sources */,
 				B331936C20303D04008477C9 /* Category+CoreDataClass.swift in Sources */,
-				C5BF6A861BEF4C080064C18E /* SubContentsViewController.swift in Sources */,
 				C5BD39DC1A6CD15700D0AF95 /* JavaViewController.swift in Sources */,
 				B3319363202E8483008477C9 /* ModalViewController.swift in Sources */,
 				B36EF0DB20347ABE0038E2D5 /* UITableView+Reorder.swift in Sources */,
@@ -528,7 +549,6 @@
 				B3A3DE0520287C2500D656A2 /* Model.xcdatamodeld in Sources */,
 				B36EF0DF20347ABE0038E2D5 /* ReorderController+DestinationRow.swift in Sources */,
 				C5F179D01BEB2CB500EEDD9A /* UIView.swift in Sources */,
-				B39D058520349E6900975F16 /* InputTextTableCell.swift in Sources */,
 				C5BD39DA1A6CD12300D0AF95 /* AlltViewController.swift in Sources */,
 				B3A3DE0B2028AE3A00D656A2 /* DetailViewController.swift in Sources */,
 			);

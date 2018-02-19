@@ -5,21 +5,33 @@ class LeftViewController : UIViewController{
     
     @IBOutlet weak var tableView: UITableView!
     
-    //TODO:配列を"Note"と"All"以外、CoreDataに保存されているカテゴリー名から追加する処理にする(ファンクション作成済)
     //固定項目:"Note","All"
     var menus = ["Note", "All"]
     
-    //TODO:カテゴリー名に応じた名前のviewControllerを生成する
+    
+    var menusTest:[[String:Any]] = [
+        [
+            "id":Int(),
+            "name":"Note"
+        ],
+        [
+            "id":Int(),
+            "name":"All"
+        ]
+    ]
+    
+
     var mainViewController: UIViewController!
     var AllViewController: UIViewController!
     var OthersViewController: UIViewController!
     var imageHeaderView: ImageHeaderView!
     
+    
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         //menusの配列にCoreDataのカテゴリー名を追加する
@@ -77,19 +89,27 @@ class LeftViewController : UIViewController{
         //menus配列をイニシャライズ
         menus = ["Note", "All"]
         
+        
+        //TODO:以下のカテゴリー一覧を文字列で管理している
+        //それをオブジェクトで管理するように書き換える？
+        //"name"カラムだけでなく、"id"も追加するべき？
+        
         //CoreDataにあるカテゴリー名を全件取得
         for inputCategory in inputCategories{
-            let addCategory = inputCategory["name"] as! String
-            menus.append(addCategory)
+            let addNameCategory = inputCategory["name"] as! String
+            let addIdCategory = inputCategory["id"] as! Int
+            
+            menus.append(addNameCategory)
+            
+            //(テスト用)サイドバーのセルにidのプロパティを追加したい
+            let add_menus = ["id":addIdCategory,"name":addNameCategory] as [String : Any]
+            menusTest.append(add_menus)
         }
         //テーブルの再描画
         tableView.reloadData()
     }
 }
 
-
-//TODO:なぜextensionが上手くいってないのか
-// └ 上記でセットしているfunctionがなぜか反応しない
 //遷移先を指定している
 extension LeftViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -101,7 +121,6 @@ extension LeftViewController : UITableViewDelegate {
                 return 60
             }
         }
-        
         return CGFloat()
     }
 
@@ -118,20 +137,29 @@ extension LeftViewController : UITableViewDelegate {
 
 //以下は、サイドバーのビューの体裁を整えている。
 extension LeftViewController : UITableViewDataSource {
+    //セルの数指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menus.count
     }
 
+    //セル表示データを指定
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         for list in menus{
             if (list == "Note" || list == "All"){
+                //BaseTableViewCellというTableViewCellを継承されたクラスを作成
                 let cell = BaseTableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: BaseTableViewCell.identifier)
+                
                 cell.setData(menus[indexPath.row])
                 return cell
-            }else{
+            }
+            //"Note"と"All"以外にカテゴリーIDを振る
+            else{
                 let cell = BaseTableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: BaseTableViewCell.identifier)
-                cell.setData(menus[indexPath.row])
+                //TODO:menusTestのディクショナリからidとnameを取得し、cellのプロパティにそれぞれ当てはめる
+                cell.category_id = menusTest[indexPath.row]["id"] as! Int
+                cell.setData(menusTest[indexPath.row]["name"])
+                
+//                cell.setData(menus[indexPath.row])
                 return cell
             }
         }

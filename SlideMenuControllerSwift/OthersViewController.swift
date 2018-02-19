@@ -5,7 +5,6 @@ import CoreData
 class OthersViewController: UIViewController,UITableViewDelegate,UITableViewDataSource   {
     
     @IBOutlet weak var myTableView: UITableView!
-    
     //表示したいセルの配列を初期化
     var artInfo:[[String:Any]] = []
     
@@ -19,9 +18,6 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return artInfo.count
     }
-    
-    //TODO:セルのビュー調整
-    //TODO:データのread等
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //文字列を表示するセルの取得
@@ -75,7 +71,6 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     
     ///////////////////// 画面遷移 ////////////////////////////
-    
     
     //セグエを使って画面遷移してる時発動
     //上のtableView関数で定義されているperformSegue関数を使用することで使用が可能になる。

@@ -2,7 +2,6 @@
 import UIKit
 import CoreData
 
-
 class AllViewController: UIViewController,UITableViewDelegate,UITableViewDataSource   {
     
     @IBOutlet weak var myTableView: UITableView!
@@ -16,14 +15,12 @@ class AllViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var categoryId = 0
     
     /////////////////// テーブルについて /////////////////////////////
-    //（疑問）直下のtableviewはなぜ4回繰り返されるのか
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return artInfo.count
     }
     
     //TODO:セルのビュー調整
     //TODO:データのread等
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //文字列を表示するセルの取得
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
@@ -42,7 +39,6 @@ class AllViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
         //セグエの名前を指定して、画面遷移処理を発動(つける名前はshowDetail。ストーリーボード上でidtifierで指定)
         performSegue(withIdentifier: "Detail", sender: nil)
-        
     }
     
     
@@ -57,7 +53,6 @@ class AllViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
 
     //セルのスワイプ表示（デザイン）
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
         let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (action, index) -> Void in
             
             //指定されたIDのメモデータをCoreDataから削除
@@ -76,11 +71,9 @@ class AllViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     ///////////////////// 画面遷移 ////////////////////////////
     
-    
     //セグエを使って画面遷移してる時発動
     //上のtableView関数で定義されているperformSegue関数を使用することで使用が可能になる。
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         let dvc:DetailViewController = segue.destination as! DetailViewController
         
         //移動先の画面のプロパティに、選択された行番号を代入
@@ -88,14 +81,12 @@ class AllViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
         //TODO:DetailにsaveDateの値を渡す
         dvc.saveDate = artInfo[selectedRowIndex]["saveDate"] as! Date
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         myTableView.reloadData()
     }
-    
     
     //ページが読み込まれた時に、CoreDataからデータを引っ張るｚ
     override func viewWillAppear(_ animated: Bool) {
@@ -118,24 +109,20 @@ class AllViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         //どのエンティティを操作するためのオブジェクトを作成
         let query: NSFetchRequest<Article> = Article.fetchRequest()
         
-        
         //絞り込み検索
         //カテゴリーIDをキーにCoreDataを検索
         let namePredicte = NSPredicate(format: "category_id = %d", categoryId)
         query.predicate = namePredicte
-   
         
         do{
             //データを一括取得
             let fetchResult = try viewContext.fetch(query)
 
             //データの取得
-//            var i:Int = 0
             for result: AnyObject in fetchResult{
                 let content: String? = result.value(forKey: "content") as? String
                 let saveDate: Date? =  result.value(forKey: "saveDate") as? Date
                 let category: Int64 = (result.value(forKey: "category_id") as? Int64)!
-                
                 
                 let dic = ["content":content!,"saveDate":saveDate!,"categoryId":category] as [String : Any]
                 
