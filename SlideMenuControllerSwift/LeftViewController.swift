@@ -11,11 +11,11 @@ class LeftViewController : UIViewController{
     
     var menusTest:[[String:Any]] = [
         [
-            "id":Int(),
+            "id":-1,
             "name":"Note"
         ],
         [
-            "id":Int(),
+            "id":-1,
             "name":"All"
         ]
     ]
@@ -89,7 +89,6 @@ class LeftViewController : UIViewController{
         //menus配列をイニシャライズ
         menus = ["Note", "All"]
         
-        
         //TODO:以下のカテゴリー一覧を文字列で管理している
         //それをオブジェクトで管理するように書き換える？
         //"name"カラムだけでなく、"id"も追加するべき？
@@ -144,26 +143,18 @@ extension LeftViewController : UITableViewDataSource {
 
     //セル表示データを指定
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        for list in menus{
-            if (list == "Note" || list == "All"){
-                //BaseTableViewCellというTableViewCellを継承されたクラスを作成
-                let cell = BaseTableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: BaseTableViewCell.identifier)
-                
-                cell.setData(menus[indexPath.row])
-                return cell
-            }
-            //"Note"と"All"以外にカテゴリーIDを振る
-            else{
-                let cell = BaseTableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: BaseTableViewCell.identifier)
-                //TODO:menusTestのディクショナリからidとnameを取得し、cellのプロパティにそれぞれ当てはめる
-                cell.category_id = menusTest[indexPath.row]["id"] as! Int
-                cell.setData(menusTest[indexPath.row]["name"])
-                
-//                cell.setData(menus[indexPath.row])
-                return cell
-            }
+        //BaseTableViewCellというTableViewCellを継承されたクラスを作成
+        let cell = BaseTableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: BaseTableViewCell.identifier)
+
+        let test = menusTest[indexPath.row]["name"] as! String
+        
+        //作成したカテゴリーにのみcateogry_idプロパティにidを指定する
+        if (test != "Note" && test != "All"){
+            print(test)
+            cell.category_id = menusTest[indexPath.row]["id"] as! Int
         }
-        return UITableViewCell()
+        cell.setData(menusTest[indexPath.row]["name"])
+        
+        return cell
     }
-    
 }
