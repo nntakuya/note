@@ -6,10 +6,7 @@ class LeftViewController : UIViewController{
     @IBOutlet weak var tableView: UITableView!
     
     //固定項目:"Note","All"
-    var menus = ["Note", "All"]
-    
-    
-    var menusTest:[[String:Any]] = [
+    var menus:[[String:Any]] = [
         [
             "id":-1,
             "name":"Note"
@@ -70,9 +67,10 @@ class LeftViewController : UIViewController{
     
     //目的:サイドバーのカテゴリー項目から詳細画面へ遷移
     func changeViewController(num: Int) {
-        if menus[num] == "Note"{
+        let view = menus[num]["name"] as! String
+        if view == "Note"{
             self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
-        }else if(menus[num] == "All"){
+        }else if(view == "All"){
             self.slideMenuController()?.changeMainViewController(self.AllViewController, close: true)
         }else{
             self.slideMenuController()?.changeMainViewController(self.OthersViewController, close: true)
@@ -87,22 +85,24 @@ class LeftViewController : UIViewController{
         //CoreDataからカテゴリーデータを全件取得
         let inputCategories = categoryDatas.readCategoryAll()
         //menus配列をイニシャライズ
-        menus = ["Note", "All"]
-        
-        //TODO:以下のカテゴリー一覧を文字列で管理している
-        //それをオブジェクトで管理するように書き換える？
-        //"name"カラムだけでなく、"id"も追加するべき？
+        menus = [
+            [
+                "id":-1,
+                "name":"Note"
+            ],
+            [
+                "id":-1,
+                "name":"All"
+            ]
+        ]
         
         //CoreDataにあるカテゴリー名を全件取得
         for inputCategory in inputCategories{
             let addNameCategory = inputCategory["name"] as! String
             let addIdCategory = inputCategory["id"] as! Int
             
-            menus.append(addNameCategory)
-            
-            //(テスト用)サイドバーのセルにidのプロパティを追加したい
             let add_menus = ["id":addIdCategory,"name":addNameCategory] as [String : Any]
-            menusTest.append(add_menus)
+            menus.append(add_menus)
         }
         //テーブルの再描画
         tableView.reloadData()
@@ -112,15 +112,8 @@ class LeftViewController : UIViewController{
 //遷移先を指定している
 extension LeftViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        for list in menus{
-//            print(list)
-            if (list == "Note" || list == "All"){
-                return BaseTableViewCell.height()
-            }else{
-                return 60
-            }
-        }
-        return CGFloat()
+
+        return BaseTableViewCell.height()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -146,14 +139,14 @@ extension LeftViewController : UITableViewDataSource {
         //BaseTableViewCellというTableViewCellを継承されたクラスを作成
         let cell = BaseTableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: BaseTableViewCell.identifier)
 
-        let test = menusTest[indexPath.row]["name"] as! String
+        let test = menus[indexPath.row]["name"] as! String
         
         //作成したカテゴリーにのみcateogry_idプロパティにidを指定する
         if (test != "Note" && test != "All"){
-            print(test)
-            cell.category_id = menusTest[indexPath.row]["id"] as! Int
+//            print(test)
+            cell.category_id = menus[indexPath.row]["id"] as! Int
         }
-        cell.setData(menusTest[indexPath.row]["name"])
+        cell.setData(menus[indexPath.row]["name"])
         
         return cell
     }
