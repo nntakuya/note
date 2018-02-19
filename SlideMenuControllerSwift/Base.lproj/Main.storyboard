@@ -149,68 +149,6 @@
             </objects>
             <point key="canvasLocation" x="-2480.8000000000002" y="2205.2473763118442"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="mey-9X-GmW">
-            <objects>
-                <viewController id="vG4-ro-0Lp" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="aSu-Dm-CQa"/>
-                        <viewControllerLayoutGuide type="bottom" id="1b7-Kj-6Gs"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Kzf-8c-6xY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3qv-WI-oJ7">
-                                <rect key="frame" x="0.0" y="74" width="375" height="593"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.92041097345128131" green="1" blue="0.96254287805285499" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8xC-Wo-nZW">
-                                <rect key="frame" x="0.0" y="34" width="193" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.92067241668701172" green="0.99694758653640747" blue="0.96233230829238892" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Create Category"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="971-7C-WGX">
-                                <rect key="frame" x="191" y="34" width="184" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.97811824083328247" green="0.88229888677597046" blue="0.76403063535690308" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Custom Category"/>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wO1-N3-K6f" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1714.4000000000001" y="2204.3478260869565"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="C4Q-ny-KkV">
-            <objects>
-                <viewController id="X8o-Mh-P51" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="eRH-Gv-sw3"/>
-                        <viewControllerLayoutGuide type="bottom" id="uUP-Ci-GSD"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="7Ir-dL-Gp3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qBy-eg-DKG">
-                                <rect key="frame" x="0.0" y="74" width="375" height="593"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.97811824083328247" green="0.88229888677597046" blue="0.76403063535690308" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fSv-zs-rU5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-908" y="2205.2473763118442"/>
-        </scene>
         <!--Right View Controller-->
         <scene sceneID="bvR-W9-qnC">
             <objects>
@@ -564,7 +502,7 @@
         <!--Category Detail Article View Controller-->
         <scene sceneID="4c6-JU-gfu">
             <objects>
-                <viewController id="wfr-pz-swj" customClass="CategoryDetailArticleViewController" customModule="SlideMenuControllerSwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OtherDetail" id="wfr-pz-swj" customClass="CategoryDetailArticleViewController" customModule="SlideMenuControllerSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aRM-cZ-00c"/>
                         <viewControllerLayoutGuide type="bottom" id="nkD-z1-In1"/>

@@ -71,7 +71,6 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     
     ///////////////////// 画面遷移 ////////////////////////////
-    
     //セグエを使って画面遷移してる時発動
     //上のtableView関数で定義されているperformSegue関数を使用することで使用が可能になる。
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -90,7 +89,6 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
         super.viewDidLoad()
         myTableView.reloadData()
     }
-    
     
     //ページが読み込まれた時に、CoreDataからデータを引っ張るｚ
     override func viewWillAppear(_ animated: Bool) {

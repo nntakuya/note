@@ -5,6 +5,8 @@ class LeftViewController : UIViewController{
     
     @IBOutlet weak var tableView: UITableView!
     
+    var selectedCateogoryId = -1
+    
     //固定項目:"Note","All"
     var menus:[[String:Any]] = [
         [
@@ -22,8 +24,6 @@ class LeftViewController : UIViewController{
     var AllViewController: UIViewController!
     var OthersViewController: UIViewController!
     var imageHeaderView: ImageHeaderView!
-    
-    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -116,14 +116,22 @@ extension LeftViewController : UITableViewDelegate {
         return BaseTableViewCell.height()
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.changeViewController(num: indexPath.row)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        self.changeViewController(num: indexPath.row)
+//
+//        print("push1")
+//    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if self.tableView == scrollView {
         }
     }
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath)
+//    {
+////        let selectData = tableView.cellForRowAtIndexPath(indexPath)!.textLabel!.text
+//
+//        print("push")
+//    }
 }
 
 
@@ -143,11 +151,26 @@ extension LeftViewController : UITableViewDataSource {
         
         //作成したカテゴリーにのみcateogry_idプロパティにidを指定する
         if (test != "Note" && test != "All"){
-//            print(test)
             cell.category_id = menus[indexPath.row]["id"] as! Int
         }
         cell.setData(menus[indexPath.row]["name"])
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.changeViewController(num: indexPath.row)
+        selectedCateogoryId = menus[indexPath.row]["id"] as! Int
+
+        performSegue(withIdentifier: "OthersViewController", sender: nil)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let dvc:OthersViewController = segue.destination as! OthersViewController
+        
+        //OthersViewControllerに選択されたcategoryIdをセット
+        dvc.categoryId = selectedCateogoryId
+        
     }
 }
