@@ -136,8 +136,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //      カテゴリーボタンの追加
         addBtnCategory()
     }
-    
-    
+
   
 //    ==================================
 //　　　　 モーダルウィンドウ作成(create)
@@ -155,6 +154,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         CreateCategoryView.frame = CGRect(x: 0, y: 150, width: ModalView.bounds.width, height: ModalView.bounds.height - 150)
         CreateCategoryBtn.frame = CGRect(x:0,y:100,width:ModalView.bounds.width / 2, height: 50)
         CustomCategoryBtn.frame = CGRect(x:ModalView.bounds.width / 2 , y:100, width:ModalView.bounds.width / 2, height: 50)
+        
         ModalView.addSubview(CreateCategoryBtn)
         ModalView.addSubview(CustomCategoryBtn)
         CreateCategoryView.addSubview(createText())
@@ -166,17 +166,12 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //　　　　 モーダルウィンドウ作成(custom)
 //    ==================================
     func customModalWindow(){
-        
-        //表示状態
-        //        CustomCategoryView.frame = CGRect(x: 0, y: 150, width: self.view.bounds.width, height: self.view.bounds.height)
         //隠れた状態
         CustomCategoryView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
         
-        
         //スワイプジェスチャー
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipeView(sender:)))  //Swift3
-        // スワイプの方向を指定
-        downSwipe.direction = .down
+        downSwipe.direction = .down// スワイプの方向を指定
         // viewにジェスチャーを登録
         self.view.addGestureRecognizer(downSwipe)
         
@@ -206,25 +201,12 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         //textViewのイチとサイズを設定
         textView.frame = CGRect(x: 0, y:0, width: self.view.frame.width, height: self.view.frame.height)
         
-        //テキストを設定
-        textView.text = "入力してください"
-        
-        //フォントの大きさを設定
-        textView.font = UIFont.systemFont(ofSize:20.0)
-        
-        //textViewの枠線の太さを設定
-        textView.layer.borderWidth = 1
-        
-        //枠線の色をグレーに設定
-        textView.layer.borderColor = UIColor.lightGray.cgColor
-        
-        //テキストを編集できるように設定
-        textView.isEditable = true
-        
-        //TODO:未定義事項
-        //1.DONEボタンのセット 2.カテゴリーの保存処理
-        //キーボードに完了ボタンを追加
-        setInputAccessoryView(viewName: "Modal")
+        textView.text = "入力してください"//テキストを設定
+        textView.font = UIFont.systemFont(ofSize:20.0)//フォントの大きさを設定
+        textView.layer.borderWidth = 1//textViewの枠線の太さを設定
+        textView.layer.borderColor = UIColor.lightGray.cgColor//枠線の色をグレーに設定
+        textView.isEditable = true//テキストを編集できるように設定
+        setInputAccessoryView(viewName: "Modal")//キーボードに完了ボタンを追加
         
         return textView
     }
@@ -241,12 +223,9 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         // ボタンのX,Y座標.
         let posX: CGFloat = 0
         let posY: CGFloat = self.view.bounds.height - bHeight
-        
-        //TODO:TestVeiwのメンバー変数
         TestView = UIView.init(frame: CGRect(x: posX, y: posY, width: bWidth, height: bHeight))
         
-        //色指定
-        TestView.backgroundColor = UIColor.red
+        TestView.backgroundColor = UIColor.red//色指定
         
         TestView.addSubview(createBtn())//+ボタン
         TestView.addSubview(viewScroll())//スクロール
@@ -273,15 +252,9 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 
         // ボタンの設置座標とサイズを設定する.
         myButton.frame = CGRect(x: posX, y: posY, width: bWidth, height: bHeight)
-        
-        // ボタンの背景色を設定.
-        myButton.backgroundColor = UIColor.blue
-        
-        // ボタンの枠を丸くする.
-        myButton.layer.masksToBounds = true
-        
-        // コーナーの半径を設定する.
-        myButton.layer.cornerRadius = 20.0
+        myButton.backgroundColor = UIColor.blue// ボタンの背景色を設定.
+        myButton.layer.masksToBounds = true// ボタンの枠を丸くする.
+        myButton.layer.cornerRadius = 20.0// コーナーの半径を設定する.
         
         // タイトルを設定する(通常時).
         myButton.setTitle("+", for: .normal)
@@ -291,8 +264,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         myButton.setTitle("新規登録", for: .highlighted)
         myButton.setTitleColor(UIColor.black, for: .highlighted)
         
-        // ボタンにタグをつける.
-        myButton.tag = 0
+        myButton.tag = 0// ボタンにタグをつける.
         
         // イベントを追加する
         myButton.addTarget(self, action: #selector(self.onClickMyButton(sender:)), for: .touchUpInside)
@@ -318,8 +290,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         case 1://カテゴリーボタンをnoteに表示
             print("case1")
             
-            
-            
             //2.
         default:
             print("デフォルト")
@@ -331,21 +301,17 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     func CreatePostView(){
         //1.textViewの高さをずらす
         postViewX = 0
-//        postVeiwY = 0
         postVeiwY = 70
         postView.frame = CGRect(x: postViewX, y: postVeiwY, width: self.view.bounds.width, height: self.view.bounds.height)
         
         //サンプルテキスト作成
         postView.text = "sample text"
         
-        //メモメニュー作成
-        //行間指定
         let style = NSMutableParagraphStyle()
-        style.lineSpacing = 2
+        style.lineSpacing = 2//行間指定
         let attributes = [NSAttributedStringKey.paragraphStyle : style]
         postView.attributedText = NSAttributedString(string: postView.text,attributes: attributes)
-        //表示テキストのフォントサイズを変更
-        postView.font = UIFont.systemFont(ofSize: 18)
+        postView.font = UIFont.systemFont(ofSize: 18)//フォントサイズを変更
         
         //keyboard上の"Done"ボタンセット
         //"Main"はデフォルト画面のtextview画面
@@ -359,7 +325,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         // viewにジェスチャーを登録
         postView.addGestureRecognizer(downSwipe)
         
-        self.view.addSubview(postView)
+        self.view.bringSubview(toFront: postView)
     }
     
     @objc func DownSwipePostView(sender: UISwipeGestureRecognizer) {
@@ -382,9 +348,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         // width.widthでInt型でデータを取得出来る
         let width = text.size(withAttributes: [NSAttributedStringKey.font : font])
         
-        
-        // Buttonを生成する.
-        btnCategory = UIButton()
+        btnCategory = UIButton()// Buttonを生成する.
         
         // ボタンのサイズ
         let bcWidth: CGFloat = width.width
@@ -441,8 +405,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         scrollView.frame = CGRect(x: sPosX, y: sPosY, width: sWidth, height: sHeight)
         
-        //スクロールの跳ね返り
-        scrollView.bounces = false
+        scrollView.bounces = false//スクロールの跳ね返り
         
         //TODO:下記のスクロールバーを消す
 //        scrollView.scrollIndicatorInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
@@ -490,7 +453,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //　　　　   　スクロールオブジェクト内 カテゴリーボタン削除
 //    =====================================================
     func DeleteCategoryBtn() {
-//        btnCategory = UIButton()
         
         let subviews = btnCategory.subviews
         for subview in subviews {
@@ -503,12 +465,9 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //　　　　   　スクロールオブジェクト内 スクロールビュー削除
 //    =====================================================
     func DeleteScrollView(scv:UIScrollView) {
-        //        btnCategory = UIButton()
         scv.removeFromSuperview()
     }
 
-
-    
 //    =======================================
 //　　　　    ジェスチャーイベント(下スワイプ)
 //    =======================================
