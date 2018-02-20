@@ -13,7 +13,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     var postVeiwY :CGFloat = 0.0
     
     //【モーダルウィンドウ】パーツ
-    let textView: UITextView = UITextView()//(ModalView)UITextViewのインスタンスを生成
+    let textView: UITextView = UITextView()//(ModalView)U   ITextViewのインスタンスを生成
     @IBOutlet weak var ModalView: UIView!
     @IBOutlet weak var CreateCategoryBtn: UIButton!
     @IBOutlet weak var CustomCategoryBtn: UIButton!
@@ -78,6 +78,20 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //　　　　 カテゴリーボタンオブジェクト
 //    ==================================
     var btnCategory: UIButton!
+    
+    
+//    ==================================
+//　　　　 (選択後)カテゴリー表示オブジェクト
+//    ==================================
+    var DisplayCategoryBoard = UIView() //大枠
+    var DisplayCategory = UIView() //選択されたカテゴリーを表示
+    
+    
+    
+    
+    
+    
+    
     
     
     override func viewDidLoad() {
@@ -159,6 +173,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         ModalView.addSubview(CustomCategoryBtn)
         CreateCategoryView.addSubview(createText())
         ModalView.addSubview(CreateCategoryView)
+        self.view.bringSubview(toFront: ModalView)
         
     }
     
@@ -267,36 +282,19 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         myButton.tag = 0// ボタンにタグをつける.
         
         // イベントを追加する
-        myButton.addTarget(self, action: #selector(self.onClickMyButton(sender:)), for: .touchUpInside)
+        myButton.addTarget(self, action: #selector(self.onClickPlusButton(sender:)), for: .touchUpInside)
         return myButton
     }
-    
-    
-    
-//    ============================================
-//　　　　   アンダーバーボタンのアクション
-//    ============================================
-    //0.モーダルウィンドウ表示ボタン 1.カテゴリーボタン選択後のアクション
-    //TODO:プログラムの設計①
-    //
-    @objc func onClickMyButton(sender: UIButton) {
-        switch sender.tag {
-        case 0://モーダルウィンドウ(カテゴリー詳細)表示
-            print("case0")
-            UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {
-                self.ModalView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
-            }, completion: nil)
-            
-        case 1://カテゴリーボタンをnoteに表示
-            print("case1")
-            
-            //2.
-        default:
-            print("デフォルト")
-        }
+    //プラスボタンプッシュ時のファンクション
+    @objc func onClickPlusButton(sender: UIButton) {
+        UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {
+            self.ModalView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+        }, completion: nil)
     }
     
     
+    
+
     //TODO:test(postView)
     func CreatePostView(){
         //1.textViewの高さをずらす
@@ -324,8 +322,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         downSwipe.direction = .down
         // viewにジェスチャーを登録
         postView.addGestureRecognizer(downSwipe)
-        
-        self.view.bringSubview(toFront: postView)
+        self.view.addSubview(postView)
+//        self.view.bringSubview(toFront: postView)
     }
     
     @objc func DownSwipePostView(sender: UISwipeGestureRecognizer) {
@@ -338,17 +336,23 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    ============================================
 //　　　　   ボタン(カテゴリー選択)作成
 //    ============================================
-    private func btnCategory(inputCategory :String)->UIButton{
+    private func btnCategory(inputCategory :String , categoryId:Int)->UIButton{
         
         var text = "サンプル"
         //関数にデータが入った場合にのみ、そのデータを変数へ
         text = inputCategory
+        
+        //カテゴリーIDを取得し、tagとしてセット
+        let catId = categoryId
+        
         let font = UIFont(name: "Hiragino Kaku Gothic ProN", size: 18)
         //以下のコマンドで文字列の横幅を取得
         // width.widthでInt型でデータを取得出来る
         let width = text.size(withAttributes: [NSAttributedStringKey.font : font])
         
         btnCategory = UIButton()// Buttonを生成する.
+        //TODO:ボタンオブジェクトにカテゴリーIDを特定するキーを付けたい
+        btnCategory.tag = catId //カテゴリーIDをButtonオブジェクトのtagにセット
         
         // ボタンのサイズ
         let bcWidth: CGFloat = width.width
@@ -378,15 +382,42 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         btnCategory.setTitle(text, for: .highlighted)
         btnCategory.setTitleColor(UIColor.black, for: .highlighted)
         
-        // ボタンにタグをつける.
-        btnCategory.tag = 1
-        
         // イベントを追加する
-        btnCategory.addTarget(self, action: #selector(self.onClickMyButton(sender:)), for: .touchUpInside)
+        btnCategory.addTarget(self, action: #selector(self.onClickCategoryButton(sender:)), for: .touchUpInside)
         
-        self.view.addSubview(btnCategory)
+//        self.view.addSubview(btnCategory)
         return btnCategory
     }
+//    ============================================
+//　　　　   アンダーバーボタンのアクション
+//    ============================================
+    //TODO:プログラムの設計①
+    //
+    @objc func onClickCategoryButton(sender: UIButton) {
+        //memo:sender.tagでtagを取得可能
+        
+        //メモ欄に表示するカテゴリーのスペースを確保
+        UIView.animate(withDuration: 0.3, delay: 0.0,  animations: {
+            self.postView.frame = CGRect(x: 0, y: 120, width: self.view.bounds.width, height: self.view.bounds.height)
+        }, completion: nil)
+        
+        //選択されたカテゴリー情報を取得
+        let readCoreData = ingCoreData()
+        let categoryData = readCoreData.readCategory(id: sender.tag)
+        
+        //postViewの移動したスペースに大枠のViewを作成
+//        var
+        
+        //その中に選択されたカテゴリー表示オブジェクトを作成
+        
+        
+    }
+
+    
+    
+    
+    
+    
     
     
 //    ==================================
@@ -423,6 +454,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //　　　　  スクロールオブジェクトへカテゴリーボタン追加機能
 //    ========================================================
     //スクロールバーオブジェクトにカテゴリーボタンを追加
+    //TODO:ボタンオブジェクトにカテゴリー名もしくは、カテゴリーIDを追加
     func addBtnCategory(){
         var scWidth = 0//コンテンツの中身のwidth
         //カテゴリーボタンの初期化
@@ -435,7 +467,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         for inputCategory in inputCategories{
             //カテゴリーオブジェクトからカテゴリー名だけ取得
             let btnName = inputCategory["name"] as! String
-            let catBtn =  btnCategory(inputCategory: btnName)//返り値がボタンオブジェクト
+            let btnId = inputCategory["id"] as! Int
+            let catBtn =  btnCategory(inputCategory: btnName, categoryId: btnId)//返り値がボタンオブジェクト
             
             //オブジェクトの重複防止
             catBtn.frame.origin = CGPoint(x: scWidth, y: 0)
@@ -453,7 +486,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //　　　　   　スクロールオブジェクト内 カテゴリーボタン削除
 //    =====================================================
     func DeleteCategoryBtn() {
-        
+
         let subviews = btnCategory.subviews
         for subview in subviews {
             subview.removeFromSuperview()
