@@ -21,17 +21,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pAv-Nx-ghn">
-                                <rect key="frame" x="16" y="20" width="343" height="639"/>
-                                <color key="backgroundColor" red="0.98102861642837524" green="0.98101013898849487" blue="0.97380751371383667" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <gestureRecognizers/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="6oI-JU-Xm9" appends="YES" id="MeO-JZ-7hG"/>
-                                </connections>
-                            </textView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PGB-4v-vDp">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -105,12 +94,6 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.98102861642837524" green="0.98101013898849487" blue="0.97380751371383667" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <constraints>
-                            <constraint firstItem="pAv-Nx-ghn" firstAttribute="top" secondItem="mqe-YW-kRe" secondAttribute="bottom" id="253-L0-BLp"/>
-                            <constraint firstItem="pAv-Nx-ghn" firstAttribute="leading" secondItem="5CB-YG-s2x" secondAttribute="leadingMargin" id="7eX-Qf-bVm"/>
-                            <constraint firstItem="CBz-W8-Mkq" firstAttribute="top" secondItem="pAv-Nx-ghn" secondAttribute="bottom" constant="8" symbolic="YES" id="DYf-JV-Zfd"/>
-                            <constraint firstItem="pAv-Nx-ghn" firstAttribute="trailing" secondItem="5CB-YG-s2x" secondAttribute="trailingMargin" id="VuB-zy-Zaf"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="CreateCategoryBtn" destination="GyV-I1-IGq" id="mqM-80-Qci"/>
@@ -119,7 +102,6 @@
                         <outlet property="CustomCategoryBtn" destination="FwN-GG-R3s" id="Ng6-VU-Bbj"/>
                         <outlet property="CustomCategoryView" destination="sF4-Xk-3UW" id="3fT-Um-uca"/>
                         <outlet property="ModalView" destination="PGB-4v-vDp" id="9wC-aJ-r9G"/>
-                        <outlet property="postView" destination="pAv-Nx-ghn" id="BSh-tu-Xdf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HI3-lT-hOP" userLabel="First Responder" sceneMemberID="firstResponder"/>

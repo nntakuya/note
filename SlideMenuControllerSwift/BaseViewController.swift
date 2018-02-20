@@ -1,26 +1,19 @@
-//  BaseViewController.swift
-//  SlideMenuControllerSwift
 
 //  Created by 仲松拓哉 on 04/02/2018.
 //
-
-//TODO
-//1.アンダーバーの横幅をカテゴリー追加時にする
-//2.
-
 
 import UIKit
 import CoreData
 
 class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelegate{
     
-    //デフォルトのメモのTextView
-    @IBOutlet weak var postView: UITextView!
-    //(ModalView)UITextViewのインスタンスを生成
-    let textView: UITextView = UITextView()
-    
+    //メインのメモ機能
+    var postView: UITextView = UITextView()
+    var postViewX :CGFloat = 0.0
+    var postVeiwY :CGFloat = 0.0
     
     //【モーダルウィンドウ】パーツ
+    let textView: UITextView = UITextView()//(ModalView)UITextViewのインスタンスを生成
     @IBOutlet weak var ModalView: UIView!
     @IBOutlet weak var CreateCategoryBtn: UIButton!
     @IBOutlet weak var CustomCategoryBtn: UIButton!
@@ -36,8 +29,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     var categoryInfo:[[String:Any]] = []//表示したいセルの配列を初期化
     var selectedRowIndex = -1//何行目か保存されていないときを見分けるための-1を代入
     var categoryId = 0//カテゴリーIDのデフォルト値（カテゴリー：All）を "0" とする
-    
-    
     
 //    =========================================
 //　　　　   モーダルウィンドウボタン
@@ -57,13 +48,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         }, completion: nil)
         
     }
-    
-    
-//    ==================================
-//　　　　   カテゴリーオブジェクト
-//    ==================================
-//    var categoryDatas = ingCoreData()
-    
+
 //    ==================================
 //　　　　    画像オブジェクト
 //    ==================================
@@ -97,25 +82,25 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        CreatePostView()//メインのメモ機能
+    
         //viewTable カテゴリー一覧の並び替え
         CusCategoryTable.reorder.delegate = self as? TableViewReorderDelegate
-        //ModalViewを見えない場所にセットする
-        cretaModalWindow()
-        
-        //(test)ModalView【custom】
-        customModalWindow()
+        //ModalView
+        cretaModalWindow()//【create】
+        customModalWindow()//【custom】
         addListCategory()//CoreDataからテーブルデータを取得
         
-        //以下ジェスチャーでWindow閉じるイベント
-        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipeView(sender:)))  //Swift3
-        // スワイプの方向を指定
-        downSwipe.direction = .down
-        // viewにジェスチャーを登録
-        CustomCategoryView.addGestureRecognizer(downSwipe)
         
-        
-        
+        //TODO:おそらく要らないコードなので、コメントアウト
+//        //以下ジェスチャーでWindow閉じるイベント
+//        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipeView(sender:)))  //Swift3
+//        // スワイプの方向を指定
+//        downSwipe.direction = .down
+//        // viewにジェスチャーを登録
+//        CustomCategoryView.addGestureRecognizer(downSwipe)
+//
         
         //タブバーの幅取得
         tabBarWidth = self.view.bounds.width
@@ -124,29 +109,10 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         //デバッグ用
         read()
         
-        //サンプルテキスト作成
-        postView.text = "sample text"
-        
-        //メモメニュー作成
-        //行間指定
-        let style = NSMutableParagraphStyle()
-        style.lineSpacing = 2
-        let attributes = [NSAttributedStringKey.paragraphStyle : style]
-        postView.attributedText = NSAttributedString(string: postView.text,attributes: attributes)
-        //表示テキストのフォントサイズを変更
-        postView.font = UIFont.systemFont(ofSize: 16)
-
-        //keyboard上の"Done"ボタンセット
-        //"Main"はデフォルト画面のtextview画面
-        setInputAccessoryView(viewName: "Main")
-        
         //アンダーバー作成
         createTabBar()
         //カテゴリーボタンの追加
         addBtnCategory()
-        
-//        //カテゴリーボタン削除
-//        DeleteScrollView(scv: scrollView)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -336,30 +302,71 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
     
 //    ============================================
-//　　　　   ボタン【+】プッシュ後のアクション
+//　　　　   アンダーバーボタンのアクション
 //    ============================================
+    //0.モーダルウィンドウ表示ボタン 1.カテゴリーボタン選択後のアクション
+    //TODO:プログラムの設計①
+    //
     @objc func onClickMyButton(sender: UIButton) {
-//      ------------モーダルウィンドウ-----------
-        
         switch sender.tag {
-        case 0:
-            
-//            self.blueView.center = self.view.center
+        case 0://モーダルウィンドウ(カテゴリー詳細)表示
+            print("case0")
             UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {
                 self.ModalView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
             }, completion: nil)
             
+        case 1://カテゴリーボタンをnoteに表示
+            print("case1")
             
-            //モーダルウィンドウの出し方2
-//            let second = SecondViewController()
-//            let nav = UINavigationController(rootViewController: second)
-//            self.present(nav, animated: true, completion: nil)
-        case 1:
-            print("1")
+            
+            
+            //2.
         default:
             print("デフォルト")
         }
     }
+    
+    
+    //TODO:test(postView)
+    func CreatePostView(){
+        //1.textViewの高さをずらす
+        postViewX = 0
+//        postVeiwY = 0
+        postVeiwY = 70
+        postView.frame = CGRect(x: postViewX, y: postVeiwY, width: self.view.bounds.width, height: self.view.bounds.height)
+        
+        //サンプルテキスト作成
+        postView.text = "sample text"
+        
+        //メモメニュー作成
+        //行間指定
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = 2
+        let attributes = [NSAttributedStringKey.paragraphStyle : style]
+        postView.attributedText = NSAttributedString(string: postView.text,attributes: attributes)
+        //表示テキストのフォントサイズを変更
+        postView.font = UIFont.systemFont(ofSize: 18)
+        
+        //keyboard上の"Done"ボタンセット
+        //"Main"はデフォルト画面のtextview画面
+        setInputAccessoryView(viewName: "Main")
+        
+        
+        //スワイプジェスチャー
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipePostView(sender:)))  //Swift3
+        // スワイプの方向を指定
+        downSwipe.direction = .down
+        // viewにジェスチャーを登録
+        postView.addGestureRecognizer(downSwipe)
+        
+        self.view.addSubview(postView)
+    }
+    
+    @objc func DownSwipePostView(sender: UISwipeGestureRecognizer) {
+        //キーボード閉じる
+        postView.resignFirstResponder()
+    }
+    
     
     
 //    ============================================
@@ -500,22 +507,13 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         scv.removeFromSuperview()
     }
 
-//    =======================================
-//　　　　    スクロールイベント（未定義）
-//    =======================================
-    /* 以下は UITextFieldDelegate のメソッド */
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // スクロール中の処理
-    }
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        // ドラッグ開始時の処理
-    }
-    
+
     
 //    =======================================
 //　　　　    ジェスチャーイベント(下スワイプ)
 //    =======================================
+    //TODO:これを使用する
+    
     @IBAction func keyClose(_ sender: UISwipeGestureRecognizer) {
         postView.resignFirstResponder()
     }
