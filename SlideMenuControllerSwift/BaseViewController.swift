@@ -85,13 +85,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    ==================================
     var DisplayCategoryBoard = UIView() //大枠
     var DisplayCategory = UIView() //選択されたカテゴリーを表示
-    
-    
-    
-    
-    
-    
-    
+    var DisplayLabel = UILabel() //選択されたカテゴリー名を表示
     
     
     override func viewDidLoad() {
@@ -389,15 +383,13 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         return btnCategory
     }
 //    ============================================
-//　　　　   アンダーバーボタンのアクション
+//　　　　   カテゴリーボタン選択アクション
 //    ============================================
-    //TODO:プログラムの設計①
-    //
     @objc func onClickCategoryButton(sender: UIButton) {
         //memo:sender.tagでtagを取得可能
         
         //メモ欄に表示するカテゴリーのスペースを確保
-        UIView.animate(withDuration: 0.3, delay: 0.0,  animations: {
+        UIView.animate(withDuration: 0.0, delay: 0.0,  animations: {
             self.postView.frame = CGRect(x: 0, y: 120, width: self.view.bounds.width, height: self.view.bounds.height)
         }, completion: nil)
         
@@ -406,17 +398,51 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         let categoryData = readCoreData.readCategory(id: sender.tag)
         
         //postViewの移動したスペースに大枠のViewを作成
-//        var
+        DeleteUIView(scv: DisplayCategoryBoard)//カテゴリー表示欄の初期化
+        DisplayCategoryBoard = UIView()//初期化
+        DisplayCategory = UIView()//初期化
+        DisplayLabel = UILabel()//初期化
         
+        //TODO:アニメーション？
+        DisplayCategoryBoard.frame = CGRect(x: 0, y: 67, width: self.view.bounds.width, height: 50)
+        DisplayCategoryBoard.backgroundColor = UIColor.gray
+
         //その中に選択されたカテゴリー表示オブジェクトを作成
         
         
+        let catgoryName = categoryData["name"] as! String
+        DisplayLabel.text = catgoryName
+        DisplayLabel.textColor = UIColor.white
+        
+        let font = UIFont(name: "Hiragino Kaku Gothic ProN", size: 18)
+        //以下のコマンドで文字列の横幅を取得
+        // width.widthでInt型でデータを取得出来る
+        let catwidth = catgoryName.size(withAttributes: [NSAttributedStringKey.font : font as Any])
+        
+        
+        DisplayLabel.frame = CGRect(x:DisplayCategory.bounds.height/2 + 4, y:DisplayCategory.bounds.width/2,width: catwidth.width,height: 50)
+        
+        // ボタンのX,Y座標
+        let catX: CGFloat = 10
+        let catY: CGFloat = 0
+        // ボタンのサイズ
+        let catWidth: CGFloat = catwidth.width
+        let catHeight: CGFloat = 50
+        
+        DisplayCategory.layer.masksToBounds = true// ボタンの枠を丸くする.
+        DisplayCategory.layer.cornerRadius = 20.0// コーナーの半径を設定する.
+        
+        DisplayCategory.frame = CGRect(x: catX, y: catY, width: catWidth, height: catHeight)
+        DisplayCategory.backgroundColor = UIColor.blue
+        
+        DisplayCategory.addSubview(DisplayLabel)
+        DisplayCategoryBoard.addSubview(DisplayCategory)
+        self.view.addSubview(DisplayCategoryBoard)
+        
+        //インサートするカテゴリーを更新
+        categoryId = categoryData["id"] as! Int
     }
 
-    
-    
-    
-    
     
     
     
@@ -498,6 +524,13 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //　　　　   　スクロールオブジェクト内 スクロールビュー削除
 //    =====================================================
     func DeleteScrollView(scv:UIScrollView) {
+        scv.removeFromSuperview()
+    }
+    
+//    =====================================================
+//　　　　   　カテゴリー表示欄削除
+//    =====================================================
+    func DeleteUIView(scv:UIView) {
         scv.removeFromSuperview()
     }
 
@@ -634,7 +667,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         DeleteScrollView(scv: scrollView)
         scrollView = UIScrollView()
         viewScroll()
-        //        //カテゴリーボタンの追加
+        //カテゴリーボタンの追加
         addBtnCategory()
         
         textView.resignFirstResponder()//キーボードを閉じる
