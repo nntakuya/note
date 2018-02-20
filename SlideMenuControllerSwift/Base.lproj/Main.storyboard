@@ -229,7 +229,7 @@
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
                         <outlet property="tableView" destination="tZ8-EX-Dgz" id="Q4I-bN-BsR"/>
-                        <segue destination="9pR-3M-7B7" kind="show" id="WmM-QC-tMx"/>
+                        <segue destination="9pR-3M-7B7" kind="show" identifier="OthersViewController" id="WmM-QC-tMx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JrB-Wy-sfE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -461,7 +461,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="faq-yo-puq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1471" y="-538"/>
+            <point key="canvasLocation" x="1369" y="-538"/>
         </scene>
         <!--Go View Controller-->
         <scene sceneID="adq-KJ-u5Z">

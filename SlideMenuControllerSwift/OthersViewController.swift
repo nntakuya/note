@@ -95,6 +95,12 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
         
+        //サイドバーで指定されたcategoryIdをグローバル変数から取得
+         let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        categoryId = appDelegate.categoryId
+        
+        print(categoryId)
+        
         //配列を初期化
         artInfo = []
         read()

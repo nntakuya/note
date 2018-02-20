@@ -159,18 +159,24 @@ extension LeftViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.changeViewController(num: indexPath.row)
-        selectedCateogoryId = menus[indexPath.row]["id"] as! Int
+        //グローバル変数を使用
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        //グローバル変数に指定されたcategoryIdをセット
+        appDelegate.categoryId = menus[indexPath.row]["id"] as! Int
 
-        performSegue(withIdentifier: "OthersViewController", sender: nil)
+        self.changeViewController(num: indexPath.row)
+        
+        //        selectedCateogoryId = menus[indexPath.row]["id"] as! Int
+//        performSegue(withIdentifier: "OthersViewController", sender: nil)
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let dvc:OthersViewController = segue.destination as! OthersViewController
-        
-        //OthersViewControllerに選択されたcategoryIdをセット
-        dvc.categoryId = selectedCateogoryId
-        
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let dvc:OthersViewController = segue.destination as! OthersViewController
+//
+//        //OthersViewControllerに選択されたcategoryIdをセット
+//        dvc.categoryId = selectedCateogoryId
+//
+//    }
+
 }

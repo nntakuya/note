@@ -12,8 +12,11 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    //(疑問)以下のコードについて調べる
     var window: UIWindow?
+    
+    //サイドバーの遷移の際、カテゴリーIDを指定
+    var categoryId = Int()
+    
     
     fileprivate func createMenuView() {
         
