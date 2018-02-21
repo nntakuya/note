@@ -439,6 +439,7 @@
                     </view>
                     <connections>
                         <outlet property="myTableView" destination="6b3-MO-Kqf" id="gYz-MF-gDi"/>
+                        <segue destination="wfr-pz-swj" kind="show" identifier="categoryDetail" id="Inp-Xj-V6K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="faq-yo-puq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -521,7 +522,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jcg-mn-eB8" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="down" id="0Vv-sP-w5T"/>
             </objects>
-            <point key="canvasLocation" x="1249" y="2239"/>
+            <point key="canvasLocation" x="2319" y="-538"/>
         </scene>
         <!--Non Menu Controller-->
         <scene sceneID="d7w-0k-xlq">

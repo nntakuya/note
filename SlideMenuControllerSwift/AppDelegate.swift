@@ -1,9 +1,5 @@
-    //
 //  AppDelegate.swift
 //  test11
-//
-//  Created by Yuji Hato on 4/20/15.
-//  Copyright (c) 2015 Yuji Hato. All rights reserved.
 //
 
 import UIKit
