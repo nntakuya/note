@@ -42,15 +42,6 @@ class AllViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     }
     
     
-    /////////////////// スワイプ /////////////////////////////
-    //セルのスワイプ表示（表示）
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            artInfo.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//        }
-//    }
-
     //セルのスワイプ表示（デザイン）
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (action, index) -> Void in
@@ -94,44 +85,48 @@ class AllViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         self.setNavigationBarItem()
         
         //配列を初期化
-        artInfo = []
-        read()//デバッグ用
+//        artInfo = []
+        //CoreDataからArticleデータ全件取得
+        let readArticle = ArticleCoreData()
+        artInfo =  readArticle.readArticleAll() as! [[String : Any]]
+        
+//        read()//デバッグ用
         myTableView.reloadData()
     }
     
     ///////////////////// CoreData操作 ////////////////////////////
-    func read(){
-        //AppDelegateを使う用意をする
-        let appD: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        let viewContext = appD.persistentContainer.viewContext
-        
-        //どのエンティティを操作するためのオブジェクトを作成
-        let query: NSFetchRequest<Article> = Article.fetchRequest()
-        
-        //絞り込み検索
-        //カテゴリーIDをキーにCoreDataを検索
-        let namePredicte = NSPredicate(format: "category_id = %d", categoryId)
-        query.predicate = namePredicte
-        
-        do{
-            //データを一括取得
-            let fetchResult = try viewContext.fetch(query)
-
-            //データの取得
-            for result: AnyObject in fetchResult{
-                let content: String? = result.value(forKey: "content") as? String
-                let saveDate: Date? =  result.value(forKey: "saveDate") as? Date
-                let category: Int64 = (result.value(forKey: "category_id") as? Int64)!
-                
-                let dic = ["content":content!,"saveDate":saveDate!,"categoryId":category] as [String : Any]
-                
-                artInfo.append(dic)
-            }
-        }catch{
-            print("エラーだよ")
-        }
-    }
+//    func read(){
+//        //AppDelegateを使う用意をする
+//        let appD: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+//
+//        let viewContext = appD.persistentContainer.viewContext
+//
+//        //どのエンティティを操作するためのオブジェクトを作成
+//        let query: NSFetchRequest<Article> = Article.fetchRequest()
+//
+//        //絞り込み検索
+//        //カテゴリーIDをキーにCoreDataを検索
+//        let namePredicte = NSPredicate(format: "category_id = %d", categoryId)
+//        query.predicate = namePredicte
+//
+//        do{
+//            //データを一括取得
+//            let fetchResult = try viewContext.fetch(query)
+//
+//            //データの取得
+//            for result: AnyObject in fetchResult{
+//                let content: String? = result.value(forKey: "content") as? String
+//                let saveDate: Date? =  result.value(forKey: "saveDate") as? Date
+//                let category: Int64 = (result.value(forKey: "category_id") as? Int64)!
+//
+//                let dic = ["content":content!,"saveDate":saveDate!,"categoryId":category] as [String : Any]
+//
+//                artInfo.append(dic)
+//            }
+//        }catch{
+//            print("エラーだよ")
+//        }
+//    }
     
     
     //削除機能

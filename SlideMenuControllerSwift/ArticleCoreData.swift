@@ -83,6 +83,43 @@ class ArticleCoreData {
     }
     
     
+    //==================================
+    //           Read All
+    //==================================
+    //既に存在するデータの読み込み処理
+    func readArticleAll() -> [NSDictionary] {
+        //エンティティを操作するためのオブジェクトを作成する
+        let viewContext = appDalegate.persistentContainer.viewContext
+        
+        //エンティティオブジェクトを作成する
+        let myEntity = NSEntityDescription.entity(forEntityName: "Article", in: viewContext)
+        
+        let query:NSFetchRequest<Article> =  Article.fetchRequest()
+        query.entity = myEntity
+        
+        //取り出しの順番
+        //ascendind:true 昇順 古い順、false 降順　新しい順
+        let sortDescripter = NSSortDescriptor(key: "saveDate", ascending: true)
+        query.sortDescriptors = [sortDescripter]
+        
+        //データを一括取得
+        do {
+            let fetchResults = try viewContext.fetch(query)
+            if( fetchResults.count != 0) {
+                for fetch:AnyObject in fetchResults {
+                    let content:String = (fetch.value(forKey: "content") as? String)!
+                    let category_id:Int = (fetch.value(forKey: "category_id") as? Int)!
+                    let saveData:NSDate = (fetch.value(forKey: "saveData") as? NSDate)!
+                    let dic =  ["content":content,"category_id":category_id,"saveData":saveData] as [String : Any]
+                    
+                    dics.append(dic as NSDictionary)
+                }
+            }
+        } catch  {
+            print(error)
+        }
+        return dics
+    }
     
     
     

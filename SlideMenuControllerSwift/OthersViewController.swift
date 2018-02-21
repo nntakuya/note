@@ -13,7 +13,6 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
     //カテゴリーがALLだと仮定
     var categoryId = 0
     
-    /////////////////// テーブルについて /////////////////////////////
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return artInfo.count
     }
@@ -121,12 +120,10 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
             let fetchResult = try viewContext.fetch(query)
 
             //データの取得
-            //            var i:Int = 0
             for result: AnyObject in fetchResult{
                 let content: String? = result.value(forKey: "content") as? String
                 let saveDate: Date? =  result.value(forKey: "saveDate") as? Date
                 let category: Int64 = (result.value(forKey: "category_id") as? Int64)!
-
 
                 let dic = ["content":content!,"saveDate":saveDate!,"categoryId":category] as [String : Any]
 
@@ -135,6 +132,6 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
         }catch{
             print("エラーだよ")
         }
-    }    
+    }
 }
 
