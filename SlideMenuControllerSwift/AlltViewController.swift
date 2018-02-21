@@ -85,48 +85,42 @@ class AllViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         self.setNavigationBarItem()
         
         //配列を初期化
-//        artInfo = []
+        artInfo = []
         //CoreDataからArticleデータ全件取得
-        let readArticle = ArticleCoreData()
-        artInfo =  readArticle.readArticleAll() as! [[String : Any]]
+//        let readArticle = ArticleCoreData()
+//        artInfo =  readArticle.readArticleAll() as! [[String : Any]]
         
-//        read()//デバッグ用
+        read()
         myTableView.reloadData()
     }
     
     ///////////////////// CoreData操作 ////////////////////////////
-//    func read(){
-//        //AppDelegateを使う用意をする
-//        let appD: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-//
-//        let viewContext = appD.persistentContainer.viewContext
-//
-//        //どのエンティティを操作するためのオブジェクトを作成
-//        let query: NSFetchRequest<Article> = Article.fetchRequest()
-//
-//        //絞り込み検索
-//        //カテゴリーIDをキーにCoreDataを検索
-//        let namePredicte = NSPredicate(format: "category_id = %d", categoryId)
-//        query.predicate = namePredicte
-//
-//        do{
-//            //データを一括取得
-//            let fetchResult = try viewContext.fetch(query)
-//
-//            //データの取得
-//            for result: AnyObject in fetchResult{
-//                let content: String? = result.value(forKey: "content") as? String
-//                let saveDate: Date? =  result.value(forKey: "saveDate") as? Date
-//                let category: Int64 = (result.value(forKey: "category_id") as? Int64)!
-//
-//                let dic = ["content":content!,"saveDate":saveDate!,"categoryId":category] as [String : Any]
-//
-//                artInfo.append(dic)
-//            }
-//        }catch{
-//            print("エラーだよ")
-//        }
-//    }
+    func read(){
+        //AppDelegateを使う用意をする
+        let appD: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+
+        let viewContext = appD.persistentContainer.viewContext
+
+        //どのエンティティを操作するためのオブジェクトを作成
+        let query: NSFetchRequest<Article> = Article.fetchRequest()
+
+        do{
+            //データを一括取得
+            let fetchResult = try viewContext.fetch(query)
+
+            //データの取得
+            for result: AnyObject in fetchResult{
+                let content: String? = result.value(forKey: "content") as? String
+                let saveDate: Date? =  result.value(forKey: "saveDate") as? Date
+                let category: Int64 = (result.value(forKey: "category_id") as? Int64)!
+
+                let dic = ["content":content!,"saveDate":saveDate!,"categoryId":category] as [String : Any]
+                artInfo.append(dic)
+            }
+        }catch{
+            print("エラーだよ")
+        }
+    }
     
     
     //削除機能

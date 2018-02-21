@@ -87,39 +87,32 @@ class ArticleCoreData {
     //           Read All
     //==================================
     //既に存在するデータの読み込み処理
-    func readArticleAll() -> [NSDictionary] {
-        //エンティティを操作するためのオブジェクトを作成する
-        let viewContext = appDalegate.persistentContainer.viewContext
-        
-        //エンティティオブジェクトを作成する
-        let myEntity = NSEntityDescription.entity(forEntityName: "Article", in: viewContext)
-        
-        let query:NSFetchRequest<Article> =  Article.fetchRequest()
-        query.entity = myEntity
-        
-        //取り出しの順番
-        //ascendind:true 昇順 古い順、false 降順　新しい順
-        let sortDescripter = NSSortDescriptor(key: "saveDate", ascending: true)
-        query.sortDescriptors = [sortDescripter]
-        
-        //データを一括取得
-        do {
-            let fetchResults = try viewContext.fetch(query)
-            if( fetchResults.count != 0) {
-                for fetch:AnyObject in fetchResults {
-                    let content:String = (fetch.value(forKey: "content") as? String)!
-                    let category_id:Int = (fetch.value(forKey: "category_id") as? Int)!
-                    let saveData:NSDate = (fetch.value(forKey: "saveData") as? NSDate)!
-                    let dic =  ["content":content,"category_id":category_id,"saveData":saveData] as [String : Any]
-                    
-                    dics.append(dic as NSDictionary)
-                }
-            }
-        } catch  {
-            print(error)
-        }
-        return dics
-    }
+//    func read(){
+//        //AppDelegateを使う用意をする
+//        let appD: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+//
+//        let viewContext = appD.persistentContainer.viewContext
+//
+//        //どのエンティティを操作するためのオブジェクトを作成
+//        let query: NSFetchRequest<Article> = Article.fetchRequest()
+//
+//        do{
+//            //データを一括取得
+//            let fetchResult = try viewContext.fetch(query)
+//
+//            //データの取得
+//            for result: AnyObject in fetchResult{
+//                let content: String? = result.value(forKey: "content") as? String
+//                let saveDate: Date? =  result.value(forKey: "saveDate") as? Date
+//                let category: Int64 = (result.value(forKey: "category_id") as? Int64)!
+//
+//                let dic = ["content":content!,"saveDate":saveDate!,"categoryId":category] as [String : Any]
+//                artInfo.append(dic)
+//            }
+//        }catch{
+//            print("エラーだよ")
+//        }
+//    }
     
     
     
