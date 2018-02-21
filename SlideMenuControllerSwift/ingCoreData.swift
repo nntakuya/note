@@ -349,15 +349,16 @@ class ingCoreData {
     
     func insertCategory(name:String) -> Int {
         //新しいidとsort_idをセット
-        let newid:Int = max_id + 1
+        var newid:Int = max_id + 1
         let new_sort_id:Int = max_sort_id + 1
+        
+        //カテゴリーIDのスタートを1にする
+        if newid == 0 {
+            newid += 1
+        }
         
         //maxNumは初期値でセットした値
         createRecord(id: newid, name: name, sort_id: new_sort_id)
-        
-//        if(idCount > maxNum ) {
-//            deleteRireki(id: min_id)
-//        }
         
         return newid
     }
