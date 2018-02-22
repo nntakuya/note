@@ -93,6 +93,7 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
 
     
     //セルのスワイプ表示（デザイン）
+    //TODO:カテゴリーIDを削除時、それに依存する記事も同時に削除
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (action, index) -> Void in
             
@@ -100,8 +101,14 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
             self.selectedRowIndex = indexPath.row
             //TODO:確認事項　下記コードはindexPath.rowで要素を指定した方が良いのか？
             let id = self.categoryInfo[self.selectedRowIndex]["id"] as! Int
-            let CoreData = ingCoreData()
-            CoreData.deleteCategory(id: id)
+            //選択されたカテゴリーを削除
+            let CoreDataCategory = ingCoreData()
+            CoreDataCategory.deleteCategory(id: id)
+            
+            
+            //選択されたカテゴリーに依存する記事を全件削除
+            let CoreDataArticle = ArticleCoreData()
+            CoreDataArticle.deleteArticle(category_id: id)
             
             //ビューから指定されたセルを削除
             self.categoryInfo.remove(at: indexPath.row)
@@ -112,6 +119,8 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
         return [deleteButton]
     }
 }
+
+
 
 //セルの並び替え処理
 //方針: 配列の要素のデータを個別にアップデートする設計にする

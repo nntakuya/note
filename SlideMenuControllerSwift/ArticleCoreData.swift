@@ -83,6 +83,11 @@ class ArticleCoreData {
     }
     
     
+    
+    
+    
+    
+    
     //==================================
     //           Read All
     //==================================
@@ -114,6 +119,45 @@ class ArticleCoreData {
 //        }
 //    }
     
+    
+    
+//==============================
+// カテゴリーIDをkeyに記事全件削除
+//==============================
+    func deleteArticle(category_id:Int) {
+        //エンティティを操作するためのオブジェクトを作成する
+        let viewContext = appDalegate.persistentContainer.viewContext
+        
+        //どのエンティティからデータを取得してくるか設定（ToDoエンティティ）
+//        let query:NSFetchRequest<Category> =  Category.fetchRequest()
+        let query: NSFetchRequest<Article> = Article.fetchRequest()
+        //===== 絞り込み =====
+        let idPredicate = NSPredicate(format: "category_id = %d", category_id)
+        query.predicate = idPredicate
+        print(category_id)
+        
+        do {
+            //削除するデータを取得
+            let fetchResults = try viewContext.fetch(query)
+            
+            //１行ずつ削除
+            
+            for fetch:AnyObject in fetchResults{
+                //削除処理を行うために型変換
+                let record = fetch as! NSManagedObject  // 扱いやすいように型変換
+                viewContext.delete(record)
+                
+            }
+            //削除した状態を保存
+            try viewContext.save()
+//            idCount = idCount - 1
+            
+            
+        } catch  {
+            print("削除するレコードなかったよ")
+            
+        }
+    }
     
     
     
