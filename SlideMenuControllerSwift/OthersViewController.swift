@@ -93,7 +93,6 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
         //配列を初期化
         artInfo = []
         read()
-
         
         myTableView.reloadData()
     }

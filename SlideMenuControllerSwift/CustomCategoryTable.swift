@@ -1,13 +1,10 @@
-//
 //  CustomCategoryTable.swift
 //  SlideMenuControllerSwift
-//
 //  Created by 仲松拓哉 on 14/02/2018.
 
 
 import Foundation
 import UIKit
-
 
 class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
     //上記のプロトコル(UITableViewCell)でCellのデリゲートをしているので、
@@ -15,7 +12,6 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
     @IBOutlet weak var CategoryCell: UIView!
     @IBOutlet weak var CategoryTextField: UITextField!
     var id:Int!
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,7 +25,7 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
     {
         //キーボードを閉じる。
         CategoryTextField.resignFirstResponder()
-        
+
         updateCategoryName()//カテゴリー名を更新
         
         return true
@@ -63,7 +59,9 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
     
     //テーブルの数をカウント
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return categoryInfo.count
+        
     }
     
     //セルに文字列を表示
@@ -73,10 +71,14 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
             return spacer
         }
         
+
+        
         //文字列を表示するセルの取得
         //以下 "CustomTableViewCell" はテスト用にセット
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
-
+        
+        cell.selectionStyle = .none//選択時ハイライト無効
+        
         //category内容編集するためにidプロパティを更新
         cell.id = categoryInfo[indexPath.row]["id"] as? Int
         
@@ -99,18 +101,15 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
 
     
     //セルのスワイプ表示（デザイン）
-    //TODO:カテゴリーIDを削除時、それに依存する記事も同時に削除
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (action, index) -> Void in
             
             //指定されたIDのメモデータをCoreDataから削除
             self.selectedRowIndex = indexPath.row
-            //TODO:確認事項　下記コードはindexPath.rowで要素を指定した方が良いのか？
             let id = self.categoryInfo[self.selectedRowIndex]["id"] as! Int
             //選択されたカテゴリーを削除
             let CoreDataCategory = ingCoreData()
             CoreDataCategory.deleteCategory(id: id)
-            
             
             //選択されたカテゴリーに依存する記事を全件削除
             let CoreDataArticle = ArticleCoreData()
@@ -132,11 +131,6 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
 //方針: 配列の要素のデータを個別にアップデートする設計にする
 extension BaseViewController: TableViewReorderDelegate {
     func tableView(_ tableView: UITableView, reorderRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        // Update data model
-        
-        //必要な作業
-        //全体の配列、配列の削除処理(remove)、配列の追加処理(insert)
-        
         //1. 全体の列のデータを取得(viewdidload)で可
         let category = categoryInfo[sourceIndexPath.row]
         

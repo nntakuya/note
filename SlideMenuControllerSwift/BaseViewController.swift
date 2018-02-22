@@ -125,6 +125,13 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         viewScroll()
 //      カテゴリーボタンの追加
         addBtnCategory()
+        
+        
+        
+        if let indexPathForSelectedRow = CusCategoryTable.indexPathForSelectedRow { //ハイライト解除
+            CusCategoryTable.deselectRow(at: indexPathForSelectedRow, animated: true)
+        }
+
     }
 
   
