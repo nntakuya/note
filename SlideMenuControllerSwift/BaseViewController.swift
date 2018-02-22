@@ -50,14 +50,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     }
 
 //    ==================================
-//　　　　    画像オブジェクト
-//    ==================================
-    var tabBarWidth: CGFloat!
-    var tabBarHeight: CGFloat!
-    var screenWidth:CGFloat!
-    var screenHeight:CGFloat!
-    
-//    ==================================
 //　　　　 アンダーバーオブジェクト
 //    ==================================
     var TestView = UIView()
@@ -79,7 +71,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    ==================================
     var btnCategory: UIButton!
     
-    
 //    ==================================
 //　　　　 (選択後)カテゴリー表示オブジェクト
 //    ==================================
@@ -88,31 +79,13 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     var DisplayLabel = UILabel() //選択されたカテゴリー名を表示
     
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         CreatePostView()//メインのメモ機能
-    
-        //viewTable カテゴリー一覧の並び替え
-        CusCategoryTable.reorder.delegate = self as? TableViewReorderDelegate
-        //ModalView
-        cretaModalWindow()//【create】
-        customModalWindow()//【custom】
-        addListCategory()//CoreDataからテーブルデータを取得
-        
-        
-        //TODO:おそらく要らないコードなので、コメントアウト
-//        //以下ジェスチャーでWindow閉じるイベント
-//        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipeView(sender:)))  //Swift3
-//        // スワイプの方向を指定
-//        downSwipe.direction = .down
-//        // viewにジェスチャーを登録
-//        CustomCategoryView.addGestureRecognizer(downSwipe)
-//
-        
-        //タブバーの幅取得
-        tabBarWidth = self.view.bounds.width
-        tabBarHeight = self.view.bounds.height / 5
         
         //デバッグ用
         read()
@@ -121,6 +94,14 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         createTabBar()
         //カテゴリーボタンの追加
         addBtnCategory()
+        
+        //viewTable カテゴリー一覧の並び替え
+        CusCategoryTable.reorder.delegate = self as? TableViewReorderDelegate
+        //【ModalView】
+        cretaModalWindow()//create
+        customModalWindow()//custom
+        addListCategory()//CoreDataからテーブルデータを取得
+        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -146,6 +127,14 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     }
 
   
+    
+    
+    
+    
+    
+    
+    
+    
 //    ==================================
 //　　　　 モーダルウィンドウ作成(create)
 //    ==================================
