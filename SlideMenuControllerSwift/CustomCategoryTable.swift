@@ -52,9 +52,15 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
 
 
 extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
-//    ==========================
-//　　　　  　テーブル作成
-//    ==========================
+
+    //テーブルレイアウト調整
+    func AjustTableLayout(){
+        cuWidth = self.view.bounds.width
+        cuHeight = self.view.bounds.height - 150
+        CusCategoryTable.frame = CGRect(x: 0, y: 0, width: cuWidth, height: cuHeight)
+        
+    }
+    
     //テーブルの数をカウント
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categoryInfo.count

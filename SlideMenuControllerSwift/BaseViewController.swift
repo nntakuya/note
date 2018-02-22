@@ -13,7 +13,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     var postVeiwY :CGFloat = 0.0
     
     //【モーダルウィンドウ】パーツ
-    let textView: UITextView = UITextView()//(ModalView)U   ITextViewのインスタンスを生成
+    let textView: UITextView = UITextView()//(ModalView)UITextViewのインスタンスを生成
     @IBOutlet weak var ModalView: UIView!
     @IBOutlet weak var CreateCategoryBtn: UIButton!
     @IBOutlet weak var CustomCategoryBtn: UIButton!
@@ -25,6 +25,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    =========================================
     //【テーブル】CustomCategoryViewのテーブルを作成
     @IBOutlet weak var CusCategoryTable: UITableView!
+    var cuWidth:CGFloat = 0.0//テーブルの横幅
+    var cuHeight:CGFloat = 0.0//テーブルの縦幅
     
     var categoryInfo:[[String:Any]] = []//表示したいセルの配列を初期化
     var selectedRowIndex = -1//何行目か保存されていないときを見分けるための-1を代入
@@ -64,7 +66,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     // ボタンのX,Y座標
     let sPosX: CGFloat = 0.0
     let sPosY: CGFloat = 0.0
-    
     
 //    ==================================
 //　　　　 カテゴリーボタンオブジェクト
@@ -166,6 +167,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     func customModalWindow(){
         //隠れた状態
         CustomCategoryView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
+        AjustTableLayout()//テーブルのサイズを調整
         
         //スワイプジェスチャー
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipeView(sender:)))  //Swift3
