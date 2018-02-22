@@ -30,6 +30,12 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
         
         return true
     }
+    
+    //keyboard閉じる
+    func closeKeyboard(){
+        CategoryTextField.resignFirstResponder
+    }
+    
 
     //入力完了後に呼び出し
     func textFieldDidEndEditing(_ textField:UITextField){
@@ -48,14 +54,31 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
 
 
 extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
-
     //テーブルレイアウト調整
     func AjustTableLayout(){
         cuWidth = self.view.bounds.width
         cuHeight = self.view.bounds.height - 150
         CusCategoryTable.frame = CGRect(x: 0, y: 0, width: cuWidth, height: cuHeight)
         
+        //スワイプジェスチャー
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.closeKeyboardForTable(sender:)))
+        downSwipe.direction = .down// スワイプの方向を指定
+        CusCategoryTable.addGestureRecognizer(downSwipe)// viewにジェスチャーを登録
+        
     }
+//    ============================================
+//　　　　 モーダルウィンドウ ジェスチャーイベント
+//    ============================================
+    @objc func closeKeyboardForTable(sender: UISwipeGestureRecognizer) {
+        closeCustomTableKeyBoard()
+    }
+    
+    //CategoryCustomTableのkeyboard閉じるアクション
+    func closeCustomTableKeyBoard(){
+        let closeEvent = CustomTableViewCell()
+        closeEvent.closeKeyboard()
+    }
+    
     
     //テーブルの数をカウント
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

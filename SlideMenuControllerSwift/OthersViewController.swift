@@ -37,7 +37,6 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
         performSegue(withIdentifier: "categoryDetail", sender: nil)
     }
     
-    /////////////////// スワイプ /////////////////////////////
     //セルのスワイプ表示（デザイン）
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         

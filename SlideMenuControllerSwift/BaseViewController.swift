@@ -1,6 +1,4 @@
-
 //  Created by 仲松拓哉 on 04/02/2018.
-//
 
 import UIKit
 import CoreData
@@ -36,12 +34,12 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //　　　　   モーダルウィンドウボタン
 //    =========================================
     //(Btn)CreateCategoryアクション
-    
     @IBAction func BtnCreaateCategory(_ sender: UIButton) {
         UIView.animate(withDuration: 0, delay: 0,  animations: {
             self.CustomCategoryView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
         }, completion: nil)
         
+        keyboardClose()
     }
     //(Btn)CustomCategoryアクション
     @IBAction func BtnCustomCategory(_ sender: UIButton) {
@@ -49,6 +47,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
             self.CustomCategoryView.frame = CGRect(x: 0, y: 150, width: self.view.bounds.width, height: self.view.bounds.height)
         }, completion: nil)
         
+        keyboardClose()
     }
 
 //    ==================================
@@ -78,9 +77,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     var DisplayCategoryBoard = UIView() //大枠
     var DisplayCategory = UIView() //選択されたカテゴリーを表示
     var DisplayLabel = UILabel() //選択されたカテゴリー名を表示
-    
-    
-    
     
     
     override func viewDidLoad() {
@@ -125,21 +121,16 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         viewScroll()
 //      カテゴリーボタンの追加
         addBtnCategory()
-        
-        
-        
-        if let indexPathForSelectedRow = CusCategoryTable.indexPathForSelectedRow { //ハイライト解除
-            CusCategoryTable.deselectRow(at: indexPathForSelectedRow, animated: true)
-        }
-
+    }
+    
+    //TODO:改善必要
+    // └ サイドバーの表示がされる際に、キーボードを閉じる
+    override func viewWillDisappear(_ animated: Bool){
+        super.viewWillDisappear(animated)
+        keyboardClose()
+        print("サイドバー表示")
     }
 
-  
-    
-    
-    
-    
-    
     
     
     
@@ -185,6 +176,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         self.view.addSubview(CustomCategoryView)
     }
     
+    
 //    ============================================
 //　　　　 モーダルウィンドウ ジェスチャーイベント
 //    ============================================
@@ -198,8 +190,10 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
             self.CustomCategoryView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
         }, completion: nil)
         //キーボード閉じる
-        textView.resignFirstResponder()
+//        textView.resignFirstResponder()
+        keyboardClose()
     }
+    
     
 //    =========================================
 //　　　　  (モーダルウィンドウ)UITextViewの設定
@@ -285,9 +279,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     }
     
     
-    
 
-    //TODO:test(postView)
     func CreatePostView(){
         //1.textViewの高さをずらす
         postViewX = 0
@@ -377,7 +369,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         // イベントを追加する
         btnCategory.addTarget(self, action: #selector(self.onClickCategoryButton(sender:)), for: .touchUpInside)
         
-//        self.view.addSubview(btnCategory)
         return btnCategory
     }
 //    ============================================
@@ -465,8 +456,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         //TODO:下記のスクロールバーを消す
 //        scrollView.scrollIndicatorInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         
-        // Delegate を設定
-        scrollView.delegate = self
+        scrollView.delegate = self// Delegate を設定
         
         TestView.addSubview(scrollView)
         
@@ -506,6 +496,9 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 
     }
     
+    
+    
+    
 //    =====================================================
 //　　　　   　スクロールオブジェクト内 カテゴリーボタン削除
 //    =====================================================
@@ -538,8 +531,21 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     //TODO:これを使用する
     
     @IBAction func keyClose(_ sender: UISwipeGestureRecognizer) {
-        postView.resignFirstResponder()
+//        postView.resignFirstResponder()
+        keyboardClose()
     }
+    
+    
+//    =======================================
+//　　　　    キーボード閉じるアクション
+//    =======================================
+    
+    func keyboardClose(){
+        postView.resignFirstResponder()
+        textView.resignFirstResponder()
+//        closeCustomTableKeyBoard()//CustomCategoryテーブルのキーボード閉じる
+    }
+    
     
     
 //    ==================================
@@ -614,8 +620,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         //Main:デフォルトのメモ画面のtextview
         //Modal:モーダルウィンドウのtextview
-        //TODO:以下の"action: #selector(self.MaincommitButtonTapped(sender:)"のコードを
-        //     この引数senderに引数を入れるとエラーがでる。
         if viewName == "Main" {
             // 完了ボタン
             let commitButton = UIBarButtonItem(
@@ -650,7 +654,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 
         tapSave()//インサート
         read()//デバッグ用
-        postView.resignFirstResponder()//キーボードを閉じる
+//        postView.resignFirstResponder()//キーボードを閉じる
+        keyboardClose()//キーボードを閉じる
     }
     
     @objc func ModalcommitButtonTapped(sender: Any) {
@@ -668,7 +673,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         //カテゴリーボタンの追加
         addBtnCategory()
         
-        textView.resignFirstResponder()//キーボードを閉じる
+//        textView.resignFirstResponder()//キーボードを閉じる
+        keyboardClose()//キーボードを閉じる
         
         //モーダルウィンドウ閉じる
         UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {
