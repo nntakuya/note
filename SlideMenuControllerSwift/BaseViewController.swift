@@ -1,3 +1,4 @@
+
 //  Created by 仲松拓哉 on 04/02/2018.
 
 import UIKit
@@ -30,6 +31,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     var selectedRowIndex = -1//何行目か保存されていないときを見分けるための-1を代入
     var categoryId = 0//カテゴリーIDのデフォルト値（カテゴリー：All）を "0" とする
     
+    
 //    =========================================
 //　　　　   モーダルウィンドウボタン
 //    =========================================
@@ -49,7 +51,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         }, completion: nil)
         keyboardClose()
     }
-    
 
 //    ==================================
 //　　　　 アンダーバーオブジェクト
@@ -84,10 +85,9 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         super.viewDidLoad()
         CreatePostView()//メインのメモ機能
 
-        read()
+//        read()
         
-        //アンダーバー作成
-        createTabBar()
+        createTabBar()//アンダーバー作成
         //カテゴリーボタンの追加
         addBtnCategory()
         
@@ -124,7 +124,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         keyboardClose()
     }
     
-    
     //スクロールオブジェクトのリロード
     func updateScrollBar(){
         DeleteScrollView(scv: scrollView)//スクロールオブジェクト削除
@@ -132,7 +131,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         viewScroll()
         addBtnCategory()//カテゴリーボタンの追加
     }
-
     
     
 //    ==================================
@@ -159,6 +157,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         self.view.bringSubview(toFront: ModalView)
         
     }
+    
     
 //    ==================================
 //　　　　 モーダルウィンドウ作成(custom)
@@ -193,6 +192,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         keyboardClose()
     }
+    
     
     
 //    =========================================
@@ -638,7 +638,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         self.resignFirstResponder()
 
         tapSave()//インサート
-        read()//デバッグ用
+//        read()//デバッグ用
         keyboardClose()//キーボードを閉じる
     }
     
@@ -653,7 +653,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         keyboardClose()//キーボードを閉じる
         
         //TODO:CustomCategoryテーブルの再読込
-        addListCategory()//テスト
+        addListCategory()
         
         //モーダルウィンドウ閉じる
         UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {

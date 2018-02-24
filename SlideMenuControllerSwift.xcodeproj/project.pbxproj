@@ -13,7 +13,6 @@
 		B311643C2027006600F01ACB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B311643B2027006600F01ACB /* BaseViewController.swift */; };
 		B311B5772033E16600CA0604 /* CustomCategoryTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B311B5762033E16600CA0604 /* CustomCategoryTable.swift */; };
 		B3319363202E8483008477C9 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3319362202E8483008477C9 /* ModalViewController.swift */; };
-		B3319365202E8543008477C9 /* CustomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3319364202E8543008477C9 /* CustomPresentationController.swift */; };
 		B331936720300317008477C9 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331936620300317008477C9 /* SecondViewController.swift */; };
 		B331936920303B34008477C9 /* ingCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331936820303B34008477C9 /* ingCoreData.swift */; };
 		B331936C20303D04008477C9 /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331936A20303D04008477C9 /* Category+CoreDataClass.swift */; };
@@ -32,7 +31,6 @@
 		B396958B203A6925008CEB96 /* OtherCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B396958A203A6925008CEB96 /* OtherCustomCell.swift */; };
 		B3A3DE0520287C2500D656A2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B3A3DE0320287C2500D656A2 /* Model.xcdatamodeld */; };
 		B3A3DE0B2028AE3A00D656A2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A3DE0A2028AE3A00D656A2 /* DetailViewController.swift */; };
-		B3BA101F202C7AE700870E53 /* imageCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA101E202C7AE700870E53 /* imageCategory.swift */; };
 		C539E6471A315E87003B7CC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C539E6461A315E87003B7CC7 /* AppDelegate.swift */; };
 		C539E64A1A315E87003B7CC7 /* SlideMenuControllerSwift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C539E6481A315E87003B7CC7 /* SlideMenuControllerSwift.xcdatamodeld */; };
 		C539E64C1A315E87003B7CC7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C539E64B1A315E87003B7CC7 /* MainViewController.swift */; };
@@ -46,7 +44,7 @@
 		C5498C801BE897660076A7C5 /* ImageHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5498C7F1BE897660076A7C5 /* ImageHeaderView.xib */; };
 		C5498C821BE8994F0076A7C5 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5498C811BE8994F0076A7C5 /* UIImageView.swift */; };
 		C5BA8AA61A43E2EF00863FB9 /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BA8AA51A43E2EF00863FB9 /* SlideMenuController.swift */; };
-		C5BD39DA1A6CD12300D0AF95 /* AlltViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BD39D91A6CD12300D0AF95 /* AlltViewController.swift */; };
+		C5BD39DA1A6CD12300D0AF95 /* AllViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BD39D91A6CD12300D0AF95 /* AllViewController.swift */; };
 		C5BD39DC1A6CD15700D0AF95 /* JavaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BD39DB1A6CD15700D0AF95 /* JavaViewController.swift */; };
 		C5BD39DE1A6CD17B00D0AF95 /* GoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BD39DD1A6CD17B00D0AF95 /* GoViewController.swift */; };
 		C5BD39E01A6CDC8100D0AF95 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BD39DF1A6CDC8100D0AF95 /* UIViewController.swift */; };
@@ -80,7 +78,6 @@
 		B311643B2027006600F01ACB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B311B5762033E16600CA0604 /* CustomCategoryTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryTable.swift; sourceTree = "<group>"; };
 		B3319362202E8483008477C9 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
-		B3319364202E8543008477C9 /* CustomPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPresentationController.swift; sourceTree = "<group>"; };
 		B331936620300317008477C9 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		B331936820303B34008477C9 /* ingCoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ingCoreData.swift; sourceTree = "<group>"; };
 		B331936A20303D04008477C9 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -99,7 +96,6 @@
 		B396958A203A6925008CEB96 /* OtherCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherCustomCell.swift; sourceTree = "<group>"; };
 		B3A3DE0420287C2500D656A2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		B3A3DE0A2028AE3A00D656A2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		B3BA101E202C7AE700870E53 /* imageCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageCategory.swift; sourceTree = "<group>"; };
 		C539E6411A315E87003B7CC7 /* SlideMenuControllerSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlideMenuControllerSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C539E6451A315E87003B7CC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C539E6461A315E87003B7CC7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -117,7 +113,7 @@
 		C5498C7F1BE897660076A7C5 /* ImageHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageHeaderView.xib; sourceTree = "<group>"; };
 		C5498C811BE8994F0076A7C5 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		C5BA8AA51A43E2EF00863FB9 /* SlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SlideMenuController.swift; path = Source/SlideMenuController.swift; sourceTree = "<group>"; };
-		C5BD39D91A6CD12300D0AF95 /* AlltViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlltViewController.swift; sourceTree = "<group>"; };
+		C5BD39D91A6CD12300D0AF95 /* AllViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllViewController.swift; sourceTree = "<group>"; };
 		C5BD39DB1A6CD15700D0AF95 /* JavaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JavaViewController.swift; sourceTree = "<group>"; };
 		C5BD39DD1A6CD17B00D0AF95 /* GoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoViewController.swift; sourceTree = "<group>"; };
 		C5BD39DF1A6CDC8100D0AF95 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -192,7 +188,7 @@
 		B396958D203A6992008CEB96 /* SideBar */ = {
 			isa = PBXGroup;
 			children = (
-				C5BD39D91A6CD12300D0AF95 /* AlltViewController.swift */,
+				C5BD39D91A6CD12300D0AF95 /* AllViewController.swift */,
 				C539E66B1A316C78003B7CC7 /* LeftViewController.swift */,
 				B331936E20309401008477C9 /* OthersViewController.swift */,
 				B396958A203A6925008CEB96 /* OtherCustomCell.swift */,
@@ -328,8 +324,6 @@
 			children = (
 				C539E64B1A315E87003B7CC7 /* MainViewController.swift */,
 				B311643B2027006600F01ACB /* BaseViewController.swift */,
-				B3319364202E8543008477C9 /* CustomPresentationController.swift */,
-				B3BA101E202C7AE700870E53 /* imageCategory.swift */,
 				C539E64D1A315E87003B7CC7 /* Main.storyboard */,
 				C5BF6A8B1BF340020064C18E /* ExSlideMenuController.swift */,
 				B396958F203A6AAB008CEB96 /* ModalView */,
@@ -513,7 +507,6 @@
 				B36EF0E020347ABE0038E2D5 /* ReorderController+AutoScroll.swift in Sources */,
 				C5BD39DE1A6CD17B00D0AF95 /* GoViewController.swift in Sources */,
 				B394FC5A2029CACB00D42467 /* Article+CoreDataClass.swift in Sources */,
-				B3319365202E8543008477C9 /* CustomPresentationController.swift in Sources */,
 				C539E64C1A315E87003B7CC7 /* MainViewController.swift in Sources */,
 				C5BD39E01A6CDC8100D0AF95 /* UIViewController.swift in Sources */,
 				C5C1CE611A70F3B600B6E411 /* UITableViewExtension.swift in Sources */,
@@ -524,7 +517,6 @@
 				C5C1CE5D1A70F27500B6E411 /* BaseTableViewCell.swift in Sources */,
 				C539E66C1A316C78003B7CC7 /* LeftViewController.swift in Sources */,
 				C5BF6A821BEEF1A70064C18E /* DataTableViewCell.swift in Sources */,
-				B3BA101F202C7AE700870E53 /* imageCategory.swift in Sources */,
 				C539E6471A315E87003B7CC7 /* AppDelegate.swift in Sources */,
 				B331936720300317008477C9 /* SecondViewController.swift in Sources */,
 				B396958B203A6925008CEB96 /* OtherCustomCell.swift in Sources */,
@@ -550,7 +542,7 @@
 				B3A3DE0520287C2500D656A2 /* Model.xcdatamodeld in Sources */,
 				B36EF0DF20347ABE0038E2D5 /* ReorderController+DestinationRow.swift in Sources */,
 				C5F179D01BEB2CB500EEDD9A /* UIView.swift in Sources */,
-				C5BD39DA1A6CD12300D0AF95 /* AlltViewController.swift in Sources */,
+				C5BD39DA1A6CD12300D0AF95 /* AllViewController.swift in Sources */,
 				B3A3DE0B2028AE3A00D656A2 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
