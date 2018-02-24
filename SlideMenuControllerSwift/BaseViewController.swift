@@ -81,7 +81,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         CreatePostView()//メインのメモ機能
         
         //デバッグ用
@@ -131,6 +130,25 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         print("サイドバー表示")
     }
 
+    
+    
+    
+    
+//    @IBAction func closeKeyboardCell(_ sender: UITapGestureRecognizer) {
+//        let closeAction = CustomTableViewCell()
+//        closeAction.closeKeyboard()
+//    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -317,6 +335,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
     
     
+    
+    
 //    ============================================
 //　　　　   ボタン(カテゴリー選択)作成
 //    ============================================
@@ -495,15 +515,12 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         scrollView.contentSize = CGSize(width: scWidth, height: 50)
 
     }
-    
-    
-    
+   
     
 //    =====================================================
 //　　　　   　スクロールオブジェクト内 カテゴリーボタン削除
 //    =====================================================
     func DeleteCategoryBtn() {
-
         let subviews = btnCategory.subviews
         for subview in subviews {
             subview.removeFromSuperview()
@@ -528,8 +545,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    =======================================
 //　　　　    ジェスチャーイベント(下スワイプ)
 //    =======================================
-    //TODO:これを使用する
-    
     @IBAction func keyClose(_ sender: UISwipeGestureRecognizer) {
 //        postView.resignFirstResponder()
         keyboardClose()
@@ -539,12 +554,23 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    =======================================
 //　　　　    キーボード閉じるアクション
 //    =======================================
-    
     func keyboardClose(){
         postView.resignFirstResponder()
         textView.resignFirstResponder()
-//        closeCustomTableKeyBoard()//CustomCategoryテーブルのキーボード閉じる
     }
+    
+//    func tapOtherGesture(){
+//        let tapRec = UITapGestureRecognizer()
+//
+//        tapRec.addTarget(self, action:#selector(self.tapKeyClose))
+//        tapRec.numberOfTouchesRequired = 1
+//        tapRec.numberOfTapsRequired = 1
+//        self.view!.addGestureRecognizer(tapRec)
+//
+//    }
+//    @objc func tapKeyClose(){
+//        self.view.endEditing(true)
+//    }
     
     
     
@@ -571,7 +597,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         do{
             //レコードの即時保存
-            //TODO:データ保存時のバリデーション確認
             try viewContext.save()
         }catch{
         }

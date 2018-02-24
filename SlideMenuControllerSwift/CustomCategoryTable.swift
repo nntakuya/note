@@ -13,6 +13,11 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
     @IBOutlet weak var CategoryTextField: UITextField!
     var id:Int!
     
+//    override func viewDidLoad() {
+//    tapOtherGesture()
+//    }
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         //テキストフィールドのデリゲート先を自分に設定する。
@@ -20,11 +25,16 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
         CategoryTextField.tag = 0
     }
     
+
+    
+    
+    
+    
     //デリゲートメソッド
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
         //キーボードを閉じる。
-        CategoryTextField.resignFirstResponder()
+//        closeKeyboard()
 
         updateCategoryName()//カテゴリー名を更新
         
@@ -32,9 +42,26 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
     }
     
     //keyboard閉じる
-    func closeKeyboard(){
-        CategoryTextField.resignFirstResponder
-    }
+//    func closeKeyboard(){
+//        CategoryTextField.resignFirstResponder
+//    }
+
+//
+//    func tapOtherGesture(){
+//        let tapRec = UITapGestureRecognizer()
+//
+//        tapRec.addTarget(self, action:#selector(self.tapKeyClose))
+//        tapRec.numberOfTouchesRequired = 1
+//        tapRec.numberOfTapsRequired = 1
+//        CategoryTextField.addGestureRecognizer(tapRec)
+//
+//    }
+//    @objc func tapKeyClose(){
+//        CategoryTextField.endEditing(true)
+//    }
+//
+    
+    
     
 
     //入力完了後に呼び出し
@@ -59,25 +86,26 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
         cuWidth = self.view.bounds.width
         cuHeight = self.view.bounds.height - 150
         CusCategoryTable.frame = CGRect(x: 0, y: 0, width: cuWidth, height: cuHeight)
+        CusCategoryTable.keyboardDismissMode =  .interactive
         
         //スワイプジェスチャー
-        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.closeKeyboardForTable(sender:)))
-        downSwipe.direction = .down// スワイプの方向を指定
-        CusCategoryTable.addGestureRecognizer(downSwipe)// viewにジェスチャーを登録
+//        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.closeKeyboardForTable(sender:)))
+//        downSwipe.direction = .down// スワイプの方向を指定
+//        CusCategoryTable.addGestureRecognizer(downSwipe)// viewにジェスチャーを登録
         
     }
 //    ============================================
 //　　　　 モーダルウィンドウ ジェスチャーイベント
 //    ============================================
-    @objc func closeKeyboardForTable(sender: UISwipeGestureRecognizer) {
-        closeCustomTableKeyBoard()
-    }
+//    @objc func closeKeyboardForTable(sender: UISwipeGestureRecognizer) {
+//        closeCustomTableKeyBoard()
+//    }
     
     //CategoryCustomTableのkeyboard閉じるアクション
-    func closeCustomTableKeyBoard(){
-        let closeEvent = CustomTableViewCell()
-        closeEvent.closeKeyboard()
-    }
+//    func closeCustomTableKeyBoard(){
+//        let closeEvent = CustomTableViewCell()
+//        closeEvent.closeKeyboard()
+//    }
     
     
     //テーブルの数をカウント
