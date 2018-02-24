@@ -40,7 +40,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         }, completion: nil)
         
         keyboardClose()
-        
     }
     
     //(Btn)CustomCategoryアクション
@@ -48,10 +47,9 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         UIView.animate(withDuration: 0.0, delay: 0.0,  animations: {
             self.CustomCategoryView.frame = CGRect(x: 0, y: 150, width: self.view.bounds.width, height: self.view.bounds.height)
         }, completion: nil)
-        
         keyboardClose()
-        
     }
+    
 
 //    ==================================
 //　　　　 アンダーバーオブジェクト
@@ -85,8 +83,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         CreatePostView()//メインのメモ機能
-        
-        //デバッグ用
+
         read()
         
         //アンダーバー作成
@@ -117,12 +114,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
         
-        //カテゴリーボタン削除
-        DeleteScrollView(scv: scrollView)
-        scrollView = UIScrollView()
-        viewScroll()
-//      カテゴリーボタンの追加
-        addBtnCategory()
+        updateScrollBar()//カテゴリーボタンの追加
     }
     
     //TODO:改善必要
@@ -130,6 +122,15 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     override func viewWillDisappear(_ animated: Bool){
         super.viewWillDisappear(animated)
         keyboardClose()
+    }
+    
+    
+    //スクロールオブジェクトのリロード
+    func updateScrollBar(){
+        DeleteScrollView(scv: scrollView)//スクロールオブジェクト削除
+        scrollView = UIScrollView()
+        viewScroll()
+        addBtnCategory()//カテゴリーボタンの追加
     }
 
     
@@ -260,10 +261,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         myButton.setTitle("+", for: .normal)
         myButton.setTitleColor(UIColor.white, for: .normal)
         
-        // タイトルを設定する(ボタンがハイライトされた時).
-        myButton.setTitle("新規登録", for: .highlighted)
-        myButton.setTitleColor(UIColor.black, for: .highlighted)
-        
         myButton.tag = 0// ボタンにタグをつける.
         
         // イベントを追加する
@@ -276,7 +273,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
             self.ModalView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
         }, completion: nil)
     }
-    
     
 
     func CreatePostView(){
@@ -300,7 +296,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         
         //スワイプジェスチャー
-        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipePostView(sender:)))  //Swift3
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipePostView(sender:)))
         // スワイプの方向を指定
         downSwipe.direction = .down
         // viewにジェスチャーを登録
@@ -393,8 +389,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         DisplayCategoryBoard.frame = CGRect(x: 0, y: 67, width: self.view.bounds.width, height: 50)
         DisplayCategoryBoard.backgroundColor = UIColor.gray
 
-        //その中に選択されたカテゴリー表示オブジェクトを作成
-        
         
         let catgoryName = categoryData["name"] as! String
         DisplayLabel.text = catgoryName
@@ -530,11 +524,15 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    =======================================
 //　　　　    キーボード閉じるアクション
 //    =======================================
+    //TODO:以下の関数を条件分岐で適切な処理を実行させる必要がある。
     func keyboardClose(){
         postView.resignFirstResponder()
         textView.resignFirstResponder()
         CusCategoryTable.reloadData()
+        updateScrollBar()//Topメモ欄のスクロールオブジェクトの再読込
     }
+    
+
 
 //    ==================================
 //　　　　    CoreData操作(Insert処理)
@@ -652,13 +650,10 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         coreData.insertCategory(name: textView.text)//インサート
         coreData.readCategoryAll()//データチェック
         
-        //カテゴリーボタン削除
-        DeleteScrollView(scv: scrollView)
-        scrollView = UIScrollView()
-        viewScroll()
-        //カテゴリーボタンの追加
-        addBtnCategory()
         keyboardClose()//キーボードを閉じる
+        
+        //TODO:CustomCategoryテーブルの再読込
+        addListCategory()//テスト
         
         //モーダルウィンドウ閉じる
         UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {
