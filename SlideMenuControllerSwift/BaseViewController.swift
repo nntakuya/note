@@ -98,6 +98,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         customModalWindow()//custom
         addListCategory()//CoreDataからテーブルデータを取得
         
+        //TODO:(test)キーボードのスクロール機能
+        notification()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -132,6 +134,33 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         addBtnCategory()//カテゴリーボタンの追加
     }
     
+    //notification
+    func notification(){
+        postView.keyboardDismissMode =  .interactive
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillHide, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+    @objc func adjustForKeyboard(notification: Notification) {
+        let userInfo = notification.userInfo!
+        
+        let keyboardScreenEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        
+        if notification.name == Notification.Name.UIKeyboardWillHide {
+            postView.contentInset = UIEdgeInsets.zero
+        } else {
+            postView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
+        }
+        
+        postView.scrollIndicatorInsets = postView.contentInset
+        
+        let selectedRange = postView.selectedRange
+        postView.scrollRangeToVisible(selectedRange)
+    }
+    
+    
     
 //    ==================================
 //　　　　 モーダルウィンドウ作成(create)
@@ -155,7 +184,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         CreateCategoryView.addSubview(createText())
         ModalView.addSubview(CreateCategoryView)
         self.view.bringSubview(toFront: ModalView)
-        
     }
     
     
@@ -192,7 +220,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         keyboardClose()
     }
-    
     
     
 //    =========================================
@@ -419,8 +446,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         DisplayCategoryBoard.addSubview(DisplayCategory)
         self.view.addSubview(DisplayCategoryBoard)
         
-        //インサートするカテゴリーを更新
-        categoryId = categoryData["id"] as! Int
+        categoryId = categoryData["id"] as! Int //インサートするカテゴリーを更新
     }
 
     

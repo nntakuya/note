@@ -55,7 +55,7 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
         cuWidth = self.view.bounds.width
         cuHeight = self.view.bounds.height - 150
         CusCategoryTable.frame = CGRect(x: 0, y: 0, width: cuWidth, height: cuHeight)
-        CusCategoryTable.keyboardDismissMode =  .interactive
+        CusCategoryTable.keyboardDismissMode =  .interactive //テーブルの操作性を良くする
         
     }
     
