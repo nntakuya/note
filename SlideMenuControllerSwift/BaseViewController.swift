@@ -132,26 +132,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 
     
     
-    
-    
-//    @IBAction func closeKeyboardCell(_ sender: UITapGestureRecognizer) {
-//        let closeAction = CustomTableViewCell()
-//        closeAction.closeKeyboard()
-//    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 //    ==================================
 //　　　　 モーダルウィンドウ作成(create)
 //    ==================================

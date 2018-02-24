@@ -25,6 +25,34 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
         CategoryTextField.tag = 0
     }
     
+    
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        print("TextField did begin editing method called")
+//    }
+//    private func textFieldDidEndEditing(textField: UITextField) {
+//        print("TextField did end editing method called")
+//    }
+//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+//        print("TextField should begin editing method called")
+//        return true;
+//    }
+//    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+//        print("TextField should clear method called")
+//        return true;
+//    }
+//    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+//        print("TextField should snd editing method called")
+//        return true;
+//    }
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        print("While entering the characters this method gets called")
+//        return true;
+//    }
+//    func textFieldShouldReturn(textField: UITextField) -> Bool {
+//        print("TextField should return method called")
+////        textField.resignFirstResponder();
+//        return true;
+//    }
 
     
     
@@ -94,6 +122,7 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
 //        CusCategoryTable.addGestureRecognizer(downSwipe)// viewにジェスチャーを登録
         
     }
+    
 //    ============================================
 //　　　　 モーダルウィンドウ ジェスチャーイベント
 //    ============================================
@@ -110,9 +139,7 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
     
     //テーブルの数をカウント
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return categoryInfo.count
-        
     }
     
     //セルに文字列を表示

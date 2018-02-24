@@ -94,9 +94,6 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.88617227979274615" green="0.88617227979274615" blue="0.88617227979274615" alpha="0.2107999559859155" colorSpace="custom" customColorSpace="displayP3"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="vwQ-YZ-OmE" appends="YES" id="d0L-T5-S8U"/>
-                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.98102861642837524" green="0.98101013898849487" blue="0.97380751371383667" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -116,11 +113,6 @@
                         <action selector="keyClose:" destination="hwP-Ck-hW7" id="Tc3-pq-SJg"/>
                     </connections>
                 </swipeGestureRecognizer>
-                <tapGestureRecognizer id="vwQ-YZ-OmE">
-                    <connections>
-                        <action selector="closeKeyboardCell:" destination="hwP-Ck-hW7" id="Pot-wC-X6N"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-908" y="1342.5787106446778"/>
         </scene>
