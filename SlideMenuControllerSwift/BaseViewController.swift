@@ -40,7 +40,9 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         }, completion: nil)
         
         keyboardClose()
+        
     }
+    
     //(Btn)CustomCategoryアクション
     @IBAction func BtnCustomCategory(_ sender: UIButton) {
         UIView.animate(withDuration: 0.0, delay: 0.0,  animations: {
@@ -48,6 +50,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         }, completion: nil)
         
         keyboardClose()
+        
     }
 
 //    ==================================
@@ -127,7 +130,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     override func viewWillDisappear(_ animated: Bool){
         super.viewWillDisappear(animated)
         keyboardClose()
-        print("サイドバー表示")
     }
 
     
@@ -187,8 +189,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         UIView.animate(withDuration: 0.5, delay: 0,  animations: {
             self.CustomCategoryView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
         }, completion: nil)
-        //キーボード閉じる
-//        textView.resignFirstResponder()
+        
         keyboardClose()
     }
     
@@ -305,16 +306,13 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         // viewにジェスチャーを登録
         postView.addGestureRecognizer(downSwipe)
         self.view.addSubview(postView)
-//        self.view.bringSubview(toFront: postView)
     }
     
+    //TODO:下記のキーボードを閉じるファンクションをインタラクティブに設定
     @objc func DownSwipePostView(sender: UISwipeGestureRecognizer) {
         //キーボード閉じる
         postView.resignFirstResponder()
     }
-    
-    
-    
     
     
 //    ============================================
@@ -392,7 +390,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         DisplayCategory = UIView()//初期化
         DisplayLabel = UILabel()//初期化
         
-        //TODO:アニメーション？
         DisplayCategoryBoard.frame = CGRect(x: 0, y: 67, width: self.view.bounds.width, height: 50)
         DisplayCategoryBoard.backgroundColor = UIColor.gray
 
@@ -404,7 +401,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         DisplayLabel.textColor = UIColor.white
         
         let font = UIFont(name: "Hiragino Kaku Gothic ProN", size: 18)
-        //以下のコマンドで文字列の横幅を取得
+        
         // width.widthでInt型でデータを取得出来る
         let catwidth = catgoryName.size(withAttributes: [NSAttributedStringKey.font : font as Any])
         
@@ -453,8 +450,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         scrollView.bounces = false//スクロールの跳ね返り
         
-        //TODO:下記のスクロールバーを消す
-//        scrollView.scrollIndicatorInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        scrollView.showsHorizontalScrollIndicator = false //スクロールバー非表示
         
         scrollView.delegate = self// Delegate を設定
         
@@ -537,23 +533,9 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     func keyboardClose(){
         postView.resignFirstResponder()
         textView.resignFirstResponder()
+        CusCategoryTable.reloadData()
     }
-    
-//    func tapOtherGesture(){
-//        let tapRec = UITapGestureRecognizer()
-//
-//        tapRec.addTarget(self, action:#selector(self.tapKeyClose))
-//        tapRec.numberOfTouchesRequired = 1
-//        tapRec.numberOfTapsRequired = 1
-//        self.view!.addGestureRecognizer(tapRec)
-//
-//    }
-//    @objc func tapKeyClose(){
-//        self.view.endEditing(true)
-//    }
-    
-    
-    
+
 //    ==================================
 //　　　　    CoreData操作(Insert処理)
 //    ==================================
@@ -659,7 +641,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 
         tapSave()//インサート
         read()//デバッグ用
-//        postView.resignFirstResponder()//キーボードを閉じる
         keyboardClose()//キーボードを閉じる
     }
     
@@ -677,8 +658,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         viewScroll()
         //カテゴリーボタンの追加
         addBtnCategory()
-        
-//        textView.resignFirstResponder()//キーボードを閉じる
         keyboardClose()//キーボードを閉じる
         
         //モーダルウィンドウ閉じる

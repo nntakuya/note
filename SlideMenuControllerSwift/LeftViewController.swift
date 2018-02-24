@@ -112,7 +112,6 @@ class LeftViewController : UIViewController{
 //遷移先を指定している
 extension LeftViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
         return BaseTableViewCell.height()
     }
     

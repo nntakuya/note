@@ -13,10 +13,6 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
     @IBOutlet weak var CategoryTextField: UITextField!
     var id:Int!
     
-//    override func viewDidLoad() {
-//    tapOtherGesture()
-//    }
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,69 +22,14 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
     }
     
     
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        print("TextField did begin editing method called")
-//    }
-//    private func textFieldDidEndEditing(textField: UITextField) {
-//        print("TextField did end editing method called")
-//    }
-//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-//        print("TextField should begin editing method called")
-//        return true;
-//    }
-//    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-//        print("TextField should clear method called")
-//        return true;
-//    }
-//    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-//        print("TextField should snd editing method called")
-//        return true;
-//    }
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        print("While entering the characters this method gets called")
-//        return true;
-//    }
-//    func textFieldShouldReturn(textField: UITextField) -> Bool {
-//        print("TextField should return method called")
-////        textField.resignFirstResponder();
-//        return true;
-//    }
-
-    
-    
-    
     
     //デリゲートメソッド
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
-        //キーボードを閉じる。
-//        closeKeyboard()
-
         updateCategoryName()//カテゴリー名を更新
         
         return true
     }
-    
-    //keyboard閉じる
-//    func closeKeyboard(){
-//        CategoryTextField.resignFirstResponder
-//    }
-
-//
-//    func tapOtherGesture(){
-//        let tapRec = UITapGestureRecognizer()
-//
-//        tapRec.addTarget(self, action:#selector(self.tapKeyClose))
-//        tapRec.numberOfTouchesRequired = 1
-//        tapRec.numberOfTapsRequired = 1
-//        CategoryTextField.addGestureRecognizer(tapRec)
-//
-//    }
-//    @objc func tapKeyClose(){
-//        CategoryTextField.endEditing(true)
-//    }
-//
-    
     
     
 
@@ -116,26 +57,7 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
         CusCategoryTable.frame = CGRect(x: 0, y: 0, width: cuWidth, height: cuHeight)
         CusCategoryTable.keyboardDismissMode =  .interactive
         
-        //スワイプジェスチャー
-//        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.closeKeyboardForTable(sender:)))
-//        downSwipe.direction = .down// スワイプの方向を指定
-//        CusCategoryTable.addGestureRecognizer(downSwipe)// viewにジェスチャーを登録
-        
     }
-    
-//    ============================================
-//　　　　 モーダルウィンドウ ジェスチャーイベント
-//    ============================================
-//    @objc func closeKeyboardForTable(sender: UISwipeGestureRecognizer) {
-//        closeCustomTableKeyBoard()
-//    }
-    
-    //CategoryCustomTableのkeyboard閉じるアクション
-//    func closeCustomTableKeyBoard(){
-//        let closeEvent = CustomTableViewCell()
-//        closeEvent.closeKeyboard()
-//    }
-    
     
     //テーブルの数をカウント
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -148,8 +70,6 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
         if let spacer = tableView.reorder.spacerCell(for: indexPath) {
             return spacer
         }
-        
-
         
         //文字列を表示するセルの取得
         //以下 "CustomTableViewCell" はテスト用にセット
@@ -174,7 +94,7 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
         categoryInfo = categoryDatas.readCategoryAll() as! [[String : Any]]
         
         //テーブルの再描画
-        //tableView.reloadData()
+        CusCategoryTable.reloadData()
     }
 
     
