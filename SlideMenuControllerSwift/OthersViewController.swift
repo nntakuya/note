@@ -39,7 +39,6 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     //セルのスワイプ表示（デザイン）
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
         let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (action, index) -> Void in
             
             //指定されたIDのメモデータをCoreDataから削除

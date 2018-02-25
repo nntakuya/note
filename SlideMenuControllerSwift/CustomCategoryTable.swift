@@ -19,7 +19,58 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
         //テキストフィールドのデリゲート先を自分に設定する。
         CategoryTextField.delegate = self
         CategoryTextField.tag = 0
+        
+        
+        //テスト
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: Selector(("keyboardWillBeShown:")),
+//                                               name: NSNotification.Name.UIKeyboardWillShow,
+//                                                         object: nil)
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: Selector(("keyboardWillBeHidden:")),
+//                                               name: NSNotification.Name.UIKeyboardWillHide,
+//                                                         object: nil)
     }
+    
+//    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        return true
+//    }
+//    func keyboardWillBeShown(notification: NSNotification) {
+//        if let userInfo = notification.userInfo {
+//            if let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue, let animationDuration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue {
+//                restoreScrollViewSize()
+//
+//                let convertedKeyboardFrame = scrollView.convertRect(keyboardFrame, fromView: nil)
+//                let offsetY: CGFloat = CGRectGetMaxY(textField.frame) - CGRectGetMinY(convertedKeyboardFrame)
+//                if offsetY < 0 { return }
+//                updateScrollViewSize(moveSize: offsetY, duration: animationDuration)
+//            }
+//        }
+//    }
+//
+//    func keyboardWillBeHidden(notification: NSNotification) {
+//        restoreScrollViewSize()
+//    }
+//
+//    func updateScrollViewSize(moveSize: CGFloat, duration: TimeInterval) {
+//        UIView.beginAnimations("ResizeForKeyboard", context: nil)
+//        UIView.setAnimationDuration(duration)
+//
+//        let contentInsets = UIEdgeInsetsMake(0, 0, moveSize, 0)
+//        scrollView.contentInset = contentInsets
+//        scrollView.scrollIndicatorInsets = contentInsets
+//        scrollView.contentOffset = CGPointMake(0, moveSize)
+//
+//        UIView.commitAnimations()
+//    }
+//
+//    func restoreScrollViewSize() {
+//        scrollView.contentInset = UIEdgeInsetsZero
+//        scrollView.scrollIndicatorInsets = UIEdgeInsetsZero
+//    }
+//
+    
     
     
     
@@ -56,8 +107,66 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
         cuHeight = self.view.bounds.height - 150
         CusCategoryTable.frame = CGRect(x: 0, y: 0, width: cuWidth, height: cuHeight)
         CusCategoryTable.keyboardDismissMode =  .interactive //テーブルの操作性を良くする
-        
     }
+    
+    
+    
+    
+    
+//    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        return true
+//    }
+//    func keyboardWillBeShown(notification: NSNotification) {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
+//
+//
+//        if let userInfo = notification.userInfo {
+//            if let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue, let animationDuration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue {
+//                restoreScrollViewSize()
+//
+//                let convertedKeyboardFrame = CusCategoryTable.convert(keyboardFrame, from: nil)
+//                let offsetY: CGFloat = CGRectGetMaxY(cell.frame) - CGRectGetMinY(convertedKeyboardFrame)
+//                if offsetY < 0 { return }
+//                updateScrollViewSize(moveSize: offsetY, duration: animationDuration)
+//            }
+//        }
+//    }
+//
+//    func keyboardWillBeHidden(notification: NSNotification) {
+//        restoreScrollViewSize()
+//    }
+//
+//    func updateScrollViewSize(moveSize: CGFloat, duration: TimeInterval) {
+//        UIView.beginAnimations("ResizeForKeyboard", context: nil)
+//        UIView.setAnimationDuration(duration)
+//
+//        let contentInsets = UIEdgeInsetsMake(0, 0, moveSize, 0)
+//        CusCategoryTable.contentInset = contentInsets
+//        CusCategoryTable.scrollIndicatorInsets = contentInsets
+//        CusCategoryTable.contentOffset = CGPoint(0, moveSize)
+//
+//        UIView.commitAnimations()
+//    }
+//
+//    func restoreScrollViewSize() {
+//        CusCategoryTable.contentInset = UIEdgeInsetsZero
+//        CusCategoryTable.scrollIndicatorInsets = UIEdgeInsetsZero
+//    }
+//
+//
+//
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
     
     //テーブルの数をカウント
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -76,6 +185,8 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         
         cell.selectionStyle = .none//選択時ハイライト無効
+        
+//        cell.CategoryTextField.text = ""
         
         //category内容編集するためにidプロパティを更新
         cell.id = categoryInfo[indexPath.row]["id"] as? Int
