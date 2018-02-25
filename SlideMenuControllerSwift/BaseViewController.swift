@@ -1,4 +1,5 @@
 
+
 //  Created by 仲松拓哉 on 04/02/2018.
 
 import UIKit
@@ -100,6 +101,9 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         //TODO:(test)キーボードのスクロール機能
         notification()
+        
+//        let indexPath = NSIndexPath(item: numberOfRowYouWant, section: 2)
+//        tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.middle, animated: true)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -150,14 +154,18 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         if notification.name == Notification.Name.UIKeyboardWillHide {
             postView.contentInset = UIEdgeInsets.zero
+//            CusCategoryTable.contentInset = UIEdgeInsets.zero
         } else {
             postView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
+//            CusCategoryTable.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
         }
-        
         postView.scrollIndicatorInsets = postView.contentInset
-        
         let selectedRange = postView.selectedRange
         postView.scrollRangeToVisible(selectedRange)
+        
+//        CusCategoryTable.scrollIndicatorInsets = CusCategoryTable.contentInset
+//        let selectedRangeTable = CusCategoryTable.selectedRange
+//        CusCategoryTable.scrollRangeToVisible(selectedRangeTable)
     }
     
     

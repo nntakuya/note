@@ -94,6 +94,12 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
         read()
         
         myTableView.reloadData()
+        
+        
+        //セグエから
+            if let indexPathForSelectedRow = myTableView.indexPathForSelectedRow {
+            myTableView.deselectRow(at: indexPathForSelectedRow, animated: true)
+        }
     }
     
     ///////////////////// CoreData操作 ////////////////////////////
