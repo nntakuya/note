@@ -142,55 +142,55 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
     
     
-    
+    //TODO:分かんない
     //カスタムテーブルキーボードバグ修正テスト
-    func testNotificationForViewwillAppear() {
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(BaseViewController.keyboardWillShow(_:)),
-                                               name: NSNotification.Name.UIKeyboardWillShow,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(BaseViewController.keyboardWillHide(_:)) ,
-                                               name: NSNotification.Name.UIKeyboardWillHide,
-                                               object: nil)
-    }
-    func testNotificationForViewwillDisAppear(){
-        NotificationCenter.default.removeObserver(self,
-                                                  name: .UIKeyboardWillShow,
-                                                  object: self.view.window)
-        NotificationCenter.default.removeObserver(self,
-                                                  name: .UIKeyboardDidHide,
-                                                  object: self.view.window)
-    }
-    
-    
-    //
-    @objc func keyboardWillShow(_ notification: Notification) {
-        
-        let info = notification.userInfo!
-        
-        let keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        
-        // bottom of textField
-        let bottomTextField = textField.frame.origin.y + textField.frame.height
-        // top of keyboard
-        let topKeyboard = screenHeight - keyboardFrame.size.height
-        // 重なり
-        let distance = bottomTextField - topKeyboard
-        
-        if distance >= 0 {
-            // scrollViewのコンテツを上へオフセット + 20.0(追加のオフセット)
-            scrollView.contentOffset.y = distance + 20.0
-        }
-    }
-    
-    @objc func keyboardWillHide(_ notification: Notification) {
-        scrollView.contentOffset.y = 0
-    }
-    
-    
-    
+//    func testNotificationForViewwillAppear() {
+//
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(BaseViewController.keyboardWillShow(_:)),
+//                                               name: NSNotification.Name.UIKeyboardWillShow,
+//                                               object: nil)
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(BaseViewController.keyboardWillHide(_:)) ,
+//                                               name: NSNotification.Name.UIKeyboardWillHide,
+//                                               object: nil)
+//    }
+//    func testNotificationForViewwillDisAppear(){
+//        NotificationCenter.default.removeObserver(self,
+//                                                  name: .UIKeyboardWillShow,
+//                                                  object: self.view.window)
+//        NotificationCenter.default.removeObserver(self,
+//                                                  name: .UIKeyboardDidHide,
+//                                                  object: self.view.window)
+//    }
+//
+//
+//    //
+//    @objc func keyboardWillShow(_ notification: Notification) {
+//
+//        let info = notification.userInfo!
+//
+//        let keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+//
+//        // bottom of textField
+//        let bottomTextField = textField.frame.origin.y + textField.frame.height
+//        // top of keyboard
+//        let topKeyboard = screenHeight - keyboardFrame.size.height
+//        // 重なり
+//        let distance = bottomTextField - topKeyboard
+//
+//        if distance >= 0 {
+//            // scrollViewのコンテツを上へオフセット + 20.0(追加のオフセット)
+//            scrollView.contentOffset.y = distance + 20.0
+//        }
+//    }
+//
+//    @objc func keyboardWillHide(_ notification: Notification) {
+//        scrollView.contentOffset.y = 0
+//    }
+//
+//
+//
     
     
     
@@ -215,7 +215,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
             postView.contentInset = UIEdgeInsets.zero
 //            CusCategoryTable.contentInset = UIEdgeInsets.zero
         } else {
-            postView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
+            postView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + 80, right: 0)
 //            CusCategoryTable.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
         }
         postView.scrollIndicatorInsets = postView.contentInset
