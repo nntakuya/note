@@ -21,57 +21,19 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
         CategoryTextField.tag = 0
         
         
-        //テスト
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: Selector(("keyboardWillBeShown:")),
-//                                               name: NSNotification.Name.UIKeyboardWillShow,
-//                                                         object: nil)
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: Selector(("keyboardWillBeHidden:")),
-//                                               name: NSNotification.Name.UIKeyboardWillHide,
-//                                                         object: nil)
+        //ジェスチャーの登録
+        CategoryTextField.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CustomTableViewCell.textFieldTap))
+        CategoryTextField.addGestureRecognizer(tapGesture)
+        
     }
     
-//    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-//        textField.resignFirstResponder()
-//        return true
-//    }
-//    func keyboardWillBeShown(notification: NSNotification) {
-//        if let userInfo = notification.userInfo {
-//            if let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue, let animationDuration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue {
-//                restoreScrollViewSize()
-//
-//                let convertedKeyboardFrame = scrollView.convertRect(keyboardFrame, fromView: nil)
-//                let offsetY: CGFloat = CGRectGetMaxY(textField.frame) - CGRectGetMinY(convertedKeyboardFrame)
-//                if offsetY < 0 { return }
-//                updateScrollViewSize(moveSize: offsetY, duration: animationDuration)
-//            }
-//        }
-//    }
-//
-//    func keyboardWillBeHidden(notification: NSNotification) {
-//        restoreScrollViewSize()
-//    }
-//
-//    func updateScrollViewSize(moveSize: CGFloat, duration: TimeInterval) {
-//        UIView.beginAnimations("ResizeForKeyboard", context: nil)
-//        UIView.setAnimationDuration(duration)
-//
-//        let contentInsets = UIEdgeInsetsMake(0, 0, moveSize, 0)
-//        scrollView.contentInset = contentInsets
-//        scrollView.scrollIndicatorInsets = contentInsets
-//        scrollView.contentOffset = CGPointMake(0, moveSize)
-//
-//        UIView.commitAnimations()
-//    }
-//
-//    func restoreScrollViewSize() {
-//        scrollView.contentInset = UIEdgeInsetsZero
-//        scrollView.scrollIndicatorInsets = UIEdgeInsetsZero
-//    }
-//
-    
-    
+    // ジェスチャーのアクション
+    @objc func textFieldTap(sender: AnyObject) {
+        //レスポンダチェーンにアクションを送信
+        UIApplication.shared.sendAction(#selector(BaseViewController.iconTappedAction), to: nil, from: CategoryTextField, for: nil)
+    }
+
     
     
     //デリゲートメソッド
@@ -101,6 +63,31 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
 
 
 extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
+    
+    
+    @objc func iconTappedAction(sender:AnyObject?) {
+        guard let gestures = sender?.gestureRecognizers! else { return }
+        for gesture in gestures {
+            if let gesture = gesture as? UITapGestureRecognizer {
+                let tappedLocation = gesture.location(in: CusCategoryTable)
+                let tappedIndexPath = CusCategoryTable.indexPathForRow(at: tappedLocation)
+                let tappedRow = tappedIndexPath?.row
+                
+                if tappedRow != nil {
+                    print(tappedRow as! Int)
+                }
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //テーブルレイアウト調整
     func AjustTableLayout(){
         cuWidth = self.view.bounds.width
@@ -157,7 +144,13 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
 //
 //
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("didSelectRowAt: \(indexPath)")
+        
+        // タップ後すぐ非選択状態にするには下記メソッドを呼び出します．
+        // sampleTableView.deselectRow(at: indexPath, animated: true)
+    }
+
     
     
     

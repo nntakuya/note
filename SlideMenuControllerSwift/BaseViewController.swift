@@ -312,8 +312,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //        scrollView.contentOffset.y = 0
 //    }
 //
-//
-//
+
+
     
     
     
