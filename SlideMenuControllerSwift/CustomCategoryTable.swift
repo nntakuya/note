@@ -78,7 +78,52 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
                 }
             }
         }
+        
+        //【プログラムの設計】
+        //1.セル1つの長さを取得する
+        
+        
+        
     }
+    
+    
+    
+    
+//    @objc func keyboardWillShow(_ notification: Notification) {
+//
+//        let info = notification.userInfo!
+//
+//        let keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+//
+//        // bottom of textField
+//        let bottomTextField = textField.frame.origin.y + textField.frame.height
+//        // top of keyboard
+//        let topKeyboard = screenHeight - keyboardFrame.size.height
+//        // 重なり
+//        let distance = bottomTextField - topKeyboard
+//
+//        if distance >= 0 {
+//            // scrollViewのコンテツを上へオフセット + 20.0(追加のオフセット)
+//            scrollView.contentOffset.y = distance + 20.0
+//        }
+//    }
+//
+//    @objc func keyboardWillHide(_ notification: Notification) {
+//        scrollView.contentOffset.y = 0
+//    }
+//
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
