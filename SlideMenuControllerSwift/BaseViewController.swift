@@ -10,6 +10,18 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     var postView: UITextView = UITextView()
     var postViewX :CGFloat = 0.0
     var postVeiwY :CGFloat = 0.0
+    var postViewWidth :CGFloat = 0.0
+    var postViewheight :CGFloat = 0.0
+    
+    //TODO:メモ機能をscrollView内へ
+    var postScrollView:UIScrollView = UIScrollView()
+    // スクロールバーのサイズ
+    var postWidth: CGFloat = 0.0
+    var postHeight: CGFloat = 0.0
+    // ボタンのX,Y座標
+    var postPosX: CGFloat = 0.0
+    var postPosY: CGFloat = 0.0
+    
     
     //【モーダルウィンドウ】パーツ
     let textView: UITextView = UITextView()//(ModalView)UITextViewのインスタンスを生成
@@ -84,6 +96,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         CreatePostView()//メインのメモ機能
+//        makePostScoll()
 
 //        read()
         
@@ -136,6 +149,116 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         viewScroll()
         addBtnCategory()//カテゴリーボタンの追加
     }
+    
+    
+    
+//    ==========================================
+//　　　　 テスト：postViewにスクロール機能追加
+//    ==========================================
+    func CreatePostView(){
+        
+        //以下コンテンツ幅をつまりpostViewの高さを少し大きくする
+        //scrollviewの幅は画面全体の幅へ
+        // ボタンのX,Y座標
+        postPosX = 0
+        postPosY = 70
+        
+        postWidth = self.view.bounds.width
+        postHeight = self.view.bounds.height
+        
+        
+        postScrollView.frame = CGRect(x: postPosX, y: postPosY, width: postWidth, height: postHeight)
+        
+        postScrollView.bounces = true//スクロールの跳ね返り
+        
+        postScrollView.showsHorizontalScrollIndicator = false //スクロールバー非表示
+        
+        postScrollView.delegate = self// Delegate を設定
+        
+        
+        //1.textViewの高さをずらす
+        postViewX = 0
+        postVeiwY = 0
+        postViewWidth = self.view.bounds.width
+        postViewheight = self.view.bounds.height + 5
+        postView.frame = CGRect(x: postViewX, y: postVeiwY, width: postViewWidth, height: postViewheight)
+        postView.keyboardDismissMode = .interactive //textfieldのUIをインタラクティブへ
+        
+//        //スワイプジェスチャー
+//        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipePostView(sender:)))
+//        // スワイプの方向を指定
+//        downSwipe.direction = .down
+//        // viewにジェスチャーを登録
+//        postView.addGestureRecognizer(downSwipe)
+//
+        
+        //サンプルテキスト作成
+        postView.text = "sample text"
+        
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = 2//行間指定
+        let attributes = [NSAttributedStringKey.paragraphStyle : style]
+        postView.attributedText = NSAttributedString(string: postView.text,attributes: attributes)
+        postView.font = UIFont.systemFont(ofSize: 18)//フォントサイズを変更
+        
+        //keyboard上の"Done"ボタンセット
+        //"Main"はデフォルト画面のtextview画面
+        setInputAccessoryView(viewName: "Main")
+        
+        
+        
+        //スクロールビューの中身の大きさを指定
+        postScrollView.contentSize = CGSize(width: postViewWidth, height: postViewheight)
+        
+        postScrollView.addSubview(postView)
+        self.view.addSubview(postScrollView)
+
+        
+    }
+    
+    /* 以下は UITextFieldDelegate のメソッド */
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // スクロール中の処理
+        print("didScroll")
+        postView.resignFirstResponder()
+    }
+
+    
+    
+//    func CreatePostView(){
+//        //1.textViewの高さをずらす
+//        postViewX = 0
+//        postVeiwY = 70
+//        postView.frame = CGRect(x: postViewX, y: postVeiwY, width: self.view.bounds.width, height: self.view.bounds.height)
+//
+//        //サンプルテキスト作成
+//        postView.text = "sample text"
+//
+//        let style = NSMutableParagraphStyle()
+//        style.lineSpacing = 2//行間指定
+//        let attributes = [NSAttributedStringKey.paragraphStyle : style]
+//        postView.attributedText = NSAttributedString(string: postView.text,attributes: attributes)
+//        postView.font = UIFont.systemFont(ofSize: 18)//フォントサイズを変更
+//
+//        //keyboard上の"Done"ボタンセット
+//        //"Main"はデフォルト画面のtextview画面
+//        setInputAccessoryView(viewName: "Main")
+//
+//
+//        //スワイプジェスチャー
+//        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipePostView(sender:)))
+//        // スワイプの方向を指定
+//        downSwipe.direction = .down
+//        // viewにジェスチャーを登録
+//        postView.addGestureRecognizer(downSwipe)
+//        self.view.addSubview(postView)
+//    }
+//
+    
+    
+    
+    
+    
     
     
     
@@ -199,7 +322,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
     //notification
     func notification(){
-        postView.keyboardDismissMode =  .interactive
+        
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillHide, object: nil)
@@ -369,34 +492,34 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     }
     
 
-    func CreatePostView(){
-        //1.textViewの高さをずらす
-        postViewX = 0
-        postVeiwY = 70
-        postView.frame = CGRect(x: postViewX, y: postVeiwY, width: self.view.bounds.width, height: self.view.bounds.height)
-        
-        //サンプルテキスト作成
-        postView.text = "sample text"
-        
-        let style = NSMutableParagraphStyle()
-        style.lineSpacing = 2//行間指定
-        let attributes = [NSAttributedStringKey.paragraphStyle : style]
-        postView.attributedText = NSAttributedString(string: postView.text,attributes: attributes)
-        postView.font = UIFont.systemFont(ofSize: 18)//フォントサイズを変更
-        
-        //keyboard上の"Done"ボタンセット
-        //"Main"はデフォルト画面のtextview画面
-        setInputAccessoryView(viewName: "Main")
-        
-        
-        //スワイプジェスチャー
-        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipePostView(sender:)))
-        // スワイプの方向を指定
-        downSwipe.direction = .down
-        // viewにジェスチャーを登録
-        postView.addGestureRecognizer(downSwipe)
-        self.view.addSubview(postView)
-    }
+//    func CreatePostView(){
+//        //1.textViewの高さをずらす
+//        postViewX = 0
+//        postVeiwY = 70
+//        postView.frame = CGRect(x: postViewX, y: postVeiwY, width: self.view.bounds.width, height: self.view.bounds.height)
+//
+//        //サンプルテキスト作成
+//        postView.text = "sample text"
+//
+//        let style = NSMutableParagraphStyle()
+//        style.lineSpacing = 2//行間指定
+//        let attributes = [NSAttributedStringKey.paragraphStyle : style]
+//        postView.attributedText = NSAttributedString(string: postView.text,attributes: attributes)
+//        postView.font = UIFont.systemFont(ofSize: 18)//フォントサイズを変更
+//
+//        //keyboard上の"Done"ボタンセット
+//        //"Main"はデフォルト画面のtextview画面
+//        setInputAccessoryView(viewName: "Main")
+//
+//
+//        //スワイプジェスチャー
+//        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipePostView(sender:)))
+//        // スワイプの方向を指定
+//        downSwipe.direction = .down
+//        // viewにジェスチャーを登録
+//        postView.addGestureRecognizer(downSwipe)
+//        self.view.addSubview(postView)
+//    }
     
     //TODO:下記のキーボードを閉じるファンクションをインタラクティブに設定
     @objc func DownSwipePostView(sender: UISwipeGestureRecognizer) {
@@ -467,7 +590,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         //メモ欄に表示するカテゴリーのスペースを確保
         UIView.animate(withDuration: 0.0, delay: 0.0,  animations: {
-            self.postView.frame = CGRect(x: 0, y: 120, width: self.view.bounds.width, height: self.view.bounds.height)
+            self.postScrollView.frame = CGRect(x: 0, y: 120, width: self.view.bounds.width, height: self.view.bounds.height)
         }, completion: nil)
         
         //選択されたカテゴリー情報を取得
