@@ -197,7 +197,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         postView.keyboardDismissMode = .interactive //textfieldのUIをインタラクティブへ
         
         //サンプルテキスト作成
-        postView.text = "sample text"
+//        postView.text = "sample text"
         
         let style = NSMutableParagraphStyle()
         style.lineSpacing = 2//行間指定
@@ -428,8 +428,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     func createText()->UITextView{
         //textViewのイチとサイズを設定
         textView.frame = CGRect(x: 0, y:0, width: self.view.frame.width, height: self.view.frame.height)
-        
-        textView.text = "入力してください"//テキストを設定
+        textView.placeholder = "新規カテゴリーを入力"
         textView.font = UIFont.systemFont(ofSize:20.0)//フォントの大きさを設定
         textView.layer.borderWidth = 1//textViewの枠線の太さを設定
         textView.layer.borderColor = UIColor.lightGray.cgColor//枠線の色をグレーに設定
