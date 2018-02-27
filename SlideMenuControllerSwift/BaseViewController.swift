@@ -243,6 +243,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
                                                name: NSNotification.Name.UIKeyboardWillHide,
                                                object: nil)
     }
+    
     func testNotificationForViewwillDisAppear(){
         NotificationCenter.default.removeObserver(self,
                                                   name: .UIKeyboardWillShow,
@@ -265,34 +266,65 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         print(slideHeight)
         print(topKeyboard)
-        print(distance)
-        if distance >= 0 {
-            CusCategoryTable.contentOffset.y = distance
-        }
-    
-        if firstResize == 0{
-            CusCategoryTable.frame.size.height  = CusCategoryTable.frame.height - keyboardFrame.size.height
-        }
         
-        firstResize += 1
+
+        let LocationCurrentModal = ModalView.frame.origin.y//モーダルウィンドウのy座標取得
         
+        //モーダルウィンドウのy座標が0.0の場合、つまりiphone画面上に表示されている場合に、以下のコードを実行する
+        if LocationCurrentModal == 0.0 {
+//            print("success")
+            
+            if firstResize == 0{
+                print("上")
+                //テーブルのscrollView内に余分な高さ(contentOffset)をセット
+                if distance >= 0 {
+                    CusCategoryTable.contentOffset.y = distance
+                }
+                
+                CusCategoryTable.frame.size.height  = CusCategoryTable.frame.height - keyboardFrame.size.height
+                firstResize += 1
+                
+            }else{
+                print("下")
+                
+                CusCategoryTable.contentOffset.y = 0
+                
+                CusCategoryTable.frame.size.height  = self.view.bounds.height - 150
+//                CusCategoryTable.reloadData()
+                //テーブルサイズフラグをオフ(=0)にする
+                firstResize = 0
+                //            CusCategoryTable.reloadData()
+            }
+            print(firstResize)
+//            slideHeight = 0.0
+            
+        }
     }
     
     //この解除の部分をどこで解除するのか
     @objc func keyboardWillHide(_ notification: Notification) {
         let info = notification.userInfo!
         let keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        
+
         print(#function)
         CusCategoryTable.contentOffset.y = 0
         
-        if firstResize == 1{
-            CusCategoryTable.frame.size.height  = CusCategoryTable.frame.height + keyboardFrame.size.height
-        }
-        CusCategoryTable.reloadData()
-        //テーブルサイズフラグをオフ(=0)にする
+        print(firstResize)
+        
+        CusCategoryTable.frame.size.height  = self.view.bounds.height - 150
         firstResize = 0
         
+//        if firstResize == 0{
+//            CusCategoryTable.frame.size.height  = CusCategoryTable.frame.height - keyboardFrame.size.height
+//            firstResize += 1
+//        }else{
+//            CusCategoryTable.frame.size.height  = self.view.bounds.height
+//            CusCategoryTable.reloadData()
+//            //テーブルサイズフラグをオフ(=0)にする
+//            firstResize = 0
+//            //            CusCategoryTable.reloadData()
+//        }
+//
         
     }
     
@@ -470,34 +502,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     }
     
 
-//    func CreatePostView(){
-//        //1.textViewの高さをずらす
-//        postViewX = 0
-//        postVeiwY = 70
-//        postView.frame = CGRect(x: postViewX, y: postVeiwY, width: self.view.bounds.width, height: self.view.bounds.height)
-//
-//        //サンプルテキスト作成
-//        postView.text = "sample text"
-//
-//        let style = NSMutableParagraphStyle()
-//        style.lineSpacing = 2//行間指定
-//        let attributes = [NSAttributedStringKey.paragraphStyle : style]
-//        postView.attributedText = NSAttributedString(string: postView.text,attributes: attributes)
-//        postView.font = UIFont.systemFont(ofSize: 18)//フォントサイズを変更
-//
-//        //keyboard上の"Done"ボタンセット
-//        //"Main"はデフォルト画面のtextview画面
-//        setInputAccessoryView(viewName: "Main")
-//
-//
-//        //スワイプジェスチャー
-//        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipePostView(sender:)))
-//        // スワイプの方向を指定
-//        downSwipe.direction = .down
-//        // viewにジェスチャーを登録
-//        postView.addGestureRecognizer(downSwipe)
-//        self.view.addSubview(postView)
-//    }
+
     
     //TODO:下記のキーボードを閉じるファンクションをインタラクティブに設定
     @objc func DownSwipePostView(sender: UISwipeGestureRecognizer) {
