@@ -6,6 +6,9 @@
 import Foundation
 import UIKit
 
+var slideHeight:CGFloat = 0.0  //okayu
+
+
 class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
     //上記のプロトコル(UITableViewCell)でCellのデリゲートをしているので、
     //Cellのプロパティでidが使用できる
@@ -19,14 +22,48 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
         //テキストフィールドのデリゲート先を自分に設定する。
         CategoryTextField.delegate = self
         CategoryTextField.tag = 0
+        CategoryTextField.isUserInteractionEnabled = true
         
         
         //ジェスチャーの登録
         CategoryTextField.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CustomTableViewCell.textFieldTap))
-        CategoryTextField.addGestureRecognizer(tapGesture)
+        tapGesture.cancelsTouchesInView = false
+        CategoryCell.addGestureRecognizer(tapGesture)
+        
         
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        //TODO:おかゆさん
+        slideHeight = (textField.superview?.frame.height)! * CGFloat(textField.tag + 1)
+        
+        
+        
+        
+        
+        //レスポンダチェーンにアクションを送信
+//        UIApplication.shared.sendAction(#selector(BaseViewController.test), to: nil, from: CategoryTextField, for: nil)
+        
+        
+//        print(self.frame.origin.x)
+//        print(self.frame.origin.y)
+//        print(textField.superview?.frame.height as Any)
+    }
+    
+    
+//    @objc func test(sender:AnyObject?) {
+//        let tappedLocation = sender?.location(in: BaseViewController)
+//        //        let tappedIndexPath = CusCategoryTable.indexPathForRow(at: tappedLocation!)
+//        //        let tappedRow = tappedIndexPath?.row
+//        print(tappedLocation!)
+//
+//    }
+    
+    
+    
+    
     
     // ジェスチャーのアクション
     @objc func textFieldTap(sender: AnyObject) {
@@ -69,6 +106,7 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
         guard let gestures = sender?.gestureRecognizers! else { return }
         for gesture in gestures {
             if let gesture = gesture as? UITapGestureRecognizer {
+                //ここでtextfieldのlocation情報が取得出来れば理想
                 let tappedLocation = gesture.location(in: CusCategoryTable)
                 let tappedIndexPath = CusCategoryTable.indexPathForRow(at: tappedLocation)
                 let tappedRow = tappedIndexPath?.row
@@ -78,12 +116,7 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
                 }
             }
         }
-        
-        //【プログラムの設計】
-        //1.セル1つの長さを取得する
-        
-        
-        
+            
     }
     
     
@@ -112,22 +145,6 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
 //        scrollView.contentOffset.y = 0
 //    }
 //
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -231,6 +248,8 @@ extension BaseViewController: UITableViewDelegate,UITableViewDataSource {
         
         //表示したい文字の設定
         cell.CategoryTextField?.text = categoryInfo[indexPath.row]["name"] as? String
+        
+        cell.CategoryTextField.tag = indexPath.row  //okayu
         
         return cell
     }

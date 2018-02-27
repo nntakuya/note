@@ -49,7 +49,7 @@ class ingCoreData {
                     max_id = (fetch.value(forKey: "id") as? Int)!
                 }
 //                NSLog("coreDataの数\(idCount)")
-                NSLog("max_ridの値:\(max_id)")
+//                NSLog("max_ridの値:\(max_id)")
             }
         }
         catch{

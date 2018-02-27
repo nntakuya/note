@@ -43,6 +43,10 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     var selectedRowIndex = -1//何行目か保存されていないときを見分けるための-1を代入
     var categoryId = 0//カテゴリーIDのデフォルト値（カテゴリー：All）を "0" とする
     
+    //サイズフラグ
+    var firstResize :Int = 0
+    
+    
     
 //    =========================================
 //　　　　   モーダルウィンドウボタン
@@ -93,6 +97,11 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     var DisplayLabel = UILabel() //選択されたカテゴリー名を表示
     
     
+    
+    
+    
+    
+//    ====================================================================================================================================================================================================================================================================================================
     override func viewDidLoad() {
         super.viewDidLoad()
         CreatePostView()//メインのメモ機能
@@ -110,12 +119,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         cretaModalWindow()//create
         customModalWindow()//custom
         addListCategory()//CoreDataからテーブルデータを取得
-        
-        //TODO:(test)キーボードのスクロール機能
-        notification()
-        
-//        let indexPath = NSIndexPath(item: numberOfRowYouWant, section: 2)
-//        tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.middle, animated: true)
+    
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -133,6 +137,11 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         self.setNavigationBarItem()
         
         updateScrollBar()//カテゴリーボタンの追加
+        
+        //test
+        testNotificationForViewwillAppear()
+        
+        
     }
     
     //TODO:改善必要
@@ -140,6 +149,9 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     override func viewWillDisappear(_ animated: Bool){
         super.viewWillDisappear(animated)
         keyboardClose()
+        
+        //test
+        testNotificationForViewwillDisAppear()
     }
     
     //スクロールオブジェクトのリロード
@@ -184,14 +196,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         postView.frame = CGRect(x: postViewX, y: postVeiwY, width: postViewWidth, height: postViewheight)
         postView.keyboardDismissMode = .interactive //textfieldのUIをインタラクティブへ
         
-//        //スワイプジェスチャー
-//        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipePostView(sender:)))
-//        // スワイプの方向を指定
-//        downSwipe.direction = .down
-//        // viewにジェスチャーを登録
-//        postView.addGestureRecognizer(downSwipe)
-//
-        
         //サンプルテキスト作成
         postView.text = "sample text"
         
@@ -225,109 +229,83 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 
     
     
-//    func CreatePostView(){
-//        //1.textViewの高さをずらす
-//        postViewX = 0
-//        postVeiwY = 70
-//        postView.frame = CGRect(x: postViewX, y: postVeiwY, width: self.view.bounds.width, height: self.view.bounds.height)
-//
-//        //サンプルテキスト作成
-//        postView.text = "sample text"
-//
-//        let style = NSMutableParagraphStyle()
-//        style.lineSpacing = 2//行間指定
-//        let attributes = [NSAttributedStringKey.paragraphStyle : style]
-//        postView.attributedText = NSAttributedString(string: postView.text,attributes: attributes)
-//        postView.font = UIFont.systemFont(ofSize: 18)//フォントサイズを変更
-//
-//        //keyboard上の"Done"ボタンセット
-//        //"Main"はデフォルト画面のtextview画面
-//        setInputAccessoryView(viewName: "Main")
-//
-//
-//        //スワイプジェスチャー
-//        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipePostView(sender:)))
-//        // スワイプの方向を指定
-//        downSwipe.direction = .down
-//        // viewにジェスチャーを登録
-//        postView.addGestureRecognizer(downSwipe)
-//        self.view.addSubview(postView)
-//    }
-//
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //TODO:分かんない
     //カスタムテーブルキーボードバグ修正テスト
-//    func testNotificationForViewwillAppear() {
-//
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: #selector(BaseViewController.keyboardWillShow(_:)),
-//                                               name: NSNotification.Name.UIKeyboardWillShow,
-//                                               object: nil)
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: #selector(BaseViewController.keyboardWillHide(_:)) ,
-//                                               name: NSNotification.Name.UIKeyboardWillHide,
-//                                               object: nil)
-//    }
-//    func testNotificationForViewwillDisAppear(){
-//        NotificationCenter.default.removeObserver(self,
-//                                                  name: .UIKeyboardWillShow,
-//                                                  object: self.view.window)
-//        NotificationCenter.default.removeObserver(self,
-//                                                  name: .UIKeyboardDidHide,
-//                                                  object: self.view.window)
-//    }
-//
-//
-//    //
-//    @objc func keyboardWillShow(_ notification: Notification) {
-//
-//        let info = notification.userInfo!
-//
-//        let keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-//
-//        // bottom of textField
-//        let bottomTextField = textField.frame.origin.y + textField.frame.height
-//        // top of keyboard
-//        let topKeyboard = screenHeight - keyboardFrame.size.height
-//        // 重なり
-//        let distance = bottomTextField - topKeyboard
-//
-//        if distance >= 0 {
-//            // scrollViewのコンテツを上へオフセット + 20.0(追加のオフセット)
-//            scrollView.contentOffset.y = distance + 20.0
-//        }
-//    }
-//
-//    @objc func keyboardWillHide(_ notification: Notification) {
-//        scrollView.contentOffset.y = 0
-//    }
-//
-
-
-    
-    
-    
-    
-    
-    
-    //notification
-    func notification(){
+    //TODO:作業中
+    func testNotificationForViewwillAppear() {
         
-        
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillHide, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(BaseViewController.keyboardWillShow(_:)),
+                                               name: NSNotification.Name.UIKeyboardWillShow,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(BaseViewController.keyboardWillHide(_:)) ,
+                                               name: NSNotification.Name.UIKeyboardWillHide,
+                                               object: nil)
     }
+    func testNotificationForViewwillDisAppear(){
+        NotificationCenter.default.removeObserver(self,
+                                                  name: .UIKeyboardWillShow,
+                                                  object: self.view.window)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: .UIKeyboardDidHide,
+                                                  object: self.view.window)
+    }
+    
+    //okayu
+    @objc func keyboardWillShow(_ notification: Notification) {
+        print(#function)
+        let info = notification.userInfo!
+        
+        let keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        let topKeyboard = CusCategoryTable.frame.height - keyboardFrame.size.height
+        //        // 重なり
+        let distance = slideHeight - topKeyboard
+        
+        print(slideHeight)
+        print(topKeyboard)
+        print(distance)
+        if distance >= 0 {
+            CusCategoryTable.contentOffset.y = distance
+        }
+    
+        if firstResize == 0{
+            CusCategoryTable.frame.size.height  = CusCategoryTable.frame.height - keyboardFrame.size.height
+        }
+        
+        firstResize += 1
+        
+    }
+    
+    //この解除の部分をどこで解除するのか
+    @objc func keyboardWillHide(_ notification: Notification) {
+        let info = notification.userInfo!
+        let keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        print(#function)
+        CusCategoryTable.contentOffset.y = 0
+        
+        if firstResize == 1{
+            CusCategoryTable.frame.size.height  = CusCategoryTable.frame.height + keyboardFrame.size.height
+        }
+        CusCategoryTable.reloadData()
+        //テーブルサイズフラグをオフ(=0)にする
+        firstResize = 0
+        
+        
+    }
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
     @objc func adjustForKeyboard(notification: Notification) {
         let userInfo = notification.userInfo!
         
