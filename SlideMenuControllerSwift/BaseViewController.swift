@@ -98,9 +98,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
     
     
-    
-    
-    
 //    ====================================================================================================================================================================================================================================================================================================
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -196,14 +193,11 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         postView.frame = CGRect(x: postViewX, y: postVeiwY, width: postViewWidth, height: postViewheight)
         postView.keyboardDismissMode = .interactive //textfieldのUIをインタラクティブへ
         
-        //サンプルテキスト作成
-//        postView.text = "sample text"
-        
         let style = NSMutableParagraphStyle()
-        style.lineSpacing = 2//行間指定
+        style.lineSpacing = 2 //行間指定
         let attributes = [NSAttributedStringKey.paragraphStyle : style]
         postView.attributedText = NSAttributedString(string: postView.text,attributes: attributes)
-        postView.font = UIFont.systemFont(ofSize: 18)//フォントサイズを変更
+        postView.font = UIFont.systemFont(ofSize: 18) //フォントサイズを変更
         
         //keyboard上の"Done"ボタンセット
         //"Main"はデフォルト画面のtextview画面
@@ -252,8 +246,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
                                                   name: .UIKeyboardDidHide,
                                                   object: self.view.window)
     }
+
     
-    //okayu
     @objc func keyboardWillShow(_ notification: Notification) {
         print(#function)
         let info = notification.userInfo!
@@ -261,7 +255,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         let keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
         let topKeyboard = CusCategoryTable.frame.height - keyboardFrame.size.height
-        //        // 重なり
+        // 重なり
         let distance = slideHeight - topKeyboard
         
         print(slideHeight)
@@ -272,7 +266,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         //モーダルウィンドウのy座標が0.0の場合、つまりiphone画面上に表示されている場合に、以下のコードを実行する
         if LocationCurrentModal == 0.0 {
-//            print("success")
             
             if firstResize == 0{
                 print("上")
@@ -297,7 +290,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
             }
             print(firstResize)
 //            slideHeight = 0.0
-            
         }
     }
     
@@ -314,28 +306,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         CusCategoryTable.frame.size.height  = self.view.bounds.height - 150
         firstResize = 0
         
-//        if firstResize == 0{
-//            CusCategoryTable.frame.size.height  = CusCategoryTable.frame.height - keyboardFrame.size.height
-//            firstResize += 1
-//        }else{
-//            CusCategoryTable.frame.size.height  = self.view.bounds.height
-//            CusCategoryTable.reloadData()
-//            //テーブルサイズフラグをオフ(=0)にする
-//            firstResize = 0
-//            //            CusCategoryTable.reloadData()
-//        }
-//
-        
     }
-    
-    
-    
-    
-
-    
-    
-    
-    
     
     
     @objc func adjustForKeyboard(notification: Notification) {
@@ -346,18 +317,12 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         if notification.name == Notification.Name.UIKeyboardWillHide {
             postView.contentInset = UIEdgeInsets.zero
-//            CusCategoryTable.contentInset = UIEdgeInsets.zero
         } else {
             postView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height + 80, right: 0)
-//            CusCategoryTable.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
         }
         postView.scrollIndicatorInsets = postView.contentInset
         let selectedRange = postView.selectedRange
         postView.scrollRangeToVisible(selectedRange)
-        
-//        CusCategoryTable.scrollIndicatorInsets = CusCategoryTable.contentInset
-//        let selectedRangeTable = CusCategoryTable.selectedRange
-//        CusCategoryTable.scrollRangeToVisible(selectedRangeTable)
     }
     
     
@@ -498,12 +463,21 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {
             self.ModalView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
         }, completion: nil)
+        
+        
+        
+        
+        
+        //選択中のカテゴリーが表示されている場合、非表示にする
+        //1.カテゴリー表示欄を削除
+        DisplayCategoryBoard.removeFromSuperview()
+        //2.postView欄を元の座標に戻す
+        UIView.animate(withDuration: 0.0, delay: 0.0,  animations: {
+            self.postScrollView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+        }, completion: nil)
+        
     }
     
-
-
-    
-    //TODO:下記のキーボードを閉じるファンクションをインタラクティブに設定
     @objc func DownSwipePostView(sender: UISwipeGestureRecognizer) {
         //キーボード閉じる
         postView.resignFirstResponder()
@@ -564,11 +538,16 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         return btnCategory
     }
+    
+    
+    
 //    ============================================
-//　　　　   カテゴリーボタン選択アクション
+//　　　　   選択されたカテゴリー名を表示
 //    ============================================
+    //TODO:During fixing
     @objc func onClickCategoryButton(sender: UIButton) {
-        //memo:sender.tagでtagを取得可能
+        //やるべきこと
+        //ビューの位置をモーダルウィンドウの下に表示する
         
         //メモ欄に表示するカテゴリーのスペースを確保
         UIView.animate(withDuration: 0.0, delay: 0.0,  animations: {
@@ -617,6 +596,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         DisplayCategory.addSubview(DisplayLabel)
         DisplayCategoryBoard.addSubview(DisplayCategory)
         self.view.addSubview(DisplayCategoryBoard)
+        
         
         categoryId = categoryData["id"] as! Int //インサートするカテゴリーを更新
     }
@@ -910,7 +890,7 @@ extension BaseViewController : SlideMenuControllerDelegate {
     }
     
     func rightWillOpen() {
-        print("SlideMenuControllerDelegate: rightWillOpen")
+        print("SlideMenuControllerDelegate: rightWillO  pen")
     }
     
     func rightDidOpen() {

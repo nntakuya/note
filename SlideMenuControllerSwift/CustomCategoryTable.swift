@@ -38,31 +38,8 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
         
         //TODO:おかゆさん
         slideHeight = (textField.superview?.frame.height)! * CGFloat(textField.tag + 1)
-        
-        
-        
-        
-        
-        //レスポンダチェーンにアクションを送信
-//        UIApplication.shared.sendAction(#selector(BaseViewController.test), to: nil, from: CategoryTextField, for: nil)
-        
-        
-//        print(self.frame.origin.x)
-//        print(self.frame.origin.y)
-//        print(textField.superview?.frame.height as Any)
+      
     }
-    
-    
-//    @objc func test(sender:AnyObject?) {
-//        let tappedLocation = sender?.location(in: BaseViewController)
-//        //        let tappedIndexPath = CusCategoryTable.indexPathForRow(at: tappedLocation!)
-//        //        let tappedRow = tappedIndexPath?.row
-//        print(tappedLocation!)
-//
-//    }
-    
-    
-    
     
     
     // ジェスチャーのアクション
