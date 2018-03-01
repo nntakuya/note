@@ -460,21 +460,37 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     }
     //プラスボタンプッシュ時のファンクション
     @objc func onClickPlusButton(sender: UIButton) {
-        UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {
-            self.ModalView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
-        }, completion: nil)
+        
+        
+//        UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {
+//            self.ModalView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+//        }, completion: nil)
+//
+//
+//
+//
+//
+//        //選択中のカテゴリーが表示されている場合、非表示にする
+//        //1.カテゴリー表示欄を削除
+//        DisplayCategoryBoard.removeFromSuperview()
+//        //2.postView欄を元の座標に戻す
+//        UIView.animate(withDuration: 0.0, delay: 0.0,  animations: {
+//            self.postScrollView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+//        }, completion: nil)
+//
+//
+        
+        
+        let modalViewController = ModalViewController()
+        modalViewController.modalPresentationStyle = .custom
+        modalViewController.transitioningDelegate = self
+        present(modalViewController, animated: true, completion: nil)
         
         
         
         
         
-        //選択中のカテゴリーが表示されている場合、非表示にする
-        //1.カテゴリー表示欄を削除
-        DisplayCategoryBoard.removeFromSuperview()
-        //2.postView欄を元の座標に戻す
-        UIView.animate(withDuration: 0.0, delay: 0.0,  animations: {
-            self.postScrollView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
-        }, completion: nil)
+        
         
     }
     
@@ -863,6 +879,14 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
             try viewContext.save()
         } catch{
         }
+    }
+}
+
+
+
+extension BaseViewController : UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController,presenting: UIViewController?,source: UIViewController) -> UIPresentationController?{
+        return CustomPresentationController(presentedViewController: presented, presenting: presenting)
     }
 }
 
