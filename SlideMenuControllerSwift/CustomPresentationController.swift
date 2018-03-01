@@ -41,6 +41,7 @@ final class CustomPresentationController: UIPresentationController {
     override func size(forChildContentContainer container: UIContentContainer,
                        withParentContainerSize parentSize: CGSize) -> CGSize {
         return CGSize(width: parentSize.width - margin.x, height: parentSize.height - margin.y)
+//        return CGSize(width: parentSize.width, height: parentSize.height)
     }
     
     override var frameOfPresentedViewInContainerView: CGRect{

@@ -6,6 +6,8 @@ import CoreData
 
 class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelegate{
     
+    var categoryId = 0
+    
     //メインのメモ機能
     var postView: UITextView = UITextView()
     var postViewX :CGFloat = 0.0
@@ -23,51 +25,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     var postPosY: CGFloat = 0.0
     
     
-    //【モーダルウィンドウ】パーツ
-    let textView: UITextView = UITextView()//(ModalView)UITextViewのインスタンスを生成
-    @IBOutlet weak var ModalView: UIView!
-    @IBOutlet weak var CreateCategoryBtn: UIButton!
-    @IBOutlet weak var CustomCategoryBtn: UIButton!
-    @IBOutlet weak var CreateCategoryView: UIView!
-    @IBOutlet weak var CustomCategoryView: UIView!
-    
-//    =========================================
-//　　　　   CustomCategoryテーブル初期値セット
-//    =========================================
-    //【テーブル】CustomCategoryViewのテーブルを作成
-    @IBOutlet weak var CusCategoryTable: UITableView!
-    var cuWidth:CGFloat = 0.0//テーブルの横幅
-    var cuHeight:CGFloat = 0.0//テーブルの縦幅
-    
-    var categoryInfo:[[String:Any]] = []//表示したいセルの配列を初期化
-    var selectedRowIndex = -1//何行目か保存されていないときを見分けるための-1を代入
-    var categoryId = 0//カテゴリーIDのデフォルト値（カテゴリー：All）を "0" とする
-    
-    //サイズフラグ
-    var firstResize :Int = 0
-    
-    
-    
-//    =========================================
-//　　　　   モーダルウィンドウボタン
-//    =========================================
-    //(Btn)CreateCategoryアクション
-    @IBAction func BtnCreaateCategory(_ sender: UIButton) {
-        UIView.animate(withDuration: 0, delay: 0,  animations: {
-            self.CustomCategoryView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
-        }, completion: nil)
-        
-        keyboardClose()
-    }
-    
-    //(Btn)CustomCategoryアクション
-    @IBAction func BtnCustomCategory(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.0, delay: 0.0,  animations: {
-            self.CustomCategoryView.frame = CGRect(x: 0, y: 150, width: self.view.bounds.width, height: self.view.bounds.height)
-        }, completion: nil)
-        keyboardClose()
-    }
-
 //    ==================================
 //　　　　 アンダーバーオブジェクト
 //    ==================================
@@ -102,22 +59,14 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         CreatePostView()//メインのメモ機能
-//        makePostScoll()
-
-//        read()
         
         createTabBar()//アンダーバー作成
         //カテゴリーボタンの追加
         addBtnCategory()
-        
-        //viewTable カテゴリー一覧の並び替え
-        CusCategoryTable.reorder.delegate = self as? TableViewReorderDelegate
-        //【ModalView】
-        cretaModalWindow()//create
-        customModalWindow()//custom
-        addListCategory()//CoreDataからテーブルデータを取得
     
     }
+    
+    
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
@@ -135,9 +84,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         updateScrollBar()//カテゴリーボタンの追加
         
-        //test
-        testNotificationForViewwillAppear()
-        
         
     }
     
@@ -147,8 +93,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         super.viewWillDisappear(animated)
         keyboardClose()
         
-        //test
-        testNotificationForViewwillDisAppear()
     }
     
     //スクロールオブジェクトのリロード
@@ -224,89 +168,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
     
     
-    //カスタムテーブルキーボードバグ修正テスト
-    //TODO:作業中
-    func testNotificationForViewwillAppear() {
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(BaseViewController.keyboardWillShow(_:)),
-                                               name: NSNotification.Name.UIKeyboardWillShow,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(BaseViewController.keyboardWillHide(_:)) ,
-                                               name: NSNotification.Name.UIKeyboardWillHide,
-                                               object: nil)
-    }
     
-    func testNotificationForViewwillDisAppear(){
-        NotificationCenter.default.removeObserver(self,
-                                                  name: .UIKeyboardWillShow,
-                                                  object: self.view.window)
-        NotificationCenter.default.removeObserver(self,
-                                                  name: .UIKeyboardDidHide,
-                                                  object: self.view.window)
-    }
-
-    
-    @objc func keyboardWillShow(_ notification: Notification) {
-        print(#function)
-        let info = notification.userInfo!
-        
-        let keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        
-        let topKeyboard = CusCategoryTable.frame.height - keyboardFrame.size.height
-        // 重なり
-        let distance = slideHeight - topKeyboard
-        
-        print(slideHeight)
-        print(topKeyboard)
-        
-
-        let LocationCurrentModal = ModalView.frame.origin.y//モーダルウィンドウのy座標取得
-        
-        //モーダルウィンドウのy座標が0.0の場合、つまりiphone画面上に表示されている場合に、以下のコードを実行する
-        if LocationCurrentModal == 0.0 {
-            
-            if firstResize == 0{
-                print("上")
-                //テーブルのscrollView内に余分な高さ(contentOffset)をセット
-                if distance >= 0 {
-                    CusCategoryTable.contentOffset.y = distance
-                }
-                
-                CusCategoryTable.frame.size.height  = CusCategoryTable.frame.height - keyboardFrame.size.height
-                firstResize += 1
-                
-            }else{
-                print("下")
-                
-                CusCategoryTable.contentOffset.y = 0
-                
-                CusCategoryTable.frame.size.height  = self.view.bounds.height - 150
-//                CusCategoryTable.reloadData()
-                //テーブルサイズフラグをオフ(=0)にする
-                firstResize = 0
-                //            CusCategoryTable.reloadData()
-            }
-            print(firstResize)
-//            slideHeight = 0.0
-        }
-    }
-    
-    //この解除の部分をどこで解除するのか
-    @objc func keyboardWillHide(_ notification: Notification) {
-        let info = notification.userInfo!
-        let keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-
-        print(#function)
-        CusCategoryTable.contentOffset.y = 0
-        
-        print(firstResize)
-        
-        CusCategoryTable.frame.size.height  = self.view.bounds.height - 150
-        firstResize = 0
-        
-    }
     
     
     @objc func adjustForKeyboard(notification: Notification) {
@@ -327,83 +189,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
     
     
-//    ==================================
-//　　　　 モーダルウィンドウ作成(create)
-//    ==================================
-    func cretaModalWindow(){
-        
-        ModalView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
-        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipeView(sender:)))  //Swift3
-        // スワイプの方向を指定
-        downSwipe.direction = .down
-        // viewにジェスチャーを登録
-        self.view.addGestureRecognizer(downSwipe)
 
-        
-        CreateCategoryView.frame = CGRect(x: 0, y: 150, width: ModalView.bounds.width, height: ModalView.bounds.height - 150)
-        CreateCategoryBtn.frame = CGRect(x:0,y:100,width:ModalView.bounds.width / 2, height: 50)
-        CustomCategoryBtn.frame = CGRect(x:ModalView.bounds.width / 2 , y:100, width:ModalView.bounds.width / 2, height: 50)
-        
-        ModalView.addSubview(CreateCategoryBtn)
-        ModalView.addSubview(CustomCategoryBtn)
-        CreateCategoryView.addSubview(createText())
-        ModalView.addSubview(CreateCategoryView)
-        self.view.bringSubview(toFront: ModalView)
-    }
-    
-    
-//    ==================================
-//　　　　 モーダルウィンドウ作成(custom)
-//    ==================================
-    func customModalWindow(){
-        //隠れた状態
-        CustomCategoryView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
-        AjustTableLayout()//テーブルのサイズを調整
-        
-        //スワイプジェスチャー
-        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipeView(sender:)))  //Swift3
-        downSwipe.direction = .down// スワイプの方向を指定
-        // viewにジェスチャーを登録
-        self.view.addGestureRecognizer(downSwipe)
-        
-        self.view.addSubview(CustomCategoryView)
-    }
-    
-    
-//    ============================================
-//　　　　 モーダルウィンドウ ジェスチャーイベント
-//    ============================================
-    @objc func DownSwipeView(sender: UISwipeGestureRecognizer) {
-        
-        UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {
-            self.ModalView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.ModalView.bounds.width, height: self.ModalView.bounds.height - 150)
-        }, completion: nil)
-        
-        UIView.animate(withDuration: 0.5, delay: 0,  animations: {
-            self.CustomCategoryView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
-        }, completion: nil)
-        
-        keyboardClose()
-    }
-    
-    
-//    =========================================
-//　　　　  (モーダルウィンドウ)UITextViewの設定
-//    =========================================
-    func createText()->UITextView{
-        //textViewのイチとサイズを設定
-        textView.frame = CGRect(x: 0, y:0, width: self.view.frame.width, height: self.view.frame.height)
-        textView.placeholder = "新規カテゴリーを入力"
-        textView.font = UIFont.systemFont(ofSize:20.0)//フォントの大きさを設定
-        textView.layer.borderWidth = 1//textViewの枠線の太さを設定
-        textView.layer.borderColor = UIColor.lightGray.cgColor//枠線の色をグレーに設定
-        textView.isEditable = true//テキストを編集できるように設定
-        setInputAccessoryView(viewName: "Modal")//キーボードに完了ボタンを追加
-        
-        return textView
-    }
-    
-    
 //    ==================================
 //　　　　 アンダーバーオブジェクト作成
 //    ==================================
@@ -721,8 +507,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     //TODO:以下の関数を条件分岐で適切な処理を実行させる必要がある。
     func keyboardClose(){
         postView.resignFirstResponder()
-        textView.resignFirstResponder()
-        CusCategoryTable.reloadData()
         updateScrollBar()//Topメモ欄のスクロールオブジェクトの再読込
     }
     
@@ -747,6 +531,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         //値のセット
         newRecord.setValue(postView.text, forKey: "content")
         newRecord.setValue(Date(), forKey: "saveDate")//Date()で現在日時が取得できる
+        
+        
         newRecord.setValue(categoryId,forKey: "category_id")
         
         do{
@@ -810,16 +596,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
             kbToolBar.items = [spacer, commitButton]
             postView.inputAccessoryView = kbToolBar
             
-        }else if viewName == "Modal"{
-            let commitButton = UIBarButtonItem(
-                title: "Done",
-                style: .done,
-                target: self,
-                action: #selector(self.ModalcommitButtonTapped(sender:))
-            )
-            kbToolBar.items = [spacer, commitButton]
-            textView.inputAccessoryView = kbToolBar
-            
         }
     }
     
@@ -836,24 +612,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         keyboardClose()//キーボードを閉じる
     }
     
-    @objc func ModalcommitButtonTapped(sender: Any) {
-        self.resignFirstResponder()
-        
-        //CoreData処理
-        let coreData = ingCoreData()
-        coreData.insertCategory(name: textView.text)//インサート
-        coreData.readCategoryAll()//データチェック
-        
-        keyboardClose()//キーボードを閉じる
-        
-        //TODO:CustomCategoryテーブルの再読込
-        addListCategory()
-        
-        //モーダルウィンドウ閉じる
-        UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {
-            self.ModalView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.ModalView.bounds.width, height: self.ModalView.bounds.height - 150)
-        }, completion: nil)
-    }
     
     
 //    ==================================

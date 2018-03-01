@@ -1,4 +1,4 @@
-//
+ //
 //  ModalViewController.swift
 //  SlideMenuControllerSwift
 //
@@ -6,20 +6,22 @@
 //
 
 import UIKit
+import CoreData
 
 class ModalViewController: UIViewController,TableViewReorderDelegate,UITableViewDelegate,UITableViewDataSource {
-
-    //ModalView
-    
-    
-    
-    
     
     
 //    =========================================
-//　　　　   CustomCategoryテーブル初期値セット
+//　　　　   モーダルウィンドウの初期値
 //    =========================================
-    //【テーブル】CustomCategoryViewのテーブルを作成
+    let textView: UITextView = UITextView()//(ModalView)UITextViewのインスタンスを生成
+    var ModalView: UIView!
+    var CreateCategoryBtn: UIButton!
+    var CustomCategoryBtn: UIButton!
+    var CreateCategoryView: UIView!
+    var CustomCategoryView: UIView!
+    
+//    =========CustomCategoryテーブル初期値セット==============
     var CusCategoryTable: UITableView!
     var cuWidth:CGFloat = 0.0//テーブルの横幅
     var cuHeight:CGFloat = 0.0//テーブルの縦幅
@@ -33,12 +35,66 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     
     
     
+//    =========================================
+//　　　　   モーダルウィンドウの各値の設定
+//    =========================================
+    //モーダルウィンドウのマージン設定
+    //※変更する場合、CustomPresentationControllerのmarginも変更
+    let margin = (x: CGFloat(30), y: CGFloat(220.0))
+    
+    //
+    
+    
+    
+    
+    //    =========================================
+    //　　　　   モーダルウィンドウボタン
+    //    =========================================
+    //(Btn)CreateCategoryアクション
+//    @IBAction func BtnCreaateCategory(_ sender: UIButton) {
+//        UIView.animate(withDuration: 0, delay: 0,  animations: {
+//            self.CustomCategoryView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
+//        }, completion: nil)
+//
+//        keyboardClose()
+//    }
+    
+    //(Btn)CustomCategoryアクション
+//    @IBAction func BtnCustomCategory(_ sender: UIButton) {
+//        UIView.animate(withDuration: 0.0, delay: 0.0,  animations: {
+//            self.CustomCategoryView.frame = CGRect(x: 0, y: 150, width: self.view.bounds.width, height: self.view.bounds.height)
+//        }, completion: nil)
+//        keyboardClose()
+//    }
+
+    
+    
+    
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         CusCategoryTable = UITableView()
         
+        
+//        CusCategoryTable.register(CustomTableViewCell.self, forCellReuseIdentifier: "Cell")
+        CusCategoryTable.register(tableViewCellClass: CustomTableViewCell.self)
+        
         view.backgroundColor = UIColor.green
-        AjustTableLayout()
+//        AjustTableLayout()//テーブルオブジェクトを追加
+        
+        
+        cretaModalWindow()
+        
+        
+        addListCategory()//CoreDataからテーブルデータを取得
+        //viewTable カテゴリー一覧の並び替え
+        CusCategoryTable.reorder.delegate = self as? TableViewReorderDelegate
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,14 +104,301 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
 
     
     
-    func AjustTableLayout(){
-        cuWidth = self.view.bounds.width
-        cuHeight = self.view.bounds.height - 150
-        CusCategoryTable.frame = CGRect(x: 0, y: 0, width: cuWidth, height: cuHeight)
-        CusCategoryTable.keyboardDismissMode =  .onDrag //テーブルの操作性を良くする
+    
+    
+    
+    
+    
+//    ==================================
+//　　　　 モーダルウィンドウ作成(create)
+//    ==================================
+    func cretaModalWindow(){
+        //オブジェクトの初期化
+        ModalView = UIView()
         
+        
+    
+        ModalView.frame = CGRect(x: 0, y:0, width: self.view.bounds.width - margin.x, height: self.view.bounds.height - margin.y)
+        ModalView.backgroundColor = UIColor.black
+        
+        
+        let createBtn = makeCreateBtn()
+        let customBtn = makeCustomBtn()
+        let createView = makeCreateView()
+        let createTable = AjustTableLayout()
+        
+        ModalView.addSubview(createBtn)
+        ModalView.addSubview(customBtn)
+        createView.addSubview(createTable)
+        
+        
+//        createView.addSubview(createText())
+        ModalView.addSubview(createView)
+//        self.view.bringSubview(toFront: ModalView)
+        self.view.addSubview(ModalView)
+    }
+    
+    
+//    ==================================
+//　　　　 モーダルウィンドウ作成(custom)
+//    ==================================
+    func customModalWindow(){
+        //隠れた状態
+        CustomCategoryView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
+        AjustTableLayout()//テーブルのサイズを調整
+        
+        //スワイプジェスチャー
+//        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipeView(sender:)))  //Swift3
+//        downSwipe.direction = .down// スワイプの方向を指定
+//        // viewにジェスチャーを登録
+//        self.view.addGestureRecognizer(downSwipe)
+        
+        self.view.addSubview(CustomCategoryView)
+    }
+    
+    
+
+//    =========================================
+//　　　　  モーダルウィンドウ パーツ作成
+//    =========================================
+//    =============createBtnの設定============
+    func makeCreateBtn()->UIButton{
+        CreateCategoryBtn = UIButton()
+        CreateCategoryBtn.frame = CGRect(x: 0,y: 0,width:ModalView.bounds.width / 2, height: 50)
+        CreateCategoryBtn.backgroundColor = UIColor.red
+        return CreateCategoryBtn
+    }
+    
+//    =============customBtnの設定============
+    func makeCustomBtn()->UIButton{
+        CustomCategoryBtn = UIButton()
+        CustomCategoryBtn.frame = CGRect(x: ModalView.bounds.width / 2 , y: 0, width:ModalView.bounds.width / 2, height: 50)
+        CustomCategoryBtn.backgroundColor = UIColor.blue
+        
+        return CustomCategoryBtn
+    }
+    
+    
+//    =============createViewの設定============
+    func makeCreateView()->UIView{
+        CreateCategoryView = UIView()
+        //create画面の大きさ設定
+        CreateCategoryView.frame = CGRect(x: 0, y: 50, width: ModalView.bounds.width, height: ModalView.bounds.height - 50)
+        CreateCategoryView.backgroundColor = UIColor.gray
+        return CreateCategoryView
+    }
+    
+    
+    
+    
+    
+    
+//    =============UITextViewの設定============
+    
+    func createText()->UITextView{
+        //textViewのイチとサイズを設定
+        textView.frame = CGRect(x: 0, y:0, width: self.view.frame.width - margin.x, height: self.view.frame.height - margin.y)
+        textView.placeholder = "新規カテゴリーを入力"
+        textView.font = UIFont.systemFont(ofSize:20.0)//フォントの大きさを設定
+        textView.layer.borderWidth = 1//textViewの枠線の太さを設定
+        textView.layer.borderColor = UIColor.lightGray.cgColor//枠線の色をグレーに設定
+        textView.isEditable = true//テキストを編集できるように設定
+        setInputAccessoryView()//キーボードに完了ボタンを追加
+        
+        return textView
+    }
+    
+//    ==============キーボードのDoneボタン追加====================
+    func setInputAccessoryView() {
+        //--------ボタンオブジェクト作成--------------
+        let kbToolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
+        kbToolBar.barStyle = UIBarStyle.default  // スタイルを設定
+        kbToolBar.sizeToFit()  // 画面幅に合わせてサイズを変更
+        // スペーサー
+        let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace,
+                                     target: self, action: nil)
+        
+        //Modal:モーダルウィンドウのtextview
+        
+        let commitButton = UIBarButtonItem(
+            title: "Done",
+            style: .done,
+            target: self,
+            action: #selector(self.ModalcommitButtonTapped(sender:))
+        )
+        kbToolBar.items = [spacer, commitButton]
+        textView.inputAccessoryView = kbToolBar
+            
+
+    }
+    
+//    ==================================
+//　　　　 Doneボタンの実行処理(Modal)
+//    ==================================
+    @objc func ModalcommitButtonTapped(sender: Any) {
+        self.resignFirstResponder()
+        
+        //CoreData処理
+        let coreData = ingCoreData()
+        coreData.insertCategory(name: textView.text)//インサート
+        coreData.readCategoryAll()//データチェック
+        
+//        keyboardClose()//キーボードを閉じる
+        addListCategory()
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    ==================================
+//　　　　　　　 キーボード観察
+//    ==================================
+    func testNotificationForViewwillAppear() {
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(ModalViewController.keyboardWillShow(_:)),
+                                               name: NSNotification.Name.UIKeyboardWillShow,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(ModalViewController.keyboardWillHide(_:)) ,
+                                               name: NSNotification.Name.UIKeyboardWillHide,
+                                               object: nil)
+    }
+    
+    func testNotificationForViewwillDisAppear(){
+        NotificationCenter.default.removeObserver(self,
+                                                  name: .UIKeyboardWillShow,
+                                                  object: self.view.window)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: .UIKeyboardDidHide,
+                                                  object: self.view.window)
+    }
+    
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        print(#function)
+        let info = notification.userInfo!
+        
+        let keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        let topKeyboard = CusCategoryTable.frame.height - keyboardFrame.size.height
+        // 重なり
+        let distance = slideHeight - topKeyboard
+        
+        print(slideHeight)
+        print(topKeyboard)
+        
+        
+        let LocationCurrentModal = ModalView.frame.origin.y//モーダルウィンドウのy座標取得
+        
+        //モーダルウィンドウのy座標が0.0の場合、つまりiphone画面上に表示されている場合に、以下のコードを実行する
+        
+            
+        if firstResize == 0{
+            print("上")
+            //テーブルのscrollView内に余分な高さ(contentOffset)をセット
+            if distance >= 0 {
+                CusCategoryTable.contentOffset.y = distance
+            }
+            
+            CusCategoryTable.frame.size.height  = CusCategoryTable.frame.height - keyboardFrame.size.height
+            firstResize += 1
+            
+        }else{
+            print("下")
+            
+            CusCategoryTable.contentOffset.y = 0
+            
+            CusCategoryTable.frame.size.height  = self.view.bounds.height - 150
+            //                CusCategoryTable.reloadData()
+            //テーブルサイズフラグをオフ(=0)にする
+            firstResize = 0
+            //            CusCategoryTable.reloadData()
+        }
+        print(firstResize)
+        
+    }
+    
+    //この解除の部分をどこで解除するのか
+    @objc func keyboardWillHide(_ notification: Notification) {
+        let info = notification.userInfo!
+        let keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        print(#function)
+        CusCategoryTable.contentOffset.y = 0
+        
+        print(firstResize)
+        
+        CusCategoryTable.frame.size.height  = self.view.bounds.height - 150
+        firstResize = 0
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    ===============================================
+//　　　　　　　　　       テーブル設定
+//    ===============================================
+    func AjustTableLayout()->UITableView{
+        CusCategoryTable.delegate   = self
+        CusCategoryTable.dataSource = self
+        
+        CusCategoryTable.register(CustomTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(CustomTableViewCell.self))
+        print(NSStringFromClass(CustomTableViewCell.self))
         self.view.addSubview(CusCategoryTable)
         
+        
+        cuWidth = self.view.bounds.width
+        cuHeight = self.view.bounds.height
+        CusCategoryTable.frame = CGRect(x: 0, y: 0, width: cuWidth - margin.x, height: cuHeight - margin.y)
+        CusCategoryTable.keyboardDismissMode =  .onDrag //テーブルの操作性を良くする
+        
+//        self.view.addSubview(CusCategoryTable)
+        return CusCategoryTable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -80,7 +423,11 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         
         //文字列を表示するセルの取得
         //以下 "CustomTableViewCell" はテスト用にセット
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
+        let cell = tableView.dequeueReusableCell(withClass: CustomTableViewCell.self, for: indexPath)
+        
+        let test = CustomTableViewCell()
+        test.test()
         
         cell.selectionStyle = .none//選択時ハイライト無効
         
@@ -90,9 +437,10 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         cell.id = categoryInfo[indexPath.row]["id"] as? Int
         
         //表示したい文字の設定
-        cell.CategoryTextField?.text = categoryInfo[indexPath.row]["name"] as? String
+//        cell.CategoryTextField.text = categoryInfo[indexPath.row]["name"] as? String
+        cell.CategoryTextField.text = "sample"
         
-        cell.CategoryTextField.tag = indexPath.row  //okayu
+//        cell.CategoryTextField.tag = indexPath.row  //okayu
         
         return cell
     }
@@ -161,4 +509,67 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         CusCategoryTable.reloadData()
     }
 
+}
+
+
+
+
+
+extension UITableView {
+    
+    // func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell
+    // の代わりに使用する
+    func dequeueReusableCell<T: UITableViewCell>(withClass type: T.Type, for indexPath: IndexPath) -> T {
+        return self.dequeueReusableCell(withIdentifier: String(describing: type), for: indexPath) as! T
+    }
+    
+    // func dequeueReusableHeaderFooterView(withIdentifier identifier: String) -> UITableViewHeaderFooterView?
+    // の代わりに使用する
+    func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>(withClass type: T.Type) -> T {
+        return self.dequeueReusableHeaderFooterView(withIdentifier: String(describing: type)) as! T
+    }
+    
+    // func register(_ nib: UINib?, forCellReuseIdentifier identifier: String)
+    // func register(_ cellClass: Swift.AnyClass?, forCellReuseIdentifier identifier: String)
+    // の代わりに使用する
+    func register(tableViewCellClass cellClass: AnyClass) {
+        let className = String(describing: cellClass)
+        if UINib.fileExists(nibName: className) {
+            self.register(UINib.cachedNib(nibName: className), forCellReuseIdentifier: className)
+        } else {
+            self.register(cellClass, forCellReuseIdentifier: className)
+        }
+    }
+    
+    // func register(_ nib: UINib?, forHeaderFooterViewReuseIdentifier identifier: String)
+    // func register(_ aClass: Swift.AnyClass?, forHeaderFooterViewReuseIdentifier identifier: String)
+    // の代わりに使用する
+    func register(headerFooterViewClass aClass: AnyClass) {
+        let className = String(describing: aClass)
+        if UINib.fileExists(nibName: className) {
+            self.register(UINib.cachedNib(nibName: className), forHeaderFooterViewReuseIdentifier: className)
+        } else {
+            self.register(aClass, forHeaderFooterViewReuseIdentifier: className)
+        }
+    }
+}
+
+
+extension UINib {
+    
+    static let nibCache = NSCache<NSString, UINib>()
+    
+    static func fileExists(nibName: String) -> Bool {
+        return Bundle.main.path(forResource: nibName, ofType: "nib") != nil
+    }
+    
+    static func cachedNib(nibName: String) -> UINib {
+        if let nib = self.nibCache.object(forKey: nibName as NSString) {
+            return nib
+        } else {
+            let nib = UINib(nibName: nibName, bundle: nil)
+            self.nibCache.setObject(nib, forKey: nibName as NSString)
+            return nib
+        }
+    }
 }
