@@ -26,13 +26,13 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
     
 //    ==================================
-//　　　　 アンダーバーオブジェクト
+//　　　　 アンダーバーオブジェクト パーツ
 //    ==================================
+    
+//    ======アンダーバー 土台===============
     var TestView = UIView()
 
-//    ==================================
-//　　　　 スクロールバーオブジェクト
-//    ==================================
+//    ======スクロールバーオブジェクト========
     var scrollView:UIScrollView = UIScrollView()
     // スクロールバーのサイズ
     let sWidth: CGFloat = 0.0
@@ -41,17 +41,19 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     let sPosX: CGFloat = 0.0
     let sPosY: CGFloat = 0.0
     
-//    ==================================
-//　　　　 カテゴリーボタンオブジェクト
-//    ==================================
+    
+//    ======＋ボタンオブジェクト=======
+    
+    
+//    ======カテゴリーボタンオブジェクト=======
     var btnCategory: UIButton!
     
-//    ==================================
-//　　　　 (選択後)カテゴリー表示オブジェクト
-//    ==================================
+//    ======(選択後)カテゴリー表示オブジェクト==
     var DisplayCategoryBoard = UIView() //大枠
     var DisplayCategory = UIView() //選択されたカテゴリーを表示
     var DisplayLabel = UILabel() //選択されたカテゴリー名を表示
+    
+    
     
     
     
@@ -226,21 +228,22 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         myButton = UIButton()
         
         // ボタンのサイズ.
-        let bWidth: CGFloat = 50
-        let bHeight: CGFloat = 50
+        let bWidth: CGFloat = 40
+        let bHeight: CGFloat = 40
         
         // ボタンのX,Y座標.
-        let posX: CGFloat = self.view.frame.width / 90
-        let posY: CGFloat = 0
+//        let posX: CGFloat = self.view.frame.width / 90
+        let posX: CGFloat = (self.view.frame.width / 90 + 60 - bWidth) / 2
+        let posY: CGFloat = (50 - bHeight) / 2 //50はアンダーバーの高さ
 
         // ボタンの設置座標とサイズを設定する.
         myButton.frame = CGRect(x: posX, y: posY, width: bWidth, height: bHeight)
         myButton.backgroundColor = UIColor(displayP3Red: 201/250, green: 80/250, blue: 63/250, alpha: 1)
         myButton.layer.masksToBounds = true// ボタンの枠を丸くする.
-        myButton.layer.cornerRadius = 20.0// コーナーの半径を設定する.
+        myButton.layer.cornerRadius = myButton.frame.size.width * 0.5
         
         // タイトルを設定する(通常時).
-        myButton.setTitle("+", for: .normal)
+        myButton.setTitle("＋", for: .normal)
         myButton.setTitleColor(UIColor.white, for: .normal)
         
         myButton.tag = 0// ボタンにタグをつける.
@@ -322,67 +325,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
     
     
-//    ============================================
-//　　　　   選択されたカテゴリー名を表示
-//    ============================================
-    //TODO:During fixing
-    @objc func onClickCategoryButton(sender: UIButton) {
-        //やるべきこと
-        //ビューの位置をモーダルウィンドウの下に表示する
-        
-        //メモ欄に表示するカテゴリーのスペースを確保
-        UIView.animate(withDuration: 0.0, delay: 0.0,  animations: {
-            self.postScrollView.frame = CGRect(x: 0, y: 120, width: self.view.bounds.width, height: self.view.bounds.height)
-        }, completion: nil)
-        
-        //選択されたカテゴリー情報を取得
-        let readCoreData = ingCoreData()
-        let categoryData = readCoreData.readCategory(id: sender.tag)
-        
-        //postViewの移動したスペースに大枠のViewを作成
-        DeleteUIView(scv: DisplayCategoryBoard)//カテゴリー表示欄の初期化
-        DisplayCategoryBoard = UIView()//初期化
-        DisplayCategory = UIView()//初期化
-        DisplayLabel = UILabel()//初期化
-        
-        DisplayCategoryBoard.frame = CGRect(x: 0, y: 67, width: self.view.bounds.width, height: 50)
-        DisplayCategoryBoard.backgroundColor = UIColor.gray
 
-        
-        let catgoryName = categoryData["name"] as! String
-        DisplayLabel.text = catgoryName
-        DisplayLabel.textColor = UIColor.white
-        
-        let font = UIFont(name: "Hiragino Kaku Gothic ProN", size: 18)
-        
-        // width.widthでInt型でデータを取得出来る
-        let catwidth = catgoryName.size(withAttributes: [NSAttributedStringKey.font : font as Any])
-        
-        
-        DisplayLabel.frame = CGRect(x:DisplayCategory.bounds.height/2 + 4, y:DisplayCategory.bounds.width/2,width: catwidth.width,height: 50)
-        
-        // ボタンのX,Y座標
-        let catX: CGFloat = 10
-        let catY: CGFloat = 0
-        // ボタンのサイズ
-        let catWidth: CGFloat = catwidth.width
-        let catHeight: CGFloat = 50
-        
-        DisplayCategory.layer.masksToBounds = true// ボタンの枠を丸くする.
-        DisplayCategory.layer.cornerRadius = 20.0// コーナーの半径を設定する.
-        
-        DisplayCategory.frame = CGRect(x: catX, y: catY, width: catWidth, height: catHeight)
-        DisplayCategory.backgroundColor = UIColor.blue
-        
-        DisplayCategory.addSubview(DisplayLabel)
-        DisplayCategoryBoard.addSubview(DisplayCategory)
-        self.view.addSubview(DisplayCategoryBoard)
-        
-        
-        categoryId = categoryData["id"] as! Int //インサートするカテゴリーを更新
-    }
-
-    
     
     
 //    ==================================
@@ -478,6 +421,79 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //        postView.resignFirstResponder()
         keyboardClose()
     }
+    
+    
+    
+//    ============================================
+//　　　　   選択されたカテゴリー名を表示（画面うえ）
+//    ============================================
+    
+    @objc func onClickCategoryButton(sender: UIButton) {
+        //やるべきこと
+        //ビューの位置をモーダルウィンドウの下に表示する
+        
+        //メモ欄に表示するカテゴリーのスペースを確保
+        UIView.animate(withDuration: 0.0, delay: 0.0,  animations: {
+            self.postScrollView.frame = CGRect(x: 0, y: 120, width: self.view.bounds.width, height: self.view.bounds.height)
+        }, completion: nil)
+        
+        //選択されたカテゴリー情報を取得
+        let readCoreData = ingCoreData()
+        let categoryData = readCoreData.readCategory(id: sender.tag)
+        
+        //postViewの移動したスペースに大枠のViewを作成
+        DeleteUIView(scv: DisplayCategoryBoard)//カテゴリー表示欄の初期化
+        DisplayCategoryBoard = UIView()//初期化
+        DisplayCategory = UIView()//初期化
+        DisplayLabel = UILabel()//初期化
+        
+        DisplayCategoryBoard.frame = CGRect(x: 0, y: 67, width: self.view.bounds.width, height: 50)
+        DisplayCategoryBoard.backgroundColor = UIColor.gray
+        
+        
+        let catgoryName = categoryData["name"] as! String
+        DisplayLabel.text = catgoryName
+        DisplayLabel.textColor = UIColor.white
+        
+        let font = UIFont(name: "Hiragino Kaku Gothic ProN", size: 18)
+        
+        // width.widthでInt型でデータを取得出来る
+        let catwidth = catgoryName.size(withAttributes: [NSAttributedStringKey.font : font as Any])
+        
+        
+        DisplayLabel.frame = CGRect(x:DisplayCategory.bounds.height/2 + 4, y:DisplayCategory.bounds.width/2,width: catwidth.width,height: 50)
+        
+        // ボタンのX,Y座標
+        let catX: CGFloat = 10
+        let catY: CGFloat = 0
+        // ボタンのサイズ
+        let catWidth: CGFloat = catwidth.width
+        let catHeight: CGFloat = 50
+        
+        DisplayCategory.layer.masksToBounds = true// ボタンの枠を丸くする.
+        DisplayCategory.layer.cornerRadius = 20.0// コーナーの半径を設定する.
+        
+        DisplayCategory.frame = CGRect(x: catX, y: catY, width: catWidth, height: catHeight)
+        DisplayCategory.backgroundColor = UIColor.blue
+        
+        DisplayCategory.addSubview(DisplayLabel)
+        DisplayCategoryBoard.addSubview(DisplayCategory)
+        self.view.addSubview(DisplayCategoryBoard)
+        
+        
+        categoryId = categoryData["id"] as! Int //インサートするカテゴリーを更新
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 //    =======================================
