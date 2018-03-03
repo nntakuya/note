@@ -449,7 +449,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         DisplayLabel = UILabel()//初期化
         
         DisplayCategoryBoard.frame = CGRect(x: 0, y: 67, width: self.view.bounds.width, height: 50)
-        DisplayCategoryBoard.backgroundColor = UIColor.gray
+        DisplayCategoryBoard.backgroundColor = UIColor(displayP3Red: 250/250, green: 250/250, blue: 248/250, alpha: 1)
         
         
         let catgoryName = categoryData["name"] as! String
@@ -462,26 +462,32 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         let catwidth = catgoryName.size(withAttributes: [NSAttributedStringKey.font : font as Any])
         
         
-        DisplayLabel.frame = CGRect(x:DisplayCategory.bounds.height/2 + 4, y:DisplayCategory.bounds.width/2,width: catwidth.width,height: 50)
+//        DisplayLabel.frame = CGRect(x:DisplayCategory.bounds.height/2 + 4, y:DisplayCategory.bounds.width/2,width: catwidth.width,height: 50)
+    
+        let sampleY = (40 - catwidth.height) / 2
+        
+        DisplayLabel.frame = CGRect(x: 5 / 2 , y: sampleY,width: catwidth.width,height: 50)
+        
+        
+        // ボタンのサイズ
+        let catWidth: CGFloat = catwidth.width + 15
+        let catHeight: CGFloat = 40
         
         // ボタンのX,Y座標
         let catX: CGFloat = 10
-        let catY: CGFloat = 0
-        // ボタンのサイズ
-        let catWidth: CGFloat = catwidth.width
-        let catHeight: CGFloat = 50
+        let catY: CGFloat = (DisplayCategoryBoard.frame.height - catHeight) / 2
         
         DisplayCategory.layer.masksToBounds = true// ボタンの枠を丸くする.
         DisplayCategory.layer.cornerRadius = 20.0// コーナーの半径を設定する.
         
         DisplayCategory.frame = CGRect(x: catX, y: catY, width: catWidth, height: catHeight)
-        DisplayCategory.backgroundColor = UIColor.blue
+        DisplayCategory.backgroundColor = UIColor(displayP3Red: 238/250, green: 188/250, blue: 64/250, alpha: 1)
         
         DisplayCategory.addSubview(DisplayLabel)
         DisplayCategoryBoard.addSubview(DisplayCategory)
         self.view.addSubview(DisplayCategoryBoard)
         
-        
+        //TODO:このカテゴリー表示オブジェクト作成関数とは別に、表示関数を作成し、その中に以下のコードを組み込む
         categoryId = categoryData["id"] as! Int //インサートするカテゴリーを更新
     }
     
