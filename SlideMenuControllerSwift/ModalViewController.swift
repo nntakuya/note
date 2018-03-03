@@ -422,7 +422,8 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         let cell = tableView.dequeueReusableCell(withClass: CustomTableViewCell.self, for: indexPath)
         
-        cell.textinit()
+//        cell.textinit()
+        cell.test()
         
         cell.selectionStyle = .none//選択時ハイライト無効
         
@@ -432,10 +433,10 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         cell.id = categoryInfo[indexPath.row]["id"] as? Int
         
         //表示したい文字の設定
-//        cell.CategoryTextField.text = categoryInfo[indexPath.row]["name"] as? String
-        cell.CategoryTextField.text = "sample"
+        cell.CategoryTextField.text = categoryInfo[indexPath.row]["name"] as? String
+//        cell.CategoryTextField.text = "sample"
         
-//        cell.CategoryTextField.tag = indexPath.row  //okayu
+        cell.CategoryTextField.tag = indexPath.row  //okayu
         
         return cell
     }

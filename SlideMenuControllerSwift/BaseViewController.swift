@@ -325,9 +325,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
     
     
-
-    
-    
 //    ==================================
 //　　　　  スクロールオブジェクト作成
 //    ==================================
@@ -354,6 +351,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         return scrollView
     }
+    
     
     
 //    ========================================================
