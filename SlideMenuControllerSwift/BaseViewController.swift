@@ -136,6 +136,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         postViewheight = self.view.bounds.height + 5
         postView.frame = CGRect(x: postViewX, y: postVeiwY, width: postViewWidth, height: postViewheight)
         postView.keyboardDismissMode = .interactive //textfieldのUIをインタラクティブへ
+        postView.backgroundColor = UIColor(displayP3Red: 250/250, green: 250/250, blue: 248/250, alpha: 1)
+        
         
         let style = NSMutableParagraphStyle()
         style.lineSpacing = 2 //行間指定
@@ -154,8 +156,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         postScrollView.addSubview(postView)
         self.view.addSubview(postScrollView)
-
-        
     }
     
     /* 以下は UITextFieldDelegate のメソッド */
@@ -203,7 +203,12 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         let posY: CGFloat = self.view.bounds.height - bHeight
         TestView = UIView.init(frame: CGRect(x: posX, y: posY, width: bWidth, height: bHeight))
         
-        TestView.backgroundColor = UIColor.red//色指定
+        
+        TestView.backgroundColor = UIColor.white
+        //アンダーバーにシャドウを追加
+        TestView.dropShadow(color: .black, opacity: 1, offSet: CGSize(width: -1, height: 1), radius: 3, scale: true)
+        
+        
         
         TestView.addSubview(createBtn())//+ボタン
         TestView.addSubview(viewScroll())//スクロール
@@ -230,7 +235,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 
         // ボタンの設置座標とサイズを設定する.
         myButton.frame = CGRect(x: posX, y: posY, width: bWidth, height: bHeight)
-        myButton.backgroundColor = UIColor.blue// ボタンの背景色を設定.
+        myButton.backgroundColor = UIColor(displayP3Red: 201/250, green: 80/250, blue: 63/250, alpha: 1)
         myButton.layer.masksToBounds = true// ボタンの枠を丸くする.
         myButton.layer.cornerRadius = 20.0// コーナーの半径を設定する.
         
@@ -244,41 +249,15 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         myButton.addTarget(self, action: #selector(self.onClickPlusButton(sender:)), for: .touchUpInside)
         return myButton
     }
+    
     //プラスボタンプッシュ時のファンクション
     @objc func onClickPlusButton(sender: UIButton) {
-        
-        
-//        UIView.animate(withDuration: 0.5, delay: 0.0,  animations: {
-//            self.ModalView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
-//        }, completion: nil)
-//
-//
-//
-//
-//
-//        //選択中のカテゴリーが表示されている場合、非表示にする
-//        //1.カテゴリー表示欄を削除
-//        DisplayCategoryBoard.removeFromSuperview()
-//        //2.postView欄を元の座標に戻す
-//        UIView.animate(withDuration: 0.0, delay: 0.0,  animations: {
-//            self.postScrollView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
-//        }, completion: nil)
-//
-//
-        
-        
         let modalViewController = ModalViewController()
         modalViewController.modalPresentationStyle = .custom
         modalViewController.transitioningDelegate = self
         present(modalViewController, animated: true, completion: nil)
-        
-        
-        
-        
-        
-        
-        
     }
+    
     
     @objc func DownSwipePostView(sender: UISwipeGestureRecognizer) {
         //キーボード閉じる
@@ -319,7 +298,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         btnCategory.frame = CGRect(x: bcPosX, y: bcPosY, width: bcWidth, height: bcHeight)
         
         // ボタンの背景色を設定.
-        btnCategory.backgroundColor = UIColor.blue
+        btnCategory.backgroundColor = UIColor(displayP3Red: 238/250, green: 188/250, blue: 64/250, alpha: 1)
         
         // ボタンの枠を丸くする.
         btnCategory.layer.masksToBounds = true
@@ -410,7 +389,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //　　　　  スクロールオブジェクト作成
 //    ==================================
     private func viewScroll()->UIScrollView{
-        scrollView.backgroundColor = UIColor.gray
+        scrollView.backgroundColor = UIColor.white
         
         let sWidth: CGFloat = self.view.frame.width - 60 //50はボタンのwidthサイズ
         let sHeight: CGFloat = 50

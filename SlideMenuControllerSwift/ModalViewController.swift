@@ -189,10 +189,6 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     }
     
     
-    
-    
-    
-    
 //    =============UITextViewの設定============
     
     func createText()->UITextView{
@@ -426,8 +422,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         let cell = tableView.dequeueReusableCell(withClass: CustomTableViewCell.self, for: indexPath)
         
-        let test = CustomTableViewCell()
-        test.test()
+        cell.textinit()
         
         cell.selectionStyle = .none//選択時ハイライト無効
         

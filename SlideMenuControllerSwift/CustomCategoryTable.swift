@@ -16,10 +16,22 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
     var CategoryTextField = UITextField()
     var id:Int!
     
+
+    func textinit(){
+        self.CategoryTextField.frame = self.frame
+    }
+    // required initializer
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+//    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+//        super.init(style: style, reuseIdentifier: reuseIdentifier)
+//    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        CategoryCell = CustomTableViewCell()
+//        CategoryCell = CustomTableViewCell()
         
 //        CategoryTextField = UITextField()
         CategoryTextField.text = ""
@@ -29,7 +41,7 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
         CategoryTextField.tag = 0
 //        CategoryTextField.isUserInteractionEnabled = true
         
-        CategoryCell.addSubview(CategoryTextField)
+        self.addSubview(CategoryTextField)
         //ジェスチャーの登録
 //        CategoryTextField.isUserInteractionEnabled = true
 //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CustomTableViewCell.textFieldTap))
