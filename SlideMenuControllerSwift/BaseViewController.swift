@@ -290,8 +290,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         btnCategory.tag = catId //カテゴリーIDをButtonオブジェクトのtagにセット
         
         // ボタンのサイズ
-        let bcWidth: CGFloat = width.width
-        let bcHeight: CGFloat = 50
+        let bcWidth: CGFloat = width.width + 15
+        let bcHeight: CGFloat = 40
         
         // ボタンのX,Y座標
         let bcPosX: CGFloat = 0
@@ -362,7 +362,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     //スクロールバーオブジェクトにカテゴリーボタンを追加
     //TODO:ボタンオブジェクトにカテゴリー名もしくは、カテゴリーIDを追加
     func addBtnCategory(){
-        var scWidth = 0//コンテンツの中身のwidth
+        var scWidth = 0 //ボタンのx座標
+        let scHight = 5 //ボタンのy座標
         //カテゴリーボタンの初期化
         let categoryDatas = ingCoreData()
         
@@ -377,11 +378,11 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
             let catBtn =  btnCategory(inputCategory: btnName, categoryId: btnId)//返り値がボタンオブジェクト
             
             //オブジェクトの重複防止
-            catBtn.frame.origin = CGPoint(x: scWidth, y: 0)
+            catBtn.frame.origin = CGPoint(x: scWidth, y: scHight)
             //オブジェクトをスクロールバーへ追加
             scrollView.addSubview(catBtn)
-            //オブジェクト全体のwidthを取得
-            scWidth += Int(catBtn.layer.bounds.width) + 5
+            //オブジェクト全体のwidthを取得(ボタンオブジェクトの間のスペース確保)
+            scWidth += Int(catBtn.layer.bounds.width) + 10
             x += 1
         }
         scrollView.contentSize = CGSize(width: scWidth, height: 50)
