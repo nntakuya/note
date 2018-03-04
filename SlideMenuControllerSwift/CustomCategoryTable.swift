@@ -6,7 +6,7 @@
 import Foundation
 import UIKit
 
-var slideHeight:CGFloat = 0.0  
+var slideHeight:CGFloat = 0.0
 
 
 class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
@@ -19,8 +19,7 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        //TODO:おかゆさん
-        slideHeight = (textField.superview?.frame.height)! * CGFloat(textField.tag + 1)
+        slideHeight = (textField.superview?.frame.height)! * CGFloat(textField.tag - 1)
       
     }
     

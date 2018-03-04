@@ -48,6 +48,8 @@ final class CustomPresentationController: UIPresentationController {
         var presentedViewFrame = CGRect.zero
         let containerBounds = containerView!.bounds
         let childContentSize = size(forChildContentContainer: presentedViewController, withParentContainerSize: containerBounds.size)
+        
+        //TODO:下記のモーダルウィンドウのサイズが原因で、ジェスチャーイベントがおかしくなっている可能性がある。
         presentedViewFrame.size = childContentSize
         presentedViewFrame.origin.x = margin.x / 2.0
         presentedViewFrame.origin.y = margin.y / 2.0

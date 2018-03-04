@@ -1,5 +1,5 @@
-
 //  Created by 仲松拓哉 on 04/02/2018.
+
 
 import UIKit
 import CoreData
@@ -384,8 +384,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
             x += 1
         }
         scrollView.contentSize = CGSize(width: scWidth, height: 50)
-
     }
+    
    
     
 //    =====================================================

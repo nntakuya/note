@@ -79,17 +79,11 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         super.viewDidLoad()
         CusCategoryTable = UITableView()
         
-        
-//        CusCategoryTable.register(CustomTableViewCell.self, forCellReuseIdentifier: "Cell")
         CusCategoryTable.register(tableViewCellClass: CustomTableViewCell.self)
         
         view.backgroundColor = UIColor.green
-//        AjustTableLayout()//テーブルオブジェクトを追加
-        
         
         cretaModalWindow()
-        
-        
         addListCategory()//CoreDataからテーブルデータを取得
         //viewTable カテゴリー一覧の並び替え
         CusCategoryTable.reorder.delegate = self as? TableViewReorderDelegate
@@ -104,6 +98,22 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
 
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        testNotificationForViewwillAppear()
+//        self.setNavigationBarItem()
+    }
+    
+    
+    
+    override func viewWillDisappear(_ animated: Bool){
+        super.viewWillDisappear(animated)
+        testNotificationForViewwillDisAppear()
+
+    }
+    
+    
     
     
     
@@ -115,7 +125,6 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     func cretaModalWindow(){
         //オブジェクトの初期化
         ModalView = UIView()
-        
         
     
         ModalView.frame = CGRect(x: 0, y:0, width: self.view.bounds.width - margin.x, height: self.view.bounds.height - margin.y)
@@ -146,12 +155,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         //隠れた状態
         CustomCategoryView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
         AjustTableLayout()//テーブルのサイズを調整
-        
-        //スワイプジェスチャー
-//        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(BaseViewController.DownSwipeView(sender:)))  //Swift3
-//        downSwipe.direction = .down// スワイプの方向を指定
-//        // viewにジェスチャーを登録
-//        self.view.addGestureRecognizer(downSwipe)
+
         
         self.view.addSubview(CustomCategoryView)
     }
@@ -305,6 +309,10 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     }
     
     
+    //TODO:やることリスト
+    //CusCatogoryTableの高さを取得する
+    //その高さとキーボードの高さの差
+    
     @objc func keyboardWillShow(_ notification: Notification) {
         print(#function)
         let info = notification.userInfo!
@@ -312,55 +320,32 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         let keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
         let topKeyboard = CusCategoryTable.frame.height - keyboardFrame.size.height
+        
         // 重なり
         let distance = slideHeight - topKeyboard
         
+        print("カテゴリーテーブルの高さ")
+        print(CusCategoryTable.frame.height)
+        print("keyboardFrame")
+        print(keyboardFrame.size.height)
+        print("slideHeight")
         print(slideHeight)
+        print("topKeyboard")
         print(topKeyboard)
         
         
-        let LocationCurrentModal = ModalView.frame.origin.y//モーダルウィンドウのy座標取得
-        
-        //モーダルウィンドウのy座標が0.0の場合、つまりiphone画面上に表示されている場合に、以下のコードを実行する
-        
-            
-        if firstResize == 0{
-            print("上")
-            //テーブルのscrollView内に余分な高さ(contentOffset)をセット
-            if distance >= 0 {
-                CusCategoryTable.contentOffset.y = distance
-            }
-            
-            CusCategoryTable.frame.size.height  = CusCategoryTable.frame.height - keyboardFrame.size.height
-            firstResize += 1
-            
-        }else{
-            print("下")
-            
-            CusCategoryTable.contentOffset.y = 0
-            
-            CusCategoryTable.frame.size.height  = self.view.bounds.height - 150
-            //                CusCategoryTable.reloadData()
-            //テーブルサイズフラグをオフ(=0)にする
-            firstResize = 0
-            //            CusCategoryTable.reloadData()
+        //テーブルのscrollView内に余分な高さ(contentOffset)をセット
+        if distance >= 0 {
+            CusCategoryTable.contentOffset.y = distance
         }
-        print(firstResize)
-        
     }
     
-    //この解除の部分をどこで解除するのか
+
     @objc func keyboardWillHide(_ notification: Notification) {
-        let info = notification.userInfo!
-        let keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        
+
         print(#function)
         CusCategoryTable.contentOffset.y = 0
-        
-        print(firstResize)
-        
-        CusCategoryTable.frame.size.height  = self.view.bounds.height - 150
-        firstResize = 0
+
         
     }
     
@@ -390,7 +375,8 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         
         cuWidth = self.view.bounds.width
         cuHeight = self.view.bounds.height
-        CusCategoryTable.frame = CGRect(x: 0, y: 0, width: cuWidth - margin.x, height: cuHeight - margin.y)
+        //y座標の "-50"はcreateボタンとcustomボタン分の高さを差し引いた分
+        CusCategoryTable.frame = CGRect(x: 0, y: 0, width: cuWidth - margin.x, height: cuHeight - margin.y - 50)
         CusCategoryTable.keyboardDismissMode =  .onDrag //テーブルの操作性を良くする
         
 //        self.view.addSubview(CusCategoryTable)
