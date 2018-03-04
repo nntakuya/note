@@ -165,86 +165,47 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
 //    =========================================
 //    =============createBtnの設定============
     func makeCreateBtn()->UIView{
-//        CreateCategoryBtn = UIView()
-//        CreateCategoryBtn.frame = CGRect(x: 0,y: 0,width:ModalView.bounds.width / 2, height: 35)
-//        CreateCategoryBtn.backgroundColor = UIColor.clear
-//
-//        let aboveParts = UIButton()
-//        aboveParts.frame = CGRect(x:0, y:0, width:CreateCategoryBtn.frame.width + 0.5,height: CreateCategoryBtn.frame.height/2)
-//        aboveParts.layer.cornerRadius = 15
-//
-//        aboveParts.backgroundColor = UIColor.white
-//
-//        let underParts = UIButton()
-//        underParts.frame = CGRect(x:0, y:CreateCategoryBtn.frame.height/2 - 8,width:CreateCategoryBtn.frame.width,height: CreateCategoryBtn.frame.height/2 + 7)
-//        underParts.backgroundColor = UIColor.white
-//        underParts.setTitle("Create Category", for: .normal)
-//        underParts.setTitleColor(UIColor.black, for: .normal)
-//        underParts.addTarget(self, action: #selector(createAction(sender:)), for: .touchUpInside)
-//
-//        CreateCategoryBtn.addSubview(aboveParts)
-//        CreateCategoryBtn.addSubview(underParts)
-//
-//        return CreateCategoryBtn
-        
-        return TestmakingBtn(title: "create", color: "white")
+        return makingBtn(title: "create", color: "white")
     }
     
-    // title:"create"or"custom"  ,  color:"white"or"gray"
-//    func makingBtn(title:String,color:String)->UIView{
-//        CreateCategoryBtn = UIView()
-//        let aboveParts = UIButton()
-//        let underParts = UIButton()
-//
-//
-//        if title == "create"{
-//            CreateCategoryBtn.frame = CGRect(x: 0,y: 0,width:ModalView.bounds.width / 2, height: 35)
-//
-//            underParts.setTitle("Create Category", for: .normal)
-//
-//            underParts.addTarget(self, action: #selector(createAction(sender:)), for: .touchUpInside)
-//
-//        }else if title == "custom" {
-//            CustomCategoryBtn.frame = CGRect(x: ModalView.bounds.width / 2 , y: 0, width:ModalView.bounds.width / 2, height: 35)
-//
-//            underParts.setTitle("Custom Category", for: .normal)
-//
-//            underParts.addTarget(self, action: #selector(customAction(sender:)), for: .touchUpInside)
-//        }
-//
-//
-//        aboveParts.frame = CGRect(x:0, y:0, width:CreateCategoryBtn.frame.width + 0.5,height: CreateCategoryBtn.frame.height/2)
-//
-//        underParts.frame = CGRect(x:0, y:CreateCategoryBtn.frame.height/2 - 8,width:CreateCategoryBtn.frame.width,height: CreateCategoryBtn.frame.height/2 + 7)
-//
-//        //色指定
-//        //上ボタンと下ボタンの色を指定する
-//        CreateCategoryBtn.backgroundColor = UIColor.clear
-//
-//        if color == "white"{
-//            aboveParts.backgroundColor = UIColor.white
-//            underParts.backgroundColor = UIColor.white
-//            underParts.setTitleColor(UIColor.black, for: .normal)
-//        }else if color == "gray"{
-//            aboveParts.backgroundColor = UIColor.gray
-//            underParts.backgroundColor = UIColor.gray
-//            underParts.setTitleColor(UIColor.white, for: .normal)
-//        }
-//
-//        aboveParts.layer.cornerRadius = 15
-//
-//
-//        CreateCategoryBtn.addSubview(aboveParts)
-//        CreateCategoryBtn.addSubview(underParts)
-//
-//        return CreateCategoryBtn
-//    }
-    
-    
-    // title:"create"or"custom"  ,  color:"white"or"gray"
-    func TestmakingBtn(title:String,color:String)->UIView{
+    @objc func createAction(sender: UIButton){
+        textView.removeFromSuperview()
+        //textViewのイチとサイズを設定
+        textView.frame = CGRect(x: 0, y:0, width: self.view.frame.width, height: self.view.frame.height - 35)
+        textView.placeholder = "新規カテゴリーを入力"
+        textView.font = UIFont.systemFont(ofSize:20.0)//フォントの大きさを設定
+        textView.layer.borderWidth = 1//textViewの枠線の太さを設定
+        textView.layer.borderColor = UIColor.lightGray.cgColor//枠線の色をグレーに設定
+        textView.isEditable = true//テキストを編集できるように設定
+        setInputAccessoryView()//キーボードに完了ボタンを追加
+        
+        CreateCategoryView.addSubview(textView)
+        
+        CreateCategoryBtn.removeFromSuperview()
+        CustomCategoryBtn.removeFromSuperview()
+        ModalView.addSubview(makingBtn(title: "create", color: "white"))
+        ModalView.addSubview(makingBtn(title: "custom", color: "gray"))
         
         
+    }
+    
+    
+//    =============customBtnの設定============
+    func makeCustomBtn()->UIView{
+        return makingBtn(title: "custom", color: "gray")
+    }
+    @objc func customAction(sender: UIButton){
+        textView.removeFromSuperview()
+        
+        CreateCategoryBtn.removeFromSuperview()
+        CustomCategoryBtn.removeFromSuperview()
+        ModalView.addSubview(makingBtn(title: "create", color: "gray"))
+        ModalView.addSubview(makingBtn(title: "custom", color: "white"))
+    }
+    
+    //    =======ボタンオブジェクト作成関数=========
+    // title:"create"or"custom"  ,  color:"white"or"gray"
+    func makingBtn(title:String,color:String)->UIView{
         let aboveParts = UIButton()
         let underParts = UIButton()
         
@@ -301,59 +262,6 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     }
     
     
-    
-    
-    @objc func createAction(sender: UIButton){
-        textView.removeFromSuperview()
-        //textViewのイチとサイズを設定
-        textView.frame = CGRect(x: 0, y:0, width: self.view.frame.width, height: self.view.frame.height - 35)
-        textView.placeholder = "新規カテゴリーを入力"
-        textView.font = UIFont.systemFont(ofSize:20.0)//フォントの大きさを設定
-        textView.layer.borderWidth = 1//textViewの枠線の太さを設定
-        textView.layer.borderColor = UIColor.lightGray.cgColor//枠線の色をグレーに設定
-        textView.isEditable = true//テキストを編集できるように設定
-        setInputAccessoryView()//キーボードに完了ボタンを追加
-        
-
-        CreateCategoryView.addSubview(textView)
-        
-    }
-    
-//    =============customBtnの設定============
-    func makeCustomBtn()->UIView{
-//        CustomCategoryBtn = UIView()
-//        CustomCategoryBtn.frame = CGRect(x: ModalView.bounds.width / 2 , y: 0, width:ModalView.bounds.width / 2, height: 35)
-//        CustomCategoryBtn.backgroundColor = UIColor.clear
-//
-//
-//        let aboveParts = UIView()
-//        aboveParts.frame = CGRect(x:0, y:0, width:CreateCategoryBtn.frame.width + 0.5,height: CreateCategoryBtn.frame.height/2)
-//        aboveParts.layer.cornerRadius = 10
-//
-//        aboveParts.backgroundColor = UIColor.gray
-//
-//
-//
-//
-//        let underParts = UIButton()
-//        underParts.frame = CGRect(x:0, y:CreateCategoryBtn.frame.height/2 - 8,width:CreateCategoryBtn.frame.width,height: CreateCategoryBtn.frame.height/2 + 7)
-//        underParts.backgroundColor = UIColor.gray
-//        underParts.setTitle("Custom Category", for: .normal)
-//        underParts.setTitleColor(UIColor.white, for: .normal)
-//        underParts.addTarget(self, action: #selector(customAction(sender:)), for: .touchUpInside)
-//
-//        CustomCategoryBtn.addSubview(aboveParts)
-//        CustomCategoryBtn.addSubview(underParts)
-//
-//
-//        return CustomCategoryBtn
-        
-        return TestmakingBtn(title: "custom", color: "gray")
-    }
-    
-    @objc func customAction(sender: UIButton){
-        textView.removeFromSuperview()
-    }
     
     
 //    =============createViewの設定============
