@@ -42,37 +42,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     //※変更する場合、CustomPresentationControllerのmarginも変更
     let margin = (x: CGFloat(30), y: CGFloat(220.0))
     
-    //
-    
-    
-    
-    
-    //    =========================================
-    //　　　　   モーダルウィンドウボタン
-    //    =========================================
-    //(Btn)CreateCategoryアクション
-//    @IBAction func BtnCreaateCategory(_ sender: UIButton) {
-//        UIView.animate(withDuration: 0, delay: 0,  animations: {
-//            self.CustomCategoryView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
-//        }, completion: nil)
-//
-//        keyboardClose()
-//    }
-    
-    //(Btn)CustomCategoryアクション
-//    @IBAction func BtnCustomCategory(_ sender: UIButton) {
-//        UIView.animate(withDuration: 0.0, delay: 0.0,  animations: {
-//            self.CustomCategoryView.frame = CGRect(x: 0, y: 150, width: self.view.bounds.width, height: self.view.bounds.height)
-//        }, completion: nil)
-//        keyboardClose()
-//    }
 
-    
-    
-    
-    
-    
-    
     
     
     override func viewDidLoad() {
@@ -110,10 +80,6 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         testNotificationForViewwillDisAppear()
 
     }
-    
-    
-    
-    
     
     
     
@@ -324,45 +290,19 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         coreData.insertCategory(name: textView.text)//インサート
         coreData.readCategoryAll()//データチェック
         
-//        keyboardClose()//キーボードを閉じる
+        keyboardClose()//キーボードを閉じる
         addListCategory()
+        
+        
+        //手順1: 親のViewController型のインスタンスを作成
+        let targetViewController = self.parent as! BaseViewController
+        //手順2: 親のViewControllerに定義されているインスタンスメソッドを実行
+        targetViewController.updateScrollBar()
 
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    func keyboardClose(){
+        textView.resignFirstResponder
+    }
     
     
 //    ==================================
@@ -405,16 +345,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         // 重なり
         let distance = slideHeight - topKeyboard
         
-        print("カテゴリーテーブルの高さ")
-        print(CusCategoryTable.frame.height)
-        print("keyboardFrame")
-        print(keyboardFrame.size.height)
-        print("slideHeight")
-        print(slideHeight)
-        print("topKeyboard")
-        print(topKeyboard)
-        
-        
+   
         //テーブルのscrollView内に余分な高さ(contentOffset)をセット
         if distance >= 0 {
             CusCategoryTable.contentOffset.y = distance
@@ -426,20 +357,8 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
 
         print(#function)
         CusCategoryTable.contentOffset.y = 0
-
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
 //    ===============================================
@@ -467,8 +386,6 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("didSelectRowAt: \(indexPath)")
         
-        // タップ後すぐ非選択状態にするには下記メソッドを呼び出します．
-        // sampleTableView.deselectRow(at: indexPath, animated: true)
     }
     
     
@@ -485,23 +402,17 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         }
         
         //文字列を表示するセルの取得
-        //以下 "CustomTableViewCell" はテスト用にセット
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         let cell = tableView.dequeueReusableCell(withClass: CustomTableViewCell.self, for: indexPath)
         
-//        cell.textinit()
         cell.test()
         
         cell.selectionStyle = .none//選択時ハイライト無効
-        
-        //        cell.CategoryTextField.text = ""
         
         //category内容編集するためにidプロパティを更新
         cell.id = categoryInfo[indexPath.row]["id"] as? Int
         
         //表示したい文字の設定
         cell.CategoryTextField.text = categoryInfo[indexPath.row]["name"] as? String
-//        cell.CategoryTextField.text = "sample"
         
         cell.CategoryTextField.tag = indexPath.row  //okayu
         
@@ -517,6 +428,12 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         
         //テーブルの再描画
         CusCategoryTable.reloadData()
+        
+//        //BaseViewControllerのアンダーバーをアップデート
+//        let underbarUpdate = BaseViewController()
+//        underbarUpdate.updateScrollBar()
+        
+        
     }
     
     
@@ -579,22 +496,14 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
 
 
 extension UITableView {
-    
-    // func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell
-    // の代わりに使用する
     func dequeueReusableCell<T: UITableViewCell>(withClass type: T.Type, for indexPath: IndexPath) -> T {
         return self.dequeueReusableCell(withIdentifier: String(describing: type), for: indexPath) as! T
     }
     
-    // func dequeueReusableHeaderFooterView(withIdentifier identifier: String) -> UITableViewHeaderFooterView?
-    // の代わりに使用する
     func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>(withClass type: T.Type) -> T {
         return self.dequeueReusableHeaderFooterView(withIdentifier: String(describing: type)) as! T
     }
     
-    // func register(_ nib: UINib?, forCellReuseIdentifier identifier: String)
-    // func register(_ cellClass: Swift.AnyClass?, forCellReuseIdentifier identifier: String)
-    // の代わりに使用する
     func register(tableViewCellClass cellClass: AnyClass) {
         let className = String(describing: cellClass)
         if UINib.fileExists(nibName: className) {
@@ -604,9 +513,7 @@ extension UITableView {
         }
     }
     
-    // func register(_ nib: UINib?, forHeaderFooterViewReuseIdentifier identifier: String)
-    // func register(_ aClass: Swift.AnyClass?, forHeaderFooterViewReuseIdentifier identifier: String)
-    // の代わりに使用する
+   
     func register(headerFooterViewClass aClass: AnyClass) {
         let className = String(describing: aClass)
         if UINib.fileExists(nibName: className) {

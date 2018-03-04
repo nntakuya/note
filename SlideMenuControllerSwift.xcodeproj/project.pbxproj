@@ -225,6 +225,7 @@
 				B311B5762033E16600CA0604 /* CustomCategoryTable.swift */,
 				B3319362202E8483008477C9 /* ModalViewController.swift */,
 				B325C2E12045B82800C10137 /* UiPlaceholderTextifield.swift */,
+				B325C2E32046DD2900C10137 /* CustomPresentationController.swift */,
 			);
 			name = ModalView;
 			sourceTree = "<group>";
@@ -336,7 +337,6 @@
 				B311643B2027006600F01ACB /* BaseViewController.swift */,
 				B39F935820416AF900A72ADE /* ScrollBaseView.swift */,
 				C539E64D1A315E87003B7CC7 /* Main.storyboard */,
-				B325C2E32046DD2900C10137 /* CustomPresentationController.swift */,
 				C5BF6A8B1BF340020064C18E /* ExSlideMenuController.swift */,
 				B396958F203A6AAB008CEB96 /* ModalView */,
 				B396958D203A6992008CEB96 /* SideBar */,
