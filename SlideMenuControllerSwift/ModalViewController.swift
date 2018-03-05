@@ -7,6 +7,11 @@
 
 import UIKit
 import CoreData
+ 
+// protocol ScrollBarUpdateDelegate {
+//    func TestUpdateScrollBar()//スクロールバーアップデート
+// }
+ 
 
 class ModalViewController: UIViewController,TableViewReorderDelegate,UITableViewDelegate,UITableViewDataSource {
     
@@ -43,10 +48,36 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     let margin = (x: CGFloat(30), y: CGFloat(220.0))
     
 
+//    // ここで、プロトコルに従うクラスのインスタンスを用意する
+//    var delegate: ScrollBarUpdateDelegate?
+//
+//    func TestUpdateScrollBar(){
+//        self.delegate?.TestUpdateScrollBar()
+//    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         CusCategoryTable = UITableView()
         
         CusCategoryTable.register(tableViewCellClass: CustomTableViewCell.self)
@@ -295,18 +326,19 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         
         
 //        //手順1: 親のViewController型のインスタンスを作成
+//        print(self.parent,"親は.ModalViewの")
 //        let targetViewController = self.parent as! BaseViewController
 //        //手順2: 親のViewControllerに定義されているインスタンスメソッドを実行
 //        targetViewController.updateScrollBar()
         
-        let Base = BaseViewController()
+//        let Base = BaseViewController()
         
 
         //TODO:検証予定
 //        Base.loadView()
 //        Base.viewDidLoad()
 //        Base.viewWillAppear(true)
-        Base.updateScrollBar()
+//        Base.updateScrollBar()()//スクロールオブジェクト削除
     }
     func keyboardClose(){
         textView.resignFirstResponder

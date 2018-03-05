@@ -4,6 +4,9 @@
 import UIKit
 import CoreData
 
+
+
+
 class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelegate{
     
     var categoryId = 0
@@ -60,6 +63,10 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    ====================================================================================================================================================================================================================================================================================================
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(#function,"Baseview")
+        
+        
         CreatePostView()//メインのメモ機能
         
         createTabBar()//アンダーバー作成
@@ -83,7 +90,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
-        
+        print(#function,"Baseview")
+
         updateScrollBar()//カテゴリーボタンの追加
         
         
@@ -99,7 +107,15 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
     //スクロールオブジェクトのリロード
     func updateScrollBar(){
-        DeleteScrollView(scv: scrollView)//スクロールオブジェクト削除
+        print(#function,"Baseview")
+        DeleteScrollView()//スクロールオブジェクト削除
+        scrollView = UIScrollView()
+        viewScroll()
+        addBtnCategory()//カテゴリーボタンの追加
+    }
+    
+    func TestUpdateScrollBar(){
+        DeleteScrollView()//スクロールオブジェクト削除
         scrollView = UIScrollView()
         viewScroll()
         addBtnCategory()//カテゴリーボタンの追加
@@ -258,6 +274,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         let modalViewController = ModalViewController()
         modalViewController.modalPresentationStyle = .custom
         modalViewController.transitioningDelegate = self
+        
         present(modalViewController, animated: true, completion: nil)
     }
     
@@ -402,8 +419,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    =====================================================
 //　　　　   　スクロールオブジェクト内 スクロールビュー削除
 //    =====================================================
-    func DeleteScrollView(scv:UIScrollView) {
-        scv.removeFromSuperview()
+    func DeleteScrollView() {
+        scrollView.removeFromSuperview()
     }
     
 //    =====================================================
@@ -508,6 +525,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     func keyboardClose(){
         postView.resignFirstResponder()
         updateScrollBar()//Topメモ欄のスクロールオブジェクトの再読込
+        self.loadViewIfNeeded()
     }
     
 
