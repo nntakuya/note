@@ -294,14 +294,23 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         addListCategory()
         
         
-        //手順1: 親のViewController型のインスタンスを作成
-        let targetViewController = self.parent as! BaseViewController
-        //手順2: 親のViewControllerに定義されているインスタンスメソッドを実行
-        targetViewController.updateScrollBar()
+//        //手順1: 親のViewController型のインスタンスを作成
+//        let targetViewController = self.parent as! BaseViewController
+//        //手順2: 親のViewControllerに定義されているインスタンスメソッドを実行
+//        targetViewController.updateScrollBar()
+        
+        let Base = BaseViewController()
+        
 
+        //TODO:検証予定
+//        Base.loadView()
+//        Base.viewDidLoad()
+//        Base.viewWillAppear(true)
+        Base.updateScrollBar()
     }
     func keyboardClose(){
         textView.resignFirstResponder
+
     }
     
     
