@@ -226,7 +226,6 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
             CustomCategoryBtn.addSubview(underParts)
             
             return CustomCategoryBtn
-            
         }
     }
     
@@ -442,12 +441,6 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         
         //テーブルの再描画
         CusCategoryTable.reloadData()
-        
-//        //BaseViewControllerのアンダーバーをアップデート
-//        let underbarUpdate = BaseViewController()
-//        underbarUpdate.updateScrollBar()
-        
-        
     }
     
     

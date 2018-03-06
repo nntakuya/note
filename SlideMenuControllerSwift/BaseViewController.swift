@@ -258,7 +258,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         let modalViewController = ModalViewController()
         modalViewController.modalPresentationStyle = .custom
         modalViewController.transitioningDelegate = self
-        modalViewController.bvc = self
+        //下記コードはスクロールオブジェクト更新のため
+        modalViewController.bvc = self //modalViewControllerにBaseViewControllerオブジェクトプロパティを作成
         present(modalViewController, animated: true, completion: nil)
     }
     
@@ -274,9 +275,8 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    ============================================
     private func btnCategory(inputCategory :String , categoryId:Int)->UIButton{
         
-        var text = "サンプル"
         //関数にデータが入った場合にのみ、そのデータを変数へ
-        text = inputCategory
+        var text = inputCategory
         
         //カテゴリーIDを取得し、tagとしてセット
         let catId = categoryId
@@ -359,7 +359,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //　　　　  スクロールオブジェクトへカテゴリーボタン追加機能
 //    ========================================================
     //スクロールバーオブジェクトにカテゴリーボタンを追加
-    //TODO:ボタンオブジェクトにカテゴリー名もしくは、カテゴリーIDを追加
     func addBtnCategory(){
         var scWidth = 0 //ボタンのx座標
         let scHight = 5 //ボタンのy座標
@@ -429,7 +428,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    ============================================
     
     @objc func onClickCategoryButton(sender: UIButton) {
-        //やるべきこと
         //ビューの位置をモーダルウィンドウの下に表示する
         
         //メモ欄に表示するカテゴリーのスペースを確保
