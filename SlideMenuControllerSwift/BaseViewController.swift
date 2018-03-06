@@ -607,8 +607,9 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         self.resignFirstResponder()
 
         tapSave()//インサート
-//        read()//デバッグ用
         keyboardClose()//キーボードを閉じる
+        
+        postView.text = ""
     }
     
     

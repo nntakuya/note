@@ -16,6 +16,7 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
     var CategoryTextField = UITextField()
     var id:Int!
     var mvc = ModalViewController()
+    var bvc = BaseViewController()
     
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -24,7 +25,7 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
       
     }
     
-    func test(){
+    func makingCustomCell(){
         CategoryCell = self
     
         let cellWidth = Int(self.bounds.size.width - 70)
@@ -48,17 +49,18 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
         updateCategoryName()//カテゴリー名を更新
+        textField.resignFirstResponder()
         
         return true
     }
     
     
-
     //入力完了後に呼び出し
     func textFieldDidEndEditing(_ textField:UITextField){
         print("入力完了後に呼び出し")
         updateCategoryName()//カテゴリー名更新
     }
+
     
     //カテゴリー名更新
     func updateCategoryName(){
@@ -66,12 +68,15 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
         let inputText = CategoryTextField.text as! String
         categoryCore.UpdateCategoryName(id: id, name: inputText)
         
-        //ここでテーブルの再読込が必要
-        addListCategory()
+        //テーブルの再読込
+        UpdateDescriveCategory()
         
-        
+        //BaseViewのアンダーバー更新
+        bvc.updateScrollBar()
     }
-    func addListCategory(){
+    
+    
+    func UpdateDescriveCategory(){
         //CoreDataオブジェクト作成
         let categoryDatas = ingCoreData()
         //CoreDataからカテゴリーデータを全件取得

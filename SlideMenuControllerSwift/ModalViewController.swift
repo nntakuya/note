@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class ModalViewController: UIViewController,TableViewReorderDelegate,UITableViewDelegate,UITableViewDataSource {
+class ModalViewController: UIViewController,TableViewReorderDelegate,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate {
     
     
 //    =========================================
@@ -42,10 +42,11 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     //※変更する場合、CustomPresentationControllerのmarginも変更
     let margin = (x: CGFloat(30), y: CGFloat(220.0))
     
-
-    //テスト
-    var bvc:BaseViewController = BaseViewController()
+    //BaseviewControllerインスタンス
+    var bvc:BaseViewController = BaseViewController()//アンダーバー更新に必要
     
+    //CustomPresentationControllerインスタンス
+    var cpc  = CustomPresentationController.self
     
     
     override func viewDidLoad() {
@@ -251,6 +252,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         textView.layer.borderWidth = 1//textViewの枠線の太さを設定
         textView.layer.borderColor = UIColor.lightGray.cgColor//枠線の色をグレーに設定
         textView.isEditable = true//テキストを編集できるように設定
+        textView.returnKeyType = .done
         setInputAccessoryView()//キーボードに完了ボタンを追加
         
         return textView
@@ -284,6 +286,20 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
 //　　　　 Doneボタンの実行処理(Modal)
 //    ==================================
     @objc func ModalcommitButtonTapped(sender: Any) {
+        closeModal()
+    }
+    
+    
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
+    func closeModal(){
         self.resignFirstResponder()
         
         //CoreData処理
@@ -291,29 +307,13 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         coreData.insertCategory(name: textView.text)//インサート
         coreData.readCategoryAll()//データチェック
         
-        keyboardClose()//キーボードを閉じる
+        textView.resignFirstResponder
         addListCategory()
         
+        self.dismiss(animated: true, completion: nil)
         
-//        //手順1: 親のViewController型のインスタンスを作成
-//        let targetViewController = self.parent as! BaseViewController
-//        //手順2: 親のViewControllerに定義されているインスタンスメソッドを実行
-//        targetViewController.updateScrollBar()
-        
-        let Base = BaseViewController()
-        
-
-        //TODO:検証予定
-//        Base.loadView()
-//        Base.viewDidLoad()
-//        Base.viewWillAppear(true)
-//        Base.updateScrollBar()
         bvc.updateScrollBar()
         
-    }
-    func keyboardClose(){
-        textView.resignFirstResponder
-
     }
     
     
@@ -373,6 +373,10 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     }
     
     
+    
+    
+    
+    
 //    ===============================================
 //　　　　　　　　　       テーブル設定
 //    ===============================================
@@ -416,7 +420,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         //文字列を表示するセルの取得
         let cell = tableView.dequeueReusableCell(withClass: CustomTableViewCell.self, for: indexPath)
         
-        cell.test()
+        cell.makingCustomCell()
         
         cell.selectionStyle = .none//選択時ハイライト無効
         
@@ -429,6 +433,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         cell.CategoryTextField.tag = indexPath.row
         
         cell.mvc = self
+        cell.bvc = bvc
         
         return cell
     }
@@ -498,7 +503,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
             i += 1
         }
         //5.テーブルの再読込
-        CusCategoryTable.reloadData()
+        bvc.updateScrollBar()
     }
 
 }
