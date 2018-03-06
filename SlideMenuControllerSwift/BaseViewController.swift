@@ -258,6 +258,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         let modalViewController = ModalViewController()
         modalViewController.modalPresentationStyle = .custom
         modalViewController.transitioningDelegate = self
+        modalViewController.bvc = self
         present(modalViewController, animated: true, completion: nil)
     }
     

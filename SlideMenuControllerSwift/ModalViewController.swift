@@ -43,6 +43,9 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     let margin = (x: CGFloat(30), y: CGFloat(220.0))
     
 
+    //テスト
+    var bvc:BaseViewController = BaseViewController()
+    
     
     
     override func viewDidLoad() {
@@ -306,7 +309,9 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
 //        Base.loadView()
 //        Base.viewDidLoad()
 //        Base.viewWillAppear(true)
-        Base.updateScrollBar()
+//        Base.updateScrollBar()
+        bvc.updateScrollBar()
+        
     }
     func keyboardClose(){
         textView.resignFirstResponder
@@ -469,6 +474,10 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         
         return [deleteButton]
     }
+    
+    
+    
+    
     
     func tableView(_ tableView: UITableView, reorderRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         //1. 全体の列のデータを取得(viewdidload)で可

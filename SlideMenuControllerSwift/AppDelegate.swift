@@ -14,6 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var categoryId = Int()
     
     
+    //scrollViewのインスタンスを作成
+    var scrollView = UIScrollView()
+    
+    
+    
+    
+    
     fileprivate func createMenuView() {
         
         // create viewController code...
