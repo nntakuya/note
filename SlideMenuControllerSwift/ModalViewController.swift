@@ -40,7 +40,8 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
 //    =========================================
     //モーダルウィンドウのマージン設定
     //※変更する場合、CustomPresentationControllerのmarginも変更
-    let margin = (x: CGFloat(30), y: CGFloat(220.0))
+//    let margin = (x: CGFloat(30), y: CGFloat(220.0))
+    let margin = (x: CGFloat(10), y: CGFloat(120.0))
     
     //BaseviewControllerインスタンス
     var bvc:BaseViewController = BaseViewController()//アンダーバー更新に必要
@@ -96,7 +97,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         ModalView = UIView()
         
     
-        ModalView.frame = CGRect(x: 0, y:0, width: self.view.bounds.width - margin.x, height: self.view.bounds.height - margin.y)
+        ModalView.frame = CGRect(x: 0, y:0, width: self.view.bounds.width - margin.x, height: self.view.bounds.height - margin.y / 2 - 20)
         ModalView.backgroundColor = UIColor.clear
         
         
@@ -236,7 +237,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     func makeCreateView()->UIView{
         CreateCategoryView = UIView()
         //create画面の大きさ設定
-        CreateCategoryView.frame = CGRect(x: 0, y: 34, width: ModalView.bounds.width, height: ModalView.bounds.height - 50)
+        CreateCategoryView.frame = CGRect(x: 0, y: 34, width: ModalView.bounds.width, height: ModalView.bounds.height - 35)
         CreateCategoryView.backgroundColor = UIColor.clear
         return CreateCategoryView
     }
@@ -246,7 +247,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     
     func createText()->UITextView{
         //textViewのイチとサイズを設定
-        textView.frame = CGRect(x: 0, y:0, width: self.view.frame.width - margin.x, height: self.view.frame.height - margin.y - 35)
+        textView.frame = CGRect(x: 0, y:0, width: self.view.frame.width - margin.x, height: self.view.frame.height - margin.y / 2 - 20 - 35)
         textView.placeholder = "Input New Category"
         textView.font = UIFont.systemFont(ofSize:20.0)//フォントの大きさを設定
         textView.layer.borderWidth = 1//textViewの枠線の太さを設定
@@ -254,6 +255,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         textView.isEditable = true//テキストを編集できるように設定
         textView.returnKeyType = .done
         setInputAccessoryView()//キーボードに完了ボタンを追加
+        
         
         return textView
     }
@@ -390,7 +392,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         cuWidth = self.view.bounds.width
         cuHeight = self.view.bounds.height
         //y座標の "-50"はcreateボタンとcustomボタン分の高さを差し引いた分
-        CusCategoryTable.frame = CGRect(x: 0, y: 0, width: cuWidth - margin.x, height: cuHeight - margin.y - 35)
+        CusCategoryTable.frame = CGRect(x: 0, y: 0, width: cuWidth - margin.x, height: cuHeight - margin.y / 2 - 20 - 35)
         CusCategoryTable.keyboardDismissMode =  .onDrag //テーブルの操作性を良くする
         
 //        self.view.addSubview(CusCategoryTable)

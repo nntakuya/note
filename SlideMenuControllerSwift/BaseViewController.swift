@@ -615,6 +615,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         keyboardClose()//キーボードを閉じる
         
         postView.text = ""
+        
     }
     
     

@@ -21,7 +21,7 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        slideHeight = (textField.superview?.frame.height)! * CGFloat(textField.tag - 1)
+        slideHeight = (textField.superview?.frame.height)! * CGFloat(textField.tag + 1)
       
     }
     
