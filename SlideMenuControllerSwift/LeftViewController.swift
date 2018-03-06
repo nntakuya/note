@@ -23,7 +23,7 @@ class LeftViewController : UIViewController{
     var mainViewController: UIViewController!
     var AllViewController: UIViewController!
     var OthersViewController: UIViewController!
-    var imageHeaderView: ImageHeaderView!
+//    var imageHeaderView: ImageHeaderView!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -44,8 +44,8 @@ class LeftViewController : UIViewController{
         
         self.tableView.registerCellClass(BaseTableViewCell.self)
         
-        self.imageHeaderView = ImageHeaderView.loadNib()
-        self.view.addSubview(self.imageHeaderView)
+//        self.imageHeaderView = ImageHeaderView.loadNib()
+//        self.view.addSubview(self.imageHeaderView)
     }
     
     
@@ -61,7 +61,7 @@ class LeftViewController : UIViewController{
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.imageHeaderView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 160)
+//        self.imageHeaderView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 160)
         self.view.layoutIfNeeded()
     }
     
@@ -141,6 +141,15 @@ extension LeftViewController : UITableViewDataSource {
             cell.category_id = menus[indexPath.row]["id"] as! Int
         }
         cell.setData(menus[indexPath.row]["name"])
+        
+        tableView.separatorColor = UIColor.darkGray
+        tableView.separatorStyle = .none
+        
+        let border = UIView()
+        border.frame = CGRect(x: 13, y: 52, width: cell.frame.size.width * 0.75 , height: 1)
+        border.backgroundColor = UIColor.darkGray
+        cell.addSubview(border)
+        
         
         return cell
     }

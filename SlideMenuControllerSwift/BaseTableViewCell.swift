@@ -1,10 +1,8 @@
 //
 //  BaseTableViewCell.swift
 //  SlideMenuControllerSwift
-//
-//  Created by Yuji Hato on 1/22/15.
-//  Copyright (c) 2015 Yuji Hato. All rights reserved.
-//
+
+//ここでサイドバーの設定をしている
 import UIKit
 
 open class BaseTableViewCell : UITableViewCell {
@@ -29,16 +27,26 @@ open class BaseTableViewCell : UITableViewCell {
     }
     
     open class func height() -> CGFloat {
-        return 48
+        return 55
     }
     
     open func setData(_ data: Any?) {
-        self.backgroundColor = UIColor(hex: "F1F8E9")
-        self.textLabel?.font = UIFont.italicSystemFont(ofSize: 18)
-        self.textLabel?.textColor = UIColor(hex: "9E9E9E")
+//        self.backgroundColor = UIColor(hex: "F1F8E9")
+//        self.textLabel?.font = UIFont.italicSystemFont(ofSize: 18)
+        self.textLabel?.font = UIFont(name:"Helvetica", size:18)
+        
+//        self.textLabel?.textColor = UIColor(hex: "9E9E9E")
         if let menuText = data as? String {
             self.textLabel?.text = menuText
         }
+//        makingSeparator()
+        
+    }
+    
+    func makingSeparator(){
+        let border = UIView()
+        border.frame = CGRect(x: 3, y: 55, width: self.frame.size.width - 3, height: 1)
+        self.addSubview(border)
     }
     
     override open func setHighlighted(_ highlighted: Bool, animated: Bool) {
