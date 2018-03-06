@@ -148,6 +148,12 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         textView.layer.borderColor = UIColor.lightGray.cgColor//枠線の色をグレーに設定
         textView.isEditable = true//テキストを編集できるように設定
         setInputAccessoryView()//キーボードに完了ボタンを追加
+        // スワイプを定義
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(ModalViewController.downSwipeView(sender:)))
+        // レフトスワイプのみ反応するようにする
+        downSwipe.direction = .down
+        // viewにジェスチャーを登録
+        textView.addGestureRecognizer(downSwipe)
         
         CreateCategoryView.addSubview(textView)
         
@@ -179,7 +185,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         let aboveParts = UIButton()
         let underParts = UIButton()
         
-        aboveParts.layer.cornerRadius = 15
+        aboveParts.layer.cornerRadius = 11.5
         
         if color == "white"{
             aboveParts.backgroundColor = UIColor.white
@@ -190,12 +196,17 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
             underParts.backgroundColor = UIColor.gray
             underParts.setTitleColor(UIColor.white, for: .normal)
         }
-        
+//        23の時
+//        aboveParts.frame = CGRect(x:-3, y:0, width:CreateCategoryBtn.frame.width + 6,height: CreateCategoryBtn.frame.height/2)
+//
+//        underParts.frame = CGRect(x:0, y:CreateCategoryBtn.frame.height/2 - 8.5,width:CreateCategoryBtn.frame.width,height: CreateCategoryBtn.frame.height/2 + 8)
+//
+//
         
         if title == "create"{
             CreateCategoryBtn = UIView()
             CreateCategoryBtn.backgroundColor = UIColor.clear
-            CreateCategoryBtn.frame = CGRect(x: 0,y: 0,width:ModalView.bounds.width / 2, height: 35)
+            CreateCategoryBtn.frame = CGRect(x: 0,y: 0,width:ModalView.bounds.width / 2 - 0.5, height: 35)
             aboveParts.frame = CGRect(x:0, y:0, width:CreateCategoryBtn.frame.width + 0.5,height: CreateCategoryBtn.frame.height/2)
             
             underParts.frame = CGRect(x:0, y:CreateCategoryBtn.frame.height/2 - 8,width:CreateCategoryBtn.frame.width,height: CreateCategoryBtn.frame.height/2 + 7)
@@ -213,9 +224,9 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
             CustomCategoryBtn = UIView()
             CustomCategoryBtn.backgroundColor = UIColor.clear
             CustomCategoryBtn.frame = CGRect(x: ModalView.bounds.width / 2 , y: 0, width:ModalView.bounds.width / 2, height: 35)
-            aboveParts.frame = CGRect(x:0, y:0, width:CustomCategoryBtn.frame.width + 0.5,height: CreateCategoryBtn.frame.height/2)
+            aboveParts.frame = CGRect(x:0, y:0, width:CreateCategoryBtn.frame.width + 0.5,height: CreateCategoryBtn.frame.height/2)
             
-            underParts.frame = CGRect(x:0, y:CustomCategoryBtn.frame.height/2 - 8,width:CreateCategoryBtn.frame.width,height: CreateCategoryBtn.frame.height/2 + 7)
+            underParts.frame = CGRect(x:0, y:CreateCategoryBtn.frame.height/2 - 8,width:CreateCategoryBtn.frame.width,height: CreateCategoryBtn.frame.height/2 + 7)
             
             
             underParts.setTitle("Custom Category", for: .normal)
@@ -256,8 +267,20 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         textView.returnKeyType = .done
         setInputAccessoryView()//キーボードに完了ボタンを追加
         
+        // スワイプを定義
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(ModalViewController.downSwipeView(sender:)))
+        // レフトスワイプのみ反応するようにする
+        downSwipe.direction = .down
+        // viewにジェスチャーを登録
+        textView.addGestureRecognizer(downSwipe)
+        
         
         return textView
+    }
+    /// 下スワイプ時に実行される
+    @objc func downSwipeView(sender: UISwipeGestureRecognizer) {
+        textView.resignFirstResponder()
+        self.dismiss(animated: true, completion: nil)
     }
     
 //    ==============キーボードのDoneボタン追加====================
@@ -393,7 +416,13 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         cuHeight = self.view.bounds.height
         //y座標の "-50"はcreateボタンとcustomボタン分の高さを差し引いた分
         CusCategoryTable.frame = CGRect(x: 0, y: 0, width: cuWidth - margin.x, height: cuHeight - margin.y / 2 - 20 - 35)
-        CusCategoryTable.keyboardDismissMode =  .onDrag //テーブルの操作性を良くする
+        CusCategoryTable.keyboardDismissMode =  .interactive //テーブルの操作性を良くする
+        
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(ModalViewController.downSwipeView(sender:)))
+        // レフトスワイプのみ反応するようにする
+        downSwipe.direction = .down
+        // viewにジェスチャーを登録
+        CusCategoryTable.addGestureRecognizer(downSwipe)
         
 //        self.view.addSubview(CusCategoryTable)
         return CusCategoryTable
