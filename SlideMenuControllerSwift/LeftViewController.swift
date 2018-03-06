@@ -150,6 +150,8 @@ extension LeftViewController : UITableViewDataSource {
         border.backgroundColor = UIColor.darkGray
         cell.addSubview(border)
         
+        tableView.showsVerticalScrollIndicator = false//tableのスクロールバーを非表示に設定
+        
         
         return cell
     }
