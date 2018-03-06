@@ -141,7 +141,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         textView.removeFromSuperview()
         //textViewのイチとサイズを設定
         textView.frame = CGRect(x: 0, y:0, width: self.view.frame.width, height: self.view.frame.height - 35)
-        textView.placeholder = "新規カテゴリーを入力"
+        textView.placeholder = "Input New Category"
         textView.font = UIFont.systemFont(ofSize:20.0)//フォントの大きさを設定
         textView.layer.borderWidth = 1//textViewの枠線の太さを設定
         textView.layer.borderColor = UIColor.lightGray.cgColor//枠線の色をグレーに設定
@@ -247,7 +247,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     func createText()->UITextView{
         //textViewのイチとサイズを設定
         textView.frame = CGRect(x: 0, y:0, width: self.view.frame.width - margin.x, height: self.view.frame.height - margin.y - 35)
-        textView.placeholder = "新規カテゴリーを入力"
+        textView.placeholder = "Input New Category"
         textView.font = UIFont.systemFont(ofSize:20.0)//フォントの大きさを設定
         textView.layer.borderWidth = 1//textViewの枠線の太さを設定
         textView.layer.borderColor = UIColor.lightGray.cgColor//枠線の色をグレーに設定
@@ -300,18 +300,16 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     }
     
     func closeModal(){
-        self.resignFirstResponder()
+        textView.resignFirstResponder()
+        self.dismiss(animated: true, completion: nil)
         
         //CoreData処理
         let coreData = ingCoreData()
         coreData.insertCategory(name: textView.text)//インサート
         coreData.readCategoryAll()//データチェック
         
-        textView.resignFirstResponder
+        
         addListCategory()
-        
-        self.dismiss(animated: true, completion: nil)
-        
         bvc.updateScrollBar()
         
     }

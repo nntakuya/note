@@ -111,6 +111,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //　　　　 テスト：postViewにスクロール機能追加
 //    ==========================================
     func CreatePostView(){
+        self.view.backgroundColor = UIColor(displayP3Red: 250/250, green: 250/250, blue: 248/250, alpha: 1)
         
         //以下コンテンツ幅をつまりpostViewの高さを少し大きくする
         //scrollviewの幅は画面全体の幅へ
@@ -139,6 +140,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         postView.frame = CGRect(x: postViewX, y: postVeiwY, width: postViewWidth, height: postViewheight)
         postView.keyboardDismissMode = .interactive //textfieldのUIをインタラクティブへ
         postView.backgroundColor = UIColor(displayP3Red: 250/250, green: 250/250, blue: 248/250, alpha: 1)
+        postView.placeholder = "Input Text"
         
         
         let style = NSMutableParagraphStyle()
@@ -461,20 +463,23 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
 //        DisplayLabel.frame = CGRect(x:DisplayCategory.bounds.height/2 + 4, y:DisplayCategory.bounds.width/2,width: catwidth.width,height: 50)
     
-        let sampleY = (40 - catwidth.height) / 2
+//        let sampleY = (40 - catwidth.height) / 2
+        //ボタン全体の高さと幅の値が必要
+        let desplayX = 7.5
+        let desplayY = 11.0
         
-        DisplayLabel.frame = CGRect(x: 5 / 2 , y: sampleY,width: catwidth.width,height: 50)
+        DisplayLabel.frame = CGRect(x: desplayX , y: desplayY, width: Double(catwidth.width),height: Double(catwidth.height))
         
         
         // ボタンのサイズ
-        let catWidth: CGFloat = catwidth.width + 15
+        let catWidth: CGFloat = catwidth.width + 7.5
         let catHeight: CGFloat = 40
         
         // ボタンのX,Y座標
         let catX: CGFloat = 10
         let catY: CGFloat = (DisplayCategoryBoard.frame.height - catHeight) / 2
         
-        DisplayCategory.layer.masksToBounds = true// ボタンの枠を丸くする.
+//        DisplayCategory.layer.masksToBounds = true// ボタンの枠を丸くする.
         DisplayCategory.layer.cornerRadius = 20.0// コーナーの半径を設定する.
         
         DisplayCategory.frame = CGRect(x: catX, y: catY, width: catWidth, height: catHeight)
