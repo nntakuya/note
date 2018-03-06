@@ -15,6 +15,7 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
     var CategoryCell: UIView!
     var CategoryTextField = UITextField()
     var id:Int!
+    var mvc = ModalViewController()
     
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -64,6 +65,20 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
         let categoryCore = ingCoreData()
         let inputText = CategoryTextField.text as! String
         categoryCore.UpdateCategoryName(id: id, name: inputText)
+        
+        //ここでテーブルの再読込が必要
+        addListCategory()
+        
+        
     }
+    func addListCategory(){
+        //CoreDataオブジェクト作成
+        let categoryDatas = ingCoreData()
+        //CoreDataからカテゴリーデータを全件取得
+        mvc.categoryInfo = categoryDatas.readCategoryAll() as! [[String : Any]]
+        //テーブルの再描画
+        mvc.CusCategoryTable.reloadData()
+    }
+    
 }
 

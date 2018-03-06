@@ -52,6 +52,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         super.viewDidLoad()
         CusCategoryTable = UITableView()
         
+        //カスタムセルの設定
         CusCategoryTable.register(tableViewCellClass: CustomTableViewCell.self)
         
         cretaModalWindow()
@@ -108,9 +109,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         createView.addSubview(createTable)
         createView.addSubview(createText())
         
-        
         ModalView.addSubview(createView)
-//        self.view.bringSubview(toFront: ModalView)
         self.view.addSubview(ModalView)
     }
     
@@ -427,7 +426,9 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         //表示したい文字の設定
         cell.CategoryTextField.text = categoryInfo[indexPath.row]["name"] as? String
         
-        cell.CategoryTextField.tag = indexPath.row  //okayu
+        cell.CategoryTextField.tag = indexPath.row
+        
+        cell.mvc = self
         
         return cell
     }
