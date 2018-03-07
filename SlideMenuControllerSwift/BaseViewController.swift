@@ -592,7 +592,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         if viewName == "Main" {
             // 完了ボタン
             let commitButton = UIBarButtonItem(
-                title: "Done",
+                title: "Save",
                 style: .done,
                 target: self,
                 action: #selector(self.MaincommitButtonTapped(sender:))
