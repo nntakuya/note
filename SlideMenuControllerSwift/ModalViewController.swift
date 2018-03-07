@@ -53,7 +53,6 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     
     override func viewDidLoad() {
         
-//        textView.delegate = self
         textView.delegate = self
         super.viewDidLoad()
         CusCategoryTable = UITableView()
@@ -66,7 +65,24 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         //viewTable カテゴリー一覧の並び替え
         CusCategoryTable.reorder.delegate = self as? TableViewReorderDelegate
         
-        
+        notificationLimitText()//文字数制限の監視
+    }
+    
+    func notificationLimitText(){
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(textFieldDidChange),
+            name: NSNotification.Name.UITextFieldTextDidChange,
+            object: textView)
+
+    }
+    @objc private func textFieldDidChange(notification: NSNotification) {
+        let textFieldString = notification.object as! UITextField
+        if let text = textFieldString.text {
+            if text.characters.count > 30 {
+                textView.text = text.substring(to: text.index(text.startIndex, offsetBy: 30))
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -159,8 +175,8 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         
         
         textView.borderStyle = UITextBorderStyle.none //枠なし
-        textView.placeholder = "Input New Category"
-        textView.font = UIFont.systemFont(ofSize:20.0)//フォントの大きさを設定
+        textView.placeholder = "Please enter 30 charactors or less"
+        textView.font = UIFont.systemFont(ofSize:18.0)//フォントの大きさを設定
         
         
         textView.returnKeyType = .done
@@ -226,6 +242,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
             underParts.frame = CGRect(x:0, y:CreateCategoryBtn.frame.height/2 - 8,width:CreateCategoryBtn.frame.width,height: CreateCategoryBtn.frame.height/2 + 7)
             
             underParts.setTitle("Create Category", for: .normal)
+            underParts.titleLabel?.font =  UIFont(name:"Helvetica", size:17)
             
             underParts.addTarget(self, action: #selector(createAction(sender:)), for: .touchUpInside)
             
@@ -244,6 +261,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
             
             
             underParts.setTitle("Custom Category", for: .normal)
+            underParts.titleLabel?.font =  UIFont(name:"Helvetica", size:17)
             
             underParts.addTarget(self, action: #selector(customAction(sender:)), for: .touchUpInside)
             
@@ -285,8 +303,8 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         
         textView.becomeFirstResponder()//keyboardの自動表示
         textView.borderStyle = UITextBorderStyle.none //枠なし
-        textView.placeholder = "Input New Category"
-        textView.font = UIFont.systemFont(ofSize:20.0)//フォントの大きさを設定
+        textView.placeholder = "Please enter 30 charactors or less"
+        textView.font = UIFont.systemFont(ofSize:18.0)//フォントの大きさを設定
         
         
         textView.returnKeyType = .done
@@ -322,7 +340,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         
         //Modal:モーダルウィンドウのtextview
         let commitButton = UIBarButtonItem(
-            title: "Done",
+            title: "Save",
             style: .done,
             target: self,
             action: #selector(self.ModalcommitButtonTapped(sender:))

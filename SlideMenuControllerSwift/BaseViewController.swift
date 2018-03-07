@@ -50,7 +50,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
 //    ======(選択後)カテゴリー表示オブジェクト==
     var DisplayCategoryBoard = UIView() //大枠
-    var DisplayCategory = UIView() //選択されたカテゴリーを表示
+    var DisplayCategory = UIButton() //選択されたカテゴリーを表示
     var DisplayLabel = UILabel() //選択されたカテゴリー名を表示
     
     
@@ -89,8 +89,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
     }
     
-    //TODO:改善必要
-    // └ サイドバーの表示がされる際に、キーボードを閉じる
     override func viewWillDisappear(_ animated: Bool){
         super.viewWillDisappear(animated)
         keyboardClose()
@@ -108,7 +106,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
     
 //    ==========================================
-//　　　　 テスト：postViewにスクロール機能追加
+//　　　　 postViewのスクロール機能
 //    ==========================================
     func CreatePostView(){
         self.view.backgroundColor = UIColor(displayP3Red: 250/250, green: 250/250, blue: 248/250, alpha: 1)
@@ -169,9 +167,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         postView.resignFirstResponder()
     }
 
-    
-    
-    
     
     
     
@@ -263,6 +258,19 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         //下記コードはスクロールオブジェクト更新のため
         modalViewController.bvc = self //modalViewControllerにBaseViewControllerオブジェクトプロパティを作成
         present(modalViewController, animated: true, completion: nil)
+        
+        
+        //カテゴリー表示欄を削除
+        
+        
+        UIView.animate(withDuration: 0.8, delay: 0.0,  animations: {}, completion: {
+            _ in
+            self.DisplayCategoryBoard.removeFromSuperview()
+            self.postScrollView.frame = CGRect(x: 0, y: 70, width: self.view.bounds.width, height: self.view.bounds.height)
+        })
+        
+        
+        
     }
     
     
@@ -293,7 +301,13 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         btnCategory.tag = catId //カテゴリーIDをButtonオブジェクトのtagにセット
         
         // ボタンのサイズ
-        let bcWidth: CGFloat = width.width + 15
+        var bcWidth: CGFloat = width.width + 15
+        
+        if bcWidth < 45 {
+            bcWidth = 45
+        }
+        
+        
         let bcHeight: CGFloat = 40
         
         // ボタンのX,Y座標
@@ -311,6 +325,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         
         // コーナーの半径を設定する.
         btnCategory.layer.cornerRadius = 20.0
+        
         
         // タイトルを設定する(通常時).
         btnCategory.setTitle(text, for: .normal)
@@ -390,6 +405,14 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
    
     
+    
+    
+    
+    
+    
+    
+    
+    
 //    =====================================================
 //　　　　   　スクロールオブジェクト内 カテゴリーボタン削除
 //    =====================================================
@@ -444,48 +467,50 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         //postViewの移動したスペースに大枠のViewを作成
         DeleteUIView(scv: DisplayCategoryBoard)//カテゴリー表示欄の初期化
         DisplayCategoryBoard = UIView()//初期化
-        DisplayCategory = UIView()//初期化
-        DisplayLabel = UILabel()//初期化
+        DisplayCategory = UIButton()//初期化
         
         DisplayCategoryBoard.frame = CGRect(x: 0, y: 67, width: self.view.bounds.width, height: 50)
         DisplayCategoryBoard.backgroundColor = UIColor(displayP3Red: 250/250, green: 250/250, blue: 248/250, alpha: 1)
         
         
         let catgoryName = categoryData["name"] as! String
-        DisplayLabel.text = catgoryName
-        DisplayLabel.textColor = UIColor.white
         
         let font = UIFont(name: "Hiragino Kaku Gothic ProN", size: 18)
-        
+        //以下のコマンドで文字列の横幅を取得
         // width.widthでInt型でデータを取得出来る
-        let catwidth = catgoryName.size(withAttributes: [NSAttributedStringKey.font : font as Any])
-        
-        
-//        DisplayLabel.frame = CGRect(x:DisplayCategory.bounds.height/2 + 4, y:DisplayCategory.bounds.width/2,width: catwidth.width,height: 50)
-    
-//        let sampleY = (40 - catwidth.height) / 2
-        //ボタン全体の高さと幅の値が必要
-        let desplayX = 7.5
-        let desplayY = 11.0
-        
-        DisplayLabel.frame = CGRect(x: desplayX , y: desplayY, width: Double(catwidth.width),height: Double(catwidth.height))
-        
+        let width = catgoryName.size(withAttributes: [NSAttributedStringKey.font : font])
         
         // ボタンのサイズ
-        let catWidth: CGFloat = catwidth.width + 7.5
-        let catHeight: CGFloat = 40
+        var bcWidth: CGFloat = width.width + 15
+        
+        if bcWidth < 45 {
+            bcWidth = 45
+        }
+        
+        
+        let bcHeight: CGFloat = 40
         
         // ボタンのX,Y座標
-        let catX: CGFloat = 10
-        let catY: CGFloat = (DisplayCategoryBoard.frame.height - catHeight) / 2
+        let bcPosX: CGFloat = 8
+        let bcPosY: CGFloat = 11
         
-//        DisplayCategory.layer.masksToBounds = true// ボタンの枠を丸くする.
-        DisplayCategory.layer.cornerRadius = 20.0// コーナーの半径を設定する.
+        // ボタンの設置座標とサイズを設定する.
+        DisplayCategory.frame = CGRect(x: bcPosX, y: bcPosY, width: bcWidth, height: bcHeight)
         
-        DisplayCategory.frame = CGRect(x: catX, y: catY, width: catWidth, height: catHeight)
+        // ボタンの背景色を設定.
         DisplayCategory.backgroundColor = UIColor(displayP3Red: 238/250, green: 188/250, blue: 64/250, alpha: 1)
         
-        DisplayCategory.addSubview(DisplayLabel)
+        // ボタンの枠を丸くする.
+        DisplayCategory.layer.masksToBounds = true
+        
+        // コーナーの半径を設定する.
+        DisplayCategory.layer.cornerRadius = 20.0
+        
+        
+        // タイトルを設定する(通常時).
+        DisplayCategory.setTitle(catgoryName, for: .normal)
+        DisplayCategory.setTitleColor(UIColor.white, for: .normal)
+        
         DisplayCategoryBoard.addSubview(DisplayCategory)
         self.view.addSubview(DisplayCategoryBoard)
         
@@ -500,13 +525,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
     
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-//        if textField == textView {
-//            textField.resignFirstResponder()
-//            return false
-//        }
-        return true
-    }
+    
     
     
     
