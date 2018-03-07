@@ -3,8 +3,7 @@
 //  SlideMenuControllerSwift
 //
 //  Created by Kosuke Matsuda on 2015/10/31.
-//  Copyright © 2015年 Yuji Hato. All rights reserved.
-//
+
 
 #import <UIKit/UIKit.h>
 
