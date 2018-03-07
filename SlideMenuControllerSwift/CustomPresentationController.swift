@@ -21,8 +21,6 @@ final class CustomPresentationController: UIPresentationController {
             self?.overlayView.alpha = 0.7
             }, completion: nil)
         
-//        var mvc = ModalViewController()
-//        mvc.cpc = self
     }
     
     // 非表示トランジション開始前に呼ばれる
@@ -73,10 +71,5 @@ final class CustomPresentationController: UIPresentationController {
     @objc func overlayViewDidTouch(sender: AnyObject) {
         presentedViewController.dismiss(animated: true, completion: nil)
     }
-    
-    func test(){
-        presentedViewController.dismiss(animated: true, completion: nil)
-    }
-    
     
 }

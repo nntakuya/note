@@ -500,7 +500,13 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     
     
     
-    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+//        if textField == textView {
+//            textField.resignFirstResponder()
+//            return false
+//        }
+        return true
+    }
     
     
     

@@ -3,18 +3,19 @@
 //  SlideMenuControllerSwift
 //
 //  Created by 仲松拓哉 on 10/02/2018.
-//
+
 
 import UIKit
 import CoreData
 
-class ModalViewController: UIViewController,TableViewReorderDelegate,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate {
+class ModalViewController: UIViewController,TableViewReorderDelegate,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
     
     
 //    =========================================
 //　　　　   モーダルウィンドウの初期値
 //    =========================================
-    let textView: UITextView = UITextView()//(ModalView)UITextViewのインスタンスを生成
+    let textViewBase: UIView = UIView()//(ModalView)UITextViewのインスタンスを生成
+    let textView: UITextField = UITextField()//(ModalView)UITextViewのインスタンスを生成
     var ModalView: UIView!
     var CreateCategoryBtn: UIView!
     var CustomCategoryBtn: UIView!
@@ -139,24 +140,39 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     }
     
     @objc func createAction(sender: UIButton){
-        textView.removeFromSuperview()
+        textViewBase.removeFromSuperview()
+        //textViewのデータ型をUITextViewからUIViewへ変更
         //textViewのイチとサイズを設定
-        textView.frame = CGRect(x: 0, y:0, width: self.view.frame.width, height: self.view.frame.height - 35)
+        textViewBase.frame = CGRect(x: 0, y:0, width: self.view.frame.width - margin.x, height: self.view.frame.height - margin.y / 2 - 20 - 35)
+        
+        textViewBase.backgroundColor = UIColor.white
+        
+        //その上にUiTextFieldを乗っける
+        textView.frame = CGRect(x: 15.0, y: 15.0, width:textViewBase.frame.width - 30.0 , height: 21.0)
+        
+        
+        //UITextFieldを表示する際に、keyboardを自動で追加する
+        textView.becomeFirstResponder()
+        
+        
+        textView.borderStyle = UITextBorderStyle.none //枠なし
         textView.placeholder = "Input New Category"
         textView.font = UIFont.systemFont(ofSize:20.0)//フォントの大きさを設定
-        textView.layer.borderWidth = 1//textViewの枠線の太さを設定
-        textView.layer.borderColor = UIColor.lightGray.cgColor//枠線の色をグレーに設定
-        textView.isEditable = true//テキストを編集できるように設定
+        
+        
+        textView.returnKeyType = .done
         setInputAccessoryView()//キーボードに完了ボタンを追加
+        
         // スワイプを定義
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(ModalViewController.downSwipeView(sender:)))
         // レフトスワイプのみ反応するようにする
         downSwipe.direction = .down
         // viewにジェスチャーを登録
-        textView.addGestureRecognizer(downSwipe)
+        textViewBase.addGestureRecognizer(downSwipe)
+        textViewBase.addSubview(textView)
         
-        CreateCategoryView.addSubview(textView)
         
+        CreateCategoryView.addSubview(textViewBase)
         CreateCategoryBtn.removeFromSuperview()
         CustomCategoryBtn.removeFromSuperview()
         ModalView.addSubview(makingBtn(title: "create", color: "white"))
@@ -171,7 +187,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         return makingBtn(title: "custom", color: "gray")
     }
     @objc func customAction(sender: UIButton){
-        textView.removeFromSuperview()
+        textViewBase.removeFromSuperview()
         
         CreateCategoryBtn.removeFromSuperview()
         CustomCategoryBtn.removeFromSuperview()
@@ -196,12 +212,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
             underParts.backgroundColor = UIColor.gray
             underParts.setTitleColor(UIColor.white, for: .normal)
         }
-//        23の時
-//        aboveParts.frame = CGRect(x:-3, y:0, width:CreateCategoryBtn.frame.width + 6,height: CreateCategoryBtn.frame.height/2)
-//
-//        underParts.frame = CGRect(x:0, y:CreateCategoryBtn.frame.height/2 - 8.5,width:CreateCategoryBtn.frame.width,height: CreateCategoryBtn.frame.height/2 + 8)
-//
-//
+
         
         if title == "create"{
             CreateCategoryBtn = UIView()
@@ -254,16 +265,27 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     }
     
     
-//    =============UITextViewの設定============
+//    =============UITextFieldの設定============
     
-    func createText()->UITextView{
+    func createText()->UIView{
+        
+        //textViewのデータ型をUITextViewからUIViewへ変更
         //textViewのイチとサイズを設定
-        textView.frame = CGRect(x: 0, y:0, width: self.view.frame.width - margin.x, height: self.view.frame.height - margin.y / 2 - 20 - 35)
+        textViewBase.frame = CGRect(x: 0, y:0, width: self.view.frame.width - margin.x, height: self.view.frame.height - margin.y / 2 - 20 - 35)
+        
+        textViewBase.backgroundColor = UIColor.white
+        
+        //その上にUiTextFieldを乗っける
+        textView.frame = CGRect(x: 15.0, y: 15.0, width:textViewBase.frame.width - 30.0 , height: 21.0)
+        
+        
+        
+        textView.becomeFirstResponder()//keyboardの自動表示
+        textView.borderStyle = UITextBorderStyle.none //枠なし
         textView.placeholder = "Input New Category"
         textView.font = UIFont.systemFont(ofSize:20.0)//フォントの大きさを設定
-        textView.layer.borderWidth = 1//textViewの枠線の太さを設定
-        textView.layer.borderColor = UIColor.lightGray.cgColor//枠線の色をグレーに設定
-        textView.isEditable = true//テキストを編集できるように設定
+        
+        
         textView.returnKeyType = .done
         setInputAccessoryView()//キーボードに完了ボタンを追加
         
@@ -272,11 +294,13 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         // レフトスワイプのみ反応するようにする
         downSwipe.direction = .down
         // viewにジェスチャーを登録
-        textView.addGestureRecognizer(downSwipe)
+        textViewBase.addGestureRecognizer(downSwipe)
+        textViewBase.addSubview(textView)
         
         
-        return textView
+        return textViewBase
     }
+    
     /// 下スワイプ時に実行される
     @objc func downSwipeView(sender: UISwipeGestureRecognizer) {
         textView.resignFirstResponder()
@@ -294,7 +318,6 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
                                      target: self, action: nil)
         
         //Modal:モーダルウィンドウのtextview
-        
         let commitButton = UIBarButtonItem(
             title: "Done",
             style: .done,
@@ -303,7 +326,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         )
         kbToolBar.items = [spacer, commitButton]
         textView.inputAccessoryView = kbToolBar
-            
+        
 
     }
     
@@ -315,22 +338,14 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     }
     
     
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if(text == "\n") {
-            textView.resignFirstResponder()
-            return false
-        }
-        return true
-    }
-    
     func closeModal(){
         textView.resignFirstResponder()
         self.dismiss(animated: true, completion: nil)
         
         //CoreData処理
         let coreData = ingCoreData()
-        coreData.insertCategory(name: textView.text)//インサート
+        //TODO:データをインサートする処理を追加する。引数を変更し、コメントアウトを削除。
+        coreData.insertCategory(name: textView.text!)//インサート
         coreData.readCategoryAll()//データチェック
         
         
@@ -339,6 +354,14 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         
     }
     
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == textView {
+            textField.resignFirstResponder()
+            return false
+        }
+        return true
+    }
     
 //    ==================================
 //　　　　　　　 キーボード観察
@@ -364,10 +387,6 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
                                                   object: self.view.window)
     }
     
-    
-    //TODO:やることリスト
-    //CusCatogoryTableの高さを取得する
-    //その高さとキーボードの高さの差
     
     @objc func keyboardWillShow(_ notification: Notification) {
         print(#function)
@@ -498,12 +517,6 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
             self.categoryInfo.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             
-            //CoreData処理
-//            let coreData = ingCoreData()
-//            coreData.insertCategory(name: self.textView.text)//インサート
-//            coreData.readCategoryAll()//データチェック
-//
-//
             self.addListCategory()
             self.bvc.updateScrollBar()
             
