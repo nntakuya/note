@@ -34,6 +34,9 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     //サイズフラグ
     var firstResize :Int = 0
     
+    //バリデーションアラート
+    let alert: UIView = UIView()
+    let text: UILabel = UILabel()
     
     
 //    =========================================
@@ -81,9 +84,32 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         if let text = textFieldString.text {
             if text.characters.count > 30 {
                 textView.text = text.substring(to: text.index(text.startIndex, offsetBy: 30))
+                makeAlert()
+            }else{
+                alert.removeFromSuperview()
+                
             }
         }
     }
+    
+    //アラートオブジェクト作成
+    func makeAlert(){
+//        alert = UIView()
+        alert.removeFromSuperview()
+        alert.frame = CGRect(x: 15, y: 50, width: 290, height: 25 )
+        alert.backgroundColor = UIColor(displayP3Red: 253/250, green: 240/250, blue: 234/250, alpha: 1)
+        alert.layer.borderColor = UIColor.red.cgColor
+        alert.layer.borderWidth = 1
+        
+        text.removeFromSuperview()
+        text.text = "Please input 30 characters or less."
+        text.frame = CGRect(x: 15, y: 0, width: textViewBase.frame.width - 30.0, height: 25)
+        alert.addSubview(text)
+        textViewBase.addSubview(alert)
+        
+        
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -144,7 +170,6 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         CustomCategoryView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height)
         AjustTableLayout()//テーブルのサイズを調整
 
-        
         self.view.addSubview(CustomCategoryView)
     }
     
@@ -196,8 +221,6 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         CustomCategoryBtn.removeFromSuperview()
         ModalView.addSubview(makingBtn(title: "create", color: "white"))
         ModalView.addSubview(makingBtn(title: "custom", color: "gray"))
-        
-        
     }
     
     
@@ -348,8 +371,9 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         kbToolBar.items = [spacer, commitButton]
         textView.inputAccessoryView = kbToolBar
         
-
     }
+    
+    
     
 //    ==================================
 //　　　　 Doneボタンの実行処理(Modal)
