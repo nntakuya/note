@@ -162,7 +162,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         textViewBase.removeFromSuperview()
         //textViewのデータ型をUITextViewからUIViewへ変更
         //textViewのイチとサイズを設定
-        textViewBase.frame = CGRect(x: 0, y:0, width: self.view.frame.width - margin.x, height: self.view.frame.height - margin.y / 2 - 20 - 35)
+        textViewBase.frame = CGRect(x: 0, y:0, width: self.view.frame.width , height: self.view.frame.height - 35)
         
         textViewBase.backgroundColor = UIColor.white
         
