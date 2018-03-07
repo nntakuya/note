@@ -53,8 +53,8 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     
     override func viewDidLoad() {
         
+//        textView.delegate = self
         textView.delegate = self
-        
         super.viewDidLoad()
         CusCategoryTable = UITableView()
         
@@ -340,6 +340,14 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         closeModal()
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == textView {
+            closeModal()
+            return false
+        }
+        return true
+    }
+    
     
     func closeModal(){
         textView.resignFirstResponder()
@@ -358,13 +366,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     }
     
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if textField == textView {
-            textField.resignFirstResponder()
-            return false
-        }
-        return true
-    }
+    
     
 //    ==================================
 //　　　　　　　 キーボード観察
