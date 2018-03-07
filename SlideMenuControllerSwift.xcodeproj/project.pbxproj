@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0E75C5A31BE3CA9F00844634 /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BA8AA51A43E2EF00863FB9 /* SlideMenuController.swift */; };
-		0E75C5A61BE3CAFE00844634 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E75C5A41BE3CAFE00844634 /* Info.plist */; };
 		0EB8EBFF1BE3CF3C00BC2A99 /* SlideMenuControllerSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E75C5A51BE3CAFE00844634 /* SlideMenuControllerSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B3068651204F798F00AFF2A6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B3068650204F798F00AFF2A6 /* Info.plist */; };
 		B311643C2027006600F01ACB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B311643B2027006600F01ACB /* BaseViewController.swift */; };
 		B311B5772033E16600CA0604 /* CustomCategoryTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B311B5762033E16600CA0604 /* CustomCategoryTable.swift */; };
 		B325C2E22045B82800C10137 /* UiPlaceholderTextifield.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325C2E12045B82800C10137 /* UiPlaceholderTextifield.swift */; };
@@ -76,8 +76,8 @@
 
 /* Begin PBXFileReference section */
 		0E75C5961BE3CA7900844634 /* SlideMenuControllerSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SlideMenuControllerSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E75C5A41BE3CAFE00844634 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Source/Info.plist; sourceTree = "<group>"; };
 		0E75C5A51BE3CAFE00844634 /* SlideMenuControllerSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SlideMenuControllerSwift.h; path = Source/SlideMenuControllerSwift.h; sourceTree = "<group>"; };
+		B3068650204F798F00AFF2A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B311643B2027006600F01ACB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B311B5762033E16600CA0604 /* CustomCategoryTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryTable.swift; sourceTree = "<group>"; };
 		B325C2E12045B82800C10137 /* UiPlaceholderTextifield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiPlaceholderTextifield.swift; sourceTree = "<group>"; };
@@ -164,7 +164,7 @@
 		0E75C5A71BE3CB0D00844634 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0E75C5A41BE3CAFE00844634 /* Info.plist */,
+				B3068650204F798F00AFF2A6 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -481,7 +481,7 @@
 			files = (
 				C5498C801BE897660076A7C5 /* ImageHeaderView.xib in Resources */,
 				C5BF6A841BEEF1E70064C18E /* DataTableViewCell.xib in Resources */,
-				0E75C5A61BE3CAFE00844634 /* Info.plist in Resources */,
+				B3068651204F798F00AFF2A6 /* Info.plist in Resources */,
 				C539E64F1A315E87003B7CC7 /* Main.storyboard in Resources */,
 				C539E6511A315E87003B7CC7 /* Images.xcassets in Resources */,
 				B3737581204AA425004FFC57 /* Launch Screen.storyboard in Resources */,
@@ -592,6 +592,7 @@
 		0E75C59F1BE3CA7900844634 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -617,6 +618,7 @@
 		0E75C5A01BE3CA7900844634 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
