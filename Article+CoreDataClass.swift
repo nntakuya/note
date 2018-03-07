@@ -1,7 +1,7 @@
 //
 //  Article+CoreDataClass.swift
 //  SlideMenuControllerSwift
-//
+
 //  Created by 仲松拓哉 on 06/02/2018.
 
 

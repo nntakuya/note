@@ -481,7 +481,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     
     //セルのスワイプ表示（デザイン）
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (action, index) -> Void in
+        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "Delete") { (action, index) -> Void in
             
             //指定されたIDのメモデータをCoreDataから削除
             self.selectedRowIndex = indexPath.row
@@ -497,6 +497,16 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
             //ビューから指定されたセルを削除
             self.categoryInfo.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            //CoreData処理
+//            let coreData = ingCoreData()
+//            coreData.insertCategory(name: self.textView.text)//インサート
+//            coreData.readCategoryAll()//データチェック
+//
+//
+            self.addListCategory()
+            self.bvc.updateScrollBar()
+            
         }
         deleteButton.backgroundColor = UIColor.red
         

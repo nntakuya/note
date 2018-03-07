@@ -2,7 +2,6 @@
 //  SlideMenuControllerSwift.h
 //  SlideMenuControllerSwift
 //
-//  Created by Kosuke Matsuda on 2015/10/31.
 
 
 #import <UIKit/UIKit.h>

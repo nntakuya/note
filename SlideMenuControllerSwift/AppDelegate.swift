@@ -27,14 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //以下のコードはstoryboardのファイル名を指定している
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        
-        //以下のコードについて
-        //それぞれの画面の遷移先を指定している
-//        let mainViewController = storyboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
         let BaseViewController = storyboard.instantiateViewController(withIdentifier: "BaseViewController") as! BaseViewController
 
         let leftViewController = storyboard.instantiateViewController(withIdentifier: "LeftViewController") as! LeftViewController
-//        let rightViewController = storyboard.instantiateViewController(withIdentifier: "RightViewController") as! RightViewController
         
         //アプリ立ち上げ時に最初に表示したいページを指定している
         let nvc: UINavigationController = UINavigationController(rootViewController: BaseViewController)
