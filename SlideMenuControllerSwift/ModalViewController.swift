@@ -52,6 +52,9 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     
     
     override func viewDidLoad() {
+        
+        textView.delegate = self
+        
         super.viewDidLoad()
         CusCategoryTable = UITableView()
         
