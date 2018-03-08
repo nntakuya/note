@@ -44,7 +44,6 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
 //    =========================================
     //モーダルウィンドウのマージン設定
     //※変更する場合、CustomPresentationControllerのmarginも変更
-//    let margin = (x: CGFloat(30), y: CGFloat(220.0))
     let margin = (x: CGFloat(10), y: CGFloat(120.0))
     
     //BaseviewControllerインスタンス
@@ -82,12 +81,11 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     @objc private func textFieldDidChange(notification: NSNotification) {
         let textFieldString = notification.object as! UITextField
         if let text = textFieldString.text {
-            if text.characters.count > 30 {
-                textView.text = text.substring(to: text.index(text.startIndex, offsetBy: 30))
+            if text.characters.count > 20 {
+                textView.text = text.substring(to: text.index(text.startIndex, offsetBy: 20))
                 makeAlert()
             }else{
-                alert.removeFromSuperview()
-                
+                alert.removeFromSuperview()          
             }
         }
     }
@@ -96,13 +94,13 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     func makeAlert(){
 //        alert = UIView()
         alert.removeFromSuperview()
-        alert.frame = CGRect(x: 15, y: 50, width: 290, height: 25 )
+        alert.frame = CGRect(x:(textViewBase.frame.width - 290) / 2 , y: 50, width: 290, height: 25 )
         alert.backgroundColor = UIColor(displayP3Red: 253/250, green: 240/250, blue: 234/250, alpha: 1)
         alert.layer.borderColor = UIColor.red.cgColor
         alert.layer.borderWidth = 1
         
         text.removeFromSuperview()
-        text.text = "Please input 30 characters or less."
+        text.text = "Please input 20 characters or less."
         text.frame = CGRect(x: 15, y: 0, width: textViewBase.frame.width - 30.0, height: 25)
         alert.addSubview(text)
         textViewBase.addSubview(alert)
@@ -200,7 +198,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         
         
         textView.borderStyle = UITextBorderStyle.none //枠なし
-        textView.placeholder = "Please enter 30 charactors or less"
+        textView.placeholder = "Please input 20 charactors or less"
         textView.font = UIFont.systemFont(ofSize:18.0)//フォントの大きさを設定
         
         
@@ -326,7 +324,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         
         textView.becomeFirstResponder()//keyboardの自動表示
         textView.borderStyle = UITextBorderStyle.none //枠なし
-        textView.placeholder = "Please enter 30 charactors or less"
+        textView.placeholder = "Please input 20 charactors or less"
         textView.font = UIFont.systemFont(ofSize:18.0)//フォントの大きさを設定
         
         

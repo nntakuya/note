@@ -51,7 +51,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    ======(選択後)カテゴリー表示オブジェクト==
     var DisplayCategoryBoard = UIView() //大枠
     var DisplayCategory = UIButton() //選択されたカテゴリーを表示
-    var DisplayLabel = UILabel() //選択されたカテゴリー名を表示
+//    var DisplayLabel = UILabel() //選択されたカテゴリー名を表示
     
     
     
@@ -631,16 +631,55 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    ==================================
 //　　　　 Doneボタンの実行処理(Main,Modal)
 //    ==================================
-    //TODO:以下の処理が微妙
-    //Main
     @objc func MaincommitButtonTapped(sender: Any) {
         self.resignFirstResponder()
 
-        tapSave()//インサート
-        keyboardClose()//キーボードを閉じる
+//        tapSave()//インサート
+//        keyboardClose()//キーボードを閉じる
+//
+//        postView.text = ""
         
-        postView.text = ""
         
+        //TODO:カテゴリー表示オブジェクトのアニメーション
+        
+//        self.transform = self.transform.rotated(by: rotate.rotation)
+//        rotate.rotation = 0
+        purupuru()
+    }
+    
+    
+    func purupuru(){
+//        DisplayCategory.transform = self.transform.rotated(by: rotate.rotation)
+//        rotate.rotation = 0
+        var transRotate = CGAffineTransform()
+        
+//        UIView.animate(withDuration: 0.2, delay: 0.0,  animations: {
+//            let angle = 20 * CGFloat.pi / 180
+//            transRotate = CGAffineTransform(rotationAngle: CGFloat(angle));
+//            self.DisplayCategory.transform = transRotate
+//        }, completion: {
+//            _ in
+//            let angle = -40 * CGFloat.pi / 180
+//            transRotate = CGAffineTransform(rotationAngle: CGFloat(angle));
+//            self.DisplayCategory.transform = transRotate
+//        })
+        UIView.animateKeyframes(withDuration: 0.5, delay: 0.0, options: [], animations: {
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5, animations: {
+                let angle = 20 * CGFloat.pi / 180
+                transRotate = CGAffineTransform(rotationAngle: CGFloat(angle));
+                self.DisplayCategory.transform = transRotate
+            })
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.5 , relativeDuration: 0.5, animations: {
+                let angle = -40 * CGFloat.pi / 180
+                transRotate = CGAffineTransform(rotationAngle: CGFloat(angle));
+                self.DisplayCategory.transform = transRotate
+            })
+            
+            
+            
+        }, completion: nil)
     }
     
     
