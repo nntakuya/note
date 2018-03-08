@@ -44,8 +44,6 @@ class LeftViewController : UIViewController{
         
         self.tableView.registerCellClass(BaseTableViewCell.self)
         
-//        self.imageHeaderView = ImageHeaderView.loadNib()
-//        self.view.addSubview(self.imageHeaderView)
     }
     
     
@@ -61,7 +59,6 @@ class LeftViewController : UIViewController{
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        self.imageHeaderView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 160)
         self.view.layoutIfNeeded()
     }
     

@@ -207,8 +207,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         //アンダーバーにシャドウを追加
         TestView.dropShadow(color: .black, opacity: 1, offSet: CGSize(width: -1, height: 1), radius: 3, scale: true)
         
-        
-        
         TestView.addSubview(createBtn())//+ボタン
         TestView.addSubview(viewScroll())//スクロール
         self.view.addSubview(TestView)
@@ -259,18 +257,12 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         modalViewController.bvc = self //modalViewControllerにBaseViewControllerオブジェクトプロパティを作成
         present(modalViewController, animated: true, completion: nil)
         
-        
         //カテゴリー表示欄を削除
-        
-        
         UIView.animate(withDuration: 0.8, delay: 0.0,  animations: {}, completion: {
             _ in
             self.DisplayCategoryBoard.removeFromSuperview()
             self.postScrollView.frame = CGRect(x: 0, y: 70, width: self.view.bounds.width, height: self.view.bounds.height)
         })
-        
-        
-        
     }
     
     
@@ -403,15 +395,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         scrollView.contentSize = CGSize(width: scWidth, height: 50)
     }
     
-   
-    
-    
-    
-    
-    
-    
-    
-    
     
 //    =====================================================
 //　　　　   　スクロールオブジェクト内 カテゴリーボタン削除
@@ -510,6 +493,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         // タイトルを設定する(通常時).
         DisplayCategory.setTitle(catgoryName, for: .normal)
         DisplayCategory.setTitleColor(UIColor.white, for: .normal)
+//        DisplayCategory.addTarget(self, action: #selector(self.pushForDetail(sender:)), for: .touchUpInside)
         
         DisplayCategoryBoard.addSubview(DisplayCategory)
         self.view.addSubview(DisplayCategoryBoard)
@@ -518,16 +502,19 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         categoryId = categoryData["id"] as! Int //インサートするカテゴリーを更新
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+//    @objc func pushForDetail(sender: UIButton) {
+//        //カテゴリーIDは使用できる
+//        if sender == DisplayCategory {
+//            performSegue(withIdentifier: "BtnDetail", sender: nil)
+//        }
+//    }
+//
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if (segue.identifier == "BtnDetail") {
+//            let vc: OthersViewController = segue.destination as! OthersViewController
+//            vc.categoryId = categoryId
+//        }
+//    }
     
     
 //    =======================================
@@ -538,8 +525,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         postView.resignFirstResponder()
         updateScrollBar()//Topメモ欄のスクロールオブジェクトの再読込
     }
-    
-
 
 //    ==================================
 //　　　　    CoreData操作(Insert処理)
@@ -565,8 +550,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         newRecord.setValue(categoryId,forKey: "category_id")
         
         do{
-            //レコードの即時保存
-            try viewContext.save()
+            try viewContext.save()//レコードの即時保存
         }catch{
         }
     }
@@ -613,7 +597,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //        ------------------------------------------------------
         
         //Main:デフォルトのメモ画面のtextview
-        //Modal:モーダルウィンドウのtextview
         if viewName == "Main" {
             // 完了ボタン
             let commitButton = UIBarButtonItem(
@@ -639,30 +622,13 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 
         postView.text = ""
         
-        
-        //TODO:カテゴリー表示オブジェクトのアニメーション
-        
-//        self.transform = self.transform.rotated(by: rotate.rotation)
-//        rotate.rotation = 0
-        purupuru()
+        purupuru()//カテゴリー表示オブジェクトのアニメーション
     }
     
     
+    //カテゴリー保存時、表示ボタンを動かす
     func purupuru(){
-//        DisplayCategory.transform = self.transform.rotated(by: rotate.rotation)
-//        rotate.rotation = 0
         var transRotate = CGAffineTransform()
-        
-//        UIView.animate(withDuration: 0.2, delay: 0.0,  animations: {
-//            let angle = 20 * CGFloat.pi / 180
-//            transRotate = CGAffineTransform(rotationAngle: CGFloat(angle));
-//            self.DisplayCategory.transform = transRotate
-//        }, completion: {
-//            _ in
-//            let angle = -40 * CGFloat.pi / 180
-//            transRotate = CGAffineTransform(rotationAngle: CGFloat(angle));
-//            self.DisplayCategory.transform = transRotate
-//        })
         UIView.animateKeyframes(withDuration: 1.5, delay: 0.0, options: [], animations: {
             
             UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1, animations: {
@@ -682,14 +648,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
                 transRotate = CGAffineTransform(rotationAngle: CGFloat(angle));
                 self.DisplayCategory.transform = transRotate
             })
-
-//            UIView.addKeyframe(withRelativeStartTime: 1.0 , relativeDuration: 0.2, animations: {
-//                let angle = 0 * CGFloat.pi / 180
-//                transRotate = CGAffineTransform(rotationAngle: CGFloat(angle));
-//                self.DisplayCategory.transform = transRotate
-//            })
-//
-            
         }, completion: nil)
     }
     
@@ -728,7 +686,6 @@ extension BaseViewController : UIViewControllerTransitioningDelegate {
         return CustomPresentationController(presentedViewController: presented, presenting: presenting)
     }
 }
-
 
 
 //    ==================================
