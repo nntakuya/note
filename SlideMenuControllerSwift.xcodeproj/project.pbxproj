@@ -15,7 +15,6 @@
 		B325C2E22045B82800C10137 /* UiPlaceholderTextifield.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325C2E12045B82800C10137 /* UiPlaceholderTextifield.swift */; };
 		B325C2E42046DD2900C10137 /* CustomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325C2E32046DD2900C10137 /* CustomPresentationController.swift */; };
 		B3319363202E8483008477C9 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3319362202E8483008477C9 /* ModalViewController.swift */; };
-		B331936720300317008477C9 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331936620300317008477C9 /* SecondViewController.swift */; };
 		B331936920303B34008477C9 /* ingCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331936820303B34008477C9 /* ingCoreData.swift */; };
 		B331936C20303D04008477C9 /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331936A20303D04008477C9 /* Category+CoreDataClass.swift */; };
 		B331936D20303D04008477C9 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331936B20303D04008477C9 /* Category+CoreDataProperties.swift */; };
@@ -83,7 +82,6 @@
 		B325C2E12045B82800C10137 /* UiPlaceholderTextifield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiPlaceholderTextifield.swift; sourceTree = "<group>"; };
 		B325C2E32046DD2900C10137 /* CustomPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPresentationController.swift; sourceTree = "<group>"; };
 		B3319362202E8483008477C9 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
-		B331936620300317008477C9 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		B331936820303B34008477C9 /* ingCoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ingCoreData.swift; sourceTree = "<group>"; };
 		B331936A20303D04008477C9 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B331936B20303D04008477C9 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -219,7 +217,6 @@
 		B396958F203A6AAB008CEB96 /* ModalView */ = {
 			isa = PBXGroup;
 			children = (
-				B331936620300317008477C9 /* SecondViewController.swift */,
 				B311B5762033E16600CA0604 /* CustomCategoryTable.swift */,
 				B3319362202E8483008477C9 /* ModalViewController.swift */,
 				B325C2E12045B82800C10137 /* UiPlaceholderTextifield.swift */,
@@ -528,7 +525,6 @@
 				C539E66C1A316C78003B7CC7 /* LeftViewController.swift in Sources */,
 				C5BF6A821BEEF1A70064C18E /* DataTableViewCell.swift in Sources */,
 				C539E6471A315E87003B7CC7 /* AppDelegate.swift in Sources */,
-				B331936720300317008477C9 /* SecondViewController.swift in Sources */,
 				B396958B203A6925008CEB96 /* OtherCustomCell.swift in Sources */,
 				B3430BBF2039979C00D42114 /* CategoryDetailArticleViewController.swift in Sources */,
 				B367311D20490D580067CCA9 /* function.swift in Sources */,

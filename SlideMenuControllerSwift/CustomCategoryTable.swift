@@ -18,6 +18,58 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
     var mvc = ModalViewController()
     var bvc = BaseViewController()
     
+    var SortIcon = UIView()
+    var borderOne = UIView()
+    var borderTwo = UIView()
+    var borderThree = UIView()
+    
+    //test
+    var countLabel = 0
+    var firstWidth = Int()
+    
+    
+    func makingSortIcon(){
+        //ラベルをつける
+        //最初のセルの幅のみを取得
+        //2回目以降のセルの読込があった場合は、1回目のデータを読み込む
+        
+        if countLabel == 0 {
+            firstWidth = Int(self.bounds.size.width)
+            countLabel += 1
+        }
+        
+//        firstWidth = Int(self.bounds.size.width - 20)
+        
+//        SortIcon.frame = CGRect(x: self.bounds.size.width * 0.9, y: 0, width: 40, height: 40)
+        SortIcon.frame = CGRect(x: firstWidth, y: 0, width: 40, height: 40)
+        borderOne.frame = CGRect(x: 0, y: 15, width: SortIcon.frame.size.width, height: 1)
+        borderOne.backgroundColor = UIColor.black
+        borderTwo.frame = CGRect(x: 0, y: 20, width: SortIcon.frame.size.width, height: 1)
+        borderTwo.backgroundColor = UIColor.black
+        borderThree.frame = CGRect(x: 0, y: 25, width: SortIcon.frame.size.width, height: 1)
+        borderThree.backgroundColor = UIColor.black
+        
+        SortIcon.addSubview(borderOne)
+        SortIcon.addSubview(borderTwo)
+        SortIcon.addSubview(borderThree)
+        self.addSubview(SortIcon)
+        
+    }
+    
+    open class func height() -> CGFloat {
+        return 45
+    }
+    
+    open func setData(_ data: Any?) {
+        let attribute : NSAttributedString = NSAttributedString(
+            string:"",
+            attributes:  [NSAttributedStringKey.font: UIFont(name: "Helvetica-W6", size: 20)!]
+        )
+        CategoryTextField.attributedText = attribute
+        
+    }
+    
+    
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
@@ -28,10 +80,19 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
     func makingCustomCell(){
         CategoryCell = self
     
-        let cellWidth = Int(self.bounds.size.width - 70)
+//        let cellWidth = Int(self.bounds.size.width - 90)
+        let cellWidth = Int(self.bounds.size.width * 0.7)
         let cellHeight = 30
-        let cellX = 5
+        let cellX = 20
         let cellY = (Int(self.bounds.size.height) - cellHeight) / 2
+        
+        let attribute : NSAttributedString = NSAttributedString(
+            string:"",
+            attributes:  [NSAttributedStringKey.font: UIFont(name: "Helvetica", size: 20)!]
+        )
+        CategoryTextField.attributedText = attribute
+        
+//        makingSortIcon()
         
         
         //テキストフィールドのデリゲート先を自分に設定する。
@@ -42,6 +103,8 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
         self.addSubview(CategoryTextField)
         
     }
+    
+    
     
     
     

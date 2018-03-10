@@ -1,11 +1,9 @@
 ///  Created by 仲松拓哉 on 04/02/2018.
 
-
 import UIKit
 import CoreData
 
 class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelegate{
-    
     var categoryId = 0
     
     //メインのメモ機能
@@ -187,8 +185,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     }
     
     
-    
-
 //    ==================================
 //　　　　 アンダーバーオブジェクト作成
 //    ==================================
@@ -227,7 +223,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         let bHeight: CGFloat = 40
         
         // ボタンのX,Y座標.
-//        let posX: CGFloat = self.view.frame.width / 90
         let posX: CGFloat = (self.view.frame.width / 90 + 60 - bWidth) / 2
         let posY: CGFloat = (50 - bHeight) / 2 //50はアンダーバーの高さ
 
@@ -363,7 +358,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
     }
     
     
-    
+
 //    ========================================================
 //　　　　  スクロールオブジェクトへカテゴリーボタン追加機能
 //    ========================================================
