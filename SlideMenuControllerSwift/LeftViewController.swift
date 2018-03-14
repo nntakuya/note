@@ -23,7 +23,6 @@ class LeftViewController : UIViewController{
     var mainViewController: UIViewController!
     var AllViewController: UIViewController!
     var OthersViewController: UIViewController!
-//    var imageHeaderView: ImageHeaderView!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -50,7 +49,7 @@ class LeftViewController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         addListCategory()
-//        tableView.reloadData()
+
     }
     
     override func viewDidAppear(_ animated: Bool) {

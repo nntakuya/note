@@ -169,7 +169,6 @@ class ingCoreData {
         let idPredicate = NSPredicate(format: "id = %d", id)
         query.predicate = idPredicate
         
-        
         //===== データ１件取得（idを指定しているので) =====
         do {
             

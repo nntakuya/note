@@ -497,21 +497,6 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         categoryId = categoryData["id"] as! Int //インサートするカテゴリーを更新
     }
     
-//    @objc func pushForDetail(sender: UIButton) {
-//        //カテゴリーIDは使用できる
-//        if sender == DisplayCategory {
-//            performSegue(withIdentifier: "BtnDetail", sender: nil)
-//        }
-//    }
-//
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if (segue.identifier == "BtnDetail") {
-//            let vc: OthersViewController = segue.destination as! OthersViewController
-//            vc.categoryId = categoryId
-//        }
-//    }
-    
-    
 //    =======================================
 //　　　　    キーボード閉じるアクション
 //    =======================================

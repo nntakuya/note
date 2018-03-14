@@ -20,6 +20,10 @@ class OtherTableViewCell:  UITableViewCell,UITextFieldDelegate {
         CategoryTextField.tag = 0
     }
     
+    open class func height() -> CGFloat {
+        return 55
+    }
+    
     //デリゲートメソッド
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {

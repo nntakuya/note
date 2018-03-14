@@ -84,6 +84,8 @@ class AllViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
         
+        self.navigationItem.title = "All"
+        
         //配列を初期化
         artInfo = []
         //CoreDataからArticleデータ全件取得

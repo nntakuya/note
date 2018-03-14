@@ -75,6 +75,7 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         myTableView.reloadData()
+
     }
     
     //ページが読み込まれた時に、CoreDataからデータを引っ張るｚ
@@ -86,11 +87,20 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
          let appDelegate = UIApplication.shared.delegate as! AppDelegate
         categoryId = appDelegate.categoryId
         
-        print(categoryId)
         
         //配列を初期化
         artInfo = []
         read()
+        
+        let categoryData = ingCoreData()
+        let selectedCategory = categoryData.readCategory(id: categoryId)
+        
+        self.navigationItem.title = selectedCategory["name"] as? String
+        // フォント種をTime New Roman、サイズを10に指定
+        //        self.navigationController?.navigationBar.titleTextAttributes
+        //            = [NSAttributedStringKey.font: UIFont(name: "Times New Roman", size: 15)!]
+        
+        
         
         myTableView.reloadData()
         

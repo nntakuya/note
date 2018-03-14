@@ -38,9 +38,6 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
             countLabel += 1
         }
         
-//        firstWidth = Int(self.bounds.size.width - 20)
-        
-//        SortIcon.frame = CGRect(x: self.bounds.size.width * 0.9, y: 0, width: 40, height: 40)
         SortIcon.frame = CGRect(x: firstWidth, y: 0, width: 40, height: 40)
         borderOne.frame = CGRect(x: 0, y: 15, width: SortIcon.frame.size.width, height: 1)
         borderOne.backgroundColor = UIColor.black
