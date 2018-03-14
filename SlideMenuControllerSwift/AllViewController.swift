@@ -88,9 +88,6 @@ class AllViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
         //配列を初期化
         artInfo = []
-        //CoreDataからArticleデータ全件取得
-//        let readArticle = ArticleCoreData()
-//        artInfo =  readArticle.readArticleAll() as! [[String : Any]]
         
         read()
         myTableView.reloadData()

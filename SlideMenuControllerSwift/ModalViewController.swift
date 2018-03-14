@@ -92,7 +92,6 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     
     //アラートオブジェクト作成
     func makeAlert(){
-//        alert = UIView()
         alert.removeFromSuperview()
         alert.frame = CGRect(x:(textViewBase.frame.width - 290) / 2 , y: 50, width: 290, height: 25 )
         alert.backgroundColor = UIColor(displayP3Red: 253/250, green: 240/250, blue: 234/250, alpha: 1)
@@ -368,9 +367,7 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         )
         kbToolBar.items = [spacer, commitButton]
         textView.inputAccessoryView = kbToolBar
-        
     }
-    
     
     
 //    ==================================
@@ -458,10 +455,6 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
         CusCategoryTable.contentOffset.y = 0
         
     }
-    
-    
-    
-    
     
     
 //    ===============================================
@@ -604,8 +597,6 @@ class ModalViewController: UIViewController,TableViewReorderDelegate,UITableView
     }
 
 }
-
-
 
 
 

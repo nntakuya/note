@@ -19,7 +19,9 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //文字列を表示するセルの取得
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        let cell = OtherTableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Cell")
         
         //表示したい文字の設定
         cell.textLabel?.text = artInfo[indexPath.row]["content"] as? String
@@ -56,6 +58,10 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
         return [deleteButton]
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return OtherTableViewCell.height()
+    }
+    
     
     ///////////////////// 画面遷移 ////////////////////////////
     //セグエを使って画面遷移してる時発動
@@ -76,6 +82,10 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
         super.viewDidLoad()
         myTableView.reloadData()
 
+        
+        
+        //TODO:テスト
+        myTableView.registerCellClass(OtherTableViewCell.self)
     }
     
     //ページが読み込まれた時に、CoreDataからデータを引っ張るｚ

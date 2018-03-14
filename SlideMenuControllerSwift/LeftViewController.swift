@@ -148,7 +148,6 @@ extension LeftViewController : UITableViewDataSource {
         
         tableView.showsVerticalScrollIndicator = false//tableのスクロールバーを非表示に設定
         
-        
         return cell
     }
     
