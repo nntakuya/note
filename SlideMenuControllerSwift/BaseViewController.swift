@@ -58,6 +58,7 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
 //    ====================================================================================================================================================================================================================================================================================================
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.shadowImage = UIImage()//ナビゲーションバーの影なし設定
         CreatePostView()//メインのメモ機能
         
         createTabBar()//アンダーバー作成
@@ -496,6 +497,21 @@ class BaseViewController: UIViewController,UITextViewDelegate,UIScrollViewDelega
         //TODO:このカテゴリー表示オブジェクト作成関数とは別に、表示関数を作成し、その中に以下のコードを組み込む
         categoryId = categoryData["id"] as! Int //インサートするカテゴリーを更新
     }
+    
+//    @objc func pushForDetail(sender: UIButton) {
+//        //カテゴリーIDは使用できる
+//        if sender == DisplayCategory {
+//            performSegue(withIdentifier: "BtnDetail", sender: nil)
+//        }
+//    }
+//
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if (segue.identifier == "BtnDetail") {
+//            let vc: OthersViewController = segue.destination as! OthersViewController
+//            vc.categoryId = categoryId
+//        }
+//    }
+    
     
 //    =======================================
 //　　　　    キーボード閉じるアクション

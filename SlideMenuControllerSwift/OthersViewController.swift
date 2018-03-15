@@ -26,6 +26,9 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
         //表示したい文字の設定
         cell.textLabel?.text = artInfo[indexPath.row]["content"] as? String
         
+        cell.contentView.backgroundColor = UIColor(displayP3Red: 250/250, green: 250/250, blue: 248/250, alpha: 1)
+        tableView.backgroundColor = UIColor(displayP3Red: 250/250, green: 250/250, blue: 248/250, alpha: 1)
+        
         //文字設定したセルを返す
         return cell
     }
@@ -39,9 +42,10 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
         performSegue(withIdentifier: "categoryDetail", sender: nil)
     }
     
+
     //セルのスワイプ表示（デザイン）
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (action, index) -> Void in
+        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "Delete") { (action, index) -> Void in
             
             //指定されたIDのメモデータをCoreDataから削除
             self.selectedRowIndex = indexPath.row
@@ -86,6 +90,8 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
         
         //TODO:テスト
         myTableView.registerCellClass(OtherTableViewCell.self)
+        UINavigationBar.appearance().barTintColor = UIColor(displayP3Red: 250/250, green: 250/250, blue: 248/250, alpha: 1)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     //ページが読み込まれた時に、CoreDataからデータを引っ張るｚ

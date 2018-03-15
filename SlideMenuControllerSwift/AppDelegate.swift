@@ -18,9 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var scrollView = UIScrollView()
     
     
-    
-    
-    
     fileprivate func createMenuView() {
         
         // create viewController code...
@@ -61,6 +58,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.createMenuView()
         
+        
+        UINavigationBar.appearance().barTintColor = UIColor(displayP3Red: 250/250, green: 250/250, blue: 248/250, alpha: 1)
+        
+        UINavigationBar.appearance().barTintColor = UIColor(displayP3Red: 250/250, green: 250/250, blue: 248/250, alpha: 1)
+        
         return true
     }
     
@@ -93,7 +95,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Core Data stack
     
-    //TODO:直下のコードをえりこさんに確認する
 //    @available(iOS 10.0, *)
     lazy var persistentContainer: NSPersistentContainer = {
         /*

@@ -89,7 +89,7 @@ class CustomTableViewCell:  UITableViewCell,UITextFieldDelegate {
         )
         CategoryTextField.attributedText = attribute
         
-//        makingSortIcon()
+        makingSortIcon()
         
         
         //テキストフィールドのデリゲート先を自分に設定する。
