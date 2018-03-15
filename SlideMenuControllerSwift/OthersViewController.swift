@@ -29,6 +29,15 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
         cell.contentView.backgroundColor = UIColor(displayP3Red: 250/250, green: 250/250, blue: 248/250, alpha: 1)
         tableView.backgroundColor = UIColor(displayP3Red: 250/250, green: 250/250, blue: 248/250, alpha: 1)
         
+//        cell.fontbol
+        
+//        tableView.separatorStyle = .none
+//
+//        let border = UIView()
+//        border.frame = CGRect(x: 13, y: 52, width: cell.frame.size.width * 0.75 , height: 1)
+//        border.backgroundColor = UIColor.darkGray
+//        cell.addSubview(border)
+        
         //文字設定したセルを返す
         return cell
     }
@@ -86,7 +95,6 @@ class OthersViewController: UIViewController,UITableViewDelegate,UITableViewData
         super.viewDidLoad()
         myTableView.reloadData()
 
-        
         
         //TODO:テスト
         myTableView.registerCellClass(OtherTableViewCell.self)
